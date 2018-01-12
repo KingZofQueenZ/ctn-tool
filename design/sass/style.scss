@@ -1,0 +1,65 @@
+// Navigation
+nav {
+    height: 110px;
+    line-height: 110px;
+
+    ul {
+       a {
+           color: #444;
+        } 
+    }
+
+    a.button-collapse {
+        color: #26a69a;
+
+        i {
+            height: 110px;
+            line-height: 110px;
+            font-size: 30px;
+        }
+
+    }
+}
+
+// First Parallax
+#index-banner{
+    height: 400px;
+
+    .section {
+        width: 100%;
+    }
+}
+
+// Event-Cards
+.events {
+    margin-top: 20px;
+
+    .card-panel {
+        position: relative;
+
+        .registrations {
+            i {
+                vertical-align: middle;
+            }
+
+            .material-icons {
+                margin-right: 10px;
+            }
+        }
+
+        .register {
+            position: absolute;
+            right: 18px;
+            bottom: 10px;
+        }
+    }
+}
+
+.page-footer {
+    .copyright {
+        margin-right:30px;
+    }
+    .data {
+        margin-right:30px;
+    }
+}

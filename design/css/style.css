@@ -1,0 +1,35 @@
+nav {
+  height: 110px;
+  line-height: 110px; }
+  nav ul a {
+    color: #444; }
+  nav a.button-collapse {
+    color: #26a69a; }
+    nav a.button-collapse i {
+      height: 110px;
+      line-height: 110px;
+      font-size: 30px; }
+
+#index-banner {
+  height: 400px; }
+  #index-banner .section {
+    width: 100%; }
+
+.events {
+  margin-top: 20px; }
+  .events .card-panel {
+    position: relative; }
+    .events .card-panel .registrations i {
+      vertical-align: middle; }
+    .events .card-panel .registrations .material-icons {
+      margin-right: 10px; }
+    .events .card-panel .register {
+      position: absolute;
+      right: 18px;
+      bottom: 10px; }
+
+.page-footer .copyright {
+  margin-right: 30px; }
+
+.page-footer .data {
+  margin-right: 30px; }
