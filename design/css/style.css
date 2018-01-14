@@ -3,12 +3,26 @@ nav {
   line-height: 110px; }
   nav ul a {
     color: #444; }
+  nav .nav-wrapper i {
+    height: 110px;
+    line-height: 110px;
+    margin-left: 0px; }
+  nav .nav-wrapper i.login {
+    margin-left: 10px; }
   nav a.button-collapse {
-    color: #26a69a; }
+    color: #249287; }
     nav a.button-collapse i {
       height: 110px;
       line-height: 110px;
       font-size: 30px; }
+  nav .side-nav i.material-icons {
+    padding-right: 160px; }
+  nav .side-nav .collapsible-header {
+    padding: 0 32px; }
+    nav .side-nav .collapsible-header i {
+      padding-right: 110px; }
+  nav .side-nav .collapsible-body a {
+    padding-left: 50px; }
 
 #index-banner {
   height: 400px; }
@@ -28,8 +42,114 @@ nav {
       right: 18px;
       bottom: 10px; }
 
+.details {
+  margin-top: 20px; }
+  .details .button-anmeldung {
+    height: 120px; }
+    .details .button-anmeldung .btn {
+      margin: auto; }
+  .details .detail-title {
+    margin-bottom: 0; }
+  .details .tab-container {
+    margin-top: 40px; }
+    .details .tab-container .tab-content {
+      padding-top: 40px; }
+      .details .tab-container .tab-content .collection .collection-item.avatar {
+        min-height: 60px; }
+        .details .tab-container .tab-content .collection .collection-item.avatar img {
+          top: 9px; }
+
+@media only screen and (max-width: 992px) {
+  .center-on-mobile {
+    text-align: center !important; } }
+
 .page-footer .copyright {
-  margin-right: 30px; }
+  margin-right: 10px; }
 
 .page-footer .data {
-  margin-right: 30px; }
+  margin-right: 10px; }
+
+.page-footer .icons img {
+  margin-left: 10px; }
+
+blockquote {
+  border-left: 5px solid #249287; }
+
+.tabs .tab a:hover,
+.tabs .tab a.active {
+  color: #249287; }
+
+.tabs .tab a {
+  color: #44ccbe; }
+
+.tabs .indicator {
+  background-color: #249287; }
+
+.flow-text {
+  font-weight: 300; }
+  @media only screen and (min-width: 360px) {
+    .flow-text {
+      font-size: 0.9rem; } }
+  @media only screen and (min-width: 390px) {
+    .flow-text {
+      font-size: 0.918rem; } }
+  @media only screen and (min-width: 420px) {
+    .flow-text {
+      font-size: 0.936rem; } }
+  @media only screen and (min-width: 450px) {
+    .flow-text {
+      font-size: 0.954rem; } }
+  @media only screen and (min-width: 480px) {
+    .flow-text {
+      font-size: 0.972rem; } }
+  @media only screen and (min-width: 510px) {
+    .flow-text {
+      font-size: 0.99rem; } }
+  @media only screen and (min-width: 540px) {
+    .flow-text {
+      font-size: 1.008rem; } }
+  @media only screen and (min-width: 570px) {
+    .flow-text {
+      font-size: 1.026rem; } }
+  @media only screen and (min-width: 600px) {
+    .flow-text {
+      font-size: 1.044rem; } }
+  @media only screen and (min-width: 630px) {
+    .flow-text {
+      font-size: 1.062rem; } }
+  @media only screen and (min-width: 660px) {
+    .flow-text {
+      font-size: 1.08rem; } }
+  @media only screen and (min-width: 690px) {
+    .flow-text {
+      font-size: 1.098rem; } }
+  @media only screen and (min-width: 720px) {
+    .flow-text {
+      font-size: 1.116rem; } }
+  @media only screen and (min-width: 750px) {
+    .flow-text {
+      font-size: 1.134rem; } }
+  @media only screen and (min-width: 780px) {
+    .flow-text {
+      font-size: 1.152rem; } }
+  @media only screen and (min-width: 810px) {
+    .flow-text {
+      font-size: 1.17rem; } }
+  @media only screen and (min-width: 840px) {
+    .flow-text {
+      font-size: 1.188rem; } }
+  @media only screen and (min-width: 870px) {
+    .flow-text {
+      font-size: 1.206rem; } }
+  @media only screen and (min-width: 900px) {
+    .flow-text {
+      font-size: 1.224rem; } }
+  @media only screen and (min-width: 930px) {
+    .flow-text {
+      font-size: 1.242rem; } }
+  @media only screen and (min-width: 960px) {
+    .flow-text {
+      font-size: 1.26rem; } }
+  @media only screen and (max-width: 360px) {
+    .flow-text {
+      font-size: 1.2rem; } }

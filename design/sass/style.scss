@@ -1,7 +1,21 @@
+// Variables
+$color-teal: #249287;
+$color-teal-light: #44ccbe;
+
+$nav-height: 110px;
+
+// Typography override variables
+$small-screen: 600px !default;
+$large-screen: 1200px !default;
+$range : $large-screen - $small-screen !default;
+$intervals: 20 !default;
+$interval-size: $range / $intervals !default;
+
+
 // Navigation
 nav {
-    height: 110px;
-    line-height: 110px;
+    height: $nav-height;
+    line-height: $nav-height;
 
     ul {
        a {
@@ -9,15 +23,44 @@ nav {
         } 
     }
 
+    .nav-wrapper i {
+        height: $nav-height;
+        line-height: $nav-height;
+        margin-left: 0px;
+
+    }
+
+    .nav-wrapper i.login {
+        margin-left: 10px;
+    }
+  
     a.button-collapse {
-        color: #26a69a;
+        color: $color-teal;
 
         i {
-            height: 110px;
-            line-height: 110px;
+            height: $nav-height;
+            line-height: $nav-height;
             font-size: 30px;
         }
+    }
 
+    .side-nav {
+        
+        i.material-icons {
+            padding-right: 160px;
+        }
+
+        .collapsible-header {
+            padding: 0 32px;
+
+            i {
+                padding-right: 110px;
+            }
+        }
+
+        .collapsible-body a {
+            padding-left: 50px;
+        }
     }
 }
 
@@ -55,11 +98,90 @@ nav {
     }
 }
 
+// Details
+
+.details {
+    margin-top:20px;
+
+    .button-anmeldung {
+        height: 120px;
+
+        .btn {
+            margin: auto;
+        }
+    }
+
+    .detail-title {
+        margin-bottom: 0;
+    }
+
+    .tab-container {
+        margin-top:40px;
+
+        .tab-content {
+            padding-top: 40px;
+
+            .collection .collection-item.avatar {
+                min-height: 60px;
+
+                img {
+                    top: 9px;
+                }
+            }
+        }
+
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .center-on-mobile {
+        text-align: center !important; 
+    }
+}
+
 .page-footer {
     .copyright {
-        margin-right:30px;
+        margin-right:10px;
     }
     .data {
-        margin-right:30px;
+        margin-right:10px;
+    }
+    .icons img {
+        margin-left:10px;
+    }
+}
+
+// Allgemein
+blockquote {
+    border-left: 5px solid $color-teal;
+}
+
+.tabs .tab a:hover,
+.tabs .tab a.active {
+    color: $color-teal;
+}
+
+.tabs .tab a {
+    color: $color-teal-light;
+}
+
+.tabs .indicator {
+    background-color: $color-teal;
+}
+
+// Override Typograhy
+.flow-text{
+    font-weight: 300;
+    $i: 0;
+    @while $i <= $intervals {
+        @media only screen and (min-width : 360 + ($i * $interval-size)) {
+        font-size: 0.9rem * (1 + (.02 * $i));
+        }
+        $i: $i + 1;
+    }
+
+    // Handle below 360px screen
+    @media only screen and (max-width: 360px) {
+        font-size: 1.2rem;
     }
 }
