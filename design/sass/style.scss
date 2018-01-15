@@ -11,6 +11,22 @@ $range : $large-screen - $small-screen !default;
 $intervals: 20 !default;
 $interval-size: $range / $intervals !default;
 
+// Mixins
+@mixin flow-text($font-size){
+    font-weight: 300;
+    $i: 0;
+    @while $i <= $intervals {
+        @media only screen and (min-width : 360 + ($i * $interval-size)) {
+        font-size: $font-size * (1 + (.02 * $i));
+        }
+        $i: $i + 1;
+    }
+
+    // Handle below 360px screen
+    @media only screen and (max-width: 360px) {
+        font-size: 1.2rem;
+    }
+}
 
 // Navigation
 nav {
@@ -163,6 +179,7 @@ blockquote {
 
 .tabs .tab a {
     color: $color-teal-light;
+    @include flow-text(0.7rem);
 }
 
 .tabs .indicator {
@@ -171,17 +188,5 @@ blockquote {
 
 // Override Typograhy
 .flow-text{
-    font-weight: 300;
-    $i: 0;
-    @while $i <= $intervals {
-        @media only screen and (min-width : 360 + ($i * $interval-size)) {
-        font-size: 0.9rem * (1 + (.02 * $i));
-        }
-        $i: $i + 1;
-    }
-
-    // Handle below 360px screen
-    @media only screen and (max-width: 360px) {
-        font-size: 1.2rem;
-    }
+    @include flow-text(0.9rem)
 }

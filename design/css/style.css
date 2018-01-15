@@ -80,7 +80,74 @@ blockquote {
   color: #249287; }
 
 .tabs .tab a {
-  color: #44ccbe; }
+  color: #44ccbe;
+  font-weight: 300; }
+  @media only screen and (min-width: 360px) {
+    .tabs .tab a {
+      font-size: 0.7rem; } }
+  @media only screen and (min-width: 390px) {
+    .tabs .tab a {
+      font-size: 0.714rem; } }
+  @media only screen and (min-width: 420px) {
+    .tabs .tab a {
+      font-size: 0.728rem; } }
+  @media only screen and (min-width: 450px) {
+    .tabs .tab a {
+      font-size: 0.742rem; } }
+  @media only screen and (min-width: 480px) {
+    .tabs .tab a {
+      font-size: 0.756rem; } }
+  @media only screen and (min-width: 510px) {
+    .tabs .tab a {
+      font-size: 0.77rem; } }
+  @media only screen and (min-width: 540px) {
+    .tabs .tab a {
+      font-size: 0.784rem; } }
+  @media only screen and (min-width: 570px) {
+    .tabs .tab a {
+      font-size: 0.798rem; } }
+  @media only screen and (min-width: 600px) {
+    .tabs .tab a {
+      font-size: 0.812rem; } }
+  @media only screen and (min-width: 630px) {
+    .tabs .tab a {
+      font-size: 0.826rem; } }
+  @media only screen and (min-width: 660px) {
+    .tabs .tab a {
+      font-size: 0.84rem; } }
+  @media only screen and (min-width: 690px) {
+    .tabs .tab a {
+      font-size: 0.854rem; } }
+  @media only screen and (min-width: 720px) {
+    .tabs .tab a {
+      font-size: 0.868rem; } }
+  @media only screen and (min-width: 750px) {
+    .tabs .tab a {
+      font-size: 0.882rem; } }
+  @media only screen and (min-width: 780px) {
+    .tabs .tab a {
+      font-size: 0.896rem; } }
+  @media only screen and (min-width: 810px) {
+    .tabs .tab a {
+      font-size: 0.91rem; } }
+  @media only screen and (min-width: 840px) {
+    .tabs .tab a {
+      font-size: 0.924rem; } }
+  @media only screen and (min-width: 870px) {
+    .tabs .tab a {
+      font-size: 0.938rem; } }
+  @media only screen and (min-width: 900px) {
+    .tabs .tab a {
+      font-size: 0.952rem; } }
+  @media only screen and (min-width: 930px) {
+    .tabs .tab a {
+      font-size: 0.966rem; } }
+  @media only screen and (min-width: 960px) {
+    .tabs .tab a {
+      font-size: 0.98rem; } }
+  @media only screen and (max-width: 360px) {
+    .tabs .tab a {
+      font-size: 1.2rem; } }
 
 .tabs .indicator {
   background-color: #249287; }
