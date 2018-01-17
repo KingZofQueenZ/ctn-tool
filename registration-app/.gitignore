@@ -17,6 +17,11 @@
 .settings/
 *.sublime-workspace
 
+### Intellij Patch ###
+*.iml
+modules.xml
+*.ipr
+
 # IDE - VSCode
 .vscode/*
 !.vscode/settings.json

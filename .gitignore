@@ -17,6 +17,7 @@
 .settings/
 *.sublime-workspace
 
+
 ### Intellij Patch ###
 *.iml
 modules.xml
