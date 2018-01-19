@@ -11,26 +11,40 @@
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
+  <div id="login-pane">
+    <div class="container">
+      <div class="row center">
+          <div class="col s2 offset-s4"><h4 class="header teal-text">Login</h4></div>
+          <div class="input-field col s2 offset-s6">
+            <input id="email" type="text" class="validate">
+            <label for="email">E-Mail</label>
+          </div>
+          <div class="input-field col s2">
+            <input id="password" type="password" class="validate">
+            <label for="password">Passwort</label>
+          </div>
+          <div class="col s2 button-anmeldung">
+            <a class="waves-effect waves-light btn">Einloggen</a>
+          </div>
+      </div>
+    </div>
+  </div>
+
   <nav class="white" role="navigation">
     <div class="nav-wrapper container">
-      <a id="logo-container" href="index.html" class="brand-logo">
-        <img src="./img/logo.jpg" height="100" width="100">
-      </a>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="#">Start</a></li>
-        <li><a href="#">News</a></li>
-        <li><a class="dropdown-button" href="#!" data-activates="dropdown-informationen">Information<i class="material-icons right">arrow_drop_down</i></a></li>
-        <ul id='dropdown-informationen' class='dropdown-content'>
-          <li><a href="#!">Training</a></li>
-          <li><a href="#!">Team</a></li>
-          <li><a href="#!">Preise</a></li>
-          <li><a href="#!">Place 2 be</a></li>
+      <div class="nav-desktop">
+        <a id="logo-container" href="index.html" class="brand-logo">
+          <img src="./img/logo.jpg" height="100" width="100">
+        </a>
+        <ul class="right light hide-on-med-and-down">
+          <li><a class="selected" href="#">Home</a></li>
+          <li><a href="#">News</a></li>
+          <li><a href="#">Information</a></li>
+          <li><a href="#">Termine</a></li>
+          <li><a id="login-toggle" href="#!">Login<i class="material-icons right login">person</i></a></li>
         </ul>
-        <li><a href="#">Termine</a></li>
-        <li><a href="#">Kontakt</a></li>
-        <li><a href="#!">Login<i class="material-icons right login">person</i></a></li>
-      </ul>
-
+      </div>
+      
       <ul id="nav-mobile" class="side-nav">
         <li><a href="#">Start</a></li>
         <li><a href="#">News</a></li>
@@ -49,8 +63,6 @@
             </li>
           </ul>
         </li>
-
-
         <li><a href="#">Trainings</a></li>
         <li><a href="#">Kontakt</a></li>
         <li><a href="#">Login<i class="material-icons right login">person</i></a></li>
@@ -58,6 +70,14 @@
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="large material-icons">menu</i></a>
     </div>
   </nav>
+
+  <!--<li><a class="dropdown-button" href="#!" data-activates="dropdown-informationen">Information<i class="material-icons right">arrow_drop_down</i></a></li>
+        <ul id='dropdown-informationen' class='dropdown-content'>
+          <li><a href="#!">Training</a></li>
+          <li><a href="#!">Team</a></li>
+          <li><a href="#!">Preise</a></li>
+          <li><a href="#!">Place 2 be</a></li>
+        </ul>-->
   
   <div id="index-banner" class="parallax-container hide-on-med-and-down valign-wrapper">
     <div class="section no-pad-bot">
@@ -75,15 +95,15 @@
   <div class="container details">
     <div class="row">
       <div class="col s12 m12 l10">
-          <h2 class="header detail-title teal-text center-on-mobile">Workout #1 Dienstag</h2>
-          <h5 class="header detail-subtitle grey-text light center-on-mobile"><i>Dienstag, 23. Januar 2018 / 18:30 Uhr bis 19:30 Uhr</i></h5>
+          <h2 class="header light detail-title teal-text center-on-mobile">Workout #1 Dienstag</h2>
+          <h5 class="header light detail-subtitle grey-text light center-on-mobile"><i>Dienstag, 23. Januar 2018 / 18:30 Uhr bis 19:30 Uhr</i></h5>
       </div>
       <div class="col s12 m12 l2 valign-wrapper center button-anmeldung">
         <a class="waves-effect waves-light btn center">Anmelden</a>
       </div>
 
       <div class="col s12">
-        <h4>Details</h4>  
+        <h4 class="light" light >Details</h4>  
         <div class="flow-text">
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, 
             sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem 
@@ -146,15 +166,15 @@
               </div>
               <div class="input-field col s12 l4">
                 <input id="last_name" type="text" class="validate">
-                <label for="last_name">Vorname</label>
+                <label class="light" for="last_name">Vorname</label>
               </div>
               <div class="input-field col s12 l4">
                 <input id="last_name" type="text" class="validate">
-                <label for="last_name">Nachname</label>
+                <label class="light" for="last_name">Nachname</label>
               </div>
               <div class="input-field col s12 l4">
                 <input id="last_name" type="text" class="validate">
-                <label for="last_name">Telefonnummer</label>
+                <label class="light" for="last_name">Telefonnummer</label>
               </div>
               <div class="col s12 center-on-mobile">
                 <a class="waves-effect waves-light btn">Zum Probetraining anmelden</a>

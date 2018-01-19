@@ -11,29 +11,46 @@
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
-  <nav class="white" role="navigation">
-    <div class="nav-wrapper container">
-      <a id="logo-container" href="index.html" class="brand-logo">
-        <img src="./img/logo.jpg" height="100" width="100">
-      </a>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="#">Start</a></li>
-        <li><a href="#">News</a></li>
-        <li><a href="#">Information</a></li>
-        <li><a href="#">Trainings</a></li>
-        <li><a href="#">Kontakt</a></li>
-      </ul>
-
-      <ul id="nav-mobile" class="side-nav">
-        <li><a href="#">Start</a></li>
-        <li><a href="#">News</a></li>
-        <li><a href="#">Information</a></li>
-        <li><a href="#">Trainings</a></li>
-        <li><a href="#">Kontakt</a></li>
-      </ul>
-      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="large material-icons">menu</i></a>
-    </div>
-  </nav>
+    <nav class="white" role="navigation">
+      <div class="nav-wrapper container">
+        <div class="nav-desktop">
+          <a id="logo-container" href="index.html" class="brand-logo">
+            <img src="./img/logo.jpg" height="100" width="100">
+          </a>
+          <ul class="right light hide-on-med-and-down">
+            <li><a class="selected" href="#">Home</a></li>
+            <li><a href="#">News</a></li>
+            <li><a href="#">Information</a></li>
+            <li><a href="#">Termine</a></li>
+            <li><a id="login-toggle" href="#!">Login<i class="material-icons right login">person</i></a></li>
+          </ul>
+        </div>
+        
+        <ul id="nav-mobile" class="side-nav">
+          <li><a href="#">Start</a></li>
+          <li><a href="#">News</a></li>
+          <li class="no-padding">
+            <ul class="collapsible collapsible-accordion">
+              <li>
+                <a class="collapsible-header">Informationen<i class="material-icons right">arrow_drop_down</i></a>
+                <div class="collapsible-body">
+                  <ul>
+                    <li><a href="#!">Training</a></li>
+                    <li><a href="#!">Team</a></li>
+                    <li><a href="#!">Preise</a></li>
+                    <li><a href="#!">Place 2 be</a></li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li><a href="#">Trainings</a></li>
+          <li><a href="#">Kontakt</a></li>
+          <li><a href="#">Login<i class="material-icons right login">person</i></a></li>
+        </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="large material-icons">menu</i></a>
+      </div>
+    </nav>
   
   <div id="index-banner" class="parallax-container hide-on-med-and-down valign-wrapper">
     <div class="section no-pad-bot">
