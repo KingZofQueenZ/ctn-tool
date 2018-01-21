@@ -1,11 +1,12 @@
 var express = require('express');
 var router = express.Router();
 var userService = require('../services/user.service');
+var VerifyToken = require('../VerifyToken');
  
 // routes
 router.post('/authenticate', authenticate);
 router.post('/register', register);
-router.get('/', getAll);
+router.get('/', VerifyToken, VerifyToken, getAll);
 router.get('/current', getCurrent);
 router.put('/:_id', update);
 router.delete('/:_id', _delete);

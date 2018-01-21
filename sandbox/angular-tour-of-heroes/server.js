@@ -19,24 +19,24 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'dist')));
 
 // use JWT auth to secure the api, the token can be passed in the authorization header or querystring
-app.use("/users", expressJwt({
+/*app.use("/users", expressJwt({
   secret: "lololol",
   getToken: function (req) {
       if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
+        jwt.verify(token, "lololol", function(err, decoded) {
           return req.headers.authorization.split(' ')[1];
-      } else if (req.query && req.query.token) {
-          return req.query.token;
-      }
+        });
+      } 
       return null;
   }
-}).unless({ path: ['/users/authenticate', '/users/register'] }));
+}).unless({ path: ['/users/authenticate', '/users/register'] }));*/
 
 // If we do not get the correct credentials, we’ll return an appropriate message
-app.use(function (err, req, res, next) {
+/*app.use(function (err, req, res, next) {
   if (err.name === 'UnauthorizedError') {
     res.status(401).json({message:'Missing or invalid token'});
   }
-});
+});*/
 
 // Set our api routes
 app.use('/api', api);
