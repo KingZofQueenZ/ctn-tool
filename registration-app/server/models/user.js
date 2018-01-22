@@ -18,7 +18,6 @@ var userSchema = mongoose.Schema({
   }
 });
 
-
 // Hash the user's password before inserting a new user
 userSchema.pre('save', function(next) {
   var user = this;
