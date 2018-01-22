@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "Open Sans Light";
+  src: url("../fonts/open-sans/OpenSans-Light.ttf"); }
+
+@font-face {
+  font-family: "Open Sans";
+  src: url("../fonts/open-sans/OpenSans-Regular.ttf"); }
+
 html {
   height: 100%; }
 
@@ -68,12 +76,16 @@ nav {
 
 .events {
   margin-top: 20px; }
+  .events .header-text {
+    margin-bottom: 20px; }
   .events .card-panel {
     position: relative; }
-    .events .card-panel .registrations i {
-      vertical-align: middle; }
-    .events .card-panel .registrations .material-icons {
-      margin-right: 10px; }
+    .events .card-panel .registrations {
+      margin-top: 10px; }
+      .events .card-panel .registrations i {
+        vertical-align: middle; }
+      .events .card-panel .registrations .material-icons {
+        margin-right: 10px; }
     .events .card-panel .register {
       position: absolute;
       right: 18px;

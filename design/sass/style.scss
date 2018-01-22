@@ -27,6 +27,16 @@ $interval-size: $range / $intervals !default;
     }
 }
 
+@font-face {
+    font-family: "Open Sans Light";
+    src: url("../fonts/open-sans/OpenSans-Light.ttf");
+}
+
+@font-face {
+    font-family: "Open Sans";
+    src: url("../fonts/open-sans/OpenSans-Regular.ttf");
+}
+
 html {
     height: 100%;
 }
@@ -35,6 +45,7 @@ body {
     position: relative;
     padding-bottom: 6rem;
     min-height: 100%;
+    //font-family: "Open Sans";
 }
 
 // Navigation
@@ -143,10 +154,16 @@ nav {
 .events {
     margin-top: 20px;
 
+    .header-text {
+        margin-bottom:20px;
+    }
+
     .card-panel {
         position: relative;
 
         .registrations {
+            margin-top: 10px;
+
             i {
                 vertical-align: middle;
             }
