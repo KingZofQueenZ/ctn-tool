@@ -38,8 +38,8 @@ nav {
     visibility: hidden;
     -webkit-transform: scaleX(0);
     transform: scaleX(0);
-    -webkit-transition: all 0.1s ease-in-out 0s;
-    transition: all 0.1s ease-in-out 0s; }
+    -webkit-transition: all 0.2s ease-in-out 0s;
+    transition: all 0.2s ease-in-out 0s; }
   nav .nav-desktop ul a.selected:before {
     visibility: visible;
     transform: none; }
@@ -114,6 +114,37 @@ nav {
       .details .tab-container .tab-content a {
         margin-top: 20px; }
 
+.administration .event-title {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+  .administration .event-title h5 {
+    display: inline; }
+  .administration .event-title span {
+    margin-left: 10px;
+    display: inline; }
+
+.administration .event-participants .collection {
+  margin-top: -1px;
+  margin-bottom: 0px; }
+
+.administration .event-participants span {
+  font-size: 12px; }
+
+.administration .tab-container {
+  margin-top: 40px; }
+  .administration .tab-container .tab-content {
+    padding-top: 20px; }
+    .administration .tab-container .tab-content .collection .collection-item.avatar {
+      min-height: 60px; }
+      .administration .tab-container .tab-content .collection .collection-item.avatar img {
+        top: 12px; }
+    .administration .tab-container .tab-content .members .user-data {
+      font-size: 13px; }
+    .administration .tab-container .tab-content .input-field {
+      margin-top: 40px; }
+    .administration .tab-container .tab-content a {
+      margin-top: 20px; }
+
 @media only screen and (max-width: 992px) {
   .center-on-mobile {
     text-align: center !important; } }
@@ -132,6 +163,12 @@ nav {
 
 blockquote {
   border-left: 5px solid #249287; }
+
+.carousel .indicators .indicator-item {
+  background-color: #8a8a8a; }
+
+.carousel .indicators .indicator-item.active {
+  background-color: #444; }
 
 .tabs .tab a:hover,
 .tabs .tab a.active {

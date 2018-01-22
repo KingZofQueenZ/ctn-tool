@@ -80,8 +80,8 @@ nav {
                 visibility: hidden;
                 -webkit-transform: scaleX(0);
                 transform: scaleX(0);
-                -webkit-transition: all 0.1s ease-in-out 0s;
-                transition: all 0.1s ease-in-out 0s;
+                -webkit-transition: all 0.2s ease-in-out 0s;
+                transition: all 0.2s ease-in-out 0s;
             }
             
             a.selected:before {
@@ -182,7 +182,6 @@ nav {
 }
 
 // Details
-
 .details {
     margin-top:20px;
 
@@ -228,6 +227,66 @@ nav {
     }
 }
 
+// Administration
+.administration {
+    .event-title {
+        margin-top: 20px;
+        margin-bottom: 20px;
+
+        h5 {
+            display: inline;
+        }
+        span {
+            margin-left: 10px;
+            display: inline;
+        }
+    }
+
+    .event-participants {
+
+
+        .collection {
+            margin-top:-1px;
+            margin-bottom: 0px;
+        }
+
+        span {
+            font-size: 12px;
+        }
+    }
+
+    .tab-container {
+        margin-top:40px;
+
+        .tab-content {
+            padding-top: 20px;
+
+            .collection .collection-item.avatar {
+                min-height: 60px;
+
+                img {
+                    top: 12px;
+                }
+            }
+
+            .members {
+                .user-data {
+                    font-size: 13px;
+                }
+            }
+
+            .input-field {
+                margin-top: 40px;
+            }
+
+            a {
+                margin-top: 20px;
+            }
+        }
+
+    }
+}
+
 @media only screen and (max-width: 992px) {
     .center-on-mobile {
         text-align: center !important; 
@@ -254,6 +313,14 @@ nav {
 // Allgemein
 blockquote {
     border-left: 5px solid $color-teal;
+}
+
+.carousel .indicators .indicator-item {
+    background-color: rgb(138, 138, 138);
+}
+
+.carousel .indicators .indicator-item.active {
+    background-color: #444;
 }
 
 .tabs .tab a:hover,

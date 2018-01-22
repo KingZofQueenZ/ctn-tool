@@ -9,6 +9,8 @@
     $('.parallax').parallax(); 
     $('ul.tabs').tabs();
 
+    $('.carousel.carousel-slider').carousel({fullWidth: true});
+    
 
     
   }); // end of document ready
