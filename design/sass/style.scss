@@ -229,35 +229,43 @@ nav {
 
 // Administration
 .administration {
+    .header {
+        margin-top: 20px;    
+    }
+
     .event-title {
         margin-top: 20px;
         margin-bottom: 20px;
 
         h5 {
             display: inline;
+
+            i {
+                margin-top: 2px;
+            }
         }
         span {
             margin-left: 10px;
             display: inline;
         }
     }
+    .event-participants-container{
+        margin-bottom: 20px; 
+        padding: 0;
 
-    .event-participants {
-
-
-        .collection {
-            margin-top:-1px;
-            margin-bottom: 0px;
-        }
-
-        span {
-            font-size: 12px;
+        .event-participants {  
+            .collection {
+                margin-top:-1px;
+                margin-bottom: 0px;
+            }
+    
+            span {
+                font-size: 12px;
+            }
         }
     }
 
     .tab-container {
-        margin-top:40px;
-
         .tab-content {
             padding-top: 20px;
 

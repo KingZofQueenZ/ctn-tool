@@ -114,36 +114,41 @@ nav {
       .details .tab-container .tab-content a {
         margin-top: 20px; }
 
+.administration .header {
+  margin-top: 20px; }
+
 .administration .event-title {
   margin-top: 20px;
   margin-bottom: 20px; }
   .administration .event-title h5 {
     display: inline; }
+    .administration .event-title h5 i {
+      margin-top: 2px; }
   .administration .event-title span {
     margin-left: 10px;
     display: inline; }
 
-.administration .event-participants .collection {
-  margin-top: -1px;
-  margin-bottom: 0px; }
+.administration .event-participants-container {
+  margin-bottom: 20px;
+  padding: 0; }
+  .administration .event-participants-container .event-participants .collection {
+    margin-top: -1px;
+    margin-bottom: 0px; }
+  .administration .event-participants-container .event-participants span {
+    font-size: 12px; }
 
-.administration .event-participants span {
-  font-size: 12px; }
-
-.administration .tab-container {
-  margin-top: 40px; }
-  .administration .tab-container .tab-content {
-    padding-top: 20px; }
-    .administration .tab-container .tab-content .collection .collection-item.avatar {
-      min-height: 60px; }
-      .administration .tab-container .tab-content .collection .collection-item.avatar img {
-        top: 12px; }
-    .administration .tab-container .tab-content .members .user-data {
-      font-size: 13px; }
-    .administration .tab-container .tab-content .input-field {
-      margin-top: 40px; }
-    .administration .tab-container .tab-content a {
-      margin-top: 20px; }
+.administration .tab-container .tab-content {
+  padding-top: 20px; }
+  .administration .tab-container .tab-content .collection .collection-item.avatar {
+    min-height: 60px; }
+    .administration .tab-container .tab-content .collection .collection-item.avatar img {
+      top: 12px; }
+  .administration .tab-container .tab-content .members .user-data {
+    font-size: 13px; }
+  .administration .tab-container .tab-content .input-field {
+    margin-top: 40px; }
+  .administration .tab-container .tab-content a {
+    margin-top: 20px; }
 
 @media only screen and (max-width: 992px) {
   .center-on-mobile {
