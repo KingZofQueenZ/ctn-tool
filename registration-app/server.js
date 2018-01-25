@@ -4,6 +4,7 @@ const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const config = require('./server/config/index');
 
 // Get our API routes
 const usersApi = require('./server/routes/api/users');
@@ -12,7 +13,7 @@ const eventsApi = require('./server/routes/api/events');
 const app = express();
 
 /* Mongoose setup */
-mongoose.connect('mongodb://localhost/ctn');
+mongoose.connect(config.database.local);
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error'));

@@ -2,83 +2,47 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
-const User = require('../../models/user')
+const config = require('../../config/index');
 
-/* Users
-  route: /api/users
-*/
+const VerifyToken = require('../../authentication/verifytoken');
+const User = require('../../models/user');
+const Event = require('../../models/event');
+
+// Users ------------------------
+//   route: /api/users
+// ------------------------------
+
+// Public Routes ----------------
+// ------------------------------
 
 // Authenticate user
 router.post('/authenticate', (request, response) => {
   var body = request.body;
   User.findOne({ email: body.email }, (error, user) => {
     if(error) {
-      console.log('Error in POST authenticate /users', error);
       response.status(500).send(error);
       return;
     }
 
-    if(user == undefined) {
-      console.log('User not found, email:', body.email);
+    if(!user) {
       response.status(404).send('User not found, email: ' +  body.email);
       return;
     }
 
     if (user && bcrypt.compareSync(body.password, user.password)) {
-      // authentication successful
       var authenticatedUser = {
         _id: user._id,
         email: user.email,
         firstName: user.firstname,
         lastName: user.lastname,
-        token: jwt.sign({ sub: user._id }, 'lololol', { expiresIn: '14d'})
+        token: jwt.sign({ sub: user._id, admin: user.admin }, config.auth.secret, { expiresIn: '14d'})
       };
 
-      console.log("User authenticated", authenticatedUser);
       response.status(200).send(authenticatedUser);
     } else {
-        // authentication failed
-        console.log('User authentication failed, email: ' +  body.email);
         response.status(401).send('User authentication failed, email: ' +  body.email);
     }
   });
-});
-
-// Get all users
-router.get('/', (request, response) => {
-  User.find({})
-    .sort({lastname: 1, firstname: 1})
-    .exec((error, documents) => {
-      if(error) {
-        console.log('Error in GET /users', error);
-        response.status(500).send(error);
-        return;
-      }
-
-      console.log('GET /users successfull');
-      response.status(200).json(documents);
-    });
-});
-
-// Get user by id
-router.get('/:user_id', (request, response) => {
-  User.findById(request.params.user_id, (error, document) => {
-      if(document == undefined) {
-        console.log('User not found, id:', request.params.user_id);
-        response.status(404).send('User not found, id: ' +  request.params.user_id);
-        return;
-      }
-    })
-    .exec((error, document) => {
-      if(error) {
-        console.log('Error in GET /users by id', error);
-        response.status(500).send(error);
-        return;
-      }
-
-      console.log('GET /users by id successfull');
-      response.status(200).json(document);
-    });
 });
 
 // Create user
@@ -94,62 +58,115 @@ router.post('/', (request, response) => {
 
   User.create(newUser, (error, document) => {
     if(error) {
-      console.log('Error in POST /users', error);
       response.status(500).send(error);
       return;
     }
 
-    console.log('POST /users successfull');
-    response.status(200).json(document);
+    response.status(200).send("User created successfully");
   });
 });
 
-// Update user
-router.put('/', (request, response) => {
-  var body = request.body;
-  User.findOne({ _id: body._id }, (error, document) => {
-    if(error) {
-      console.log('Error in PUT find /users', error);
-      response.status(500).send(error);
-      return;
-    }
+// Secured Routes --------------------
+// -----------------------------------
 
-    if(document === null) {
-      console.log('User not found, id:', request.body._id);
-      response.status(404).send('User not found, id: ' +  request.body._id);
-      return;
-    }
-
-    document.firstname = body.firstname || document.firstname;
-    document.lastname = body.lastname || document.lastname;
-    document.phone = body.phone || document.phone;
-    document.email = body.email || document.email;
-    document.password = body.password || document.password;
-
-    document.save((error, document) => {
+// Get all users
+router.get('/', VerifyToken.verifyAdmin, (request, response) => {
+  User.find({})
+    .select({"password": 0, "__v": 0})
+    .sort({lastname: 1, firstname: 1})
+    .exec((error, documents) => {
       if(error) {
-        console.log('Error in PUT save /users', error);
-        response.send(error);
+        response.status(500).send(error);
         return;
       }
 
-      console.log('PUT /users successfull');
+      response.status(200).json(documents);
+    });
+});
+
+// Get user by {user_id}
+router.get('/:user_id', VerifyToken.verifyUser, (request, response) => {
+  User.findById(request.params.user_id)
+    .select({ "_id": 0, "password": 0, "__v": 0 })
+    .exec((error, document) => {
+      if(error) {
+        response.status(500).send(error);
+        return;
+      }
+      
+      if(!document) {
+        response.status(404).send('User not found, _id: ' +  request.params.user_id);
+        return;
+      }
+
       response.status(200).json(document);
     });
-  });
+});
+
+// Update user
+router.put('/:user_id', VerifyToken.verifyUser, (request, response) => {
+  var body = request.body;
+  User.findById(request.params.user_id)
+    .exec((error, document) => {
+      if(error) {
+        response.status(500).send(error);
+        return;
+      }
+
+      if(!document) {
+        response.status(404).send('User not found, _id: ' +  request.body._id);
+        return;
+      }
+
+      document.firstname = body.firstname || document.firstname;
+      document.lastname = body.lastname || document.lastname;
+      document.phone = body.phone || document.phone;
+      document.email = body.email || document.email;
+      document.password = body.password || document.password;
+
+      document.save((error, document) => {
+        if(error) {
+          response.send(error);
+          return;
+        }
+
+        response.status(200).send("User updated sucessfully");
+      });
+    });
 });
 
 // Delete user
-router.delete('/:user_id', (request, response) => {
+router.delete('/:user_id', VerifyToken.verifyAdmin, (request, response) => {
   User.remove({_id: request.params.user_id}, (error, document) => {
     if(error) {
-      console.log('Error in DELETE /users', error);
       response.status(500).send(error);
       return;
     }
 
-    response.status(200).send();
+    if(!document.n){
+      response.status(404).send('User not found, _id: ' +  request.params.user_id);
+      return;
+    }
+
+    response.status(200).send("User deleted sucessfully");
   });
+});
+
+// Get upcoming all events for a user
+router.get('/:user_id/events', VerifyToken.verifyUser, (request, response) => {
+  console.log(new Date(Date.now()).toISOString());
+  Event.find({participant_ids: request.params.user_id, date: {"$gte": new Date(Date.now()).toISOString()}})
+      .select({ "_id": 0, "password": 0, "__v": 0, "allow_trials:": 0 })
+      .sort('date')
+      .populate('participant_ids', 'firstname lastname -_id')
+      .exec((error, document) => {
+        if(error) {
+          response.status(500).send(error);
+          return;
+        }
+
+        response.status(200).json(document);
+      });
 });
 
 module.exports = router;
