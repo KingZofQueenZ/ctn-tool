@@ -4,6 +4,7 @@ const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const helmet = require('helmet');
 const config = require('./server/config/index');
 
 // Get our API routes
@@ -11,6 +12,9 @@ const usersApi = require('./server/routes/api/users');
 const eventsApi = require('./server/routes/api/events');
 
 const app = express();
+
+// Set headers for security
+app.use(helmet());
 
 /* Mongoose setup */
 mongoose.connect(config.database.local);
