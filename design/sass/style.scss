@@ -1,0 +1,353 @@
+// Variables
+$color-teal: #249287;
+$color-teal-light: #44ccbe;
+
+$nav-height: 110px;
+
+// Typography override variables
+$small-screen: 600px !default;
+$large-screen: 1200px !default;
+$range : $large-screen - $small-screen !default;
+$intervals: 8 !default;
+$interval-size: $range / $intervals !default;
+
+// Mixins
+@mixin flow-text($font-size){
+    $i: 0;
+    @while $i <= $intervals {
+        @media only screen and (min-width : 360 + ($i * $interval-size)) {
+        font-size: $font-size * (1 + (.02 * $i));
+        }
+        $i: $i + 1;
+    }
+
+    // Handle below 360px screen
+    @media only screen and (max-width: 360px) {
+        font-size: 1.2rem;
+    }
+}
+
+@font-face {
+    font-family: "Open Sans Light";
+    src: url("../fonts/open-sans/OpenSans-Light.ttf");
+}
+
+@font-face {
+    font-family: "Open Sans";
+    src: url("../fonts/open-sans/OpenSans-Regular.ttf");
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    position: relative;
+    padding-bottom: 6rem;
+    min-height: 100%;
+    //font-family: "Open Sans";
+}
+
+// Navigation
+nav {
+    height: $nav-height;
+    line-height: $nav-height;
+    
+    .nav-desktop {
+        ul {    
+            li{
+                line-height: 40px;
+                margin-top: 35px;
+                margin-left: 25px;
+            }
+    
+           a {
+               font-size: 20px;
+               position: relative;
+               color: #444;
+               text-decoration: none;
+               padding: 0 5px;;
+            } 
+    
+            a:before {
+                content: "";
+                position: absolute;
+                width: 100%;
+                height: 2px;
+                bottom: 0;
+                left: 0;
+                background-color: $color-teal;
+                visibility: hidden;
+                -webkit-transform: scaleX(0);
+                transform: scaleX(0);
+                -webkit-transition: all 0.2s ease-in-out 0s;
+                transition: all 0.2s ease-in-out 0s;
+            }
+            
+            a.selected:before {
+                visibility: visible;
+                transform: none;
+            }
+    
+            a:hover:before {
+                visibility: visible;
+                -webkit-transform: scaleX(1);
+                transform: scaleX(1);
+            } 
+    
+            a:hover {
+                background-color: transparent;
+            }
+        }
+    }
+    
+
+    .nav-wrapper i {
+        height: $nav-height;
+        line-height: $nav-height;
+        margin-left: 0px;
+    }
+
+    .nav-wrapper i.login {
+        margin-left: 10px;
+        margin-top: -36px;
+    }
+  
+    a.button-collapse {
+        color: $color-teal;
+
+        i {
+            font-size: 30px;
+        }
+    }
+
+    .side-nav {
+        
+        i.material-icons {
+            padding-right: 160px;
+        }
+
+        .collapsible-header {
+            padding: 0 32px;
+
+            i {
+                padding-right: 110px;
+            }
+        }
+
+        .collapsible-body a {
+            padding-left: 50px;
+        }
+    }
+}
+
+// First Parallax
+#index-banner{
+    height: 400px;
+
+    .section {
+        width: 100%;
+    }
+}
+
+// Event-Cards
+.events {
+    margin-top: 20px;
+
+    .header-text {
+        margin-bottom:20px;
+    }
+
+    .card-panel {
+        position: relative;
+
+        .registrations {
+            margin-top: 10px;
+
+            i {
+                vertical-align: middle;
+            }
+
+            .material-icons {
+                margin-right: 10px;
+            }
+        }
+
+        .register {
+            position: absolute;
+            right: 18px;
+            bottom: 10px;
+        }
+    }
+}
+
+// Details
+.details {
+    margin-top:20px;
+
+    .button-anmeldung {
+        height: 120px;
+
+        .btn {
+            margin: auto;
+        }
+    }
+
+    .detail-title {
+        margin-bottom: 0;
+    }
+
+    .detail-subtitle {
+        line-height: 32px;
+    }
+
+    .tab-container {
+        margin-top:40px;
+
+        .tab-content {
+            padding-top: 40px;
+
+            .collection .collection-item.avatar {
+                min-height: 60px;
+
+                img {
+                    top: 9px;
+                }
+            }
+
+            .input-field {
+                margin-top: 40px;
+            }
+
+            a {
+                margin-top: 20px;
+            }
+        }
+
+    }
+}
+
+// Administration
+.administration {
+    .header {
+        margin-top: 20px;    
+    }
+
+    .event-title {
+        margin-top: 20px;
+        margin-bottom: 20px;
+
+        h5 {
+            display: inline;
+
+            i {
+                margin-top: 2px;
+            }
+        }
+        span {
+            margin-left: 10px;
+            display: inline;
+        }
+    }
+    .event-participants-container{
+        margin-bottom: 20px; 
+        padding: 0;
+
+        .event-participants {  
+            .collection {
+                margin-top:-1px;
+                margin-bottom: 0px;
+            }
+    
+            span {
+                font-size: 12px;
+            }
+        }
+    }
+
+    .tab-container {
+        .tab-content {
+            padding-top: 20px;
+
+            .collection .collection-item.avatar {
+                min-height: 60px;
+
+                img {
+                    top: 12px;
+                }
+            }
+
+            .members {
+                .user-data {
+                    font-size: 13px;
+                }
+            }
+
+            .input-field {
+                margin-top: 40px;
+            }
+
+            a {
+                margin-top: 20px;
+            }
+        }
+
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .center-on-mobile {
+        text-align: center !important; 
+    }
+}
+
+.page-footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    .copyright {
+        margin-right:10px;
+    }
+    .data {
+        margin-right:10px;
+    }
+    .icons img {
+        margin-left:10px;
+    }
+}
+
+// Allgemein
+blockquote {
+    border-left: 5px solid $color-teal;
+}
+
+.carousel .indicators .indicator-item {
+    background-color: rgb(138, 138, 138);
+}
+
+.carousel .indicators .indicator-item.active {
+    background-color: #444;
+}
+
+.tabs .tab a:hover,
+.tabs .tab a.active {
+    color: $color-teal;
+}
+
+.tabs .tab a {
+    color: $color-teal-light;
+    font-weight: 400;
+    @include flow-text(0.9rem);
+}
+
+.tabs .indicator {
+    background-color: $color-teal;
+}
+
+// Override Typograhy
+.flow-text{
+    font-weight: 300;
+    @include flow-text(1rem)
+}
