@@ -3,11 +3,25 @@ const express = require('express');
 const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const helmet = require('helmet');
+const config = require('./server/config/index');
 
 // Get our API routes
-const api = require('./server/routes/api');
+const usersApi = require('./server/routes/api/users');
+const eventsApi = require('./server/routes/api/events');
 
 const app = express();
+
+// Set headers for security
+app.use(helmet());
+
+/* Mongoose setup */
+mongoose.connect(config.database.local);
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error'));
+db.once('open', () => console.log("Successfully connected to MongoDB"));
 
 // Parsers for POST data
 app.use(bodyParser.json());
@@ -17,7 +31,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'dist')));
 
 // Set our api routes
-app.use('/api', api);
+app.use('/api/users', usersApi);
+app.use('/api/events', eventsApi);
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
