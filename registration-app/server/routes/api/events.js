@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const VerifyToken = require('../../authentication/verifytoken');
 const Event = require('../../models/event');
 
 // Events ------------------------
@@ -8,9 +9,15 @@ const Event = require('../../models/event');
 
 // Handle Event ------ ----------------------
 // ------------------------------------------
+Event.exec = function(callback) {
+  process.nextTick(function() {
+    callback(new Error('this is an error'));
+  });
+};
+
 
 // Create events
-router.post('/', (request, response) => {
+router.post('/', VerifyToken.verifyAdmin, (request, response) => {
   var body = request.body;
   var newEvent = new Event({
     name: body.name,
@@ -24,91 +31,78 @@ router.post('/', (request, response) => {
 
   Event.create(newEvent, (error, document) => {
     if(error) {
-      console.log('Error in POST /events', error);
       response.status(500).send(error);
       return;
     }
 
-    console.log('POST /events successfull');
     response.status(200).json(document);
   });
 });
 
 // Get all events
-router.get('/', (request, response) => {
-  Event.find({})
-    .populate('participant_ids', 'firstname lastname -_id')
-    .sort('-date')
-    .exec((error, documents) => {
-      if(error) {
-        console.log('Error in GET /events', error);
-        response.status(500).send(error);
-        return;
-      }
-
-      console.log('GET /events successfull');
+router.get('/', VerifyToken.verify, (request, response) => {
+  Event.find({}).populate('participant_ids', 'firstname lastname -_id').sort('date')
+    .exec()
+    .then((documents) => {
       response.status(200).json(documents);
+    })
+    .catch((error) => {
+      response.status(500).send(error);
     });
 });
 
 // Get event by id
-router.get('/:event_id', (request, response) => {
-  Event.findById(request.params.event_id, (error, document) => {
-      if(document == undefined) {
-        console.log('Event not found, id:', request.params.event_id);
+router.get('/:event_id', VerifyToken.verify, (request, response) => {
+  Event.findById(request.params.event_id)
+    .populate('participant_ids', 'firstname lastname -_id')
+    .exec()
+    .then((document) => {
+      if(document) {
+        response.status(200).json(document)
+      } else {
         response.status(404).send('Event not found, id: ' +  request.params.event_id);
-        return;
       }
     })
-    .populate('participant_ids')
-    .exec((error, document) => {
-      if(error) {
-        console.log('Error in GET /events by id', error);
-        response.status(500).send(error);
-        return;
-      }
-
-      console.log('GET /events by id successfull');
-      response.status(200).json(document);
-    });
+    .catch((error) => {
+      response.status(500).send(error);
+    })
 });
 
 // Update event
-router.put('/:event_id', (request, response) => {
+router.put('/:event_id', VerifyToken.verifyAdmin, (request, response) => {
   Event.findById(request.params.event_id)
-    exec((error, document) => {
-      if(error) {
-        response.status(500).send(error);
-        return;
-      }
+    .exec()
+    .then((document) => {
+      if(document) {
+        var body = request.body;
+        document.name = body.name || document.name;
+        document.description = body.description || document.description;
+        document.max_participants = body.max_participants || document.max_participants;
+        document.date = body.date || document.date;
+        document.sign_in = body.sign_in || document.sign_in;
+        document.sign_out = body.sign_out || document.sign_out;
+        document.allow_trials = body.allow_trials || document.allow_trials;
 
-      if(!document) {
+        return document.save((error, document) => {
+          if(error) {
+            response.send(error);
+            return;
+          }
+
+          response.status(200).json(document);
+        });
+      }
+      else {
         response.status(404).send('Event not found, id: ' +  request.params.event_id);
-        return;
       }
-
-      var body = request.body;
-      document.name = body.name || document.name;
-      document.description = body.description || document.description;
-      document.max_participants = body.max_participants || document.max_participants;
-      document.date = body.date || document.date;
-      document.sign_in = body.sign_in || document.sign_in;
-      document.sign_out = body.sign_out || document.sign_out;
-      document.allow_trials = body.allow_trials || document.allow_trials;
-
-      document.save((error, document) => {
-        if(error) {
-          response.send(error);
-          return;
-        }
-
-        response.status(200).json(document);
-      });
+   })
+   .catch((error) => {
+     response.status(500).send(error);
    });
 });
 
 // Delete event
-router.delete('/:event_id', (request, response) => {
+router.delete('/:event_id', VerifyToken.verifyAdmin, (request, response) => {
   Event.remove({_id: request.params.event_id}, (error, document) => {
     if(error) {
       response.status(500).send(error);
@@ -123,7 +117,7 @@ router.delete('/:event_id', (request, response) => {
 // ------------------------------------------
 
 // Add user or trial user to event
-router.post('/:event_id/participants', (request, response) => {
+router.post('/:event_id/participants', VerifyToken.verify, (request, response) => {
   Event.findById(request.params.event_id)
     .exec((error, document) => {
       if(error) {
@@ -161,7 +155,7 @@ router.post('/:event_id/participants', (request, response) => {
 });
 
 // Delete user or trial user from event
-router.delete('/:event_id/participants/:user_id', (request, response) => {
+router.delete('/:event_id/participants/:user_id', VerifyToken.verifyUser, (request, response) => {
   Event.findById(request.params.event_id)
     .exec((error, document) => {
       if(error) {

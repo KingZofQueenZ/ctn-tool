@@ -21,7 +21,7 @@ mongoose.connect(config.database.local);
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error'));
-db.once('open', () => console.log("Successfully conneted to MongoDB"));
+db.once('open', () => console.log("Successfully connected to MongoDB"));
 
 // Parsers for POST data
 app.use(bodyParser.json());
