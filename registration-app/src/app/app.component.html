@@ -1,20 +1,41 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-
+<nav class="white" role="navigation">
+    <div class="nav-wrapper container">
+        <div class="nav-desktop">
+        <a id="logo-container" href="index.html" class="brand-logo">
+            <img src="../assets/img/logo.jpg" height="100" width="100">
+        </a>
+        <ul class="right light hide-on-med-and-down">
+            <li><a class="selected" href="#">Home</a></li>
+            <li><a href="#">News</a></li>
+            <li><a href="#">Information</a></li>
+            <li><a href="#">Termine</a></li>
+            <li><a id="login-toggle" href="#!">Login<i class="material-icons right login">person</i></a></li>
+        </ul>
+        </div>
+        
+        <ul id="nav-mobile" class="side-nav">
+        <li><a href="#">Start</a></li>
+        <li><a href="#">News</a></li>
+        <li class="no-padding">
+            <ul class="collapsible collapsible-accordion">
+            <li>
+                <a class="collapsible-header">Informationen<i class="material-icons right">arrow_drop_down</i></a>
+                <div class="collapsible-body">
+                <ul>
+                    <li><a href="#!">Training</a></li>
+                    <li><a href="#!">Team</a></li>
+                    <li><a href="#!">Preise</a></li>
+                    <li><a href="#!">Place 2 be</a></li>
+                </ul>
+                </div>
+            </li>
+            </ul>
+        </li>
+        <li><a href="#">Trainings</a></li>
+        <li><a href="#">Kontakt</a></li>
+        <li><a href="#">Login<i class="material-icons right login">person</i></a></li>
+        </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="large material-icons">menu</i></a>
+    </div>
+</nav>
+<router-outlet></router-outlet>
