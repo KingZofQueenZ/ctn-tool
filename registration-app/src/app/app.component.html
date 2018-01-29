@@ -5,37 +5,40 @@
             <img src="../assets/img/logo.jpg" height="100" width="100">
         </a>
         <ul class="right light hide-on-med-and-down">
-            <li><a class="selected" href="#">Home</a></li>
+            <li><a routerLink="/">Home</a></li>
             <li><a href="#">News</a></li>
             <li><a href="#">Information</a></li>
             <li><a href="#">Termine</a></li>
-            <li><a id="login-toggle" href="#!">Login<i class="material-icons right login">person</i></a></li>
+            <div *ngIf="currentUser;then nouser else user"></div>
+            <ng-template #nouser><li><a id="login-toggle" routerLink="/login" routerLinkActive="selected">Login<i class="material-icons right login">person</i></a></li></ng-template>
+            <ng-template #user><li><a id="login-toggle" routerLink="/login" routerLinkActive="selected">Timothy Gediga<i class="material-icons right login">person</i></a></li></ng-template>
         </ul>
         </div>
         
         <ul id="nav-mobile" class="side-nav">
-        <li><a href="#">Start</a></li>
+        <li><a href="#">Home</a></li>
         <li><a href="#">News</a></li>
-        <li class="no-padding">
-            <ul class="collapsible collapsible-accordion">
-            <li>
-                <a class="collapsible-header">Informationen<i class="material-icons right">arrow_drop_down</i></a>
-                <div class="collapsible-body">
-                <ul>
-                    <li><a href="#!">Training</a></li>
-                    <li><a href="#!">Team</a></li>
-                    <li><a href="#!">Preise</a></li>
-                    <li><a href="#!">Place 2 be</a></li>
-                </ul>
-                </div>
-            </li>
-            </ul>
-        </li>
-        <li><a href="#">Trainings</a></li>
-        <li><a href="#">Kontakt</a></li>
+        <li><a href="#">Information</a></li>
+        <li><a href="#">Termine</a></li>
         <li><a href="#">Login<i class="material-icons right login">person</i></a></li>
         </ul>
         <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="large material-icons">menu</i></a>
     </div>
 </nav>
+
 <router-outlet></router-outlet>
+
+<footer class="page-footer teal">
+    <div class="footer-copyright grey darken-4">
+      <div class="container">
+          <span class="copyright">&copy;2018 crossthenature</span>    
+          <span class="data"><a href="#" class="grey-text text-lighten-2">Datenschutz</a></span>       
+          <span class="impressum"><a href="#" class="grey-text text-lighten-2">Impressum</a></span>
+          <div class="icons right hide-on-small-only">
+            <img src="assets/img/twitter.png" height="25" width="25">
+            <img src="assets/img/facebook.png" height="25" width="25">
+            <img src="assets/img/instagram.png" height="25" width="25">
+          </div>          
+      </div>
+    </div>
+  </footer>

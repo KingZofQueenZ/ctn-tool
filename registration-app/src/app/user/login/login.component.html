@@ -1,22 +1,22 @@
 <div class="container login">
   <div class="row">
     <div class="col s12 l6 offset-l3">
-      <h2 class="header light detail-title teal-text center-on-mobile">Login</h2>
+        <h3 class="header light detail-title teal-text center-on-mobile">Login</h3>
     </div>
 
     <form class="col s12 l6 offset-l3">
-      <div class="login-container">
-        <mat-form-field>
-          <input matInput placeholder="E-Mail">
-        </mat-form-field>
-
-        <mat-form-field>
-          <input matInput placeholder="Passwort">
-        </mat-form-field>
-      </div>
-      <div class="col s12 center-on-mobile">
-        <a class="waves-effect waves-light btn">Login</a>
-      </div>
+        <div class="input-field col s12">
+          <input id="email" type="text" class="validate" [(ngModel)]="model.email" name="email">
+          <label class="light" for="email">E-Mail</label>
+        </div>
+        <div class="input-field col s12">
+          <input id="password" type="password" class="validate" [(ngModel)]="model.password" name="password">
+          <label class="light" for="password">Passwort</label>
+        </div>
+        <div class="col s12 center-on-mobile">
+          <a (click)="login()" class="waves-effect waves-light btn">Login</a>
+          <span class="register light"><i>   Noch nicht <a [routerLink]="['/register']">registriert?</a></i></span>
+        </div>
     </form>
   </div>
-</div>
+</div>  

@@ -6,10 +6,11 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class AuthenticationService {
+
   constructor(private http: HttpClient) { }
 
   login(email: string, password: string): Observable<any> {
-    return this.http.post<any>('/users/authenticate', { email: email, password: password })
+    return this.http.post<any>('/api/users/authenticate', { email: email, password: password })
         .map((user) => {
             // login successful if there's a jwt token in the response
             if (user && user.token) {
@@ -24,4 +25,5 @@ export class AuthenticationService {
       // remove user from local storage to log user out
       localStorage.removeItem('currentUser');
   }
+
 }
