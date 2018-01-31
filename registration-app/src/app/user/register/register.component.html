@@ -14,14 +14,9 @@
           <label class="light" for="lastname">Nachname</label>
         </div>
         <div class="input-field col s12">
-          <input id="email" name="email" type="email" #email="ngModel" class="validate" [(ngModel)]="user.email" required email/>
+          <input id="email" name="email" type="email" #email="ngModel" [(ngModel)]="user.email" required email [class.valid]="email.valid" [class.invalid]="email.invalid && email.touched"/>
           <label class="light" data-error="Geben Sie eine gültige E-Mail Adresse ein" for="email">E-Mail</label>
         </div>
-        <!--<div class="input-field col s12">
-          <input id="email" name="email" #email="ngModel" type="email" [(ngModel)]="user.email" required email [class.valid]="email.valid" [class.invalid]="email.invalid && (email.dirty || email.touched)" (focus)="emailFocus=true" (blur)="emailFocus=false"/>
-          <label class="validate light" for="email">E-Mail</label>
-          <div class="message light" [hidden]="!emailFocus || !email.invalid || (!email.dirty && !email.touched)">Geben Sie eine gültige E-Mail Adresse ein</div>
-        </div>-->
         <div class="input-field col s12">
           <input id="phone" type="text" class="validate" required  [(ngModel)]="user.phone" name="phone">
           <label class="light" data-error="Geben Sie eine gültige E-Mail Adresse ein" for="phone">Telefon</label>

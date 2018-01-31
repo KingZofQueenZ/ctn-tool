@@ -1,12 +1,5 @@
 .input-field {
-    position: relative;
-
-    .message {
-        color: #F44336;
-        font-size: 12px;
-        cursor: text;
-        position: absolute;
-        top: 50px;
-        transition: visibility 0s, opacity 2s linear;
+    label {
+        width: 100%;
     }
 }
