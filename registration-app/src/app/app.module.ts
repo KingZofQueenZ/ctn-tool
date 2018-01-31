@@ -11,12 +11,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthenticationService } from './services/authentication.service';
 import { AuthInterceptor } from './shared/auth.interceptor';
 import { AuthGuard } from './shared/auth.guard';
+import { OverviewComponent } from './event/overview/overview.component';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    OverviewComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,8 @@ import { AuthGuard } from './shared/auth.guard';
       multi: true,
     },
     AuthGuard,
-    AuthenticationService
+    AuthenticationService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

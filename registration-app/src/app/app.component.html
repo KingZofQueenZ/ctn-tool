@@ -8,7 +8,7 @@
             <li><a routerLink="/">Home</a></li>
             <li><a href="#">News</a></li>
             <li><a href="#">Information</a></li>
-            <li><a href="#">Termine</a></li>
+            <li><a routerLink="/events" routerLinkActive="selected">Termine</a></li>
             <div *ngIf="currentUser;then nouser else user"></div>
             <ng-template #nouser><li><a id="login-toggle" routerLink="/login" routerLinkActive="selected">Login<i class="material-icons right login">person</i></a></li></ng-template>
             <ng-template #user><li><a id="login-toggle" routerLink="/login" routerLinkActive="selected">Timothy Gediga<i class="material-icons right login">person</i></a></li></ng-template>

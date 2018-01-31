@@ -4,29 +4,34 @@
         <h3 class="header light detail-title teal-text center-on-mobile">Registrieren</h3>
     </div>
 
-    <form class="col s12 l6 offset-l3">
+    <form (ngSubmit)="registerForm.form.valid && register()" #registerForm="ngForm" class="col s12 l6 offset-l3">
         <div class="input-field col s12">
-          <input id="firstname" type="text" class="validate" [(ngModel)]="model.firstname" name="firstname">
+          <input id="firstname" type="text" required [(ngModel)]="user.firstname" name="firstname">
           <label class="light" for="firstname">Vorname</label>
         </div>
         <div class="input-field col s12">
-          <input id="lastname" type="text" class="validate" [(ngModel)]="model.lastname" name="lastname">
+          <input id="lastname" type="text" required [(ngModel)]="user.lastname" name="lastname">
           <label class="light" for="lastname">Nachname</label>
         </div>
         <div class="input-field col s12">
-          <input id="email" type="text" class="validate" [(ngModel)]="model.email" name="email">
-          <label class="light" for="email">E-Mail</label>
+          <input id="email" name="email" type="email" #email="ngModel" class="validate" [(ngModel)]="user.email" required email/>
+          <label class="light" data-error="Geben Sie eine gültige E-Mail Adresse ein" for="email">E-Mail</label>
+        </div>
+        <!--<div class="input-field col s12">
+          <input id="email" name="email" #email="ngModel" type="email" [(ngModel)]="user.email" required email [class.valid]="email.valid" [class.invalid]="email.invalid && (email.dirty || email.touched)" (focus)="emailFocus=true" (blur)="emailFocus=false"/>
+          <label class="validate light" for="email">E-Mail</label>
+          <div class="message light" [hidden]="!emailFocus || !email.invalid || (!email.dirty && !email.touched)">Geben Sie eine gültige E-Mail Adresse ein</div>
+        </div>-->
+        <div class="input-field col s12">
+          <input id="phone" type="text" class="validate" required  [(ngModel)]="user.phone" name="phone">
+          <label class="light" data-error="Geben Sie eine gültige E-Mail Adresse ein" for="phone">Telefon</label>
         </div>
         <div class="input-field col s12">
-          <input id="phone" type="text" class="validate" [(ngModel)]="model.phone" name="phone">
-          <label class="light" for="phone">Telefon</label>
-        </div>
-        <div class="input-field col s12">
-          <input id="password" type="password" class="validate" [(ngModel)]="model.password" name="password">
+          <input id="password" class="validate" type="password" required [(ngModel)]="user.password" name="password">
           <label class="light" for="password">Passwort</label>
         </div>
         <div class="col s12 center-on-mobile">
-          <a (click)="register()" class="waves-effect waves-light btn">Registrieren</a>
+          <button class="btn waves-effect waves-light" type="submit" name="action">Registrieren</button>
         </div>
     </form>
   </div>
