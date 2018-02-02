@@ -6,33 +6,33 @@
 
     <form (ngSubmit)="registerForm.form.valid && register()" #registerForm="ngForm" class="col s12 l6 offset-l3">
         <div class="input-field col s12">
-          <input id="firstname" type="text" required [(ngModel)]="user.firstname" name="firstname">
+          <input id="firstname" name="firstname" type="text" class="validate" [(ngModel)]="user.firstname" required>
           <label class="light" for="firstname">Vorname</label>
         </div>
         <div class="input-field col s12">
-          <input id="lastname" type="text" required [(ngModel)]="user.lastname" name="lastname">
+          <input id="lastname" name="lastname" type="text" class="validate" [(ngModel)]="user.lastname" required>
           <label class="light" for="lastname">Nachname</label>
         </div>
         <div class="input-field col s12">
-          <input id="email" name="email" type="email" #email="ngModel" class="validate" [(ngModel)]="user.email" required email/>
-          <label class="light" data-error="Geben Sie eine gültige E-Mail Adresse ein" for="email">E-Mail</label>
-        </div>
-        <!--<div class="input-field col s12">
-          <input id="email" name="email" #email="ngModel" type="email" [(ngModel)]="user.email" required email [class.valid]="email.valid" [class.invalid]="email.invalid && (email.dirty || email.touched)" (focus)="emailFocus=true" (blur)="emailFocus=false"/>
-          <label class="validate light" for="email">E-Mail</label>
-          <div class="message light" [hidden]="!emailFocus || !email.invalid || (!email.dirty && !email.touched)">Geben Sie eine gültige E-Mail Adresse ein</div>
-        </div>-->
-        <div class="input-field col s12">
-          <input id="phone" type="text" class="validate" required  [(ngModel)]="user.phone" name="phone">
-          <label class="light" data-error="Geben Sie eine gültige E-Mail Adresse ein" for="phone">Telefon</label>
+          <input id="email" name="email" type="email" class="validate" [(ngModel)]="user.email" required email [class.invalid]="hasError">
+          <label class="light" for="email">E-Mail</label>
         </div>
         <div class="input-field col s12">
-          <input id="password" class="validate" type="password" required [(ngModel)]="user.password" name="password">
+          <input id="phone" name="phone" type="text" class="validate" [(ngModel)]="user.phone" required>
+          <label class="light" for="phone">Telefon</label>
+        </div>
+        <div class="input-field col s12">
+          <input id="password" name="password" type="password" class="validate" [(ngModel)]="user.password" required>
           <label class="light" for="password">Passwort</label>
         </div>
         <div class="col s12 center-on-mobile">
-          <button class="btn waves-effect waves-light" type="submit" name="action">Registrieren</button>
+          <button class="btn waves-effect waves-light" [class.disabled]="!registerForm.form.valid" type="submit" name="action">Registrieren</button>
         </div>
     </form>
+
+    <div class="col s12 l6 offset-l3">
+      <div class="col s12 error light" [hidden]="!hasError">Ein Benutzer mit dieser E-Mail Adresse existiert bereits! Passwort <a [routerLink]="['/password']">vergessen?</a></div>
+    </div>
+
   </div>
 </div>  

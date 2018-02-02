@@ -4,19 +4,23 @@
         <h3 class="header light detail-title teal-text center-on-mobile">Login</h3>
     </div>
 
-    <form class="col s12 l6 offset-l3">
+    <form (ngSubmit)="loginForm.form.valid && login()" #loginForm="ngForm" class="col s12 l6 offset-l3">
         <div class="input-field col s12">
-          <input id="email" type="text" class="validate" [(ngModel)]="model.email" name="email">
+          <input id="email" name="email" type="email" class="validate" [(ngModel)]="model.email" required email [class.invalid]="hasError">
           <label class="light" for="email">E-Mail</label>
         </div>
         <div class="input-field col s12">
-          <input id="password" type="password" class="validate" [(ngModel)]="model.password" name="password">
+          <input id="password" name="password" type="password" class="validate" [(ngModel)]="model.password" required [class.invalid]="hasError">
           <label class="light" for="password">Passwort</label>
         </div>
         <div class="col s12 center-on-mobile">
-          <a (click)="login()" class="waves-effect waves-light btn">Login</a>
-          <span class="register light"><i>   Noch nicht <a [routerLink]="['/register']">registriert?</a></i></span>
+          <button class="btn waves-effect waves-light" [class.disabled]="!loginForm.form.valid" type="submit" name="action">Login</button>
+          <span class="register light"><i><a [routerLink]="['/register']">Registrieren</a> / <a [routerLink]="['/password']">Passwort vergessen</a></i></span>
         </div>
     </form>
+
+    <div class="col s12 l6 offset-l3">
+      <div class="col s12 error light" [hidden]="!hasError">Die E-Mail Adresse oder das Passwort ist falsch</div>
+    </div>
   </div>
 </div>  

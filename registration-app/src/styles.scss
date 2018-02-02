@@ -38,6 +38,7 @@ body {
     min-height: 100%;
 }
 
+
 // Navigation
 nav {
     height: $nav-height;
@@ -111,65 +112,10 @@ nav {
         }
     }
 
-    .side-nav {
-        
-        i.material-icons {
-            padding-right: 160px;
-        }
-
-        .collapsible-header {
-            padding: 0 32px;
-
-            i {
-                padding-right: 110px;
-            }
-        }
-
-        .collapsible-body a {
-            padding-left: 50px;
-        }
-    }
 }
 
-// First Parallax
-#index-banner{
-    height: 400px;
 
-    .section {
-        width: 100%;
-    }
-}
 
-// Event-Cards
-.events {
-    margin-top: 20px;
-
-    .header-text {
-        margin-bottom:20px;
-    }
-
-    .card-panel {
-        position: relative;
-
-        .registrations {
-            margin-top: 10px;
-
-            i {
-                vertical-align: middle;
-            }
-
-            .material-icons {
-                margin-right: 10px;
-            }
-        }
-
-        .register {
-            position: absolute;
-            right: 18px;
-            bottom: 10px;
-        }
-    }
-}
 
 // Details
 .details {

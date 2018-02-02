@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,19 +9,29 @@ import { AuthenticationService } from '../../services/authentication.service';
 })
 export class LoginComponent implements OnInit {
   model: any = {};
+  hasError = false;
 
-  constructor(private authenticationService: AuthenticationService) { }
+  constructor(
+    private router: Router,
+    private authenticationService: AuthenticationService
+  ) { }
 
   ngOnInit() {
     this.authenticationService.logout();
   }
 
   login() {
-    console.log('login');
     this.authenticationService.login(this.model.email, this.model.password)
-        .subscribe(
-            data => {
-              console.log('login success');
-            });
+      .subscribe(
+        result => {
+          console.log('login success');
+        },
+        error => {
+          this.hasError = true;
+        },
+        () => {
+          this.router.navigate(['/events']);
+        }
+      );
   }
 }

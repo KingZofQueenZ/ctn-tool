@@ -13,6 +13,9 @@ import { AuthInterceptor } from './shared/auth.interceptor';
 import { AuthGuard } from './shared/auth.guard';
 import { OverviewComponent } from './event/overview/overview.component';
 import { UserService } from './services/user.service';
+import { EventService } from './services/event.service';
+import { StorageService } from './services/storage.service';
+import { CustomMaterializeModule } from './shared/materialize.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,7 @@ import { UserService } from './services/user.service';
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
+    CustomMaterializeModule
   ],
   providers: [
     {
@@ -35,7 +39,9 @@ import { UserService } from './services/user.service';
     },
     AuthGuard,
     AuthenticationService,
-    UserService
+    UserService,
+    EventService,
+    StorageService
   ],
   bootstrap: [AppComponent]
 })

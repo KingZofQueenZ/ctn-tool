@@ -1,30 +1,50 @@
 <nav class="white" role="navigation">
     <div class="nav-wrapper container">
         <div class="nav-desktop">
-        <a id="logo-container" href="index.html" class="brand-logo">
-            <img src="../assets/img/logo.jpg" height="100" width="100">
-        </a>
-        <ul class="right light hide-on-med-and-down">
-            <li><a routerLink="/">Home</a></li>
-            <li><a href="#">News</a></li>
-            <li><a href="#">Information</a></li>
-            <li><a routerLink="/events" routerLinkActive="selected">Termine</a></li>
-            <div *ngIf="currentUser;then nouser else user"></div>
-            <ng-template #nouser><li><a id="login-toggle" routerLink="/login" routerLinkActive="selected">Login<i class="material-icons right login">person</i></a></li></ng-template>
-            <ng-template #user><li><a id="login-toggle" routerLink="/login" routerLinkActive="selected">Timothy Gediga<i class="material-icons right login">person</i></a></li></ng-template>
-        </ul>
+            <a id="logo-container" href="index.html" class="brand-logo">
+                <img src="../assets/img/logo.jpg" height="100" width="100">
+            </a>
+            <ul class="right light hide-on-med-and-down">
+                <li><a routerLink="/">Home</a></li>
+                <li><a href="#">News</a></li>
+                <li><a href="#">Information</a></li>
+                <li><a routerLink="/events" routerLinkActive="selected">Termine</a></li>
+                <li><a id="login-toggle" routerLink="/login" routerLinkActive="selected">{{getFullName('Login')}}<i class="material-icons right login">person</i></a></li>
+            </ul>
         </div>
-        
-        <ul id="nav-mobile" class="side-nav">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">News</a></li>
-        <li><a href="#">Information</a></li>
-        <li><a href="#">Termine</a></li>
-        <li><a href="#">Login<i class="material-icons right login">person</i></a></li>
-        </ul>
-        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="large material-icons">menu</i></a>
+        <a href="#" id="btn-sidenav-demo" class="button-collapse"><i class="large material-icons">menu</i></a>
     </div>
 </nav>
+
+<mz-sidenav #sidenav [id]="'sidenav'" [collapseButtonId]="'btn-sidenav-demo'" [edge]="'left'">
+    <mz-sidenav-header>
+      <div class="user-view">
+        <img class="circle avatar" src="../assets/img/user-img.jpg">
+        <div class="white-text name">{{getFullName()}}</div>
+        <div class="white-text email">{{getEmail()}}</div>
+      </div>
+    </mz-sidenav-header>
+
+    <mz-sidenav-link>
+        <a href="#">Home</a>
+    </mz-sidenav-link>
+
+    <mz-sidenav-link>
+        <a href="#">News</a>
+    </mz-sidenav-link>
+
+    <mz-sidenav-link>
+        <a href="#">Informationen</a>
+    </mz-sidenav-link>
+
+    <mz-sidenav-link>
+        <a href="#">Termine</a>
+    </mz-sidenav-link>
+
+    <mz-sidenav-link>
+        <a href="#"><i mz-icon-mdi [icon]="'account'" [align]="'right'"></i>{{getFullName('Login')}}</a>
+    </mz-sidenav-link>
+</mz-sidenav>
 
 <router-outlet></router-outlet>
 

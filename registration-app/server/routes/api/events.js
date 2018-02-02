@@ -24,6 +24,7 @@ router.post('/', VerifyToken.verifyAdmin, (request, response) => {
     description: body.description,
     max_participants: body.max_participants,
     date: body.date,
+    time_to: body.time_to,
     sign_in: body.sign_in,
     sign_out: body.sign_out,
     allow_trials: body.allow_trials
@@ -41,7 +42,7 @@ router.post('/', VerifyToken.verifyAdmin, (request, response) => {
 
 // Get all events
 router.get('/', VerifyToken.verify, (request, response) => {
-  Event.find({}).populate('participant_ids', 'firstname lastname -_id').sort('date')
+  Event.find({}).populate('participant_ids', 'firstname lastname').sort('date')
     .exec()
     .then((documents) => {
       response.status(200).json(documents);
@@ -54,7 +55,7 @@ router.get('/', VerifyToken.verify, (request, response) => {
 // Get event by id
 router.get('/:event_id', VerifyToken.verify, (request, response) => {
   Event.findById(request.params.event_id)
-    .populate('participant_ids', 'firstname lastname -_id')
+    .populate('participant_ids', 'firstname lastname')
     .exec()
     .then((document) => {
       if(document) {
@@ -79,6 +80,7 @@ router.put('/:event_id', VerifyToken.verifyAdmin, (request, response) => {
         document.description = body.description || document.description;
         document.max_participants = body.max_participants || document.max_participants;
         document.date = body.date || document.date;
+        document.time_to = body.time_to || document.time_to;
         document.sign_in = body.sign_in || document.sign_in;
         document.sign_out = body.sign_out || document.sign_out;
         document.allow_trials = body.allow_trials || document.allow_trials;
@@ -131,8 +133,8 @@ router.post('/:event_id/participants', VerifyToken.verify, (request, response) =
       }
 
       // Add to participants of event
-      if(request.body.user_id) {
-        document.participant_ids.push(request.body.user_id);
+      if(request.body._id) {
+        document.participant_ids.push(request.body._id);
       }
 
       // Add to trial workouts of event
@@ -164,7 +166,7 @@ router.delete('/:event_id/participants/:user_id', VerifyToken.verifyUser, (reque
       }
 
       if(!document) {
-        response.status(404).send('Event not found, id: ' +  request.body._id);
+        response.status(404).send('Event not found, id: ' +  request.params.user_id);
         return;
       }
 

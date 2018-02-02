@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent {
   user: User = new User;
-  emailFocus = false;
+  hasError = false;
 
   constructor(
     private router: Router,
@@ -18,11 +18,16 @@ export class RegisterComponent {
   ) { }
 
   register(): void {
-    console.log(this.user);
     this.userService.create(this.user)
       .subscribe(
-        data => {
-          console.log('Registered successfully');
+        result => {
+          console.log(result);
+        },
+        error => {
+          this.hasError = true;
+          console.log(error);
+        },
+        () => {
           this.router.navigate(['/login']);
         });
   }

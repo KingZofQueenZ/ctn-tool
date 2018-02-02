@@ -11,6 +11,7 @@ var eventSchema = mongoose.Schema({
   description: String,
   max_participants: Number,
   date: { type: Date, required: true },
+  time_to: Date,
   sign_in: Date,
   sign_out: Date,
   participant_ids: [{ type: ObjectId, ref: 'User' }],
