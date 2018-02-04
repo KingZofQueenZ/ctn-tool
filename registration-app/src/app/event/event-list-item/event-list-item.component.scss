@@ -1,0 +1,31 @@
+// Event-Cards
+  
+    .header-text {
+        margin-bottom:20px;
+    }
+  
+    .card-panel {
+        position: relative;
+  
+        a {
+          color: #000;
+        }
+        .registrations {
+            margin-top: 10px;
+  
+            i {
+                vertical-align: middle;
+            }
+  
+            .material-icons {
+                margin-right: 10px;
+            }
+        }
+  
+        .register {
+          cursor: pointer;
+          position: absolute;
+          right: 18px;
+          bottom: 10px;
+        }
+    }
