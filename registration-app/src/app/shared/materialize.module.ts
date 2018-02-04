@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { MzParallaxModule, MzSidenavModule, MzIconModule, MzIconMdiModule, MzTabModule } from 'ng2-materialize';
+import { MzParallaxModule, MzSidenavModule, MzIconModule, MzIconMdiModule, MzTabModule, MzSpinnerModule, MzButtonModule } from 'ng2-materialize';
 
 @NgModule({
   imports: [
@@ -7,14 +7,18 @@ import { MzParallaxModule, MzSidenavModule, MzIconModule, MzIconMdiModule, MzTab
     MzSidenavModule,
     MzIconModule,
     MzIconMdiModule,
-    MzTabModule
+    MzTabModule,
+    MzSpinnerModule,
+    MzButtonModule 
   ],
   exports: [
     MzParallaxModule,
     MzSidenavModule,
     MzIconModule,
     MzIconMdiModule,
-    MzTabModule
+    MzTabModule,
+    MzSpinnerModule,
+    MzButtonModule 
   ],
 })
 export class CustomMaterializeModule { }

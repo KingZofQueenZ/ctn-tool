@@ -11,14 +11,21 @@
 </mz-parallax>
 
 <!-- Event Cards -->
-<div class="container details">
+<div class="container details" *ngIf="event">
   <div class="row">
-    <div class="col s12 m12 l10">
-        <h2 class="header light detail-title teal-text center-on-mobile">Workout of the day #1</h2>
-        <h5 class="header light detail-subtitle grey-text light center-on-mobile"><i>Dienstag, 23. Januar 2018 / 18:30 Uhr bis 19:30 Uhr</i></h5>
+    <div class="col s12 l10">
+        <h2 class="header light detail-title teal-text center-on-mobile">{{event.name}}</h2>
+        <h5 class="header light detail-subtitle grey-text light center-on-mobile"><i>{{date_string}}</i></h5>
     </div>
-    <div class="col s12 m12 l2 valign-wrapper center button-anmeldung">
-      <a class="waves-effect waves-light btn center">Anmelden</a>
+    <div class="col s12 l2 valign-wrapper center button-anmeldung">
+        <div *ngIf="is_registered; then registered; else notregistered"></div>
+            
+        <ng-template #notregistered>
+            <a class="waves-effect waves-light btn center">Anmelden</a>
+        </ng-template>
+        <ng-template #registered>
+            <a class="waves-effect waves-light btn center red">Abmelden</a>
+        </ng-template>
     </div>
 
     <div class="col s12">
@@ -37,65 +44,78 @@
     </div>
   </div>
     
-  <!--<div class="row tab-container">-->
-    <mz-tab
-      [fixedTabWidth]="'true'"
-      [swipeable]="'true'" >
-      <mz-tab-item [active]="'true'" [label]="'Workout'">
-        <div class="row">
-          <div class="col s12 flow-text">
+  <div class="row tab-container">
+    <div class="col s12">
+      <ul class="tabs">
+        <li class="tab col s4 m4"><a class="active" href="#tab1">Workout</a></li>
+        <li class="tab col s4 m4"><a href="#tab2">Anmeldungen</a></li>
+        <li class="tab col s4 m4"><a href="#tab3">Probetraining</a></li>
+      </ul>
+    </div>
+    <div id="tab1" class="col s12 tab-content">
+      <div class="row">
+        <div class="col s12 flow-text">
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore 
+            magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea 
+            takimata sanctus est Lorem ipsum dolor sit amet.
+        </div>
+      </div>
+    </div>
+    <div id="tab2" class="col s12 tab-content">
+      <div class="row">
+        <div class="col s12 flow-text">
+          <ul class="collection">
+            <li class="collection-item avatar valign-wrapper">
+              <img src="../../../assets/img/user.png" height="42" width="42" alt="" class="circle">
+              <p>Timothy Gediga</p>
+            </li>
+            <li class="collection-item avatar valign-wrapper">
+              <img src="../../../assets/img/user-img.jpg" height="42" width="42" alt="" class="circle">
+              <p>Andreas Müller</p>
+            </li>
+            <li class="collection-item avatar valign-wrapper">
+              <img src="../../../assets/img/user.png" height="42" width="42" alt="" class="circle">
+              <p>Hans Muster</p>
+              <div class="secondary-content"><i class="material-icons" data-tooltip="Probetraining">fitness_center</i></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div id="tab3" class="col s12 tab-content">
+      <div class="row">
+        <form class="col s12">
+          <div class="row">
+            <div class="col s12 flow-text">
               Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore 
-              magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea 
-              takimata sanctus est Lorem ipsum dolor sit amet.
-          </div>
-        </div>
-      </mz-tab-item>
-      <mz-tab-item [active]="'true'" [label]="'Anmeldungen'">
-          <div class="col s12 flow-text">
-            <ul class="collection">
-              <li class="collection-item avatar valign-wrapper">
-                <img src="./img/user.png" height="42" width="42" alt="" class="circle">
-                <p>Timothy Gediga</p>
-              </li>
-              <li class="collection-item avatar valign-wrapper">
-                <img src="./img/user-img.jpg" height="42" width="42" alt="" class="circle">
-                <p>Andreas Müller</p>
-              </li>
-              <li class="collection-item avatar valign-wrapper">
-                <img src="./img/user.png" height="42" width="42" alt="" class="circle">
-                <p>Hans Muster</p>
-                <div class="secondary-content"><i class="material-icons" data-tooltip="Probetraining">fitness_center</i></div>
-              </li>
-            </ul>
-          </div>
-      </mz-tab-item>
-      <mz-tab-item [active]="'true'" [label]="'Probetraining'">
-        <div class="row">
-          <form class="col s12">
-            <div class="row">
-              <div class="col s12 flow-text">
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore 
-                magna aliquyam erat, sed diam voluptua.
-              </div>
-              <div class="input-field col s12 l4">
-                <input id="last_name" type="text" class="validate">
-                <label class="light" for="last_name">Vorname</label>
-              </div>
-              <div class="input-field col s12 l4">
-                <input id="last_name" type="text" class="validate">
-                <label class="light" for="last_name">Nachname</label>
-              </div>
-              <div class="input-field col s12 l4">
-                <input id="last_name" type="text" class="validate">
-                <label class="light" for="last_name">Telefonnummer</label>
-              </div>
-              <div class="col s12 center-on-mobile">
-                <a class="waves-effect waves-light btn">Zum Probetraining anmelden</a>
-              </div>
+              magna aliquyam erat, sed diam voluptua.
             </div>
-          </form>
-        </div>
-      </mz-tab-item>
-    </mz-tab>
-  <!--</div>-->
+            <div class="input-field col s12 l4">
+              <input id="last_name" type="text" class="validate">
+              <label class="light" for="last_name">Vorname</label>
+            </div>
+            <div class="input-field col s12 l4">
+              <input id="last_name" type="text" class="validate">
+              <label class="light" for="last_name">Nachname</label>
+            </div>
+            <div class="input-field col s12 l4">
+              <input id="last_name" type="text" class="validate">
+              <label class="light" for="last_name">Telefonnummer</label>
+            </div>
+            <div class="col s12 center-on-mobile">
+              <a class="waves-effect waves-light btn">Zum Probetraining anmelden</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div> 
+  </div>
+</div>
+
+<div class="container spinner" *ngIf="!event">
+  <div class="row center">
+    <mz-spinner
+      [size]="'big'">
+    </mz-spinner>
+  </div>
 </div>

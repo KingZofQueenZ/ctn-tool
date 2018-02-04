@@ -1,0 +1,49 @@
+
+// Details
+.details {
+    margin-top:20px;
+
+    .button-anmeldung {
+        height: 120px;
+
+        .btn {
+            margin: auto;
+        }
+    }
+
+    .detail-title {
+        margin-bottom: 0;
+    }
+
+    .detail-subtitle {
+        line-height: 32px;
+    }
+
+    .tab-container {
+        margin-top:40px;
+
+        .tab-content {
+            padding-top: 40px;
+
+            .collection .collection-item.avatar {
+                min-height: 60px;
+
+                img {
+                    top: 9px;
+                }
+            }
+
+            .input-field {
+                margin-top: 40px;
+            }
+
+            a {
+                margin-top: 20px;
+            }
+        }
+
+    }
+}
+.spinner {
+    margin-top:40px;
+}

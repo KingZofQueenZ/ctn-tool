@@ -7,7 +7,7 @@
       draggable: true, // Choose whether you can drag to open on touch screens,    
     });
     $('.parallax').parallax(); 
-    $('ul.tabs').tabs();
+    //$('ul.tabs').tabs();
 
   }); // end of document ready
 })(jQuery); // end of jQuery name space
