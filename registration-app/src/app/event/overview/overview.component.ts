@@ -56,7 +56,6 @@ export class OverviewComponent {
 
     event.participant_ids.forEach(element => {
       if (element._id === this.user._id) {
-        console.log(true, event);
         val = true;
       }
     });
