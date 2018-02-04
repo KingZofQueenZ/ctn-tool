@@ -16,13 +16,15 @@ import { UserService } from './services/user.service';
 import { EventService } from './services/event.service';
 import { StorageService } from './services/storage.service';
 import { CustomMaterializeModule } from './shared/materialize.module';
+import { DetailComponent } from './event/detail/detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    OverviewComponent
+    OverviewComponent,
+    DetailComponent
   ],
   imports: [
     BrowserModule,

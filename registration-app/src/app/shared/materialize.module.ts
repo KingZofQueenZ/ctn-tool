@@ -1,18 +1,20 @@
 import { NgModule } from '@angular/core';
-import { MzParallaxModule, MzSidenavModule, MzIconModule, MzIconMdiModule } from 'ng2-materialize';
+import { MzParallaxModule, MzSidenavModule, MzIconModule, MzIconMdiModule, MzTabModule } from 'ng2-materialize';
 
 @NgModule({
   imports: [
     MzParallaxModule,
     MzSidenavModule,
     MzIconModule,
-    MzIconMdiModule
+    MzIconMdiModule,
+    MzTabModule
   ],
   exports: [
     MzParallaxModule,
     MzSidenavModule,
     MzIconModule,
-    MzIconMdiModule
+    MzIconMdiModule,
+    MzTabModule
   ],
 })
 export class CustomMaterializeModule { }

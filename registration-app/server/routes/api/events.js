@@ -42,7 +42,12 @@ router.post('/', VerifyToken.verifyAdmin, (request, response) => {
 
 // Get all events
 router.get('/', VerifyToken.verify, (request, response) => {
-  Event.find({}).populate('participant_ids', 'firstname lastname').sort('date')
+  const page = request.query.page;
+
+  Event.find({}).populate('participant_ids', 'firstname lastname')
+    .sort('date')
+    .skip(10 * (page - 1))
+    .limit(10)
     .exec()
     .then((documents) => {
       response.status(200).json(documents);
