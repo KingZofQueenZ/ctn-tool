@@ -17,6 +17,7 @@ import { EventService } from './services/event.service';
 import { StorageService } from './services/storage.service';
 import { CustomMaterializeModule } from './shared/materialize.module';
 import { DetailComponent } from './event/detail/detail.component';
+import { EventListItemComponent } from './event/event-list-item/event-list-item.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { DetailComponent } from './event/detail/detail.component';
     LoginComponent,
     RegisterComponent,
     OverviewComponent,
-    DetailComponent
+    DetailComponent,
+    EventListItemComponent
   ],
   imports: [
     BrowserModule,
