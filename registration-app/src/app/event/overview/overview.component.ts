@@ -27,7 +27,7 @@ export class OverviewComponent {
         this.processData(event);
       });
       this.events = events;
-    })
+    });
   }
   
   private processData(event:Event): void {
