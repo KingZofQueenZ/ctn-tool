@@ -12,6 +12,14 @@ import { MzSidenavModule, MzIconModule, MzIconMdiModule } from 'ng2-materialize'
 export class AppComponent implements OnInit {
   user: any;
 
+  public options = {
+    position: ['bottom', 'right'],
+    lastOnBottom: true,
+    animate: 'fromRight',
+    timeOut: 5000,
+    showProgressBar: false
+  };
+
   constructor(private storageService: StorageService) { }
 
   ngOnInit(): void {

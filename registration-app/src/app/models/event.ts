@@ -10,8 +10,4 @@ export class Event {
     participant_ids: any;
     allow_trials: Boolean;
     trial_workouts: any;
-
-    date_string: string;
-    participant_count_string: string;
-    is_registered: Boolean;
 }

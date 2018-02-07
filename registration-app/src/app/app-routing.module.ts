@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { LoginComponent } from './user/login/login.component';
 import { RegisterComponent } from './user/register/register.component';
-import { OverviewComponent } from './event/overview/overview.component';
+import { EventListOverviewComponent } from './event/event-list-overview/event-list-overview.component';
 import { AuthGuard } from './shared/auth.guard';
 import { DetailComponent } from './event/detail/detail.component';
 
@@ -11,8 +11,8 @@ const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'events', component: OverviewComponent, canActivate: [AuthGuard] },
-  { path: 'details/:id', component: DetailComponent, canActivate: [AuthGuard] }
+  { path: 'events', component: EventListOverviewComponent/*, canActivate: [AuthGuard] */},
+  { path: 'details/:id', component: DetailComponent }
 ];
 
 @NgModule({

@@ -41,7 +41,7 @@ router.post('/', VerifyToken.verifyAdmin, (request, response) => {
 });
 
 // Get all events
-router.get('/', VerifyToken.verify, (request, response) => {
+router.get('/', (request, response) => {
   const page = request.query.page;
 
   Event.find({}).populate('participant_ids', 'firstname lastname')
@@ -58,7 +58,7 @@ router.get('/', VerifyToken.verify, (request, response) => {
 });
 
 // Get event by id
-router.get('/:event_id', VerifyToken.verify, (request, response) => {
+router.get('/:event_id', (request, response) => {
   Event.findById(request.params.event_id)
     .populate('participant_ids', 'firstname lastname')
     .exec()

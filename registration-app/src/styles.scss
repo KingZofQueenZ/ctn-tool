@@ -27,6 +27,14 @@ $interval-size: $range / $intervals !default;
     }
 }
 
+.spinner {
+    margin-top:40px;
+}
+
+.simple-notification-wrapper {
+    width: 400px !important;
+}
+
 .parralax {
     width: 100%;
     position: absolute;

@@ -1,18 +1,18 @@
 <div class="card-panel grey lighten-5">
   <div class="card-content black-text">
-    <div class="datetime grey-text text-darken-1 light"><i>{{event.date_string}}</i></div>
+    <div class="datetime grey-text text-darken-1 light"><i>{{date_string}}</i></div>
     <a [routerLink]="['/details', event._id]">
       <h4 class="title">{{event.name}}</h4>
     </a>
-    <div class="registrations grey-text text-darken-1 light"><i class="tiny material-icons">group</i><i>{{event.participant_count_string}} Anmeldungen</i></div>
-    <div class="register">
-      <div *ngIf="event.is_registered; then registered; else notregistered"></div>
+    <div class="registrations grey-text text-darken-1 light"><i class="tiny material-icons">group</i><i>{{participant_count_string}} Anmeldungen</i></div>
+    <div class="register" *ngIf="user">
+      <div *ngIf="is_registered; then registered; else notregistered"></div>
       
       <ng-template #notregistered>
-          <i class="black-text" mz-icon-mdi [icon]="'account-plus'" [size]="'24px'" (click)="handleRegistration.next(event)"></i>
+          <i class="small material-icons" (click)="handleRegistration()" *ngIf="!is_full">person_add</i>
       </ng-template>
       <ng-template #registered>
-          <i id="registered" class="green-text" mz-icon-mdi [icon]="'check'" [size]="'24px'" (click)="handleRegistration.next(event)"></i>
+          <i class="{{color}} small material-icons" (click)="handleRegistration()" (mouseenter)="mouseEnter()" (mouseleave)="mouseLeave()">{{icon}}</i>
       </ng-template>
     </div> 
   </div>
