@@ -17,7 +17,7 @@
         <h3 class="header detail-title teal-text center-on-mobile">{{event.name}}</h3>
         <h5 class="header light detail-subtitle grey-text light center-on-mobile"><i>{{date_string}}</i></h5>
     </div>
-    <div class="col s12 l2 valign-wrapper center button-anmeldung">
+    <div class="col s12 l2 valign-wrapper right-align button-anmeldung" *ngIf="user">
         <div *ngIf="is_registered; then registered; else notregistered"></div>
             
         <ng-template #notregistered>
@@ -33,7 +33,7 @@
       <div class="flow-text">{{event.description}}</div>
     </div>
 
-    <div class="col s12 anmeldungen flow-text">
+    <div class="col s12 anmeldungen flow-text" *ngIf="user">
       <h5 class="light">Anmeldungen</h5> 
       <ul class="collection" >
         <li class="collection-item avatar valign-wrapper" *ngFor="let participant of event.participant_ids">
@@ -43,7 +43,7 @@
       </ul>
     </div>
 
-    <form class="col s12 probetraining">
+    <form class="col s12 probetraining" *ngIf="!user">
       <h5 class="light">Anmeldung zum Probetraining</h5> 
         <div class="row">
           <div class="col s12 flow-text">

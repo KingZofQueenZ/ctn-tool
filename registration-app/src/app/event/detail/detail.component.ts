@@ -44,7 +44,7 @@ export class DetailComponent implements AfterViewChecked {
     let val = false;
 
     event.participant_ids.forEach(element => {
-      if (element._id === this.user._id) {
+      if (this.user && element._id === this.user._id) {
         console.log(true, event);
         val = true;
       }
