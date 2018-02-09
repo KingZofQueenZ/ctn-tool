@@ -1,8 +1,8 @@
 <div class="card-panel grey lighten-5">
   <div class="card-content black-text">
-    <div class="datetime grey-text text-darken-1 light"><i>{{date_string}}</i></div>
+    <div class="datetime grey-text text-darken-1 light truncate"><i>{{date_string}}</i></div>
     <a [routerLink]="['/details', event._id]">
-      <h4 class="title">{{event.name}}</h4>
+      <h4 class="title truncate">{{event.name}}</h4>
     </a>
     <div class="registrations grey-text text-darken-1 light"><i class="tiny material-icons">group</i><i>{{participant_count_string}} Anmeldungen</i></div>
     <div class="register" *ngIf="user">

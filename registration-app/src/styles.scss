@@ -114,8 +114,8 @@ nav {
     
 
     .nav-wrapper i {
-        height: $nav-height;
-        line-height: $nav-height;
+        height: $nav-height !important;
+        line-height: $nav-height !important;
         margin-left: 0px;
     }
 

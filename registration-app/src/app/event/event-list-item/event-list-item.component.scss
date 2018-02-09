@@ -6,21 +6,20 @@
   
     .card-panel {
         position: relative;
+        height: 120px;
+        padding-top: 10px;
+        padding-bottom: 10px;
 
         .card-content {
-            overflow: hidden;
-
             h4{
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
+                font-size: 1.5rem; 
             }
 
             a {
               color: #000;
             }
+            
             .registrations {
-                margin-top: 10px;
       
                 i {
                     vertical-align: middle;
@@ -28,19 +27,19 @@
       
                 .material-icons {
                     margin-right: 10px;
-                    user-select: none;
-                    -moz-user-select: none;
-                    -khtml-user-select: none;
-                    -webkit-user-select: none;
-                    -o-user-select: none;
                 }
             }
       
             .register {
               cursor: pointer;
               position: absolute;
-              right: 18px;
-              bottom: 10px;
+              right: 13px;
+              bottom: 3px;
+              user-select: none;
+              -moz-user-select: none;
+              -khtml-user-select: none;
+              -webkit-user-select: none;
+              -o-user-select: none;
             }
 
         }

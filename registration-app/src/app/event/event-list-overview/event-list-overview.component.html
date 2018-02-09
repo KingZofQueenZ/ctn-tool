@@ -11,6 +11,7 @@
 </mz-parallax>
 
 <!-- Event Cards -->
+
 <div class="container events" style="height:100%" infiniteScroll
 [infiniteScrollDistance]="0"
 [infiniteScrollThrottle]="300"
@@ -25,7 +26,8 @@
       takimata sanctus est Lorem ipsum dolor sit amet. 
     </div>
   </div>
-  <div class="row">
+  <div class="divider"></div>
+  <div class="row event-cards">
     <div *ngFor="let event of events" >
       <div class="col s12 {{getWidth(event)}}">
           <app-event-list-item [event]="event"></app-event-list-item>

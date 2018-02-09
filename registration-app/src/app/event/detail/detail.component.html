@@ -28,68 +28,45 @@
         </ng-template>
     </div>
 
-    <div class="col s12">
-      <h4 class="light">Details</h4>  
+    <div class="col s12 details">
+      <h5 class="light">Details</h5>  
       <div class="flow-text">{{event.description}}</div>
     </div>
-  </div>
-    
-  <div class="row tab-container">
-    <div class="col s12">
-      <ul class="tabs">
-        <li class="tab col s4 m4"><a class="active" href="#tab1">Workout</a></li>
-        <li class="tab col s4 m4"><a href="#tab2">Anmeldungen</a></li>
-        <li class="tab col s4 m4"><a href="#tab3">Probetraining</a></li>
+
+    <div class="col s12 anmeldungen flow-text">
+      <h5 class="light">Anmeldungen</h5> 
+      <ul class="collection" >
+        <li class="collection-item avatar valign-wrapper" *ngFor="let participant of event.participant_ids">
+          <img src="../../../assets/img/user.png" height="42" width="42" alt="" class="circle">
+          <p>{{participant.firstname}} {{participant.lastname}}</p>
+        </li>
       </ul>
     </div>
-    <div id="tab1" class="col s12 tab-content">
-      <div class="row">
-        <div class="col s12 flow-text">
+
+    <form class="col s12 probetraining">
+      <h5 class="light">Anmeldung zum Probetraining</h5> 
+        <div class="row">
+          <div class="col s12 flow-text">
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore 
-            magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea 
-            takimata sanctus est Lorem ipsum dolor sit amet.
-        </div>
-      </div>
-    </div>
-    <div id="tab2" class="col s12 tab-content">
-      <div class="row">
-        <div class="col s12 flow-text">
-          <ul class="collection" >
-            <li class="collection-item avatar valign-wrapper" *ngFor="let participant of event.participant_ids">
-              <img src="../../../assets/img/user.png" height="42" width="42" alt="" class="circle">
-              <p>{{participant.firstname}} {{participant.lastname}}</p>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div id="tab3" class="col s12 tab-content">
-      <div class="row">
-        <form class="col s12">
-          <div class="row">
-            <div class="col s12 flow-text">
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore 
-              magna aliquyam erat, sed diam voluptua.
-            </div>
-            <div class="input-field col s12 l4">
-              <input id="last_name" type="text" class="validate">
-              <label class="light" for="last_name">Vorname</label>
-            </div>
-            <div class="input-field col s12 l4">
-              <input id="last_name" type="text" class="validate">
-              <label class="light" for="last_name">Nachname</label>
-            </div>
-            <div class="input-field col s12 l4">
-              <input id="last_name" type="text" class="validate">
-              <label class="light" for="last_name">Telefonnummer</label>
-            </div>
-            <div class="col s12 center-on-mobile">
-              <a class="waves-effect waves-light btn">Zum Probetraining anmelden</a>
-            </div>
+            magna aliquyam erat, sed diam voluptua.
           </div>
-        </form>
-      </div>
-    </div> 
+          <div class="input-field col s12 l4">
+            <input id="last_name" type="text" class="validate">
+            <label class="light" for="last_name">Vorname</label>
+          </div>
+          <div class="input-field col s12 l4">
+            <input id="last_name" type="text" class="validate">
+            <label class="light" for="last_name">Nachname</label>
+          </div>
+          <div class="input-field col s12 l4">
+            <input id="last_name" type="text" class="validate">
+            <label class="light" for="last_name">Telefonnummer</label>
+          </div>
+          <div class="col s12 center-on-mobile">
+            <a class="waves-effect waves-light btn">Zum Probetraining anmelden</a>
+          </div>
+        </div>
+      </form>
   </div>
 </div>
 

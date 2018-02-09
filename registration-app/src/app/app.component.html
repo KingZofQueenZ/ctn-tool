@@ -5,9 +5,9 @@
                 <img src="../assets/img/logo.jpg" height="100" width="100">
             </a>
             <ul class="right light hide-on-med-and-down">
-                <li><a routerLink="/">Home</a></li>
-                <li><a href="#">News</a></li>
-                <li><a href="#">Information</a></li>
+                <li><a routerLink="/events">Home</a></li>
+                <li><a routerLink="/events">News</a></li>
+                <li><a routerLink="/events">Information</a></li>
                 <li><a routerLink="/events" routerLinkActive="selected">Termine</a></li>
                 <li><a id="login-toggle" routerLink="/login" routerLinkActive="selected">{{getFullName('Login')}}<i class="material-icons right login">person</i></a></li>
             </ul>
@@ -26,19 +26,19 @@
     </mz-sidenav-header>
 
     <mz-sidenav-link>
-        <a href="#">Home</a>
+        <a routerLink="/events">Home</a>
     </mz-sidenav-link>
 
     <mz-sidenav-link>
-        <a href="#">News</a>
+        <a routerLink="/events">News</a>
     </mz-sidenav-link>
 
     <mz-sidenav-link>
-        <a href="#">Informationen</a>
+        <a routerLink="/events">Informationen</a>
     </mz-sidenav-link>
 
     <mz-sidenav-link>
-        <a href="#">Termine</a>
+        <a routerLink="/events">Termine</a>
     </mz-sidenav-link>
 
     <mz-sidenav-divider></mz-sidenav-divider>
@@ -51,16 +51,16 @@
     </ng-template>
     <ng-template #loggedin>
         <mz-sidenav-link>
-            <a href="#">Meine Trainings</a>
+            <a routerLink="/events">Meine Trainings</a>
         </mz-sidenav-link>
     
         <mz-sidenav-link>
-            <a href="#">Mein Profil</a>
+            <a routerLink="/events">Mein Profil</a>
         </mz-sidenav-link>
 
         <div *ngIf="user.admin">
             <mz-sidenav-link>
-                <a routerLink="/login">Administration</a>
+                <a routerLink="/events">Administration</a>
             </mz-sidenav-link>
         </div>
         

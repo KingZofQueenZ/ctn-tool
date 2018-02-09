@@ -3,7 +3,7 @@
 
 module.exports = {
     auth: {
-      secret: process.env.SECRET
+      secret: process.env.SECRET || 'awdawdawdawd'
     },
     database: {
       local: 'mongodb://localhost/ctn',

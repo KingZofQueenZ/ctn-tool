@@ -19,28 +19,23 @@
         line-height: 32px;
     }
 
-    .tab-container {
-        margin-top:40px;
+    .anmeldungen {
+        margin-top:20px;
 
-        .tab-content {
-            padding-top: 40px;
-
-            .collection .collection-item.avatar {
-                min-height: 60px;
-
-                img {
-                    top: 9px;
-                }
-            }
-
-            .input-field {
-                margin-top: 40px;
-            }
-
-            a {
-                margin-top: 20px;
+        .collection .collection-item.avatar {
+            min-height: 55px;
+    
+            img {
+                top: 7px;
             }
         }
-
     }
+
+    .probetraining {
+        margin-top:20px;
+    
+        a {
+            margin-top: 20px;
+        }
+    } 
 }

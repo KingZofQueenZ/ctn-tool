@@ -54,8 +54,11 @@ export class DetailComponent implements AfterViewChecked {
   
   private setDateString(event: Event): string {
     const date = moment(event.date).utc().format('dddd, D MMMM YYYY / HH:mm');
-    const time_to = moment(event.time_to).utc().format('HH:mm');
-    return date + ' bis ' + time_to;
+    if (event.time_to) {
+      const time_to = moment(event.time_to).utc().format('HH:mm');
+      return date + '-' + time_to;
+    }
+    return date + ' Uhr';
   }
 
   handleRegistration(): void {
