@@ -35,7 +35,8 @@ router.post('/authenticate', (request, response) => {
         email: user.email,
         firstname: user.firstname,
         lastname: user.lastname,
-        token: jwt.sign({ sub: user._id, admin: user.admin }, config.auth.secret, { expiresIn: '14d'})
+        token: jwt.sign({ sub: user._id, admin: user.admin }, config.auth.secret, { expiresIn: '14d'}),
+        admin: user.admin
       };
 
       response.status(200).send(authenticatedUser);

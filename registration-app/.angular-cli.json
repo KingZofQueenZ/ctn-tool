@@ -16,7 +16,9 @@
       "polyfills": "polyfills.ts",
       "prefix": "app",
       "styles": [
+        "assets/styles/materialize.scss",
         "styles.scss",
+        "../node_modules/angular2-toaster/toaster.css",
         "../node_modules/mdi/css/materialdesignicons.min.css"
       ],
       "scripts": [

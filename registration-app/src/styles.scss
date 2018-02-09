@@ -52,6 +52,12 @@ body {
     min-height: 100%;
 }
 
+#toast-container.toast-bottom-full-width{
+    .toast {
+        margin-bottom: 10px !important;
+    }
+}
+
 
 // Navigation
 nav {

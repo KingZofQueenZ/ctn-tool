@@ -2,6 +2,7 @@ import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { Event } from '../../models/event';
 import { User } from '../../models/user';
 import { EventService } from '../../services/event.service';
+import { ToasterService, Toast } from 'angular2-toaster';
 import * as moment from 'moment';
 
 @Component({
@@ -19,7 +20,7 @@ export class EventListItemComponent implements OnInit {
   icon: String = 'done';
   color: String = 'green-text';
 
-  constructor(private eventService: EventService) {
+  constructor(private eventService: EventService, private toasterService: ToasterService) {
     moment.locale('de');
     this.user = JSON.parse(localStorage.getItem('currentUser'));
   }
@@ -32,9 +33,13 @@ export class EventListItemComponent implements OnInit {
   }
 
   private setDateString(): string {
-    const date = moment(this.event.date).utc().format('dd. D MMM. YYYY / HH:mm');
-    const time_to = moment(this.event.time_to).utc().format('HH:mm');
-    return date + '-' + time_to;
+    const date = moment(this.event.date).utc().format('dd. D MMM YYYY / HH:mm');
+
+    if (this.event.time_to) {
+      const time_to = moment(this.event.time_to).utc().format('HH:mm');
+      return date + '-' + time_to;
+    }
+    return date + ' Uhr';
   }
 
   private setParticipantCountString(): string {
@@ -75,6 +80,13 @@ export class EventListItemComponent implements OnInit {
           this.participant_count_string = this.setParticipantCountString();
           this.is_registered = false;
           this.is_full = this.checkIfFull();
+
+          const toast: Toast = {
+            type: 'success',
+            title: 'Abmeldung erfolgreich',
+            body: 'Sie wurden erfolgreich für ' + this.event.name + ' abgemeldet'
+          };
+          this.toasterService.pop(toast);
         },
         error => {
           console.log(error);
@@ -87,6 +99,13 @@ export class EventListItemComponent implements OnInit {
           this.participant_count_string = this.setParticipantCountString();
           this.is_registered = true;
           this.is_full = this.checkIfFull();
+
+          const toast: Toast = {
+            type: 'success',
+            title: 'Anmeldung erfolgreich',
+            body: 'Sie wurden erfolgreich für ' + this.event.name + ' angemeldet'
+          };
+          this.toasterService.pop(toast);
         },
         error => {
           console.log(error);

@@ -3,23 +3,25 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './shared/auth.interceptor';
+import { AuthGuard } from './shared/auth.guard';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './user/login/login.component';
 import { RegisterComponent } from './user/register/register.component';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AuthenticationService } from './services/authentication.service';
-import { AuthInterceptor } from './shared/auth.interceptor';
-import { AuthGuard } from './shared/auth.guard';
+import { EventListItemComponent } from './event/event-list-item/event-list-item.component';
 import { EventListOverviewComponent } from './event/event-list-overview/event-list-overview.component';
+import { DetailComponent } from './event/detail/detail.component';
+
+import { AuthenticationService } from './services/authentication.service';
 import { UserService } from './services/user.service';
 import { EventService } from './services/event.service';
 import { StorageService } from './services/storage.service';
+
+import { AppRoutingModule } from './app-routing.module';
 import { CustomMaterializeModule } from './shared/materialize.module';
-import { DetailComponent } from './event/detail/detail.component';
-import { EventListItemComponent } from './event/event-list-item/event-list-item.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { ToasterModule, ToasterService } from 'angular2-toaster';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     HttpClientModule,
     CustomMaterializeModule,
     BrowserAnimationsModule,
+    ToasterModule,
     InfiniteScrollModule
   ],
   providers: [
@@ -49,7 +52,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     AuthenticationService,
     UserService,
     EventService,
-    StorageService
+    StorageService,
+    ToasterService
   ],
   bootstrap: [AppComponent]
 })

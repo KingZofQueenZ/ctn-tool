@@ -5,4 +5,5 @@ export class User {
     lastname: string;
     phone: string;
     email: string;
+    admin: boolean;
 }

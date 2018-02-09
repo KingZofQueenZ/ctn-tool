@@ -41,12 +41,38 @@
         <a href="#">Termine</a>
     </mz-sidenav-link>
 
-    <mz-sidenav-link>
-        <a href="#"><i mz-icon-mdi [icon]="'account'" [align]="'right'"></i>{{getFullName('Login')}}</a>
-    </mz-sidenav-link>
+    <mz-sidenav-divider></mz-sidenav-divider>
+    
+    <div *ngIf="user;then loggedin; else notloggedin "></div>
+    <ng-template #notloggedin>
+        <mz-sidenav-link>
+            <a routerLink="/login">Login</a>
+        </mz-sidenav-link>
+    </ng-template>
+    <ng-template #loggedin>
+        <mz-sidenav-link>
+            <a href="#">Meine Trainings</a>
+        </mz-sidenav-link>
+    
+        <mz-sidenav-link>
+            <a href="#">Mein Profil</a>
+        </mz-sidenav-link>
+
+        <div *ngIf="user.admin">
+            <mz-sidenav-link>
+                <a routerLink="/login">Administration</a>
+            </mz-sidenav-link>
+        </div>
+        
+        <mz-sidenav-link>
+            <a routerLink="/login">Logout</a>
+        </mz-sidenav-link>
+
+    </ng-template>
 </mz-sidenav>
 
 <router-outlet></router-outlet>
+<toaster-container [toasterconfig]="config"></toaster-container>
 
 <footer class="page-footer teal">
     <div class="footer-copyright grey darken-4">
