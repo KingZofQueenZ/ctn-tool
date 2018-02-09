@@ -1,0 +1,38 @@
+<div class="container register">
+  <div class="row">
+    <div class="col s12 l6 offset-l3">
+        <h3 class="header detail-title teal-text center-on-mobile">Registrieren</h3>
+    </div>
+
+    <form (ngSubmit)="registerForm.form.valid && register()" #registerForm="ngForm" class="col s12 l6 offset-l3">
+        <div class="input-field col s12">
+          <input id="firstname" name="firstname" type="text" class="validate" [(ngModel)]="user.firstname" required>
+          <label class="light" for="firstname">Vorname</label>
+        </div>
+        <div class="input-field col s12">
+          <input id="lastname" name="lastname" type="text" class="validate" [(ngModel)]="user.lastname" required>
+          <label class="light" for="lastname">Nachname</label>
+        </div>
+        <div class="input-field col s12">
+          <input id="email" name="email" type="email" class="validate" [(ngModel)]="user.email" required email [class.invalid]="hasError">
+          <label class="light" for="email">E-Mail</label>
+        </div>
+        <div class="input-field col s12">
+          <input id="phone" name="phone" type="text" class="validate" [(ngModel)]="user.phone" required>
+          <label class="light" for="phone">Telefon</label>
+        </div>
+        <div class="input-field col s12">
+          <input id="password" name="password" type="password" class="validate" [(ngModel)]="user.password" required>
+          <label class="light" for="password">Passwort</label>
+        </div>
+        <div class="col s12 center-on-mobile">
+          <button class="btn waves-effect waves-light" [class.disabled]="!registerForm.form.valid" type="submit" name="action">Registrieren</button>
+        </div>
+    </form>
+
+    <div class="col s12 l6 offset-l3">
+      <div class="col s12 error light" [hidden]="!hasError">Ein Benutzer mit dieser E-Mail Adresse existiert bereits! Passwort <a [routerLink]="['/password']">vergessen?</a></div>
+    </div>
+
+  </div>
+</div>  

@@ -17,7 +17,7 @@ const app = express();
 app.use(helmet());
 
 /* Mongoose setup */
-mongoose.connect(config.database.local);
+mongoose.connect(process.env.CONNECTIONSTRING || config.database.local);
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error'));

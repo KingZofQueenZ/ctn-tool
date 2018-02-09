@@ -3,9 +3,10 @@
 
 module.exports = {
     auth: {
-      secret: 'TfS9wNmLQprbzGxgH3wospnYIuNLLsyg'
+      secret: process.env.SECRET
     },
     database: {
       local: 'mongodb://localhost/ctn',
+
     }
   };

@@ -1,0 +1,43 @@
+<mz-parallax [height]="400" class="hide-on-med-and-down">
+  <div class="parralax section no-pad-bot">
+    <div class="container">
+      <h1 class="header center teal-text">Trainings und Termine</h1>
+      <div class="row center">
+        <h5 class="header white-text col s12 light">&laquo;If it doesn´t challenge you, it doesn´t change you.&raquo;</h5>
+      </div>
+    </div>
+  </div>
+  <img src="../../../assets/img/crossfit-index2.jpg" alt="Unsplashed background img 1">
+</mz-parallax>
+
+<!-- Event Cards -->
+<div class="container events" style="height:100%" infiniteScroll
+[infiniteScrollDistance]="0"
+[infiniteScrollThrottle]="300"
+(scrolled)="onScroll()">
+  <div class="row">
+    <div class="col s12">
+      <h3 class="header teal-text center-on-mobile">Die nächsten Workouts und Termine</h3>
+    </div>
+    <div class="col s12 header-text">
+      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore 
+      magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea 
+      takimata sanctus est Lorem ipsum dolor sit amet. 
+    </div>
+  </div>
+  <div class="row">
+    <div *ngFor="let event of events" >
+      <div class="col s12 {{getWidth(event)}}">
+          <app-event-list-item [event]="event"></app-event-list-item>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container spinner" *ngIf="!events">
+  <div class="row center">
+    <mz-spinner
+      [size]="'big'">
+    </mz-spinner>
+  </div>
+</div>
