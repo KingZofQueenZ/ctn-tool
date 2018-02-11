@@ -22,6 +22,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CustomMaterializeModule } from './shared/materialize.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
+import { CreateEventComponent } from './admin/create-event/create-event.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ToasterModule, ToasterService } from 'angular2-toaster';
     RegisterComponent,
     EventListOverviewComponent,
     DetailComponent,
-    EventListItemComponent
+    EventListItemComponent,
+    CreateEventComponent
   ],
   imports: [
     BrowserModule,

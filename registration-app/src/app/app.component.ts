@@ -11,7 +11,8 @@ import { ToasterConfig } from 'angular2-toaster/src/toaster-config';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  user: any;
+  fullName: String = ''; 
+  user: User;
 
   public config: ToasterConfig = new ToasterConfig({
     animation: 'fade',
@@ -20,43 +21,20 @@ export class AppComponent implements OnInit {
     timeout: 3000
   });
 
-  constructor(private storageService: StorageService) { }
-
-  ngOnInit(): void {
-    this.setUserName();
-
-    this.storageService.watchStorage().subscribe((data: string) => {
-      this.setUserName();
-    });
-  }
-
-  setUserName() {
-    const user = JSON.parse(localStorage.getItem('currentUser'));
-      if (user) {
+  constructor(private storageService: StorageService) { 
+    this.storageService.storageSub.subscribe((data: string) => {
+      console.log('changed');
+      const user = JSON.parse(localStorage.getItem('currentUser'));
+      if(user) {
+        this.fullName = user.firstname + ' ' + user.lastname;
         this.user = user;
-        console.log(user);
       } else {
+        this.fullName = 'Login';
         this.user = null;
       }
+    });}
+
+  ngOnInit(): void {
   }
-
-  getFullName(alt?: string): string {
-    if (this.user) {
-      return this.user.firstname + ' ' + this.user.lastname;
-    }
-
-    if (alt) {
-      return alt;
-    }
-
-    return '';
-  }
-
-  getEmail(): string {
-    if (this.user) {
-      return this.user.email;
-    }
-
-    return '';
-  }
+  
 }

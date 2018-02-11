@@ -9,7 +9,7 @@
                 <li><a routerLink="/events">News</a></li>
                 <li><a routerLink="/events">Information</a></li>
                 <li><a routerLink="/events" routerLinkActive="selected">Termine</a></li>
-                <li><a id="login-toggle" routerLink="/login" routerLinkActive="selected">{{getFullName('Login')}}<i class="material-icons right login">person</i></a></li>
+                <li><a id="login-toggle" routerLink="/login" routerLinkActive="selected">{{fullName}}<i class="material-icons right login">person</i></a></li>
             </ul>
         </div>
         <a href="#" id="btn-sidenav-demo" class="button-collapse"><i class="large material-icons">menu</i></a>
@@ -20,8 +20,8 @@
     <mz-sidenav-header>
       <div class="user-view">
         <img class="circle avatar" src="../assets/img/user-img.jpg">
-        <div class="white-text name">{{getFullName()}}</div>
-        <div class="white-text email">{{getEmail()}}</div>
+        <div class="white-text name">{{fullName}}</div>
+        <div class="white-text email">{{}}</div>
       </div>
     </mz-sidenav-header>
 
