@@ -23,14 +23,13 @@ export class AppComponent implements OnInit {
 
   constructor(private storageService: StorageService) { 
     this.storageService.storageSub.subscribe((data: string) => {
-      console.log('changed');
       const user = JSON.parse(localStorage.getItem('currentUser'));
       if(user) {
         this.fullName = user.firstname + ' ' + user.lastname;
         this.user = user;
       } else {
         this.fullName = 'Login';
-        this.user = null;
+        this.user = undefined;
       }
     });}
 

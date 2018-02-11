@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { MzParallaxModule, MzSidenavModule, MzIconModule, MzIconMdiModule, MzTabModule, MzSpinnerModule, MzButtonModule } from 'ng2-materialize';
+import { MzParallaxModule, MzSidenavModule, MzIconModule, MzIconMdiModule, MzTabModule, MzSpinnerModule, MzButtonModule, MzInputModule, MzTextareaModule, MzDatepickerModule, MzTimepickerModule, MzCheckboxModule } from 'ng2-materialize';
 
 @NgModule({
   imports: [
@@ -9,7 +9,12 @@ import { MzParallaxModule, MzSidenavModule, MzIconModule, MzIconMdiModule, MzTab
     MzIconMdiModule,
     MzTabModule,
     MzSpinnerModule,
-    MzButtonModule 
+    MzButtonModule,
+    MzInputModule,
+    MzTextareaModule,
+    MzDatepickerModule,
+    MzTimepickerModule,
+    MzCheckboxModule 
   ],
   exports: [
     MzParallaxModule,
@@ -18,7 +23,12 @@ import { MzParallaxModule, MzSidenavModule, MzIconModule, MzIconMdiModule, MzTab
     MzIconMdiModule,
     MzTabModule,
     MzSpinnerModule,
-    MzButtonModule 
+    MzButtonModule,
+    MzInputModule,
+    MzTextareaModule,
+    MzDatepickerModule,
+    MzTimepickerModule,
+    MzCheckboxModule 
   ],
 })
 export class CustomMaterializeModule { }

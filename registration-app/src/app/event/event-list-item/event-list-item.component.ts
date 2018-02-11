@@ -33,13 +33,20 @@ export class EventListItemComponent implements OnInit {
   }
 
   private setDateString(): string {
-    const date = moment(this.event.date).utc().format('dd. D MMM YYYY / HH:mm');
+    const date = moment(this.event.date).utc().format('dd. D MMM YYYY');
 
-    if (this.event.time_to) {
-      const time_to = moment(this.event.time_to).utc().format('HH:mm');
-      return date + '-' + time_to;
+    if (this.event.time_from) {
+      const time_from = moment(this.event.time_from).utc().format('HH:mm');
+
+      if (this.event.time_to) {
+        const time_to = moment(this.event.time_to).utc().format('HH:mm');
+        return date + ' / ' + time_from + '-' + time_to;
+      }
+
+      return date + ' / ' + time_from + ' Uhr';
     }
-    return date + ' Uhr';
+
+    return date;
   }
 
   private setParticipantCountString(): string {

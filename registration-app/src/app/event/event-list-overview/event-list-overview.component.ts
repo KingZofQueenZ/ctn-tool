@@ -27,7 +27,7 @@ export class EventListOverviewComponent {
 
   getWidth(event: Event): string {
     const amount = this.events.filter(element =>
-    moment(event.date).utc().format('dd/MM/YYYY') === moment(element.date).utc().format('dd/MM/YYYY')).length;
+    moment.utc(event.date).isSame(moment.utc(element.date))).length;
     switch (amount) {
       case 1:
         return 'l12';

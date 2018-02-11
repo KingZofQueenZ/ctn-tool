@@ -24,6 +24,7 @@ router.post('/', VerifyToken.verifyAdmin, (request, response) => {
     description: body.description,
     max_participants: body.max_participants,
     date: body.date,
+    time_from: body.time_from,
     time_to: body.time_to,
     sign_in: body.sign_in,
     sign_out: body.sign_out,
@@ -85,6 +86,7 @@ router.put('/:event_id', VerifyToken.verifyAdmin, (request, response) => {
         document.description = body.description || document.description;
         document.max_participants = body.max_participants || document.max_participants;
         document.date = body.date || document.date;
+        document.time_from = body.time_from || document.time_from;
         document.time_to = body.time_to || document.time_to;
         document.sign_in = body.sign_in || document.sign_in;
         document.sign_out = body.sign_out || document.sign_out;
