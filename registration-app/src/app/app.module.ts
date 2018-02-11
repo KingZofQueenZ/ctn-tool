@@ -23,6 +23,7 @@ import { CustomMaterializeModule } from './shared/materialize.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
 import { CreateEventComponent } from './admin/create-event/create-event.component';
+import { OverviewComponent } from './admin/overview/overview.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { CreateEventComponent } from './admin/create-event/create-event.componen
     EventListOverviewComponent,
     DetailComponent,
     EventListItemComponent,
-    CreateEventComponent
+    CreateEventComponent,
+    OverviewComponent
   ],
   imports: [
     BrowserModule,

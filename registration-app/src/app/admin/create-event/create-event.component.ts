@@ -67,6 +67,7 @@ export class CreateEventComponent {
       )
     } else {
       let event: Event = Object.assign({}, this.event);
+      let errorCounter = 0;
 
       const dates = this.getDates();
       dates.forEach(date => {
@@ -74,16 +75,19 @@ export class CreateEventComponent {
         event.time_from = moment.utc(date.format('YYYY-MM-DD') + ' ' + this.event.time_from).toDate();
         event.time_to = moment.utc(date.format('YYYY-MM-DD') + ' ' + this.event.time_to).toDate();
 
-        console.log(event);
         this.eventService.create(event).subscribe(
           result => {
             console.log('Successfull!: ' + result);
           },
           error => {
-            console.log(error);
+            errorCounter++;
           }
         );
       });
+
+      if(errorCounter){
+        //Toast error
+      }
     }
   }
 
@@ -94,7 +98,8 @@ export class CreateEventComponent {
 
     while(!moment.utc(date).isAfter(moment.utc(this.repeat_date))){
       repeatDays.forEach(weekday => {
-        if (moment.utc(date).isoWeekday() <= weekday){
+        if (moment.utc(date).isoWeekday() <= weekday 
+            && !moment.utc(date).isoWeekday(weekday).isAfter(moment.utc(this.repeat_date))){
           dateArray.push(moment.utc(date).isoWeekday(weekday));
         }
       });

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import { MzInputModule, MzCheckboxModule, MzModalModule } from 'ng2-materialize';
 
 @Component({
   selector: 'app-register',

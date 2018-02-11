@@ -1,0 +1,21 @@
+<div class="container register">
+    <div class="row">
+      <div class="col s12">
+          <h4 class="header detail-title teal-text center-on-mobile">Administration</h4>
+      </div>
+
+      <a (click)="createEventModal.open()">Open Modal</a>
+
+    </div>
+</div>
+
+
+
+<mz-modal #createEventModal [fixedFooter]="true" [fullscreen]="true">
+    <mz-modal-content>
+      <app-create-event></app-create-event>
+    </mz-modal-content>
+    <mz-modal-footer>
+      <button mz-button [flat]="true" mz-modal-close>Schliessen</button>
+    </mz-modal-footer>
+  </mz-modal>

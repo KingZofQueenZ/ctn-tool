@@ -42,6 +42,6 @@ export class EventListOverviewComponent {
 
   onScroll () {
     this.page++;
-    // this.getEvents();
+    this.getEvents();
   }
 }
