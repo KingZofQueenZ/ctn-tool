@@ -36,12 +36,12 @@ export class EventListOverviewComponent {
       case 3:
         return 'l4';
       default:
-        return 'l1';
+        return 'l12';
     }
   }
 
   onScroll () {
     this.page++;
-    this.getEvents();
+    //this.getEvents();
   }
 }

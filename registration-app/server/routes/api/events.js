@@ -41,14 +41,15 @@ router.post('/', VerifyToken.verifyAdmin, (request, response) => {
   });
 });
 
-// Get all events
+// Get all events .skip(10 * (page - 1)).limit(10)
 router.get('/', (request, response) => {
-  const page = request.query.page;
+  const page = request.query.page || 1;
+  const amount = Number(request.query.amount) || 10;
 
-  Event.find({}).populate('participant_ids', 'firstname lastname')
+  Event.find({"date": {"$gte": new Date()}})
+    .populate('participant_ids', 'firstname lastname')
     .sort('date')
-    .skip(10 * (page - 1))
-    .limit(10)
+    .limit(amount)
     .exec()
     .then((documents) => {
       response.status(200).json(documents);

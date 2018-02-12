@@ -18,8 +18,7 @@ export class DetailComponent implements AfterViewChecked {
   date_string: string;
   is_registered: Boolean;
 
-  constructor(private route: ActivatedRoute, private eventService: EventService) { 
-    moment.locale('de');
+  constructor(private route: ActivatedRoute, private eventService: EventService) {
     this.user = JSON.parse(localStorage.getItem('currentUser'));
     this.getEvent();
     $('ul.tabs').tabs();
@@ -53,7 +52,7 @@ export class DetailComponent implements AfterViewChecked {
   }
   
   private setDateString(event: Event): string {
-    const date = moment(event.date).utc().format('dddd, D MMMM YYYY / HH:mm');
+    const date = moment(event.date).utc().format('dddd, D MMMM YYYY');
     
     if (event.time_from) {
       const time_from = moment(event.time_from).utc().format('HH:mm');

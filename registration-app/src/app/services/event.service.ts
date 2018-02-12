@@ -21,13 +21,17 @@ export class EventService {
   }
 
   // GET /events
-  getAll(page: number = 1): Observable<Event[]> {
+  getAll(page?: number): Observable<Event[]> {
     return this.http.get<Event[]>('/api/events?page=' + page);
   }
 
   // GET /events/{event-id}
   getById(_id: string): Observable<Event> {
     return this.http.get<Event>('/api/events/' + _id);
+  }
+
+  getNext(): Observable<Event> {
+    return this.http.get<Event>('api/events?amount=1');
   }
 
   // PUT /events/{event-id}

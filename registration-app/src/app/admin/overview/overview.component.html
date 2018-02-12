@@ -1,17 +1,89 @@
-<div class="container register">
+<div class="container administration">
     <div class="row">
       <div class="col s12">
-          <h4 class="header detail-title teal-text center-on-mobile">Administration</h4>
+          <h3 class="header detail-title teal-text center-on-mobile">Administration</h3>
       </div>
-
-      <a (click)="createEventModal.open()">Open Modal</a>
-
     </div>
+    
+    <div class="divider"></div>
+
+    <!-- Next Event -->
+    <div class="row next-event">
+      <div class="col s12">
+        <h4 class="header center-on-mobile">Nächster Termin</h4>
+      </div>
+      <div class="col s12 title ">
+        <h5 class="header teal-text light center-on-mobile">{{nextEvent?.name}}<i class="material-icons">create</i></h5>
+        <span class="grey-text text-darken-1 light center-on-mobile"><i>{{dateString}}</i></span>
+      </div>
+      
+      <div class="col s12 l6 registrations">
+        <ul class="collection" >
+          <li class="collection-item">
+            Jessika Schmitz
+          </li>
+          <li class="collection-item">
+            Lea Eggers
+          </li>
+          <li class="collection-item">
+            Franziska Ackerman
+            <div class="secondary-content"><i class="material-icons" data-tooltip="Probetraining">fitness_center</i></div>
+          </li>
+          <li class="collection-item">
+            Stephan Unger
+          </li>
+          <li class="collection-item">
+            Dirk Ehrlichmann
+          </li>
+        </ul>
+      </div>
+      <div class="col s12 l6 registrations">
+        <ul class="collection" >
+          <li class="collection-item">
+            Benjamin Meister
+          </li>
+          <li class="collection-item">
+            Dirk Schwab
+          </li>
+          <li class="collection-item">
+            Anja Kuhn
+          </li>
+          <li class="collection-item">
+            Heike Schweitzer
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- Next Event -->
+
+    <div class="divider"></div>
+
+    <!-- All Events -->
+    <div class="row all-event">
+      <div class="col s12 l8">
+          <h4 class="header center-on-mobile">Alle Termine</h4>
+      </div>
+      <div class="col s12 l4 center-on-mobile button">
+        <a mz-button (click)="createEventModal.open()">
+          Neuer Termin
+        </a>
+      </div>
+    </div>
+    <!-- All Events -->
+
+
+
+
+
+
+
+
+
 </div>
 
 
 
-<mz-modal #createEventModal [fixedFooter]="true" [fullscreen]="true">
+<mz-modal #createEventModal [fixedFooter]="true">
     <mz-modal-content>
       <app-create-event></app-create-event>
     </mz-modal-content>

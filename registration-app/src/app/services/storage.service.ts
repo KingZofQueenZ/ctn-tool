@@ -7,12 +7,10 @@ export class StorageService {
   storageSub= new Subject<string>();
 
   watchStorage(): Observable<any> {
-    console.log('called');
     return this.storageSub.asObservable();
   }
 
   setItem(key: string, data: any) {
-    console.log('item set');
     localStorage.setItem(key, data);
     this.storageSub.next(key);
   }

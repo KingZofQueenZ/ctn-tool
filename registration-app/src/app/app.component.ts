@@ -4,14 +4,14 @@ import { StorageService } from './services/storage.service';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { MzSidenavModule, MzIconModule, MzIconMdiModule } from 'ng2-materialize';
 import { ToasterConfig } from 'angular2-toaster/src/toaster-config';
+import { ChangeDetectionStrategy } from '@angular/compiler/src/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
-  fullName: String = ''; 
+export class AppComponent {
   user: User;
 
   public config: ToasterConfig = new ToasterConfig({
@@ -21,19 +21,20 @@ export class AppComponent implements OnInit {
     timeout: 3000
   });
 
-  constructor(private storageService: StorageService) { 
-    this.storageService.storageSub.subscribe((data: string) => {
-      const user = JSON.parse(localStorage.getItem('currentUser'));
-      if(user) {
-        this.fullName = user.firstname + ' ' + user.lastname;
-        this.user = user;
-      } else {
-        this.fullName = 'Login';
-        this.user = undefined;
-      }
-    });}
+  constructor(private storageService: StorageService) {
+    this.getUser();
 
-  ngOnInit(): void {
+    storageService.storageSub.subscribe((key: string) => {
+      this.getUser();
+    });
   }
-  
+
+  getUser() {
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    if (user) {
+      this.user = user;
+    } else {
+      this.user = null;
+    }
+  }
 }

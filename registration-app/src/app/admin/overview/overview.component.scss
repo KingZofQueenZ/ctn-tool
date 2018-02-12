@@ -1,0 +1,48 @@
+.next-event {
+    .title {
+        margin-bottom: 40px;
+        
+        @media only screen and (max-width: 992px) {
+            span {
+                display: block !important;
+            }
+            
+            h5 {
+                display: block !important;
+            }
+        }
+        span {
+            display: inline;
+            font-size: 18px;
+        }
+        
+        h5 {
+            display: inline;
+            margin-right: 10px;
+        }
+    }
+
+    .registrations {
+        .collection {
+            margin-top: -15px;
+            .collection-item {
+                height: 40px;
+            }
+        }
+    }
+}
+
+.all-event {
+
+    .button {
+        margin-top: 20px;
+    }
+
+    @media only screen and (min-width: 992px) {
+        .button {
+            a {
+                float: right !important;
+            }
+        }
+    }
+}

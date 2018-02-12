@@ -40,7 +40,18 @@ $interval-size: $range / $intervals !default;
     position: absolute;
     top: 20%;
     z-index: 1;
-  }
+}
+
+#toast-container.toast-bottom-full-width{
+    .toast {
+        margin-bottom: 10px !important;
+    }
+}
+
+.modal {
+    width: 90% !important;
+    max-height: 90% !important;
+}
   
 html {
     height: 100%;
@@ -52,11 +63,6 @@ body {
     min-height: 100%;
 }
 
-#toast-container.toast-bottom-full-width{
-    .toast {
-        margin-bottom: 10px !important;
-    }
-}
 
 
 // Navigation
@@ -208,49 +214,10 @@ nav {
     }
 }
 
-.page-footer {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-
-    .copyright {
-        margin-right:10px;
-    }
-    .data {
-        margin-right:10px;
-    }
-    .icons img {
-        margin-left:10px;
-    }
-}
 
 // Allgemein
 blockquote {
     border-left: 5px solid $color-teal;
-}
-
-.carousel .indicators .indicator-item {
-    background-color: rgb(138, 138, 138);
-}
-
-.carousel .indicators .indicator-item.active {
-    background-color: #444;
-}
-
-.tabs .tab a:hover,
-.tabs .tab a.active {
-    color: $color-teal;
-}
-
-.tabs .tab a {
-    color: $color-teal-light;
-    font-weight: 400;
-    @include flow-text(0.9rem);
-}
-
-.tabs .indicator {
-    background-color: $color-teal;
 }
 
 // Override Typograhy

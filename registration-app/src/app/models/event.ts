@@ -1,5 +1,3 @@
-import { max } from "rxjs/operators/max";
-
 export class Event {
     _id: string;
     name: string;
