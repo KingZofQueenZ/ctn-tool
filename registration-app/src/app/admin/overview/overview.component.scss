@@ -19,6 +19,10 @@
         h5 {
             display: inline;
             margin-right: 10px;
+
+            i{
+                margin-top: 2px;
+            }
         }
     }
 
@@ -32,7 +36,7 @@
     }
 }
 
-.all-event {
+.all-events {
 
     .button {
         margin-top: 20px;
@@ -42,6 +46,33 @@
         .button {
             a {
                 float: right !important;
+            }
+        }
+    }
+
+    .events {
+        .collection-item {
+            .title {
+                font-size: 18px;
+            }
+            .date {
+
+            }
+
+            a {
+                margin-left: 5px;
+                margin-top: -25px;
+            }
+
+            @media only screen and (max-width: 992px) {
+                .title {
+                    display: block !important;
+                }
+                
+                .date {
+                    display: block !important;
+                    margin-top: 2px;
+                }
             }
         }
     }
