@@ -14,7 +14,8 @@ export class OverviewComponent implements OnInit {
   nextEvent: Event;
   delEvent: Event;
   dateString: string;
-  events: Event[] = new Array<Event>();
+  noEvents: Boolean = false;
+  events: Event[] = [];
 
   constructor(private eventService: EventService) {
     moment.locale('de');
@@ -37,16 +38,20 @@ export class OverviewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.eventService.getNext().subscribe(event => {
+    /*this.eventService.getNext().subscribe(event => {
       this.nextEvent = event[0];
       this.dateString = this.getDateString(event[0]);
       console.log(event[0]);
-    });
+    });*/
 
-    this.eventService.getAll(10).subscribe(events => {
+    this.eventService.getAll().subscribe(events => {
       events.forEach((element) => {
         this.events.push(element);
       });
+      
+      if(!this.events.length) {
+        this.noEvents = true;
+      }
     });
   }
 

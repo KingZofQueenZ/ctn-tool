@@ -20,6 +20,11 @@ export class CreateEventComponent {
   sa: Boolean;
   so: Boolean;
   repeat_date: Date;
+  datum_anmeldefrist: string;
+  time_anmeldefrist: string;
+  datum_abmeldefrist: string;
+  time_abmeldefrist: string;
+  time_from: string;
 
   public optionsDate: Pickadate.DateOptions = {
     format: 'dddd, dd mmm. yyyy',
@@ -46,49 +51,56 @@ export class CreateEventComponent {
     cleartext: 'Löschen',
     canceltext: 'Abbrechen', 
     autoclose: true, 
-    interval: 15
+    interval: 150
   };
   
   constructor(private eventService: EventService) { }
 
-  create() {
+  create() {    
     if(!this.repeat_date){
-      this.event.time_to = moment.utc(this.event.date + ' ' + this.event.time_to).toDate();
-      this.event.time_from = moment.utc(this.event.date + ' ' + this.event.time_from).toDate();
-      this.event.date = moment.utc(this.event.date).toDate();
+      this.createSingleEvent();
+    } else {
+      this.createMultipleEvents();
+    }
+  }
 
-      this.eventService.create(this.event).subscribe(
+  private createSingleEvent() {
+    let event: Event = Object.assign({}, this.event);
+
+    event.date = moment(this.event.date + 'T' + this.time_from).toDate();
+    if(this.event.time_to) { event.time_to = moment(this.event.date + 'T' + this.event.time_to).toDate() };
+    if(this.datum_anmeldefrist && this.time_anmeldefrist) { event.sign_in = moment(this.datum_anmeldefrist + 'T' + this.time_anmeldefrist).toDate() };
+    if(this.datum_abmeldefrist && this.time_abmeldefrist) { event.sign_out = moment(this.datum_abmeldefrist + 'T' + this.time_abmeldefrist).toDate() };
+
+    this.eventService.create(event).subscribe(
+      result => {
+        console.log('Successful ' + result);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  private createMultipleEvents() {
+    let event: Event = Object.assign({}, this.event);
+    const dates = this.getDates();
+
+    dates.forEach(date => {
+      event.date = moment(date.format('YYYY-MM-DD') + 'T' + this.time_from).toDate();
+      if(this.event.time_to) { event.time_to = moment(date.format('YYYY-MM-DD') + 'T' + this.event.time_to).toDate() };
+      if(this.datum_anmeldefrist && this.time_anmeldefrist) { event.sign_in = moment(this.datum_anmeldefrist + 'T' + this.time_anmeldefrist).toDate() };
+      if(this.datum_abmeldefrist && this.time_abmeldefrist) { event.sign_out = moment(this.datum_abmeldefrist + 'T' + this.time_abmeldefrist).toDate() };
+
+      this.eventService.create(event).subscribe(
         result => {
-          console.log('Successful ' + result);
+          console.log('Successfull!: ' + result);
         },
         error => {
           console.log(error);
         }
-      )
-    } else {
-      let event: Event = Object.assign({}, this.event);
-      let errorCounter = 0;
-
-      const dates = this.getDates();
-      dates.forEach(date => {
-        event.date = date.toDate();
-        event.time_from = moment.utc(date.format('YYYY-MM-DD') + ' ' + this.event.time_from).toDate();
-        event.time_to = moment.utc(date.format('YYYY-MM-DD') + ' ' + this.event.time_to).toDate();
-
-        this.eventService.create(event).subscribe(
-          result => {
-            console.log('Successfull!: ' + result);
-          },
-          error => {
-            errorCounter++;
-          }
-        );
-      });
-
-      if(errorCounter){
-        //Toast error
-      }
-    }
+      );
+    });
   }
 
   private getDates() {

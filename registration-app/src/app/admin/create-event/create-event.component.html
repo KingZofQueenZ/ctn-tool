@@ -6,7 +6,10 @@
   </div>
 
   <form (ngSubmit)="createEventForm.form.valid && create()" #createEventForm="ngForm">
+    <div class="divider"></div>
+
     <div class="row">
+      <div class="col s12 subtitle">Allgemeines</div>
       <mz-input-container class="col s12 l10">
         <input mz-input [label]="'Bezeichnung'" [validate]="true" id="name" name="name" type="text" [(ngModel)]="event.name" required>
       </mz-input-container> 
@@ -16,11 +19,17 @@
       <mz-textarea-container class="col s12">
         <textarea mz-textarea [label]="'Beschreibung'" id="description" name="description" [(ngModel)]="event.description"></textarea>
       </mz-textarea-container>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="row">
+      <div class="col s12 subtitle">Datum</div>
       <mz-datepicker-container class="col s12 l4">
         <input mz-datepicker [label]="'Datum'" [options]="optionsDate" [(ngModel)]="event.date" id="datum" name="datum" type="text" required>
       </mz-datepicker-container> 
       <mz-timepicker-container class="col s6 l4">
-        <input mz-timepicker [label]="'Zeit von'" [options]="optionsTime" [(ngModel)]="event.time_from" id="timefrom" name="timefrom" type="text">
+        <input mz-timepicker [label]="'Zeit von'" [options]="optionsTime" [(ngModel)]="time_from" id="timefrom" name="timefrom" type="text" required>
       </mz-timepicker-container> 
       <mz-timepicker-container class="col s6 l4">
         <input mz-timepicker [label]="'Zeit bis'" [options]="optionsTime" [(ngModel)]="event.time_to" id="timeto" name="timeto" type="text">
@@ -29,63 +38,52 @@
 
     <div class="divider"></div>
 
+    <div class="row">
+      <div class="col s12 subtitle">Anmeldefrist</div>
+      <mz-datepicker-container class="col s12 l6">
+        <input mz-datepicker [label]="'Datum'" [options]="optionsDate" [(ngModel)]="datum_anmeldefrist" id="datumanmeldefrist" name="datumanmeldefrist" type="text">
+      </mz-datepicker-container> 
+      <mz-timepicker-container class="col s12 l6">
+        <input mz-timepicker [label]="'Zeit'" [options]="optionsTime" [(ngModel)]="time_anmeldefrist" id="timeanmeldefrist" name="timeanmeldefrist" type="text">
+      </mz-timepicker-container>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="row">
+      <div class="col s12 subtitle">Abmeldefrist</div>
+      <mz-datepicker-container class="col s12 l6">
+        <input mz-datepicker [label]="'Datum'" [options]="optionsDate" [(ngModel)]="datum_abmeldefrist" id="datumabmeldefrist" name="datumabmeldefrist" type="text">
+      </mz-datepicker-container> 
+      <mz-timepicker-container class="col s12 l6">
+        <input mz-timepicker [label]="'Zeit'" [options]="optionsTime" [(ngModel)]="time_abmeldefrist" id="timeabmeldefrist" name="timeabmeldefrist" type="text">
+      </mz-timepicker-container>
+    </div>
+
+    <div class="divider"></div>
+
     <div class="row repeat">
-        <div class="col s12 title">Termin wiederholen</div>
+        <div class="col s12 subtitle">Termin wiederholung</div>
         <mz-checkbox-container class="checkbox col s3 l1">
-          <input mz-checkbox
-            [label]="'Mo'"
-            id="montag"
-            type="checkbox"
-            name="montag"
-            [(ngModel)]="mo">
+          <input mz-checkbox [label]="'Mo'" id="montag" type="checkbox" name="montag" [(ngModel)]="mo">
         </mz-checkbox-container>
         <mz-checkbox-container class="checkbox col s3 l1">
-          <input mz-checkbox
-            [label]="'Di'"
-            id="dienstag"
-            type="checkbox"
-            name="dienstag"
-            [(ngModel)]="di">
+          <input mz-checkbox [label]="'Di'" id="dienstag" type="checkbox" name="dienstag" [(ngModel)]="di">
         </mz-checkbox-container>
         <mz-checkbox-container class="checkbox col s3 l1">
-          <input mz-checkbox
-            [label]="'Mi'"
-            id="mittwoch"
-            type="checkbox"
-            name="mittwoch"
-            [(ngModel)]="mi">
+          <input mz-checkbox [label]="'Mi'" id="mittwoch" type="checkbox" name="mittwoch" [(ngModel)]="mi">
         </mz-checkbox-container>
         <mz-checkbox-container class="checkbox col s3 l1">
-          <input mz-checkbox
-            [label]="'Do'"
-            id="donnerstag"
-            type="checkbox"
-            name="donnerstag"
-            [(ngModel)]="do">
+          <input mz-checkbox [label]="'Do'" id="donnerstag" type="checkbox" name="donnerstag" [(ngModel)]="do">
         </mz-checkbox-container>
         <mz-checkbox-container class="checkbox col s3 l1">
-          <input mz-checkbox
-            [label]="'Fr'"
-            id="freitag"
-            type="checkbox"
-            name="freitag"
-            [(ngModel)]="fr">
+          <input mz-checkbox [label]="'Fr'" id="freitag" type="checkbox" name="freitag" [(ngModel)]="fr">
         </mz-checkbox-container>
         <mz-checkbox-container class="checkbox col s3 l1">
-          <input mz-checkbox
-            [label]="'Sa'"
-            id="samstag"
-            type="checkbox"
-            name="samstag"
-            [(ngModel)]="sa">
+          <input mz-checkbox [label]="'Sa'" id="samstag" type="checkbox" name="samstag" [(ngModel)]="sa">
         </mz-checkbox-container>
         <mz-checkbox-container class="checkbox col s3 l1">
-          <input mz-checkbox
-            [label]="'So'"
-            id="sonntag"
-            type="checkbox"
-            name="sonntag"
-            [(ngModel)]="so">
+          <input mz-checkbox [label]="'So'" id="sonntag" type="checkbox" name="sonntag" [(ngModel)]="so">
         </mz-checkbox-container>
         <mz-datepicker-container class="col s12 offset-l1 l4">
           <input mz-datepicker [label]="'Wiederholen bis'" [options]="optionsDate" [(ngModel)]="repeat_date" id="repeat" name="repeat" type="text">

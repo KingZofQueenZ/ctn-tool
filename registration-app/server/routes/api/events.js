@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const VerifyToken = require('../../authentication/verifytoken');
 const Event = require('../../models/event');
+const moment = require('moment');
 
 // Events ------------------------
 //   route: /api/events
@@ -46,13 +47,14 @@ router.get('/', (request, response) => {
   const page = request.query.page || 1;
   const amount = Number(request.query.amount) || 20;
 
-  Event.find({"date": {"$gte": new Date()}})
+  Event.find({"date": {"$gte": moment().format()}})
     .populate('participant_ids', 'firstname lastname')
     .sort('date')
     .skip(amount * (page - 1))
     .limit(amount)
     .exec()
     .then((documents) => {
+      console.log(documents);
       response.status(200).json(documents);
     })
     .catch((error) => {

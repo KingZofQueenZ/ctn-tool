@@ -13,6 +13,7 @@ export class EventListOverviewComponent {
   events: Event[] = [];
   page = 1;
   dateArray: any[];
+  noEvents: Boolean = false;
 
   constructor(private eventService: EventService) {
     this.eventService.getDateDict().subscribe(result => {
@@ -26,11 +27,15 @@ export class EventListOverviewComponent {
       events.forEach((element) => {
         this.events.push(element);
       });
+
+      if(!this.events.length) {
+        this.noEvents = true;
+      }
     });
   }
 
   getWidth(event: Event): string {
-    const amount = this.dateArray.find(x => x._id === event.date).count;
+    const amount = this.dateArray.find(x => x._id === moment(event.date).format("YYYY-MM-DD")).count;
 
     switch (amount) {
       case 1:

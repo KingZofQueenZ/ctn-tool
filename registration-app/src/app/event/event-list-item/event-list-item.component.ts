@@ -5,26 +5,27 @@ import { EventService } from '../../services/event.service';
 import { ToasterService, Toast } from 'angular2-toaster';
 import * as moment from 'moment';
 import {trigger, transition, style, animate, state} from '@angular/animations'
-import {BrowserModule} from '@angular/platform-browser'
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
+import { BrowserModule } from '@angular/platform-browser'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { MzTooltipModule, MzButtonModule } from 'ng2-materialize';
 
 @Component({
   selector: 'app-event-list-item',
   animations: [
     trigger(
-      'myAnimation',
+      'opacityAnimation',
       [
         transition(
         ':enter', [
           style({opacity: 0}),
-          animate('500ms', style({'opacity': 1}))
+          animate('400ms 200ms', style({'opacity': 1}))
         ]
       ),
       transition(
         ':leave', [
           style({'opacity': 1}),
-          animate('500ms', style({'opacity': 0})
-        ]
+          animate('400ms', style({'opacity': 0}))
+        ],
       )]
     )
   ],
@@ -38,6 +39,7 @@ export class EventListItemComponent implements OnInit {
   can_register: Boolean;
   can_unregister: Boolean;
   participant_string: string;
+  participant_list: string;
   date_string: string;
   user: User;
   icon: String = 'done';
@@ -50,6 +52,8 @@ export class EventListItemComponent implements OnInit {
 
   ngOnInit(): void {
     this.date_string = this.dateString();
+    this.can_register = this.canRegister();
+    this.can_unregister = this.canUnregister();
     this.updateUser();
   }
 
@@ -66,9 +70,10 @@ export class EventListItemComponent implements OnInit {
     this.eventService.addParticipant(this.event._id, this.user).subscribe(
       result => {
         this.event.participant_ids.push({ _id: this.user._id, firstname: this.user.firstname, lastname: this.user.lastname});
-        console.log(this.event.participant_ids);
         this.updateUser();
-        this.toasterService.pop('success', 'Anmeldung erfolgreich', 'Sie wurden erfolgreich für ' + this.event.name + ' angemeldet');
+        this.icon = 'done';
+        this.color = 'green-text';
+        this.toasterService.pop('success', 'Anmeldung erfolgreich', 'Sie wurden erfolgreich für ' + this.event.name + ', am ' + this.date_string + ' angemeldet');
       },
       error => {
         this.toasterService.pop('error', 'Fehler', 'Es ist ein Fehler aufgetreten. Bitte melden Sie sich beim Administrator!');
@@ -81,7 +86,7 @@ export class EventListItemComponent implements OnInit {
       result => {
         this.event.participant_ids.splice(this.event.participant_ids.indexOf(this.user._id), 1);
         this.updateUser();
-        this.toasterService.pop('success', 'Abmeldung erfolgreich', 'Sie wurden erfolgreich für ' + this.event.name + ' abgemeldet');
+        this.toasterService.pop('success', 'Abmeldung erfolgreich', 'Sie wurden erfolgreich für ' + this.event.name + ', am ' + this.date_string + ' abgemeldet');
       },
       error => {
         this.toasterService.pop('error', 'Fehler', 'Es ist ein Fehler aufgetreten. Bitte melden Sie sich beim Administrator!');
@@ -93,23 +98,52 @@ export class EventListItemComponent implements OnInit {
     this.is_registered = this.registered();
     this.is_full = this.full();
     this.participant_string = this.participantCount();
+    this.participant_list = this.participantList();
+    console.log(this.participant_list);
+  }
+
+  private canRegister() {
+    if(this.event.sign_in) {
+      return moment(this.event.sign_in).isAfter(moment());
+    }
+    return true;
+  }
+
+  private canUnregister() {
+    if(this.event.sign_out) {
+      return moment(this.event.sign_out).isAfter(moment());
+    }
+    return true;
   }
 
   private dateString() {
-    const date = moment(this.event.date).utc().format('dd. D MMM YYYY / HH:mm');
+    const date = moment(this.event.date).format('dd. D MMM YYYY / HH:mm');
 
     if (this.event.time_to) {
-      return date +  '-' + moment(this.event.time_to).utc().format('HH:mm');
+      return date +  '-' + moment(this.event.time_to).format('HH:mm');
     }
     return date + ' Uhr';
   }
 
-  private participantCount(): string {
+  private participantCount() {
     if (this.event.max_participants) {
       return this.event.participant_ids.length + '/' + this.event.max_participants;
     } else {
       return this.event.participant_ids.length;
     }
+  }
+
+  private participantList() {
+    let participants = '';
+
+    this.event.participant_ids.forEach(participant => {
+      if(!participants) {
+        participants = participant.firstname + ' ' + participant.lastname;
+      } else {
+        participants += '</br>' + participant.firstname + ' ' + participant.lastname;
+      }
+    });
+    return participants;
   }
 
   private registered() {
@@ -118,5 +152,15 @@ export class EventListItemComponent implements OnInit {
 
   private full() {
     return (this.event.max_participants && this.event.participant_ids.length >= this.event.max_participants);
+  }
+
+  mouseEnter() {
+    this.icon = 'close';
+    this.color = 'red-text';
+  }
+
+  mouseLeave() {
+    this.icon = 'done';
+    this.color = 'green-text';
   }
 }

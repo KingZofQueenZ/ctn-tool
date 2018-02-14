@@ -14,13 +14,13 @@ const Event = require('../../models/event');
 router.get('/event-dates', (request, response) => {
   Event.aggregate([
     {$match: { "date": {"$gte": new Date()}}},
+    {$sort: { "date": 1}},
     {$group: 
       {
-        _id: "$date",
+        _id: { $dateToString: { format: "%Y-%m-%d", date: "$date" }},
         count: {$sum: 1}
       }
-    },
-    {$sort: { "date": 1}}
+    }
   ]).exec()
   .then((documents) => {
     response.status(200).json(documents);

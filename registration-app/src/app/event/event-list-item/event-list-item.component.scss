@@ -1,51 +1,49 @@
 // Event-Cards
-  
-    .header-text {
-        margin-bottom: 40px;
-    }
-  
-    .card-panel {
-        position: relative;
-        height: 120px;
-        padding-top: 10px;
-        padding-bottom: 10px;
+.header-text {
+    margin-bottom: 40px;
+}
 
-        .card-content {
-            h4{
-                font-size: 1.5rem; 
+.card-panel {
+    position: relative;
+    height: 120px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    .card-content {
+        h4{
+            font-size: 1.5rem; 
+        }
+
+        a {
+            color: #000;
+        }
+        
+        .registrations {
+            i {
+                vertical-align: middle;
+            }
+    
+            .material-icons {
+                margin-right: 10px;
+            }
+        }
+    
+        .register {
+            i {
+                cursor: pointer;
+                position: absolute;
+                right: 13px;
+                bottom: 8px;
+                user-select: none;
+                -moz-user-select: none;
+                -khtml-user-select: none;
+                -webkit-user-select: none;
+                -o-user-select: none;
             }
 
-            a {
-              color: #000;
+            .no-unregister {
+                cursor: not-allowed; 
             }
-            
-            .registrations {
-      
-                i {
-                    vertical-align: middle;
-                }
-      
-                .material-icons {
-                    margin-right: 10px;
-                }
-            }
-      
-            .register {
-              cursor: pointer;
-              position: absolute;
-              right: 13px;
-              bottom: 3px;
-              user-select: none;
-              -moz-user-select: none;
-              -khtml-user-select: none;
-              -webkit-user-select: none;
-              -o-user-select: none;
-
-              .hover-icon:hover {
-                  content: "close";
-                  color: #F44336 !important
-              }
-            }
-
         }
     }
+}
