@@ -20,6 +20,10 @@ export class EventService {
     return this.http.post<Event>('/api/events', event, {headers: headers, responseType: 'text' as 'json'});
   }
 
+  getDateDict(): Observable<any> {
+    return this.http.get<any>('/api/helper/event-dates');
+  }
+
   // GET /events
   getAll(page?: number): Observable<Event[]> {
     return this.http.get<Event[]>('/api/events?page=' + page);

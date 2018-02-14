@@ -2,18 +2,12 @@
   <div class="card-content black-text">
     <div class="datetime grey-text text-darken-1 light truncate"><i>{{date_string}}</i></div>
     <a [routerLink]="['/details', event._id]">
-      <h4 class="title truncate">{{event.name}}</h4>
+      <h4 class="title truncate">{{event?.name}}</h4>
     </a>
-    <div class="registrations grey-text text-darken-1 light"><i class="tiny material-icons">group</i><i>{{participant_count_string}} Anmeldungen</i></div>
+    <div class="registrations grey-text text-darken-1 light"><i class="tiny material-icons">group</i><i>{{participant_string}} Anmeldungen</i></div>
     <div class="register" *ngIf="user">
-      <div *ngIf="is_registered; then registered; else notregistered"></div>
-      
-      <ng-template #notregistered>
-          <i class="small material-icons" (click)="handleRegistration()" *ngIf="!is_full">person_add</i>
-      </ng-template>
-      <ng-template #registered>
-          <i class="{{color}} small material-icons" (click)="handleRegistration()" (mouseenter)="mouseEnter()" (mouseleave)="mouseLeave()">{{icon}}</i>
-      </ng-template>
+      <i *ngIf="!is_registered && !is_full" class="small material-icons" (click)="handleRegistration()" [@myAnimation]>person_add</i>
+      <i *ngIf="is_registered" class="green-text small material-icons hover-icon" (click)="handleRegistration()" [@myAnimation]>done</i>
     </div> 
   </div>
 </div>

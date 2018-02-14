@@ -12,11 +12,28 @@ import { SlicePipe } from '@angular/common';
 })
 export class OverviewComponent implements OnInit {
   nextEvent: Event;
+  delEvent: Event;
   dateString: string;
   events: Event[] = new Array<Event>();
 
   constructor(private eventService: EventService) {
     moment.locale('de');
+  }
+
+  deleteEvent() {
+    this.eventService.delete(this.delEvent._id).subscribe(
+      result => {
+        console.log('Deleted');
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  setEventToDelete(event: Event) {
+    this.delEvent = event;
+    console.log('Event set');
   }
 
   ngOnInit() {

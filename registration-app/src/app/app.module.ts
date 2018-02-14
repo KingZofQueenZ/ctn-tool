@@ -11,7 +11,7 @@ import { LoginComponent } from './user/login/login.component';
 import { RegisterComponent } from './user/register/register.component';
 import { EventListItemComponent } from './event/event-list-item/event-list-item.component';
 import { EventListOverviewComponent } from './event/event-list-overview/event-list-overview.component';
-import { DetailComponent } from './event/detail/detail.component';
+import { EventDetailComponent } from './event/detail/event-detail.component';
 
 import { AuthenticationService } from './services/authentication.service';
 import { UserService } from './services/user.service';
@@ -31,7 +31,7 @@ import { OverviewComponent } from './admin/overview/overview.component';
     LoginComponent,
     RegisterComponent,
     EventListOverviewComponent,
-    DetailComponent,
+    EventDetailComponent,
     EventListItemComponent,
     CreateEventComponent,
     OverviewComponent

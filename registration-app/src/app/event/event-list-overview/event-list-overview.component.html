@@ -1,20 +1,15 @@
-<mz-parallax [height]="400" class="hide-on-med-and-down">
-  <div class="parralax section no-pad-bot">
-    <div class="container">
-      <h1 class="header center teal-text">Trainings und Termine</h1>
-      <div class="row center">
-        <h5 class="header white-text col s12 light">&laquo;If it doesn´t challenge you, it doesn´t change you.&raquo;</h5>
-      </div>
+<div class="parallax hide-on-med-and-down">
+  <div class="container">
+    <h1 class="header center teal-text">Trainings und Termine</h1>
+    <div class="row center">
+      <h5 class="header white-text col s12 light">&laquo;If it doesn´t challenge you, it doesn´t change you.&raquo;</h5>
     </div>
   </div>
-  <img src="../../../assets/img/crossfit-index2.jpg" alt="Unsplashed background img 1">
-</mz-parallax>
+</div>
 
 <!-- Event Cards -->
-
 <div class="container events" style="height:100%" infiniteScroll
 [infiniteScrollDistance]="0"
-[infiniteScrollThrottle]="300"
 (scrolled)="onScroll()">
   <div class="row">
     <div class="col s12">
@@ -36,7 +31,7 @@
   </div>
 </div>
 
-<div class="container spinner" *ngIf="!events">
+<div class="container spinner" *ngIf="!events.length">
   <div class="row center">
     <mz-spinner
       [size]="'big'">

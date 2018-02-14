@@ -40,6 +40,11 @@
               -khtml-user-select: none;
               -webkit-user-select: none;
               -o-user-select: none;
+
+              .hover-icon:hover {
+                  content: "close";
+                  color: #F44336 !important
+              }
             }
 
         }

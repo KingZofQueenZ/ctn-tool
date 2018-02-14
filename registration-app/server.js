@@ -10,6 +10,7 @@ const config = require('./server/config/index');
 // Get our API routes
 const usersApi = require('./server/routes/api/users');
 const eventsApi = require('./server/routes/api/events');
+const otherApi = require('./server/routes/api/helper');
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'dist')));
 // Set our api routes
 app.use('/api/users', usersApi);
 app.use('/api/events', eventsApi);
+app.use('/api/helper', otherApi);
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {

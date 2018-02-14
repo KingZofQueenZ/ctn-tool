@@ -41,14 +41,15 @@ router.post('/', VerifyToken.verifyAdmin, (request, response) => {
   });
 });
 
-// Get all events .skip(10 * (page - 1)).limit(10)
+// Get all events 
 router.get('/', (request, response) => {
   const page = request.query.page || 1;
-  const amount = Number(request.query.amount) || 10;
+  const amount = Number(request.query.amount) || 20;
 
   Event.find({"date": {"$gte": new Date()}})
     .populate('participant_ids', 'firstname lastname')
     .sort('date')
+    .skip(amount * (page - 1))
     .limit(amount)
     .exec()
     .then((documents) => {

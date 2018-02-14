@@ -51,7 +51,7 @@
           <li class="collection-item" *ngFor="let event of events">
             <span class="title teal-text">{{event.name}}</span>
             <span class="date grey-text text-darken-1 light"><i>{{getDateString(event)}}</i></span>
-            <a class="secondary-content"><i class="material-icons">delete</i></a>
+            <a class="secondary-content" (click)="setEventToDelete(event);deleteEventModal.open()"><i class="material-icons">delete</i></a>
             <a class="secondary-content"><i class="material-icons">edit</i></a>
             <a class="secondary-content" [routerLink]="['/details', event._id]"><i class="material-icons">remove_red_eye</i></a>
           </li>
@@ -73,11 +73,28 @@
 
 
 
-<mz-modal #createEventModal [fixedFooter]="true">
-    <mz-modal-content>
-      <app-create-event></app-create-event>
-    </mz-modal-content>
-    <mz-modal-footer>
-      <button mz-button [flat]="true" mz-modal-close>Schliessen</button>
-    </mz-modal-footer>
-  </mz-modal>
+<mz-modal #createEventModal class="createModal" [fixedFooter]="true">
+  <mz-modal-content>
+    <app-create-event></app-create-event>
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button mz-button [flat]="true" mz-modal-close>Schliessen</button>
+  </mz-modal-footer>
+</mz-modal>
+
+<mz-modal #deleteEventModal class="deleteModal" [fixedFooter]="true">
+  <mz-modal-content>
+    <div class="container administration">
+      <div class="row">
+        <div class="col s12">
+          <span>Möchten Sie den Event {{delEvent?.name}} wirklich löschen?</span>
+        </div>
+      </div>
+    </div>
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
+    <button mz-button class="red white-text" [flat]="true" (click)="deleteEvent()" mz-modal-close>Löschen</button>
+  </mz-modal-footer>
+</mz-modal>
+

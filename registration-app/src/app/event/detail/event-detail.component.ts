@@ -5,14 +5,14 @@ import { User } from '../../models/user';
 import { EventService } from '../../services/event.service';
 import * as moment from 'moment';
 import { ActivatedRoute } from '@angular/router';
-declare var $:any;
+declare var $: any;
 
 @Component({
-  selector: 'app-detail',
-  templateUrl: './detail.component.html',
-  styleUrls: ['./detail.component.scss']
+  selector: 'app-event-detail',
+  templateUrl: './event-detail.component.html',
+  styleUrls: ['./event-detail.component.scss']
 })
-export class DetailComponent implements AfterViewChecked {
+export class EventDetailComponent implements AfterViewChecked {
   event: Event;
   user: User;
   date_string: string;

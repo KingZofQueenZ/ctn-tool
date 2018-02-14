@@ -44,13 +44,21 @@ $interval-size: $range / $intervals !default;
 
 #toast-container.toast-bottom-full-width{
     .toast {
-        margin-bottom: 10px !important;
+        margin-top: 10px !important;
+        width: 100% !important;
+        border-radius: 0;
     }
 }
 
-.modal {
+.createModal .modal {
     width: 90% !important;
     max-height: 90% !important;
+}
+
+.deleteModal .modal {
+    width: 350px !important;
+    max-height: 30% !important;
+    top: 30% !important;
 }
   
 html {

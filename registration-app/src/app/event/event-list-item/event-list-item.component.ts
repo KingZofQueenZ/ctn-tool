@@ -4,19 +4,42 @@ import { User } from '../../models/user';
 import { EventService } from '../../services/event.service';
 import { ToasterService, Toast } from 'angular2-toaster';
 import * as moment from 'moment';
+import {trigger, transition, style, animate, state} from '@angular/animations'
+import {BrowserModule} from '@angular/platform-browser'
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 
 @Component({
   selector: 'app-event-list-item',
+  animations: [
+    trigger(
+      'myAnimation',
+      [
+        transition(
+        ':enter', [
+          style({opacity: 0}),
+          animate('500ms', style({'opacity': 1}))
+        ]
+      ),
+      transition(
+        ':leave', [
+          style({'opacity': 1}),
+          animate('500ms', style({'opacity': 0})
+        ]
+      )]
+    )
+  ],
   templateUrl: './event-list-item.component.html',
   styleUrls: ['./event-list-item.component.scss']
 })
 export class EventListItemComponent implements OnInit {
   @Input() event: Event;
-  user: User;
-  date_string: string;
-  participant_count_string: string;
   is_registered: Boolean;
   is_full: Boolean;
+  can_register: Boolean;
+  can_unregister: Boolean;
+  participant_string: string;
+  date_string: string;
+  user: User;
   icon: String = 'done';
   color: String = 'green-text';
 
@@ -26,30 +49,62 @@ export class EventListItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.date_string = this.setDateString();
-    this.participant_count_string = this.setParticipantCountString();
-    this.is_registered = this.checkIfRegistered();
-    this.is_full = this.checkIfFull();
+    this.date_string = this.dateString();
+    this.updateUser();
   }
 
-  private setDateString(): string {
-    const date = moment(this.event.date).utc().format('dd. D MMM YYYY');
-
-    if (this.event.time_from) {
-      const time_from = moment(this.event.time_from).utc().format('HH:mm');
-
-      if (this.event.time_to) {
-        const time_to = moment(this.event.time_to).utc().format('HH:mm');
-        return date + ' / ' + time_from + '-' + time_to;
-      }
-
-      return date + ' / ' + time_from + ' Uhr';
+  handleRegistration(): void {
+    if (this.registered()) {
+      this.deleteParticipant();
+    } else {
+      this.addParticipant();
     }
-
-    return date;
   }
 
-  private setParticipantCountString(): string {
+  // Private Methods
+  private addParticipant() {
+    this.eventService.addParticipant(this.event._id, this.user).subscribe(
+      result => {
+        this.event.participant_ids.push({ _id: this.user._id, firstname: this.user.firstname, lastname: this.user.lastname});
+        console.log(this.event.participant_ids);
+        this.updateUser();
+        this.toasterService.pop('success', 'Anmeldung erfolgreich', 'Sie wurden erfolgreich für ' + this.event.name + ' angemeldet');
+      },
+      error => {
+        this.toasterService.pop('error', 'Fehler', 'Es ist ein Fehler aufgetreten. Bitte melden Sie sich beim Administrator!');
+      }
+    );
+  }
+
+  private deleteParticipant() {
+    this.eventService.deleteParticipant(this.event._id, this.user._id).subscribe(
+      result => {
+        this.event.participant_ids.splice(this.event.participant_ids.indexOf(this.user._id), 1);
+        this.updateUser();
+        this.toasterService.pop('success', 'Abmeldung erfolgreich', 'Sie wurden erfolgreich für ' + this.event.name + ' abgemeldet');
+      },
+      error => {
+        this.toasterService.pop('error', 'Fehler', 'Es ist ein Fehler aufgetreten. Bitte melden Sie sich beim Administrator!');
+      }
+    );
+  }
+
+  private updateUser() {
+    this.is_registered = this.registered();
+    this.is_full = this.full();
+    this.participant_string = this.participantCount();
+  }
+
+  private dateString() {
+    const date = moment(this.event.date).utc().format('dd. D MMM YYYY / HH:mm');
+
+    if (this.event.time_to) {
+      return date +  '-' + moment(this.event.time_to).utc().format('HH:mm');
+    }
+    return date + ' Uhr';
+  }
+
+  private participantCount(): string {
     if (this.event.max_participants) {
       return this.event.participant_ids.length + '/' + this.event.max_participants;
     } else {
@@ -57,77 +112,11 @@ export class EventListItemComponent implements OnInit {
     }
   }
 
-  private checkIfRegistered(): Boolean {
-    let val = false;
-
-    this.event.participant_ids.forEach(element => {
-      if (this.user && element._id === this.user._id) {
-        val = true;
-      }
-    });
-    return val;
+  private registered() {
+    return this.event.participant_ids.find(x => x._id === this.user._id) !== undefined;
   }
 
-  private checkIfFull(): Boolean {
-    let val = false;
-
-    if (this.event.max_participants && this.event.participant_ids.length >= this.event.max_participants) {
-      val = true;
-    }
-    return val;
-  }
-
-  handleRegistration(): void {
-    if (this.is_registered) {
-      this.eventService.deleteParticipant(this.event._id, this.user._id).subscribe(
-        result => {
-          const index = this.event.participant_ids.indexOf(this.user._id);
-          this.event.participant_ids.splice(index, 1);
-
-          this.participant_count_string = this.setParticipantCountString();
-          this.is_registered = false;
-          this.is_full = this.checkIfFull();
-
-          const toast: Toast = {
-            type: 'success',
-            title: 'Abmeldung erfolgreich',
-            body: 'Sie wurden erfolgreich für ' + this.event.name + ' abgemeldet'
-          };
-          this.toasterService.pop(toast);
-        },
-        error => {
-          console.log(error);
-        }
-      );
-    } else {
-      this.eventService.addParticipant(this.event._id, this.user).subscribe(
-        result => {
-          this.event.participant_ids.push(this.user._id);
-          this.participant_count_string = this.setParticipantCountString();
-          this.is_registered = true;
-          this.is_full = this.checkIfFull();
-
-          const toast: Toast = {
-            type: 'success',
-            title: 'Anmeldung erfolgreich',
-            body: 'Sie wurden erfolgreich für ' + this.event.name + ' angemeldet'
-          };
-          this.toasterService.pop(toast);
-        },
-        error => {
-          console.log(error);
-        }
-      );
-    }
-  }
-
-  mouseEnter() {
-    this.icon = 'close';
-    this.color = 'red-text';
-  }
-
-  mouseLeave() {
-    this.icon = 'done';
-    this.color = 'green-text';
+  private full() {
+    return (this.event.max_participants && this.event.participant_ids.length >= this.event.max_participants);
   }
 }

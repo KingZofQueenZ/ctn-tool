@@ -12,9 +12,13 @@ import * as moment from 'moment';
 export class EventListOverviewComponent {
   events: Event[] = [];
   page = 1;
+  dateArray: any[];
 
   constructor(private eventService: EventService) {
-    this.getEvents();
+    this.eventService.getDateDict().subscribe(result => {
+      this.dateArray = result;
+      this.getEvents();
+    });
   }
 
   getEvents(): void {
@@ -26,8 +30,8 @@ export class EventListOverviewComponent {
   }
 
   getWidth(event: Event): string {
-    const amount = this.events.filter(element =>
-    moment.utc(event.date).isSame(moment.utc(element.date))).length;
+    const amount = this.dateArray.find(x => x._id === event.date).count;
+
     switch (amount) {
       case 1:
         return 'l12';
@@ -42,6 +46,6 @@ export class EventListOverviewComponent {
 
   onScroll () {
     this.page++;
-    //this.getEvents();
+    this.getEvents();
   }
 }
