@@ -1,0 +1,70 @@
+<div class="container create-event">
+  <div class="row title">
+    <div class="col s12">
+        <h4 class="header detail-title teal-text center-on-mobile">Neuer Termin anlegen</h4>
+    </div>
+  </div>
+
+  <form (ngSubmit)="editEventForm.form.valid && edit()" #editEventForm="ngForm" *ngIf="_event">
+    <div class="divider"></div>
+
+    <div class="row">
+      <div class="col s12 subtitle">Allgemeines</div>
+      <mz-input-container class="col s12 l10">
+        <input mz-input [label]="'Bezeichnung'" [validate]="true" id="name" name="name" type="text" [(ngModel)]="_event.name" required>
+      </mz-input-container> 
+      <mz-input-container class="col s12 l2">
+        <input mz-input [label]="'Teilnehmer'" [validate]="true" id="max_participants" name="max_participants" type="number" [(ngModel)]="_event.max_participants">
+      </mz-input-container> 
+      <mz-textarea-container class="col s12">
+        <textarea mz-textarea [label]="'Beschreibung'" id="description" name="description" [(ngModel)]="_event.description"></textarea>
+      </mz-textarea-container>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="row">
+      <div class="col s12 subtitle">Datum</div>
+      <mz-datepicker-container class="col s12 l4">
+        <input mz-datepicker [label]="'Datum'" [options]="optionsDate" [(ngModel)]="_event.date" id="datum" name="datum" type="text" required>
+      </mz-datepicker-container> 
+      <mz-timepicker-container class="col s6 l4">
+        <input mz-timepicker [label]="'Zeit von'" [options]="optionsTime" [(ngModel)]="time_from" id="timefrom" name="timefrom" type="text" required>
+      </mz-timepicker-container> 
+      <mz-timepicker-container class="col s6 l4">
+        <input mz-timepicker [label]="'Zeit bis'" [options]="optionsTime" [(ngModel)]="time_to" id="timeto" name="timeto" type="text">
+      </mz-timepicker-container> 
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="row">
+      <div class="col s12 subtitle">Anmeldefrist</div>
+      <mz-datepicker-container class="col s12 l6">
+        <input mz-datepicker [label]="'Datum'" [options]="optionsDate" [(ngModel)]="datum_anmeldefrist" id="datumanmeldefrist" name="datumanmeldefrist" type="text">
+      </mz-datepicker-container> 
+      <mz-timepicker-container class="col s12 l6">
+        <input mz-timepicker [label]="'Zeit'" [options]="optionsTime" [(ngModel)]="time_anmeldefrist" id="timeanmeldefrist" name="timeanmeldefrist" type="text">
+      </mz-timepicker-container>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="row">
+      <div class="col s12 subtitle">Abmeldefrist</div>
+      <mz-datepicker-container class="col s12 l6">
+        <input mz-datepicker [label]="'Datum'" [options]="optionsDate" [(ngModel)]="datum_abmeldefrist" id="datumabmeldefrist" name="datumabmeldefrist" type="text">
+      </mz-datepicker-container> 
+      <mz-timepicker-container class="col s12 l6">
+        <input mz-timepicker [label]="'Zeit'" [options]="optionsTime" [(ngModel)]="time_abmeldefrist" id="timeabmeldefrist" name="timeabmeldefrist" type="text">
+      </mz-timepicker-container>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="col s12 submit center-on-mobile">
+      <button class="btn waves-effect waves-light" [class.disabled]="!editEventForm.form.valid" type="submit" name="action">Event speichern</button>
+    </div>
+  </form>
+</div>
+ 

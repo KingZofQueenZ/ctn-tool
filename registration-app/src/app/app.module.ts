@@ -23,6 +23,7 @@ import { CustomMaterializeModule } from './shared/materialize.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
 import { CreateEventComponent } from './admin/create-event/create-event.component';
+import { EditEventComponent } from './admin/edit-event/edit-event.component';
 import { AdminEventOverviewComponent } from './admin/admin-event-overview/admin-event-overview.component';
 import { AdminUserOverviewComponent } from './admin/admin-user-overview/admin-user-overview.component';
 import { AdminOverviewComponent } from './admin/admin-overview/admin-overview.component';
@@ -37,6 +38,7 @@ import { NextEventComponent } from './admin/next-event/next-event.component';
     EventDetailComponent,
     EventListItemComponent,
     CreateEventComponent,
+    EditEventComponent,
     AdminEventOverviewComponent,
     AdminOverviewComponent,
     NextEventComponent,

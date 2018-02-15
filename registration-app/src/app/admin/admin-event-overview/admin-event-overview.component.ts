@@ -12,6 +12,7 @@ import { ToasterService } from 'angular2-toaster';
   styleUrls: ['./admin-event-overview.component.scss']
 })
 export class AdminEventOverviewComponent implements OnInit {
+  editEvent: Event;
   delEvent: Event;
   delEventDateString: string;
   dateString: string;
@@ -27,19 +28,23 @@ export class AdminEventOverviewComponent implements OnInit {
   }
 
   private getDateString(event: Event): string {
-    const date = moment.utc(event.date).format('dd. D MMM YYYY');
+    const date = moment(event.date).format('dd. D MMM YYYY / HH:mm');
 
       if (event.time_to) {
-        const time_to = moment.utc(event.time_to).format('HH:mm');
+        const time_to = moment(event.time_to).format('HH:mm');
         return date + '-' + time_to;
       }
 
-      return date + ' / ' + ' Uhr';
+      return date + ' Uhr';
   }
 
   setEventToDelete(event: Event) {
     this.delEvent = event;
     this.delEventDateString = this.getDateString(event);
+  }
+
+  setEventToEdit(event: Event) {
+    this.editEvent = event;
   }
 
   deleteEvent() {

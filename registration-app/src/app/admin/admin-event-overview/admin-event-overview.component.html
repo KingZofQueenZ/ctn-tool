@@ -15,7 +15,7 @@
           <span class="date grey-text text-darken-1 light"><i>{{getDateString(event)}}</i></span>
           <div class="icon-container">
             <a class="secondary-content delete" (click)="setEventToDelete(event);deleteEventModal.open()"><i class="material-icons">delete</i></a>
-            <a class="secondary-content edit"><i class="material-icons">edit</i></a>
+            <a class="secondary-content edit" (click)="setEventToEdit(event);editEventModal.open()"><i class="material-icons">edit</i></a>
             <a class="secondary-content show" [routerLink]="['/details', event._id]"><i class="material-icons">remove_red_eye</i></a>
           </div>
         </li>
@@ -43,6 +43,15 @@
 <mz-modal #createEventModal class="createModal" [fixedFooter]="true">
   <mz-modal-content>
     <app-create-event></app-create-event>
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button mz-button [flat]="true" mz-modal-close>Schliessen</button>
+  </mz-modal-footer>
+</mz-modal>
+
+<mz-modal #editEventModal class="editModal" [fixedFooter]="true">
+  <mz-modal-content>
+    <app-edit-event [event]="editEvent"></app-edit-event>
   </mz-modal-content>
   <mz-modal-footer>
     <button mz-button [flat]="true" mz-modal-close>Schliessen</button>
