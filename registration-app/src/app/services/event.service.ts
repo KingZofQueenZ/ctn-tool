@@ -34,8 +34,8 @@ export class EventService {
     return this.http.get<Event>('/api/events/' + _id);
   }
 
-  getNext(): Observable<Event> {
-    return this.http.get<Event>('api/events?amount=1');
+  getAmount(amount?: number): Observable<Event[]> {
+    return this.http.get<Event[]>('api/events?amount=' + amount);
   }
 
   // PUT /events/{event-id}

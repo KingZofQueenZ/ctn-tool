@@ -44,16 +44,16 @@ export class CreateEventComponent {
 
   public optionsTime: Pickadate.TimeOptions = {
     format: 'HH:i',
-    default: 'now', 
-    fromnow: 0,       
-    twelvehour: false, 
+    default: 'now',
+    fromnow: 0,
+    twelvehour: false,
     donetext: 'OK',
     cleartext: 'Löschen',
-    canceltext: 'Abbrechen', 
-    autoclose: true, 
+    canceltext: 'Abbrechen',
+    autoclose: true,
     interval: 150
   };
-  
+
   constructor(private eventService: EventService) { }
 
   create() {    

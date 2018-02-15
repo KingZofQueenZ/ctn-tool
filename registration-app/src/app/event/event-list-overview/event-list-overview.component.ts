@@ -28,14 +28,14 @@ export class EventListOverviewComponent {
         this.events.push(element);
       });
 
-      if(!this.events.length) {
+      if (!this.events.length) {
         this.noEvents = true;
       }
     });
   }
 
   getWidth(event: Event): string {
-    const amount = this.dateArray.find(x => x._id === moment(event.date).format("YYYY-MM-DD")).count;
+    const amount = this.dateArray.find(x => x._id === moment(event.date).format('YYYY-MM-DD')).count;
 
     switch (amount) {
       case 1:

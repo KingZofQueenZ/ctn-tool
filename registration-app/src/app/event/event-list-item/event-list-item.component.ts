@@ -42,6 +42,7 @@ export class EventListItemComponent implements OnInit {
   participant_list: string;
   date_string: string;
   user: User;
+  lockIcon: Boolean = false;
   icon: String = 'done';
   color: String = 'green-text';
 
@@ -54,7 +55,11 @@ export class EventListItemComponent implements OnInit {
     this.date_string = this.dateString();
     this.can_register = this.canRegister();
     this.can_unregister = this.canUnregister();
-    this.updateUser();
+
+    if (this.user) {
+      this.updateUser();
+    }
+    this.updateEvent();
   }
 
   handleRegistration(): void {
@@ -71,9 +76,11 @@ export class EventListItemComponent implements OnInit {
       result => {
         this.event.participant_ids.push({ _id: this.user._id, firstname: this.user.firstname, lastname: this.user.lastname});
         this.updateUser();
+        this.updateEvent();
         this.icon = 'done';
         this.color = 'green-text';
-        this.toasterService.pop('success', 'Anmeldung erfolgreich', 'Sie wurden erfolgreich für ' + this.event.name + ', am ' + this.date_string + ' angemeldet');
+        this.toasterService.pop('success', 'Anmeldung erfolgreich', 'Sie wurden erfolgreich für '
+                                  + this.event.name + ', am ' + this.date_string + ' angemeldet');
       },
       error => {
         this.toasterService.pop('error', 'Fehler', 'Es ist ein Fehler aufgetreten. Bitte melden Sie sich beim Administrator!');
@@ -82,11 +89,15 @@ export class EventListItemComponent implements OnInit {
   }
 
   private deleteParticipant() {
+    this.lockIcon = true;
     this.eventService.deleteParticipant(this.event._id, this.user._id).subscribe(
       result => {
         this.event.participant_ids.splice(this.event.participant_ids.indexOf(this.user._id), 1);
         this.updateUser();
-        this.toasterService.pop('success', 'Abmeldung erfolgreich', 'Sie wurden erfolgreich für ' + this.event.name + ', am ' + this.date_string + ' abgemeldet');
+        this.updateEvent();
+        this.toasterService.pop('success', 'Abmeldung erfolgreich', 'Sie wurden erfolgreich für '
+                                  + this.event.name + ', am ' + this.date_string + ' abgemeldet');
+        this.lockIcon = false;
       },
       error => {
         this.toasterService.pop('error', 'Fehler', 'Es ist ein Fehler aufgetreten. Bitte melden Sie sich beim Administrator!');
@@ -94,23 +105,25 @@ export class EventListItemComponent implements OnInit {
     );
   }
 
+  private updateEvent() {
+    this.participant_string = this.participantCount();
+  }
+
   private updateUser() {
     this.is_registered = this.registered();
     this.is_full = this.full();
-    this.participant_string = this.participantCount();
     this.participant_list = this.participantList();
-    console.log(this.participant_list);
   }
 
   private canRegister() {
-    if(this.event.sign_in) {
+    if (this.event.sign_in) {
       return moment(this.event.sign_in).isAfter(moment());
     }
     return true;
   }
 
   private canUnregister() {
-    if(this.event.sign_out) {
+    if (this.event.sign_out) {
       return moment(this.event.sign_out).isAfter(moment());
     }
     return true;
@@ -137,7 +150,7 @@ export class EventListItemComponent implements OnInit {
     let participants = '';
 
     this.event.participant_ids.forEach(participant => {
-      if(!participants) {
+      if (!participants) {
         participants = participant.firstname + ' ' + participant.lastname;
       } else {
         participants += '</br>' + participant.firstname + ' ' + participant.lastname;
@@ -160,7 +173,9 @@ export class EventListItemComponent implements OnInit {
   }
 
   mouseLeave() {
-    this.icon = 'done';
-    this.color = 'green-text';
+    if (!this.lockIcon) {
+      this.icon = 'done';
+      this.color = 'green-text';
+    }
   }
 }

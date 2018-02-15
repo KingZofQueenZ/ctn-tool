@@ -54,7 +54,6 @@ router.get('/', (request, response) => {
     .limit(amount)
     .exec()
     .then((documents) => {
-      console.log(documents);
       response.status(200).json(documents);
     })
     .catch((error) => {

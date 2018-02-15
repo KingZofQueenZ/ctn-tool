@@ -1,0 +1,46 @@
+.all-events {
+
+    .button {
+        margin-top: 20px;
+    }
+
+    @media only screen and (min-width: 992px) {
+        .button {
+            a {
+                float: right !important;
+            }
+        }
+    }
+
+    .events {
+        margin-top: 20px;
+
+        .collection-item {
+            position: relative;
+
+            .title {
+                font-size: 18px;
+            }
+
+            .icon-container {    
+                position: absolute;
+                right: 20px;
+                top: 21px;
+                
+                a {
+                    margin-left: 5px;
+                    cursor: pointer;
+                }
+            }
+
+            .title {
+                display: block !important;
+            }
+            
+            .date {
+                display: block !important;
+                margin-top: 2px;
+            }
+        }
+    }
+}

@@ -7,7 +7,9 @@ import { EventListOverviewComponent } from './event/event-list-overview/event-li
 import { AuthGuard } from './shared/auth.guard';
 import { EventDetailComponent } from './event/detail/event-detail.component';
 import { CreateEventComponent } from './admin/create-event/create-event.component';
-import { OverviewComponent } from './admin/overview/overview.component';
+import { AdminEventOverviewComponent } from './admin/admin-event-overview/admin-event-overview.component';
+import { AdminOverviewComponent } from './admin/admin-overview/admin-overview.component';
+import { AdminUserOverviewComponent } from './admin/admin-user-overview/admin-user-overview.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -15,7 +17,9 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'events', component: EventListOverviewComponent},
   { path: 'details/:id', component: EventDetailComponent },
-  { path: 'admin', component: OverviewComponent, canActivate: [AuthGuard] }
+  { path: 'admin', component: AdminOverviewComponent, canActivate: [AuthGuard] },
+  { path: 'admin-event', component: AdminEventOverviewComponent, canActivate: [AuthGuard] },
+  { path: 'admin-user', component: AdminUserOverviewComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="row all-events">
+    <div class="col s12 l8">
+        <h4 class="header teal-text center-on-mobile">Alle Termine</h4>
+    </div>
+    <div class="col s12 l4 center-on-mobile button">
+      <a mz-button (click)="createEventModal.open()">
+        Neuer Termin
+      </a>
+    </div>
+    <div class="col s12 events">
+      <ul class="collection" *ngIf="events.length">
+        <li class="collection-item" *ngFor="let event of events">
+          <span class="title teal-text">{{event.name}}</span>
+          <span class="date grey-text text-darken-1 light"><i>{{getDateString(event)}}</i></span>
+          <div class="icon-container">
+            <a class="secondary-content delete" (click)="setEventToDelete(event);deleteEventModal.open()"><i class="material-icons">delete</i></a>
+            <a class="secondary-content edit"><i class="material-icons">edit</i></a>
+            <a class="secondary-content show" [routerLink]="['/details', event._id]"><i class="material-icons">remove_red_eye</i></a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf="noEvents">
+  <div class="row">
+    <div class="col s12 center-on-mobile">
+      <p class="flow-text">Es gibt zurzeit leider keine Termine!</p>
+    </div>
+  </div>
+</div>
+
+<div class="container spinner" *ngIf="!events.length && !noEvents">
+  <div class="row center">
+    <mz-spinner
+      [size]="'big'">
+    </mz-spinner>
+  </div>
+</div>
+
+<mz-modal #createEventModal class="createModal" [fixedFooter]="true">
+  <mz-modal-content>
+    <app-create-event></app-create-event>
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button mz-button [flat]="true" mz-modal-close>Schliessen</button>
+  </mz-modal-footer>
+</mz-modal>
+
+<mz-modal #deleteEventModal class="deleteModal" [fixedFooter]="true">
+  <mz-modal-content>
+    <div class="container administration">
+      <div class="row">
+        <div class="col s12">
+          <span class="flow-text">Möchtest du den Termin <i>{{delEvent?.name}}</i> am {{delEventDateString}} wirklich löschen?</span>
+        </div>
+      </div>
+    </div>
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
+    <button mz-button class="red white-text" [flat]="true" (click)="deleteEvent()" mz-modal-close>Löschen</button>
+  </mz-modal-footer>
+</mz-modal>
+
