@@ -15,15 +15,17 @@ export class EditEventComponent {
     if (ev) {
       this._event = ev;
       this.time_from = moment(this._event.date).format('HH:mm');
-      this.time_to = moment(this._event.time_to).format('HH:mm');
-      this.datum_anmeldefrist = moment(this._event.sign_in).format('YYYY-MM-DD');
-      this.time_anmeldefrist = moment(this._event.sign_in).format('HH:mm');
-      this.datum_abmeldefrist = moment(this._event.sign_out).format('YYYY-MM-DD');
-      this.time_abmeldefrist = moment(this._event.sign_out).format('HH:mm');
+      this._event.date = moment(this._event.date).format('YYYY-MM-DD');
+
+      if (this._event.time_to) { this.time_to = moment(this._event.time_to).format('HH:mm'); }
+      if (this._event.sign_in) { this.datum_anmeldefrist = moment(this._event.sign_in).format('YYYY-MM-DD'); }
+      if (this._event.sign_in) { this.time_anmeldefrist = moment(this._event.sign_in).format('HH:mm'); }
+      if (this._event.sign_out) { this.datum_abmeldefrist = moment(this._event.sign_out).format('YYYY-MM-DD'); }
+      if (this._event.sign_out) { this.time_abmeldefrist = moment(this._event.sign_out).format('HH:mm'); }
     }
   }
-  
-  _event: Event;
+
+  _event: any;
   datum_anmeldefrist: string;
   time_anmeldefrist: string;
   datum_abmeldefrist: string;
@@ -59,16 +61,22 @@ export class EditEventComponent {
     interval: 150
   };
 
-  constructor(private eventService: EventService) { 
-  }
+  constructor(private eventService: EventService) {}
 
   edit() {
-    let event: Event = Object.assign({}, this._event);
+    const event: Event = Object.assign({}, this._event);
 
     event.date = moment(this._event.date + 'T' + this.time_from).toDate();
-    if(this.time_to) { event.time_to = moment(this._event.date) + 'T' + this.time_to).toDate() };
-    if(this.datum_anmeldefrist && this.time_anmeldefrist) { event.sign_in = moment(this.datum_anmeldefrist + 'T' + this.time_anmeldefrist).toDate() };
-    if(this.datum_abmeldefrist && this.time_abmeldefrist) { event.sign_out = moment(this.datum_abmeldefrist + 'T' + this.time_abmeldefrist).toDate() };
+    if (this.time_to) { event.time_to = moment(this._event.date + 'T' + this.time_to).toDate(); }
+
+    if (this.datum_anmeldefrist && this.time_anmeldefrist) {
+
+      event.sign_in = moment(this.datum_anmeldefrist + 'T' + this.time_anmeldefrist).toDate();
+    }
+
+    if (this.datum_abmeldefrist && this.time_abmeldefrist) {
+      event.sign_out = moment(this.datum_abmeldefrist + 'T' + this.time_abmeldefrist).toDate();
+    }
 
     this.eventService.update(event).subscribe(
       result => {
