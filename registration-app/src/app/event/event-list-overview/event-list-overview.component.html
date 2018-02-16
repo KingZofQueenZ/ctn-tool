@@ -8,7 +8,7 @@
 </div>
 
 <!-- Event Cards -->
-<div class="container events" style="height:100%" infiniteScroll
+<div class="container events" *ngIf="dateArray.length" style="height:100%" infiniteScroll
 [infiniteScrollDistance]="0"
 (scrolled)="onScroll()">
   <div class="row">

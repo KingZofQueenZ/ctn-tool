@@ -11,16 +11,30 @@ import * as moment from 'moment';
 })
 export class EventListOverviewComponent {
   events: Event[] = [];
+  dateArray: any[] = [];
   page = 1;
-  dateArray: any[];
   noEvents: Boolean = false;
 
   constructor(private eventService: EventService) {
-    this.eventService.getDateDict().subscribe(result => {
-      this.dateArray = result;
-      this.getEvents();
-    });
+    this.getEvents();
   }
+
+  getDates() {
+    this.dateArray = [];
+
+    this.events.forEach((event) => {
+      const entry = this.dateArray.find(x => x.date === moment(event.date).format('YYYY-MM-DD'));
+
+      if (entry) {
+        entry.count = entry.count++;
+      } else {
+        this.dateArray.push({ date: moment(event.date).format('YYYY-MM-DD'), count: 1});
+      }
+    });
+
+    console.log(this.dateArray);
+  }
+
 
   getEvents(): void {
     this.eventService.getAll(this.page).subscribe(events => {
@@ -31,11 +45,13 @@ export class EventListOverviewComponent {
       if (!this.events.length) {
         this.noEvents = true;
       }
+
+      this.getDates();
     });
   }
 
   getWidth(event: Event): string {
-    const amount = this.dateArray.find(x => x._id === moment(event.date).format('YYYY-MM-DD')).count;
+    const amount = this.dateArray.find(x => x.date === moment(event.date).format('YYYY-MM-DD')).count;
 
     switch (amount) {
       case 1:
