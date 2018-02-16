@@ -18,7 +18,7 @@ const app = express();
 app.use(helmet());
 
 /* Mongoose setup */
-mongoose.connect(process.env.CONNECTIONSTRING || config.database.local);
+mongoose.connect(process.env.CONNECTIONSTRING || config.database.local, { uri_decode_auth: true });
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error'));
