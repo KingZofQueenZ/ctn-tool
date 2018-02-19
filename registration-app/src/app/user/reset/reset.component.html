@@ -1,0 +1,34 @@
+<div class="container login">
+  <div class="row" *ngIf="!success">
+    <div class="col s12 l8 offset-l2">
+        <h4 class="header detail-title teal-text center-on-mobile">Passwort zurücksetzen</h4>
+    </div>
+
+    <div class="col s12 l8 offset-l2">
+        <span class="flow-text">Gib bitte deine E-Mail Adresse ein. Wir werden dir ein neues Passwort zusenden!</span>
+    </div>
+
+    <form (ngSubmit)="resetForm.form.valid && reset()" #resetForm="ngForm" class="col s12 l8 offset-l2 form">
+        <div class="input-field col s12">
+          <input id="email" name="email" type="email" class="validate" [(ngModel)]="model.email" required email [class.invalid]="hasError">
+          <label class="light" for="email">E-Mail</label>
+        </div>
+        <div class="col s12 center-on-mobile">
+          <button class="btn waves-effect waves-light" [class.disabled]="!resetForm.form.valid" type="submit" name="action">Bestätigen</button>
+        </div>
+    </form>
+
+    <div class="col s12 l8 offset-l2">
+      <div class="col s12 error light" [hidden]="!hasError">Das Passwort konnte nicht zurückgesetzt werden!</div>
+    </div>
+  </div>
+  <div class="row" *ngIf="success">
+    <div class="col s12 l8 offset-l2">
+        <h4 class="header detail-title teal-text center-on-mobile">Passwort zurückgesetzt</h4>
+    </div>
+
+    <div class="col s12 l8 offset-l2">
+        <span class="flow-text">Das Passwort wurde erfolgreich zurückgesetzt. Wir haben dir ein neues Passwort an die angegebene E-Mail Adresse gesendet.</span>
+    </div>
+  </div>
+</div>  

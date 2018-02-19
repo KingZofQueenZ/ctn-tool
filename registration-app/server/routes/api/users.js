@@ -5,8 +5,7 @@ const router = express.Router();
 const config = require('../../config/index');
 const sgMail = require('@sendgrid/mail');
 const randomstring = require("randomstring");
-const MY_TEMPLATE_ID = process.env.MY_TEMPLATE_ID || 'dd068f4e-5676-4708-bb78-8dd238aa9a31';
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+//sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 sgMail.setSubstitutionWrappers('{{', '}}');
 
 const VerifyToken = require('../../authentication/verifytoken');
@@ -75,7 +74,7 @@ router.post('/', (request, response) => {
       to: newUser.email,
       from: 'info@crossthenature.ch',
       subject: 'Registrierung bestätigen',
-      templateId: MY_TEMPLATE_ID,
+      templateId: process.env.TEMPLATE_ID_REGISTER || 'dd068f4e-5676-4708-bb78-8dd238aa9a31',
       substitutions: {
         url: 'http://' + request.get('host') + '/activate/' + newUser.activation_code,
         firstname: newUser.firstname,
@@ -108,6 +107,47 @@ router.put('/activate/:code', (request, response) => {
           return;
         }
         response.status(200).send({activated: true});
+      });
+    });
+
+});
+
+router.put('/reset', (request, response) => {
+  console.log(request.body.email);
+  User.findOne({email: request.body.email})
+    .exec((error, document) => {
+      if(error) {
+        response.status(500).send(error);
+        return;
+      }
+      
+      if(!document) {
+        response.status(404).send('User not found, email: ' +  request.body.email);
+        return;
+      }
+
+      const newPW = randomstring.generate(7);
+
+      document.password = newPW;
+      document.save((error, document) => {
+        if(error) {
+          response.status(500).send(error);
+          return;
+        }
+
+        // Send E-Mail
+        const msg = {
+          to: document.email,
+          from: 'info@crossthenature.ch',
+          subject: 'Neues Passwort',
+          templateId: process.env.TEMPLATE_ID_RESET || '97a11dcd-6f26-4fdc-a6eb-d7f9bfe3d915',
+          substitutions: {
+            password: newPW,
+          }
+        };
+        sgMail.send(msg);
+
+        response.status(200).send({reset: true});
       });
     });
 

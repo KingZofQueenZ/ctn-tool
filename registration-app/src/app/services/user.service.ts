@@ -43,4 +43,9 @@ export class UserService {
   delete(_id: string): Observable<User> {
     return this.http.delete<User>('/api/users/' + _id, {headers: headers, responseType: 'text' as 'json'});
   }
+
+  // PUT /users/reset
+  reset(model: any): Observable<any> {
+    return this.http.put('/api/users/reset', model, {headers: headers, responseType: 'text' as 'json'});
+  }
 }

@@ -10,10 +10,12 @@ import { AdminEventOverviewComponent } from './admin/admin-event-overview/admin-
 import { AdminOverviewComponent } from './admin/admin-overview/admin-overview.component';
 import { AdminUserOverviewComponent } from './admin/admin-user-overview/admin-user-overview.component';
 import { ActivateComponent } from './user/activate/activate.component';
+import { ResetComponent } from './user/reset/reset.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
+  { path: 'reset', component: ResetComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'events', component: EventListOverviewComponent},
   { path: 'details/:id', component: EventDetailComponent },
@@ -21,6 +23,7 @@ const routes: Routes = [
   { path: 'admin', component: AdminOverviewComponent, canActivate: [AuthGuard] },
   { path: 'admin-event', component: AdminEventOverviewComponent, canActivate: [AuthGuard] },
   { path: 'admin-user', component: AdminUserOverviewComponent, canActivate: [AuthGuard] }
+
 ];
 
 @NgModule({

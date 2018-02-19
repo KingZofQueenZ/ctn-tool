@@ -13,9 +13,9 @@
           <input id="password" name="password" type="password" class="validate" [(ngModel)]="model.password" required [class.invalid]="hasError">
           <label class="light" for="password">Passwort</label>
         </div>
-        <div class="col s12 center-on-mobile">
+        <div class="col s12 center-on-mobile button center-on-mobile">
           <button class="btn waves-effect waves-light" [class.disabled]="!loginForm.form.valid" type="submit" name="action">Login</button>
-          <span class="register light"><i><a [routerLink]="['/register']">Registrieren</a> / <a [routerLink]="['/password']">Passwort vergessen</a></i></span>
+          <span class="register light"><i><a [routerLink]="['/register']">Registrieren</a> / <a [routerLink]="['/reset']">Passwort vergessen</a></i></span>
         </div>
     </form>
 

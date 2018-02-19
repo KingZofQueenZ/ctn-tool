@@ -8,6 +8,7 @@ import { AuthGuard } from './shared/auth.guard';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './user/login/login.component';
+import { ResetComponent } from './user/reset/reset.component';
 import { RegisterComponent } from './user/register/register.component';
 import { EventListItemComponent } from './event/event-list-item/event-list-item.component';
 import { EventListOverviewComponent } from './event/event-list-overview/event-list-overview.component';
@@ -44,7 +45,8 @@ import { ActivateComponent } from './user/activate/activate.component';
     AdminOverviewComponent,
     NextEventComponent,
     AdminUserOverviewComponent,
-    ActivateComponent
+    ActivateComponent,
+    ResetComponent
   ],
   imports: [
     BrowserModule,
