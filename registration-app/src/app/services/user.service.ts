@@ -19,6 +19,11 @@ export class UserService {
     return this.http.post<User>('/api/users', user, {headers: headers, responseType: 'text' as 'json'});
   }
 
+  // PUT /users/activate/{code}
+  activate(code: string): Observable<any> {
+    return this.http.put('/api/users/activate/' + code, {headers: headers, responseType: 'text' as 'json'});
+  }
+
   // GET /users
   getAll(): Observable<User[]> {
     return this.http.get<User[]>('/api/users');

@@ -3,6 +3,11 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 const config = require('../../config/index');
+const sgMail = require('@sendgrid/mail');
+const randomstring = require("randomstring");
+const MY_TEMPLATE_ID = process.env.MY_TEMPLATE_ID || 'dd068f4e-5676-4708-bb78-8dd238aa9a31';
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+sgMail.setSubstitutionWrappers('{{', '}}');
 
 const VerifyToken = require('../../authentication/verifytoken');
 const User = require('../../models/user');
@@ -29,7 +34,7 @@ router.post('/authenticate', (request, response) => {
       return;
     }
 
-    if (user && bcrypt.compareSync(body.password, user.password)) {
+    if (user && user.activated && bcrypt.compareSync(body.password, user.password)) {
       var authenticatedUser = {
         _id: user._id,
         email: user.email,
@@ -54,7 +59,9 @@ router.post('/', (request, response) => {
     lastname: body.lastname,
     phone: body.phone,
     email: body.email,
-    password: body.password
+    password: body.password,
+    activated: false,
+    activation_code: randomstring.generate(7)
   });
 
   User.create(newUser, (error, document) => {
@@ -63,8 +70,47 @@ router.post('/', (request, response) => {
       return;
     }
 
+    // Send E-Mail
+    const msg = {
+      to: newUser.email,
+      from: 'info@crossthenature.ch',
+      subject: 'Registrierung bestätigen',
+      templateId: MY_TEMPLATE_ID,
+      substitutions: {
+        url: 'http://localhost:3000/activate/' + newUser.activation_code,
+        firstname: newUser.firstname,
+      }
+    };
+    sgMail.send(msg);
+
     response.status(200).send("User created successfully");
   });
+});
+
+router.put('/activate/:code', (request, response) => {
+  User.findOne({activation_code: request.params.code})
+    .exec((error, document) => {
+      if(error) {
+        response.status(500).send(error);
+        return;
+      }
+      
+      if(!document || document.activated) {
+        response.status(404).send('User not found, _id: ' +  request.params.user_id);
+        return;
+      }
+
+      document.activated = true;
+      document.activation_code = "";
+      document.save((error, document) => {
+        if(error) {
+          response.send(error);
+          return;
+        }
+        response.status(200).send("User activated sucessfully");
+      });
+    });
+
 });
 
 // Secured Routes --------------------

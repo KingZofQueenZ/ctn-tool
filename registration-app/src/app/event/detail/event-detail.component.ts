@@ -12,7 +12,7 @@ declare var $: any;
   templateUrl: './event-detail.component.html',
   styleUrls: ['./event-detail.component.scss']
 })
-export class EventDetailComponent implements AfterViewChecked {
+export class EventDetailComponent {
   event: Event;
   user: User;
   date_string: string;
@@ -21,11 +21,6 @@ export class EventDetailComponent implements AfterViewChecked {
   constructor(private route: ActivatedRoute, private eventService: EventService) {
     this.user = JSON.parse(localStorage.getItem('currentUser'));
     this.getEvent();
-    $('ul.tabs').tabs();
-  }
-
-  ngAfterViewChecked(): void {
-    $('ul.tabs').tabs();
   }
 
   getEvent() {

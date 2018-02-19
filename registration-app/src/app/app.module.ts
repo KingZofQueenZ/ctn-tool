@@ -28,6 +28,7 @@ import { AdminEventOverviewComponent } from './admin/admin-event-overview/admin-
 import { AdminUserOverviewComponent } from './admin/admin-user-overview/admin-user-overview.component';
 import { AdminOverviewComponent } from './admin/admin-overview/admin-overview.component';
 import { NextEventComponent } from './admin/next-event/next-event.component';
+import { ActivateComponent } from './user/activate/activate.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { NextEventComponent } from './admin/next-event/next-event.component';
     AdminEventOverviewComponent,
     AdminOverviewComponent,
     NextEventComponent,
-    AdminUserOverviewComponent
+    AdminUserOverviewComponent,
+    ActivateComponent
   ],
   imports: [
     BrowserModule,

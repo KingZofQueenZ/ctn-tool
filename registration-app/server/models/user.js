@@ -16,7 +16,9 @@ var userSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  admin: Boolean
+  admin: Boolean,
+  activated: Boolean,
+  activation_code: String
 });
 
 // Hash the user's password before inserting a new user
