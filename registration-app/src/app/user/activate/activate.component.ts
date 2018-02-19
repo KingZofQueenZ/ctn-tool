@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { MzButtonModule } from 'ng2-materialize';
 
 @Component({
   selector: 'app-activate',
@@ -16,18 +17,16 @@ export class ActivateComponent implements OnInit {
     private route: ActivatedRoute) {}
 
   ngOnInit() {
-    console.log()
     const code = this.route.snapshot.paramMap.get('code');
 
     this.userService.activate(code).subscribe(
       result => {
-      }, 
-      error => {
-        console.log(error);
-        this.error = true;
+        console.log('result', result);
+        this.router.navigate(['/login'], { queryParams: { activated : true}});
       },
-      () => {
-        this.router.navigate(['/login?activated=true']);
+      error => {
+        console.log('error', error);
+        this.error = true;
       });
   }
 }

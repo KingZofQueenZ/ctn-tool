@@ -1,46 +1,62 @@
 <div class="container register">
-  <div class="row">
+  <div class="row" *ngIf="!success">
     <div class="col s12 l8 offset-l2">
         <h4 class="header detail-title teal-text center-on-mobile">Registrieren</h4>
     </div>
 
-    <form (ngSubmit)="registerForm.form.valid && register()" #registerForm="ngForm" class="col s12 l8 offset-l2">
+    <form novalidate (ngSubmit)="registerForm.valid && register()" [formGroup]="registerForm" class="col s12 l8 offset-l2">
         <div class="input-field col s12">
-          <input id="firstname" name="firstname" type="text" class="validate" [(ngModel)]="user.firstname" required>
+          <input id="firstname" formControlName="firstname" name="firstname" type="text" class="validate" [(ngModel)]="user.firstname" [class.valid]="registerForm.controls['firstname'].valid" [class.invalid]="registerForm.controls['firstname'].touched && !registerForm.controls['firstname'].valid">
           <label class="light" for="firstname">Vorname</label>
         </div>
         <div class="input-field col s12">
-          <input id="lastname" name="lastname" type="text" class="validate" [(ngModel)]="user.lastname" required>
+          <input id="lastname" formControlName="lastname" type="text" class="validate" [(ngModel)]="user.lastname" [class.valid]="registerForm.controls['lastname'].valid" [class.invalid]="registerForm.controls['lastname'].touched && !registerForm.controls['lastname'].valid">
           <label class="light" for="lastname">Nachname</label>
         </div>
         <div class="input-field col s12">
-          <input id="email" name="email" type="email" class="validate" [(ngModel)]="user.email" required email [class.invalid]="hasError">
+          <input id="email" formControlName="email" type="email" [(ngModel)]="user.email" [class.valid]="registerForm.controls['email'].valid" [class.invalid]="registerForm.controls['email'].touched && !registerForm.controls['email'].valid">
           <label class="light" for="email">E-Mail</label>
         </div>
         <div class="input-field col s12">
-          <input id="phone" name="phone" type="text" class="validate" [(ngModel)]="user.phone" required>
+          <input id="phone" formControlName="phone" type="text" [(ngModel)]="user.phone" [class.valid]="registerForm.controls['phone'].valid" [class.invalid]="registerForm.controls['phone'].touched && !registerForm.controls['phone'].valid">
           <label class="light" for="phone">Telefon</label>
         </div>
         <div class="input-field col s12">
-          <input id="password" name="password" type="password" class="validate" [(ngModel)]="user.password" required>
+          <input id="password" formControlName="password" type="password" [(ngModel)]="user.password" [class.valid]="registerForm.controls['password'].valid" [class.invalid]="registerForm.controls['password'].touched && !registerForm.controls['password'].valid">
           <label class="light" for="password">Passwort</label>
         </div>
-        <mz-checkbox-container class="checkbox col s1">
-            <input mz-checkbox
-              id="confirm"
-              type="checkbox"
-              name="confirm">
-        </mz-checkbox-container>
-        <div class="col s11 confirm">Ich habe die <a (click)="agbModal.open()">Datenschutzbestimmungen</a> gelesen</div>
+        <div class="input-field col s12">
+          <input id="confirmPassword" formControlName="confirmPassword" type="password" [class.valid]="registerForm.controls['confirmPassword'].valid" [class.invalid]="registerForm.controls['confirmPassword'].touched && !registerForm.controls['confirmPassword'].valid">
+          <label class="light" for="confirmPassword">Passwort bestätigen</label>
+        </div>
+
+        <div class="col s12 checkbox-container">
+          <mz-checkbox-container class="checkbox">
+              <input mz-checkbox
+                id="confirm"
+                type="checkbox"
+                formControlName="confirm">
+          </mz-checkbox-container>
+          <span class="confirm">Ich akzeptiere die <a (click)="agbModal.open()">AGB</a></span>
+        </div>
         <div class="col s12 center-on-mobile register-button">
-          <button class="btn waves-effect waves-light" [class.disabled]="!registerForm.form.valid" type="submit" name="action">Registrieren</button>
+          <button class="btn waves-effect waves-light" [disabled]="!registerForm.valid" type="submit" name="action">Registrieren</button>
         </div>
     </form>
 
-    <div class="col s12 l6 offset-l3">
+    <div class="col s12 l8 offset-l2">
       <div class="col s12 error light" [hidden]="!hasError">Ein Benutzer mit dieser E-Mail Adresse existiert bereits! Passwort <a [routerLink]="['/password']">vergessen?</a></div>
     </div>
 
+  </div>
+
+  <div class="row success" *ngIf="success">
+      <div class="col s12 l8 offset-l2">
+          <h4 class="header detail-title teal-text center-on-mobile">Registrierung erfolgreich</h4>
+      </div>
+      <div class="col s12 l8 offset-l2 text">
+          <span class="flow-text">{{user.firstname}}, vielen Dank für deine Registrierung! Wir haben dir eine Bestätigungsmail an <i>{{user.email}}</i> gesendet. Bestätige bitte kurz deine E-Mail Adresse indem du auf den Link im Mail klickst. Anschliessend kannst du dich einloggen.</span>
+      </div>
   </div>
 </div>  
 

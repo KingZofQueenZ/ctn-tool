@@ -19,7 +19,7 @@
 </nav>
 
 <mz-sidenav #sidenav [id]="'sidenav'" [collapseButtonId]="'btn-sidenav-demo'" [edge]="'left'" [closeOnClick]="true">
-    <mz-sidenav-header>
+    <mz-sidenav-header *ngIf="user">
       <div class="user-view">
         <img class="circle avatar" src="../assets/img/user-img.jpg">
         <div class="white-text name">{{user?.firstname + ' ' + user?.lastname}}</div>

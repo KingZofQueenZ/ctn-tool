@@ -20,7 +20,7 @@ export class EventListOverviewComponent {
   }
 
   setDateArray(event: Event) {
-    let date = this.dateArray.find(x => x.date === moment(event.date).format('YYYY-MM-DD'));
+    const date = this.dateArray.find(x => x.date === moment(event.date).format('YYYY-MM-DD'));
 
     if (date) {
       this.dateArray.find(x => x.date === moment(event.date).format('YYYY-MM-DD')).count = ++date.count;

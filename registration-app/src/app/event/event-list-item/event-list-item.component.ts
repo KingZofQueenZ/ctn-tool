@@ -4,9 +4,9 @@ import { User } from '../../models/user';
 import { EventService } from '../../services/event.service';
 import { ToasterService, Toast } from 'angular2-toaster';
 import * as moment from 'moment';
-import {trigger, transition, style, animate, state} from '@angular/animations'
-import { BrowserModule } from '@angular/platform-browser'
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import {trigger, transition, style, animate, state} from '@angular/animations';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MzTooltipModule, MzButtonModule } from 'ng2-materialize';
 
 @Component({

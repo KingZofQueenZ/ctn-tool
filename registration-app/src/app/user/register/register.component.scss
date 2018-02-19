@@ -2,19 +2,39 @@
     margin-top: 30px;
     color: #F44336;    
     
-}
-
-.confirm {
-    margin-top: 15px;
-    color: #9e9e9e;
-
     a {
-        color: #9e9e9e;
+        color: #F44336;    
         text-decoration: underline;
-        cursor: pointer;
     }
+    
 }
 
 .register-button {
     margin-top: 20px;
+}
+
+.checkbox-container {
+    position: relative;
+
+    .checkbox {
+        float: left;
+    }
+
+    .confirm {
+        position: absolute;
+        top: 15px;
+        color: #9e9e9e;
+
+        a {
+            color: #9e9e9e;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+}
+
+.success {
+    .text {
+        margin-top: 20px;
+    }
 }

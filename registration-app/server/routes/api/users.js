@@ -77,7 +77,7 @@ router.post('/', (request, response) => {
       subject: 'Registrierung bestätigen',
       templateId: MY_TEMPLATE_ID,
       substitutions: {
-        url: 'http://localhost:3000/activate/' + newUser.activation_code,
+        url: 'http://' + request.get('host') + '/activate/' + newUser.activation_code,
         firstname: newUser.firstname,
       }
     };
@@ -107,7 +107,7 @@ router.put('/activate/:code', (request, response) => {
           response.send(error);
           return;
         }
-        response.status(200).send("User activated sucessfully");
+        response.status(200).send({activated: true});
       });
     });
 

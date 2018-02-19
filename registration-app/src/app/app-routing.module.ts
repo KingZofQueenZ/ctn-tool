@@ -13,7 +13,7 @@ import { ActivateComponent } from './user/activate/activate.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent, pathMatch: 'full' },
   { path: 'register', component: RegisterComponent },
   { path: 'events', component: EventListOverviewComponent},
   { path: 'details/:id', component: EventDetailComponent },

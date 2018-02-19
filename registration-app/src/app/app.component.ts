@@ -18,7 +18,7 @@ export class AppComponent {
     animation: 'fade',
     limit: 3,
     positionClass: 'toast-bottom-full-width',
-    timeout: 3000
+    timeout: 4000
   });
 
   constructor(private storageService: StorageService) {
