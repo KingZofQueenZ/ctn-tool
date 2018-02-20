@@ -1,7 +1,7 @@
 <div class="container register">
   <div class="row" *ngIf="!success">
     <div class="col s12 l8 offset-l2">
-        <h4 class="header detail-title teal-text center-on-mobile">Registrieren</h4>
+        <h3 class="header detail-title teal-text center-on-mobile">Registrieren</h3>
     </div>
 
     <form novalidate (ngSubmit)="registerForm.valid && register()" [formGroup]="registerForm" class="col s12 l8 offset-l2">
@@ -40,7 +40,7 @@
           <span class="confirm">Ich akzeptiere die <a (click)="agbModal.open()">AGB</a></span>
         </div>
         <div class="col s12 center-on-mobile register-button">
-          <button class="btn waves-effect waves-light" [disabled]="!registerForm.valid" type="submit" name="action">Registrieren</button>
+          <button class="btn" [disabled]="!registerForm.valid" type="submit" name="action">Registrieren</button>
         </div>
     </form>
 

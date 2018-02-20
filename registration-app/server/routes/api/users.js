@@ -5,7 +5,7 @@ const router = express.Router();
 const config = require('../../config/index');
 const sgMail = require('@sendgrid/mail');
 const randomstring = require("randomstring");
-//sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 sgMail.setSubstitutionWrappers('{{', '}}');
 
 const VerifyToken = require('../../authentication/verifytoken');

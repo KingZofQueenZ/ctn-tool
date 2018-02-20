@@ -11,12 +11,16 @@ import { AdminOverviewComponent } from './admin/admin-overview/admin-overview.co
 import { AdminUserOverviewComponent } from './admin/admin-user-overview/admin-user-overview.component';
 import { ActivateComponent } from './user/activate/activate.component';
 import { ResetComponent } from './user/reset/reset.component';
+import { HomeComponent } from './content/home/home.component';
+import { NewsOverviewComponent } from './news/news-overview/news-overview.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
   { path: 'reset', component: ResetComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'news', component: NewsOverviewComponent},
   { path: 'events', component: EventListOverviewComponent},
   { path: 'details/:id', component: EventDetailComponent },
   { path: 'activate/:code', component: ActivateComponent },

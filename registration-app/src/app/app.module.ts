@@ -30,6 +30,8 @@ import { AdminUserOverviewComponent } from './admin/admin-user-overview/admin-us
 import { AdminOverviewComponent } from './admin/admin-overview/admin-overview.component';
 import { NextEventComponent } from './admin/next-event/next-event.component';
 import { ActivateComponent } from './user/activate/activate.component';
+import { HomeComponent } from './content/home/home.component';
+import { NewsOverviewComponent } from './news/news-overview/news-overview.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { ActivateComponent } from './user/activate/activate.component';
     NextEventComponent,
     AdminUserOverviewComponent,
     ActivateComponent,
-    ResetComponent
+    ResetComponent,
+    HomeComponent,
+    NewsOverviewComponent
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,7 @@
 <div class="container login">
   <div class="row">
     <div class="col s12 l6 offset-l3">
-        <h4 class="header detail-title teal-text center-on-mobile">Login</h4>
+        <h3 class="header detail-title teal-text center-on-mobile">Login</h3>
     </div>
 
     <form (ngSubmit)="loginForm.form.valid && login()" #loginForm="ngForm" class="col s12 l6 offset-l3">
@@ -14,13 +14,32 @@
           <label class="light" for="password">Passwort</label>
         </div>
         <div class="col s12 center-on-mobile button center-on-mobile">
-          <button class="btn waves-effect waves-light" [class.disabled]="!loginForm.form.valid" type="submit" name="action">Login</button>
+          <button class="btn" [class.disabled]="!loginForm.form.valid" type="submit" name="action">Login</button>
           <span class="register light"><i><a [routerLink]="['/register']">Registrieren</a> / <a [routerLink]="['/reset']">Passwort vergessen</a></i></span>
         </div>
     </form>
 
     <div class="col s12 l6 offset-l3">
-      <div class="col s12 error light" [hidden]="!hasError">Die E-Mail Adresse oder das Passwort ist falsch</div>
+      <div class="col s12 error light" [hidden]="!hasError">Du konntest nicht eingeloggt werden! Passwort oder E-Mail falsch? Benutzer bereits aktiviert?</div>
     </div>
   </div>
 </div>  
+
+<!--
+<form (ngSubmit)="loginForm.form.valid && login()" #loginForm="ngForm" class="col s12 l6 offset-l3">
+  <div class="input-field col s12">
+    <mz-input-container>
+        <input mz-input [label]="'E-Mail'" name="email" [validate]="true" id="email" type="email" [(ngModel)]="model.email" required email [class.invalid]="hasError">
+    </mz-input-container>
+  </div>
+  <div class="input-field col s12">
+    <mz-input-container>
+        <input mz-input [label]="'Passwort'" name="password" [validate]="true" id="password" type="password" [(ngModel)]="model.password" required [class.invalid]="hasError">
+    </mz-input-container>
+  </div>
+  <div class="col s12 center-on-mobile button center-on-mobile">
+    <button mz-button class="btn waves-effect waves-light" [class.disabled]="!loginForm.form.valid" type="submit" name="action">Login</button>
+    <span class="register light"><i><a [routerLink]="['/register']">Registrieren</a> / <a [routerLink]="['/reset']">Passwort vergessen</a></i></span>
+  </div>
+</form>
+-->

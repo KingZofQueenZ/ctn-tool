@@ -23,23 +23,16 @@ export class LoginComponent implements OnInit {
     this.authenticationService.logout();
 
     const activated = this.activatedRoute.snapshot.queryParams['activated'];
-    if (activated) {
-      this.toasterService.pop('success', 'Aktivierung erfolgreich',
-        'Dein Benutzer wurde erfolgreich aktiviert! Du kannst dich nun einloggen.');
-    }
   }
 
   login() {
     this.authenticationService.login(this.model.email, this.model.password)
       .subscribe(
         result => {
-          console.log('login success');
+          this.router.navigate(['/events']);
         },
         error => {
           this.hasError = true;
-        },
-        () => {
-          this.router.navigate(['/events']);
         }
       );
   }

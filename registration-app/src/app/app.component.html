@@ -5,8 +5,8 @@
                 <img src="../assets/img/logo.jpg" height="100" width="100">
             </a>
             <ul class="right light hide-on-med-and-down">
-                <li><a routerLink="/events">Home</a></li>
-                <li><a routerLink="/events">News</a></li>
+                <li><a routerLink="/home" routerLinkActive="selected">Home</a></li>
+                <li><a routerLink="/news" routerLinkActive="selected">News</a></li>
                 <li><a routerLink="/events">Information</a></li>
                 <li><a routerLink="/events" routerLinkActive="selected">Termine</a></li>
                 <li *ngIf="user?.admin"><a routerLink="/admin" routerLinkActive="selected">Admin</a></li>
@@ -28,11 +28,11 @@
     </mz-sidenav-header>
 
     <mz-sidenav-link>
-        <a routerLink="/events">Home</a>
+        <a routerLink="/home">Home</a>
     </mz-sidenav-link>
 
     <mz-sidenav-link>
-        <a routerLink="/events">News</a>
+        <a routerLink="/news">News</a>
     </mz-sidenav-link>
 
     <mz-sidenav-link>
@@ -87,4 +87,4 @@
           </div>          
       </div>
     </div>
-  </footer>
+</footer>
