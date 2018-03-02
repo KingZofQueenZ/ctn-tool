@@ -17,7 +17,10 @@ const app = express();
 app.use(helmet());
 
 /* Mongoose setup */
-mongoose.connect(process.env.CONNECTIONSTRING || config.database.local, { uri_decode_auth: true });
+console.log('MongoDB', process.env.CONNECTIONSTRING);
+console.log('Secret', process.env.SECRET);
+console.log('SendGrid', process.env.SENDGRID_API_KEY);
+mongoose.connect(process.env.CONNECTIONSTRING || config.database.local);
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error'));
