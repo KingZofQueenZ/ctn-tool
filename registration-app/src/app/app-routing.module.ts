@@ -13,6 +13,10 @@ import { ActivateComponent } from './user/activate/activate.component';
 import { ResetComponent } from './user/reset/reset.component';
 import { HomeComponent } from './content/home/home.component';
 import { NewsOverviewComponent } from './news/news-overview/news-overview.component';
+import { CreateEventComponent } from './admin/create-event/create-event.component';
+import { EditEventComponent } from './admin/edit-event/edit-event.component';
+import { DeleteEventComponent } from './admin/delete-event/delete-event.component';
+import { ProfileComponent } from './user/profile/profile.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -26,7 +30,11 @@ const routes: Routes = [
   { path: 'activate/:code', component: ActivateComponent },
   { path: 'admin', component: AdminOverviewComponent, canActivate: [AuthGuard] },
   { path: 'admin-event', component: AdminEventOverviewComponent, canActivate: [AuthGuard] },
-  { path: 'admin-user', component: AdminUserOverviewComponent, canActivate: [AuthGuard] }
+  { path: 'admin-event-create', component: CreateEventComponent, canActivate: [AuthGuard] },
+  { path: 'admin-event-edit/:id', component: EditEventComponent, canActivate: [AuthGuard] },
+  { path: 'admin-event-delete/:id', component: DeleteEventComponent, canActivate: [AuthGuard] },
+  { path: 'admin-user', component: AdminUserOverviewComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] }
 
 ];
 

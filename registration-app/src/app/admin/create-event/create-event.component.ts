@@ -3,7 +3,8 @@ import { Event } from '../../models/event';
 import { MzInputModule, MzTextareaModule, MzDatepickerModule, MzTimepickerModule, MzCheckboxModule } from 'ng2-materialize';
 import { EventService } from '../../services/event.service';
 import * as moment from 'moment';
-
+import { Location } from '@angular/common';
+import { ToasterService } from 'angular2-toaster';
 
 @Component({
   selector: 'app-create-event',
@@ -54,10 +55,10 @@ export class CreateEventComponent {
     interval: 150
   };
 
-  constructor(private eventService: EventService) { }
+  constructor(private eventService: EventService, private location: Location, private toasterService: ToasterService) { }
 
-  create() {    
-    if(!this.repeat_date){
+  create() {
+    if (!this.repeat_date) {
       this.createSingleEvent();
     } else {
       this.createMultipleEvents();
@@ -65,53 +66,56 @@ export class CreateEventComponent {
   }
 
   private createSingleEvent() {
-    let event: Event = Object.assign({}, this.event);
+    const event: Event = Object.assign({}, this.event);
 
     event.date = moment(this.event.date + 'T' + this.time_from).toDate();
-    if(this.event.time_to) { event.time_to = moment(this.event.date + 'T' + this.event.time_to).toDate() };
-    if(this.datum_anmeldefrist && this.time_anmeldefrist) { event.sign_in = moment(this.datum_anmeldefrist + 'T' + this.time_anmeldefrist).toDate() };
-    if(this.datum_abmeldefrist && this.time_abmeldefrist) { event.sign_out = moment(this.datum_abmeldefrist + 'T' + this.time_abmeldefrist).toDate() };
+    if (this.event.time_to) { event.time_to = moment(this.event.date + 'T' + this.event.time_to).toDate(); }
+    if (this.datum_anmeldefrist && this.time_anmeldefrist) { event.sign_in = moment(this.datum_anmeldefrist + 'T' + this.time_anmeldefrist).toDate(); }
+    if (this.datum_abmeldefrist && this.time_abmeldefrist) { event.sign_out = moment(this.datum_abmeldefrist + 'T' + this.time_abmeldefrist).toDate(); }
 
     this.eventService.create(event).subscribe(
       result => {
-        console.log('Successful ' + result);
+        this.toasterService.pop('success', 'Erstellen erfolgreich', 'Der Termin wurde erfolgreich erstellt.');
+        this.goBack();
       },
       error => {
-        console.log(error);
+        this.toasterService.pop('error', 'Erstellen nicht erfolgreich', 'Der Termin konnte nicht erstellt werden.');
       }
     );
   }
 
   private createMultipleEvents() {
-    let event: Event = Object.assign({}, this.event);
+    const event: Event = Object.assign({}, this.event);
     const dates = this.getDates();
 
     dates.forEach(date => {
       event.date = moment(date.format('YYYY-MM-DD') + 'T' + this.time_from).toDate();
-      if(this.event.time_to) { event.time_to = moment(date.format('YYYY-MM-DD') + 'T' + this.event.time_to).toDate() };
-      if(this.datum_anmeldefrist && this.time_anmeldefrist) { event.sign_in = moment(this.datum_anmeldefrist + 'T' + this.time_anmeldefrist).toDate() };
-      if(this.datum_abmeldefrist && this.time_abmeldefrist) { event.sign_out = moment(this.datum_abmeldefrist + 'T' + this.time_abmeldefrist).toDate() };
+      if (this.event.time_to) { event.time_to = moment(date.format('YYYY-MM-DD') + 'T' + this.event.time_to).toDate(); }
+      if (this.datum_anmeldefrist && this.time_anmeldefrist) { event.sign_in = moment(this.datum_anmeldefrist + 'T' + this.time_anmeldefrist).toDate(); }
+      if (this.datum_abmeldefrist && this.time_abmeldefrist) { event.sign_out = moment(this.datum_abmeldefrist + 'T' + this.time_abmeldefrist).toDate(); }
 
       this.eventService.create(event).subscribe(
         result => {
           console.log('Successfull!: ' + result);
         },
         error => {
-          console.log(error);
+          this.toasterService.pop('error', 'Erstellen nicht erfolgreich', 'Mindestens ein Termin konnte nicht erstellt werden.');
         }
       );
     });
+
+    this.goBack();
   }
 
   private getDates() {
-    let dateArray = new Array();
+    const dateArray = new Array();
+    const repeatDays = this.getRepeatDays();
     let date = moment.utc(this.event.date);
-    let repeatDays = this.getRepeatDays();
 
-    while(!moment.utc(date).isAfter(moment.utc(this.repeat_date))){
+    while (!moment.utc(date).isAfter(moment.utc(this.repeat_date))) {
       repeatDays.forEach(weekday => {
-        if (moment.utc(date).isoWeekday() <= weekday 
-            && !moment.utc(date).isoWeekday(weekday).isAfter(moment.utc(this.repeat_date))){
+        if (moment.utc(date).isoWeekday() <= weekday
+            && !moment.utc(date).isoWeekday(weekday).isAfter(moment.utc(this.repeat_date))) {
           dateArray.push(moment.utc(date).isoWeekday(weekday));
         }
       });
@@ -121,7 +125,7 @@ export class CreateEventComponent {
   }
 
   private getRepeatDays() {
-    var repeatArray = new Array();
+    const repeatArray = new Array();
 
     if (this.mo) {
       repeatArray.push(1);
@@ -152,5 +156,9 @@ export class CreateEventComponent {
     }
 
     return repeatArray;
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }

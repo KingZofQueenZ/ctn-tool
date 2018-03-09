@@ -1,13 +1,9 @@
 .all-events {
-
-    .button {
-        margin-top: 20px;
-    }
-
     @media only screen and (min-width: 992px) {
         .button {
             a {
                 float: right !important;
+                margin-top: 30px;
             }
         }
     }

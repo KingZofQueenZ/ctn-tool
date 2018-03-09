@@ -12,9 +12,6 @@ import { ToasterService } from 'angular2-toaster';
   styleUrls: ['./admin-event-overview.component.scss']
 })
 export class AdminEventOverviewComponent implements OnInit {
-  editEvent: Event;
-  delEvent: Event;
-  delEventDateString: string;
   dateString: string;
   noEvents: Boolean = false;
   events: Event[] = [];
@@ -38,27 +35,6 @@ export class AdminEventOverviewComponent implements OnInit {
       return date + ' Uhr';
   }
 
-  setEventToDelete(event: Event) {
-    this.delEvent = event;
-    this.delEventDateString = this.getDateString(event);
-  }
-
-  setEventToEdit(event: Event) {
-    this.editEvent = event;
-  }
-
-  deleteEvent() {
-    this.eventService.delete(this.delEvent._id).subscribe(
-      result => {
-        this.toasterService.pop('success', 'Löschen erfolgreich', 'Der Termin wurde erfolgreich gelöscht.');
-        this.refresh();
-      },
-      error => {
-        this.toasterService.pop('error', 'Löschen fehlerhaft', 'Der Termin konnte nicht gelöscht werden!');
-      }
-    );
-  }
-
   private getEvents() {
     this.eventService.getAll().subscribe(events => {
       events.forEach((element) => {
@@ -77,5 +53,4 @@ export class AdminEventOverviewComponent implements OnInit {
     this.events = [];
     this.getEvents();
   }
-
 }

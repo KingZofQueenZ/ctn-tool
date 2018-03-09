@@ -8,6 +8,20 @@
     </div>
   </div>
 
+  <div class="row" *ngIf="noEvents">
+    <div class="col s12">
+      <p class="flow-text">Es gibt zurzeit leider keine Termine!</p>
+    </div>
+  </div>
+  
+  <div class="container spinner" *ngIf="!nextEvents.length && !noEvents">
+    <div class="row center">
+      <mz-spinner
+        [size]="'big'">
+      </mz-spinner>
+    </div>
+  </div>
+
   <div class="next-events" *ngFor="let event of nextEvents">
     <app-next-event [event]="event"></app-next-event>
   </div>
@@ -62,21 +76,5 @@
       </div>
     </div>
 
-  </div>
-</div>
-
-<div class="container" *ngIf="noEvents">
-  <div class="row">
-    <div class="col s12 center-on-mobile">
-      <p class="flow-text">Es gibt zurzeit leider keine Termine!</p>
-    </div>
-  </div>
-</div>
-
-<div class="container spinner" *ngIf="!nextEvents.length && !noEvents">
-  <div class="row center">
-    <mz-spinner
-      [size]="'big'">
-    </mz-spinner>
   </div>
 </div>

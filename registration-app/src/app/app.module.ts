@@ -32,6 +32,8 @@ import { NextEventComponent } from './admin/next-event/next-event.component';
 import { ActivateComponent } from './user/activate/activate.component';
 import { HomeComponent } from './content/home/home.component';
 import { NewsOverviewComponent } from './news/news-overview/news-overview.component';
+import { DeleteEventComponent } from './admin/delete-event/delete-event.component';
+import { ProfileComponent } from './user/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { NewsOverviewComponent } from './news/news-overview/news-overview.compon
     ActivateComponent,
     ResetComponent,
     HomeComponent,
-    NewsOverviewComponent
+    NewsOverviewComponent,
+    DeleteEventComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

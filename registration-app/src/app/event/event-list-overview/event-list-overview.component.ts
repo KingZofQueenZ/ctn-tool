@@ -1,22 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MzParallaxModule  } from 'ng2-materialize';
 import { Event } from '../../models/event';
 import { EventService } from '../../services/event.service';
 import * as moment from 'moment';
+import { ActivatedRoute, Params} from '@angular/router';
 
 @Component({
   selector: 'app-overview',
   templateUrl: './event-list-overview.component.html',
   styleUrls: ['./event-list-overview.component.scss']
 })
-export class EventListOverviewComponent {
+export class EventListOverviewComponent implements OnInit {
   events: Event[] = [];
   dateArray: any[] = [];
   page = 1;
   noEvents: Boolean = false;
 
-  constructor(private eventService: EventService) {
+  constructor(private eventService: EventService, private route: ActivatedRoute) {
     this.getEvents();
+  }
+
+  ngOnInit(): void {
+    /*this.route.queryParams.subscribe((params: Params) => {
+      const probetraining = params['probetraining'];
+    });*/
   }
 
   setDateArray(event: Event) {
@@ -29,7 +36,6 @@ export class EventListOverviewComponent {
     }
   }
 
-
   getEvents(): void {
     this.eventService.getAll(this.page).subscribe(events => {
       events.forEach((element) => {
@@ -40,7 +46,6 @@ export class EventListOverviewComponent {
       if (!this.events.length) {
         this.noEvents = true;
       }
-
     });
   }
 

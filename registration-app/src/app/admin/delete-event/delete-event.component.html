@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row title">
+    <div class="col s12">
+        <h3 class="header detail-title teal-text center-on-mobile">Termin löschen</h3>
+    </div>
+  </div>
+  <div class="row" *ngIf="event">
+    <div class="col s12">
+      <span class="flow-text">Möchtest du den Termin <i>{{event.name}}</i> am {{dateString}} wirklich löschen?</span>
+    </div>
+    <div class="col s12 buttons center-on-mobile">
+      <button class="btn waves-effect waves-light" (click)="deleteEvent()">Löschen</button>&nbsp;
+      <button class="btn waves-effect waves-light red" (click)="goBack()">Abbrechen</button>
+    </div>
+  </div>
+</div>

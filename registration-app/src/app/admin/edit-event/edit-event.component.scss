@@ -1,5 +1,5 @@
 .title {
-    margin-bottom: 10px;
+    margin-bottom: -10px;
 }
 
 .subtitle {
@@ -14,8 +14,12 @@
     }
 }
 
-
 .submit {
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
+
+    button, a {
+        margin-top: 10px;
+    }
 }
+
