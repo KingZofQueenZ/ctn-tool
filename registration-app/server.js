@@ -19,7 +19,7 @@ app.use(helmet());
 /* Mongoose setup */
 console.log('MongoDB', process.env.CONNECTIONSTRING);
 console.log('Secret', process.env.SECRET);
-console.log('SendGrid', process.env.SENDGRID_API_KEY);
+console.log('Mail', process.env.MAILCONNECTIONSTRING);
 mongoose.connect(process.env.CONNECTIONSTRING || config.database.local);
 
 var db = mongoose.connection;

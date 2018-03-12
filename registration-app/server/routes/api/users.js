@@ -3,14 +3,12 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 const config = require('../../config/index');
-const sgMail = require('@sendgrid/mail');
 const randomstring = require("randomstring");
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-sgMail.setSubstitutionWrappers('{{', '}}');
 
 const VerifyToken = require('../../authentication/verifytoken');
 const User = require('../../models/user');
 const Event = require('../../models/event');
+const mailer = require('../../config/mailer');
 
 // Users ------------------------
 //   route: /api/users
@@ -43,6 +41,15 @@ router.post('/authenticate', (request, response) => {
         admin: user.admin
       };
 
+      var locals = {
+        email: 'timothy.gediga@outlook.com',
+        subject: 'Registrierung bestätigen',
+        firstname: 'Timothy',
+        url: 'http://' + request.get('host') + '/activate/'
+      };
+      mailer.sendMail('registration', locals);
+  
+
       response.status(200).send(authenticatedUser);
     } else {
         response.status(401).send('User authentication failed, email: ' +  body.email);
@@ -69,18 +76,13 @@ router.post('/', (request, response) => {
       return;
     }
 
-    // Send E-Mail
-    const msg = {
-      to: newUser.email,
-      from: 'info@crossthenature.ch',
+    var locals = {
+      email: newUser.email,
       subject: 'Registrierung bestätigen',
-      templateId: process.env.TEMPLATE_ID_REGISTER || 'dd068f4e-5676-4708-bb78-8dd238aa9a31',
-      substitutions: {
-        url: 'http://' + request.get('host') + '/activate/' + newUser.activation_code,
-        firstname: newUser.firstname,
-      }
+      firstname: newUser.firstname,
+      url: 'http://' + request.get('host') + '/activate/' + newUser.activation_code
     };
-    sgMail.send(msg);
+    mailer.sendMail('registration', locals);
 
     response.status(200).send("User created successfully");
   });
@@ -113,7 +115,6 @@ router.put('/activate/:code', (request, response) => {
 });
 
 router.put('/reset', (request, response) => {
-  console.log(request.body.email);
   User.findOne({email: request.body.email})
     .exec((error, document) => {
       if(error) {
@@ -135,17 +136,12 @@ router.put('/reset', (request, response) => {
           return;
         }
 
-        // Send E-Mail
-        const msg = {
-          to: document.email,
-          from: 'info@crossthenature.ch',
+        var locals = {
+          email: request.body.email,
           subject: 'Neues Passwort',
-          templateId: process.env.TEMPLATE_ID_RESET || '97a11dcd-6f26-4fdc-a6eb-d7f9bfe3d915',
-          substitutions: {
-            password: newPW,
-          }
+          password: newPW,
         };
-        sgMail.send(msg);
+        mailer.sendMail('password', locals);
 
         response.status(200).send({reset: true});
       });
