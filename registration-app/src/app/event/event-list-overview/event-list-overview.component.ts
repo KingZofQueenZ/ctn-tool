@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MzParallaxModule  } from 'ng2-materialize';
 import { Event } from '../../models/event';
 import { EventService } from '../../services/event.service';
 import * as moment from 'moment';

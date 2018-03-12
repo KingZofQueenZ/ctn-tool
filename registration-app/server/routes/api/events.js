@@ -129,7 +129,7 @@ router.delete('/:event_id', VerifyToken.verifyAdmin, (request, response) => {
 // ------------------------------------------
 
 // Add user or trial user to event
-router.post('/:event_id/participants', VerifyToken.verify, (request, response) => {
+router.post('/:event_id/participants', (request, response) => {
   Event.findById(request.params.event_id)
     .exec((error, document) => {
       if(error) {
@@ -145,13 +145,12 @@ router.post('/:event_id/participants', VerifyToken.verify, (request, response) =
       // Add to participants of event
       if(request.body._id) {
         document.participant_ids.push(request.body._id);
-      }
-
-      // Add to trial workouts of event
-      if(request.body.name) {
+      } else if(request.body.firstname) {
+        // Add to trial workouts of event
         document.trial_workouts.push({
-          name: body.name,
-          phone: body.phone
+          firstname: request.body.firstname,
+          lastname: request.body.lastname,
+          phone: request.body.phone
         });
       }
 

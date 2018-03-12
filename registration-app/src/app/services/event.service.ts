@@ -53,6 +53,12 @@ export class EventService {
     return this.http.post<Event>('/api/events/' + eventId + '/participants/', user, {headers: headers, responseType: 'text' as 'json'});
   }
 
+  // POST /events/{event-id}/participants
+  addTrialParticipant(eventId: string, firstname: string, lastname: string, phone: string): Observable<Event> {
+    return this.http.post<Event>('/api/events/' + eventId + '/participants/',
+      { firstname: firstname, lastname: lastname, phone: phone }, {headers: headers, responseType: 'text' as 'json'});
+  }
+
   // DELETE /events/{event-id}/participants/{participant-id}
   deleteParticipant(eventId: string, userId: string): Observable<Event> {
     return this.http.delete<Event>('/api/events/' + eventId + '/participants/' + userId + '/',

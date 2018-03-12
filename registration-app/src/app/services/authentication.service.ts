@@ -26,5 +26,4 @@ export class AuthenticationService {
   logout() {
     this.storageService.removeItem('currentUser');
   }
-
 }

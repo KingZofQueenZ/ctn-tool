@@ -3,11 +3,19 @@
 .details {
     margin-top:20px;
 
-    .button-anmeldung {
-        height: 120px;
+    @media only screen and (min-width: 992px) {
+        .button-anmeldung {
+            a {
+                float: right !important;
+            }
+        }
+    }
 
-        .btn {
-            margin: auto;
+    .button-anmeldung {
+        margin-top: 30px;
+
+        a.not-allowed {
+            cursor: not-allowed !important;
         }
     }
 
@@ -19,8 +27,14 @@
         line-height: 32px;
     }
 
+    .detail-deadline-subtitle {
+        font-size: 18px;    
+        display: block;
+    }
+    
     .anmeldungen {
         margin-top:20px;
+        margin-bottom: 30px;
 
         .collection .collection-item.avatar {
             min-height: 55px;
@@ -29,13 +43,44 @@
                 top: 7px;
             }
         }
+
+        .secondary-content i {
+            user-select: none;
+            -moz-user-select: none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            -o-user-select: none;
+        }
     }
 
     .probetraining {
+        margin-bottom: 30px;
         margin-top:20px;
-    
+
         a {
-            margin-top: 20px;
+            margin-top:20px;
+        }
+
+        .subtitle {
+            margin-bottom: 10px;
+        }
+
+        .button {
+            margin-top: 15px;
         }
     } 
 }
+
+.parallax {
+    background-image: url("../../../assets/img/crossfit-index-detail.jpg");
+    min-height: 400px; 
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  
+    h1 {
+      margin-top: 0px;
+      padding-top: 125px;
+    }
+  }

@@ -1,72 +1,85 @@
-<mz-parallax [height]="400" class="hide-on-med-and-down">
-  <div class="parralax section no-pad-bot">
-    <div class="container">
-      <h1 class="header center teal-text">Details</h1>
-      <div class="row center">
-        <h5 class="header white-text col s12 light">&laquo;Nothing great comes without sacrifice.&raquo;</h5>
-      </div>
+<div class="parallax hide-on-med-and-down">
+  <div class="container">
+    <h1 class="header center teal-text">Details</h1>
+    <div class="row center">
+      <h5 class="header white-text col s12 light">&laquo;Nothing great comes without sacrifice.&raquo;</h5>
     </div>
   </div>
-  <img src="../../../assets/img/crossfit-index-detail.jpg" alt="Unsplashed background img 1">
-</mz-parallax>
+</div>
 
 <!-- Event Cards -->
 <div class="container details" *ngIf="event">
   <div class="row">
-    <div class="col s12 l10">
+    <div class="col s12 l8">
         <h3 class="header detail-title teal-text center-on-mobile">{{event.name}}</h3>
         <h5 class="header light detail-subtitle grey-text light center-on-mobile"><i>{{date_string}}</i></h5>
+        <span *ngIf="date_string_anmeldung" class="header light detail-deadline-subtitle grey-text light center-on-mobile"><i>Anmeldefrist: {{date_string_anmeldung}}</i></span>
+        <span *ngIf="date_string_abmeldung" class="header light detail-deadline-subtitle grey-text light center-on-mobile"><i>Abmeldefrist: {{date_string_abmeldung}}</i></span>
     </div>
-    <div class="col s12 l2 valign-wrapper right-align button-anmeldung" *ngIf="user">
-        <div *ngIf="is_registered; then registered; else notregistered"></div>
-            
-        <ng-template #notregistered>
-            <a class="waves-effect waves-light btn center" (click)="handleRegistration()">Anmelden</a>
-        </ng-template>
-        <ng-template #registered>
-            <a class="waves-effect waves-light btn center red" (click)="handleRegistration()">Abmelden</a>
-        </ng-template>
+    <div class="col s12 l4 center-on-mobile button-anmeldung" *ngIf="user">
+      <a *ngIf="!is_registered && !is_full && can_register" class="waves-effect waves-light btn center" (click)="handleRegistration()">Anmelden</a>
+      <a *ngIf="is_registered && can_unregister" class="waves-effect waves-light btn center red" (click)="handleRegistration()">Abmelden</a>
+      <a *ngIf="is_registered && !can_unregister" class="btn center grey not-allowed" mz-tooltip [tooltip]="'Du kannst dich von diesem Event nicht mehr abmelden!'">Abmelden</a>
     </div>
 
-    <div class="col s12 details">
+    <div class="col s12 details" *ngIf="event.description">
       <h5 class="light">Details</h5>  
       <div class="flow-text">{{event.description}}</div>
     </div>
 
-    <div class="col s12 anmeldungen flow-text" *ngIf="user">
-      <h5 class="light">Anmeldungen</h5> 
-      <ul class="collection" >
-        <li class="collection-item avatar valign-wrapper" *ngFor="let participant of event.participant_ids">
-          <img src="../../../assets/img/user.png" height="42" width="42" alt="" class="circle">
-          <p>{{participant.firstname}} {{participant.lastname}}</p>
-        </li>
-      </ul>
+    <!-- Only show if user is logged in -->
+    <div *ngIf="user">
+      <div class="col s12 anmeldungen flow-text">
+        <h5 class="light">Anmeldungen</h5> 
+        <ul class="collection" *ngIf="event.participant_ids.length" >
+          <li class="collection-item avatar valign-wrapper" *ngFor="let participant of event.participant_ids">
+            <img src="../../../assets/img/user.png" height="42" width="42" alt="" class="circle">
+            <p>{{participant.firstname}} {{participant.lastname}}</p>
+            <div *ngIf="participant.trial" class="secondary-content"><i class="material-icons" data-tooltip="Anmeldung zum Probetraining" mz-tooltip [tooltip]="'Anmeldung zum Probetraining'">fitness_center</i></div>
+          </li>
+        </ul>
+        <div *ngIf="!event.participant_ids.length">
+          <span class="flow-text"><i>Es gibt noch keine Anmeldungen. Sei der Erste!</i></span>
+        </div>
+      </div>
     </div>
 
-    <form class="col s12 probetraining" *ngIf="!user">
-      <h5 class="light">Anmeldung zum Probetraining</h5> 
+    <!-- Only show if user is not logged in -->
+    <div class="col s12 probetraining" *ngIf="!user">
+      <div class="title">
+          <h5 class="light">Anmeldung zum Probetraining</h5> 
+      </div>
+
+      <div class="flow-text subtitle" *ngIf="!trial_success && !is_full">
+        Bitte fülle das Formular aus, um dich für ein Probetraining anzumelden.
+      </div>
+      
+      <div class="flow-text" *ngIf="is_full">
+        Bei diesem Event haben wir leider keine freien Plätze mehr. Gerne darfst du an einem anderen Tag kommen!
+      </div>
+      
+      <form class="form" (ngSubmit)="trialForm.form.valid && handleTrialWorkout()" #trialForm="ngForm" *ngIf="!trial_success && !is_full">
         <div class="row">
-          <div class="col s12 flow-text">
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore 
-            magna aliquyam erat, sed diam voluptua.
-          </div>
           <div class="input-field col s12 l4">
-            <input id="last_name" type="text" class="validate">
+            <input id="last_name" type="text" class="validate" [(ngModel)]="model.firstname" required [class.invalid]="hasError" name="firstname">
             <label class="light" for="last_name">Vorname</label>
           </div>
           <div class="input-field col s12 l4">
-            <input id="last_name" type="text" class="validate">
+            <input id="last_name" type="text" class="validate" [(ngModel)]="model.lastname" required [class.invalid]="hasError" name="lastname">
             <label class="light" for="last_name">Nachname</label>
           </div>
           <div class="input-field col s12 l4">
-            <input id="last_name" type="text" class="validate">
+            <input id="last_name" type="text" class="validate" [(ngModel)]="model.phone" required [class.invalid]="hasError" name="phone">
             <label class="light" for="last_name">Telefonnummer</label>
           </div>
-          <div class="col s12 center-on-mobile">
-            <a class="waves-effect waves-light btn">Zum Probetraining anmelden</a>
+          <div class="col s12 center-on-mobile button">
+            <button class="waves-effect waves-light btn" [class.disabled]="!trialForm.form.valid" type="submit" name="action">Zum Probetraining anmelden</button>
           </div>
         </div>
       </form>
+
+      <div class ="flow-text" *ngIf="trial_success">Du wurdest erfolgreich für das Probetraining angemeldet. Wir erwarten dich am {{date_string}}. Solltest du doch nicht Teilnehmen können, melde dich bitte bei unseren Coaches ab!</div>
+    </div>
   </div>
 </div>
 

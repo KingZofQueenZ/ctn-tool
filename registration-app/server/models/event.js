@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
 var trialWorkoutSchema = mongoose.Schema({
-  name: String,
+  firstname: String,
+  lastname: String,
   phone: String
 });
 

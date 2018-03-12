@@ -39,7 +39,6 @@ export class EventListItemComponent implements OnInit {
   can_register: Boolean;
   can_unregister: Boolean;
   participant_string: string;
-  participant_list: string;
   date_string: string;
   user: User;
   lockIcon: Boolean = false;
@@ -55,6 +54,7 @@ export class EventListItemComponent implements OnInit {
     this.date_string = this.dateString();
     this.can_register = this.canRegister();
     this.can_unregister = this.canUnregister();
+    this.getTrialWorkouts();
 
     if (this.user) {
       this.updateUser();
@@ -88,6 +88,12 @@ export class EventListItemComponent implements OnInit {
     );
   }
 
+  private getTrialWorkouts() {
+    this.event.trial_workouts.forEach(element => {
+      this.event.participant_ids.push({ _id: element._id, firstname: element.firstname, lastname: element.lastname, trial: true});
+    });
+  }
+
   private deleteParticipant() {
     this.lockIcon = true;
     this.eventService.deleteParticipant(this.event._id, this.user._id).subscribe(
@@ -112,7 +118,6 @@ export class EventListItemComponent implements OnInit {
   private updateUser() {
     this.is_registered = this.registered();
     this.is_full = this.full();
-    this.participant_list = this.participantList();
   }
 
   private canRegister() {
@@ -144,19 +149,6 @@ export class EventListItemComponent implements OnInit {
     } else {
       return this.event.participant_ids.length;
     }
-  }
-
-  private participantList() {
-    let participants = '';
-
-    this.event.participant_ids.forEach(participant => {
-      if (!participants) {
-        participants = participant.firstname + ' ' + participant.lastname;
-      } else {
-        participants += '</br>' + participant.firstname + ' ' + participant.lastname;
-      }
-    });
-    return participants;
   }
 
   private registered() {
