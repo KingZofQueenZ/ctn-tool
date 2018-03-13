@@ -2,10 +2,11 @@ const config = require('../config/index');
 const nodemailer = require('nodemailer');
 const Email = require('email-templates');
 const smtpConfig = config.mailer.connectionString;
+const path = require('path');
 
 const email = new Email({
     views: { 
-        root: './server/templates',
+        root: (path.join(__dirname, '../../templates')),
         options: {
             extension: 'ejs'
         }
@@ -15,7 +16,7 @@ const email = new Email({
 exports.sendMail = function(template, locals ) {
     const transporter = nodemailer.createTransport(smtpConfig);
 
-    email.render('registration', locals)
+    email.render(template, locals)
         .then((result) => {
             const emailOptions = {
                 from: config.mailer.defaultFromAddress,
@@ -23,11 +24,14 @@ exports.sendMail = function(template, locals ) {
                 subject: locals.subject,
                 html: result
             }
-            console.log('Success');
-            /*transporter.sendMail(emailOptions, (err, data) => {
-                console.log(data);
+            transporter.sendMail(emailOptions, (err, data) => {
+                if (!err) {
+                    return true;
+                }
+
                 console.log(err);
-            })*/
+                return false;
+            })
 
             return true;
         })

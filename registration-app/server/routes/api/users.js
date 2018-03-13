@@ -39,16 +39,7 @@ router.post('/authenticate', (request, response) => {
         lastname: user.lastname,
         token: jwt.sign({ sub: user._id, admin: user.admin }, config.auth.secret, { expiresIn: '14d'}),
         admin: user.admin
-      };
-
-      var locals = {
-        email: 'timothy.gediga@outlook.com',
-        subject: 'Registrierung bestätigen',
-        firstname: 'Timothy',
-        url: 'http://' + request.get('host') + '/activate/'
-      };
-      mailer.sendMail('registration', locals);
-  
+      };  
 
       response.status(200).send(authenticatedUser);
     } else {
@@ -80,7 +71,7 @@ router.post('/', (request, response) => {
       email: newUser.email,
       subject: 'Registrierung bestätigen',
       firstname: newUser.firstname,
-      url: 'http://' + request.get('host') + '/activate/' + newUser.activation_code
+      url: 'http://ctn.musca.uberspace.de/activate/' + newUser.activation_code
     };
     mailer.sendMail('registration', locals);
 

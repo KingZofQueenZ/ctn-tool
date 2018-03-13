@@ -144,7 +144,13 @@ router.post('/:event_id/participants', (request, response) => {
 
       // Add to participants of event
       if(request.body._id) {
-        document.participant_ids.push(request.body._id);
+        if (document.participant_ids.indexOf(request.body._id)) {
+          document.participant_ids.push(request.body._id);
+        } else {
+          // Array already contains user
+          response.status(405).send('User already registered for this Event!');
+          return;
+        }
       } else if(request.body.firstname) {
         // Add to trial workouts of event
         document.trial_workouts.push({
@@ -180,8 +186,12 @@ router.delete('/:event_id/participants/:user_id', VerifyToken.verifyUser, (reque
       }
 
       var indexToDelete = document.participant_ids.indexOf(request.params.user_id);
-      if(indexToDelete !== -1)
+      if(indexToDelete !== -1) {
         document.participant_ids.splice(indexToDelete, 1);
+      } else {
+        response.status(405).send('User not registered for this Event!');
+        return;
+      }
 
       var trialWorkoutToDelete = document.trial_workouts.id(request.params.user_id);
       if(trialWorkoutToDelete)
