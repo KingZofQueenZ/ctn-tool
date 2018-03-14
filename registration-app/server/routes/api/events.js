@@ -144,9 +144,12 @@ router.post('/:event_id/participants', (request, response) => {
 
       // Add to participants of event
       if(request.body._id) {
-        if (document.participant_ids.indexOf(request.body._id)) {
+        console.log('Ids:', document.participant_ids, document.participant_ids.indexOf(request.body._id));
+        if (document.participant_ids.indexOf(request.body._id) === -1) {
+          console.log('Adding User');
           document.participant_ids.push(request.body._id);
         } else {
+          console.log('Already added');
           // Array already contains user
           response.status(405).send('User already registered for this Event!');
           return;

@@ -79,11 +79,11 @@ export class EventListItemComponent implements OnInit {
         this.updateEvent();
         this.icon = 'done';
         this.color = 'green-text';
-        this.toasterService.pop('success', 'Anmeldung erfolgreich', 'Sie wurden erfolgreich für '
+        this.toasterService.pop('success', 'Anmeldung erfolgreich', 'Du wurdest erfolgreich für '
                                   + this.event.name + ', am ' + this.date_string + ' angemeldet');
       },
       error => {
-        this.toasterService.pop('error', 'Fehler', 'Es ist ein Fehler aufgetreten. Bitte melden Sie sich beim Administrator!');
+        this.toasterService.pop('error', 'Fehler', 'Du konntest nicht angemeldet werden!');
       }
     );
   }
@@ -101,12 +101,12 @@ export class EventListItemComponent implements OnInit {
         this.event.participant_ids.splice(this.event.participant_ids.indexOf(this.user._id), 1);
         this.updateUser();
         this.updateEvent();
-        this.toasterService.pop('success', 'Abmeldung erfolgreich', 'Sie wurden erfolgreich für '
+        this.toasterService.pop('success', 'Abmeldung erfolgreich', 'Du wurdest erfolgreich für '
                                   + this.event.name + ', am ' + this.date_string + ' abgemeldet');
         this.lockIcon = false;
       },
       error => {
-        this.toasterService.pop('error', 'Fehler', 'Es ist ein Fehler aufgetreten. Bitte melden Sie sich beim Administrator!');
+        this.toasterService.pop('error', 'Fehler', 'Du konntest nicht abgemeldet werden!');
       }
     );
   }

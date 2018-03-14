@@ -72,7 +72,7 @@ export class EventDetailComponent {
       result => {
         this.event.participant_ids.push({ _id: this.user._id, firstname: this.user.firstname, lastname: this.user.lastname});
         this.updateUser();
-        this.toasterService.pop('success', 'Anmeldung erfolgreich', 'Sie wurden erfolgreich für '
+        this.toasterService.pop('success', 'Anmeldung erfolgreich', 'Du wurdest erfolgreich für '
                                   + this.event.name + ', am ' + this.date_string + ' angemeldet');
       },
       error => {
@@ -88,7 +88,7 @@ export class EventDetailComponent {
       result => {
         this.event.participant_ids.splice(this.event.participant_ids.findIndex(x => x._id === this.user._id), 1);
         this.updateUser();
-        this.toasterService.pop('success', 'Abmeldung erfolgreich', 'Sie wurden erfolgreich für '
+        this.toasterService.pop('success', 'Abmeldung erfolgreich', 'Du wurdest erfolgreich für '
                                   + this.event.name + ', am ' + this.date_string + ' abgemeldet');
       },
       error => {
