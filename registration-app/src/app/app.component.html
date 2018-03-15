@@ -49,14 +49,13 @@
         <mz-sidenav-link>
             <a routerLink="/login">Login</a>
         </mz-sidenav-link>
-    </div>
-    <div *ngIf="user">
         <mz-sidenav-link>
-            <a routerLink="/events">Meine Trainings</a>
+            <a routerLink="/register">Registrieren</a>
         </mz-sidenav-link>
-    
+    </div>
+    <div *ngIf="user">    
         <mz-sidenav-link>
-            <a routerLink="/events">Mein Profil</a>
+            <a routerLink="/profile">Mein Profil</a>
         </mz-sidenav-link>
 
         <div *ngIf="user.admin">
