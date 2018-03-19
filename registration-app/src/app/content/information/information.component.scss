@@ -42,36 +42,42 @@
     }
 }
 
-.welcome {
-    margin-bottom: 40px;
-
-    .link {
-        margin-top: 30px;
-    
-        a {
-            color: #000; 
-            text-decoration: underline;
-        }
-    }
-}
-
-.sponsor {
+.team {
     margin-top: 20px;
 
-    .image {
-        height: 200px;
+    .header {
+        margin-bottom: 40px;
+    }
 
-        .center {
-            width: 100%;
+    .member {
+        margin-top: 10px;
 
+        img {
+            width: 60%;
+        }
+        
+        .text {
+            width: 60%;
+            margin: auto;
+
+            span {
+                display: block;
+            }
+        }
+        
+        @media only screen and (max-width: 992px) {
+            
             img {
                 width: 100%;
             }
-    
-            img.vw {
-                width: 50%;
+
+            .text {
+                width: 100%;
             }
         }
     }
 }
 
+.contact {
+    margin-top: 40px;
+}

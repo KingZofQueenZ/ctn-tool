@@ -7,7 +7,7 @@
             <ul class="right light hide-on-med-and-down">
                 <li><a routerLink="/home" routerLinkActive="selected">Home</a></li>
                 <li><a routerLink="/news" routerLinkActive="selected">News</a></li>
-                <li><a routerLink="/events">Information</a></li>
+                <li><a routerLink="/information" routerLinkActive="selected">Information</a></li>
                 <li><a routerLink="/events" routerLinkActive="selected">Termine</a></li>
                 <li *ngIf="user?.admin"><a routerLink="/admin" routerLinkActive="selected">Admin</a></li>
                 <li *ngIf="user"><a id="login-toggle" routerLink="/profile" routerLinkActive="selected">{{user?.firstname + ' ' + user?.lastname}}<i class="material-icons right login">person</i></a></li>

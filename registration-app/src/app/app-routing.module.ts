@@ -17,11 +17,13 @@ import { CreateEventComponent } from './admin/create-event/create-event.componen
 import { EditEventComponent } from './admin/edit-event/edit-event.component';
 import { DeleteEventComponent } from './admin/delete-event/delete-event.component';
 import { ProfileComponent } from './user/profile/profile.component';
+import { InformationComponent } from './content/information/information.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
+  { path: 'information', component: InformationComponent },
   { path: 'reset', component: ResetComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'news', component: NewsOverviewComponent},
