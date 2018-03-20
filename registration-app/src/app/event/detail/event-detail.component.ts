@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewChecked } from '@angular/core';
+import { Component, Input, Pipe, PipeTransform, AfterViewChecked, ViewEncapsulation } from '@angular/core';
 import { MzTooltipModule, MzButtonModule } from 'ng2-materialize';
 import { Event } from '../../models/event';
 import { User } from '../../models/user';
@@ -6,11 +6,20 @@ import { EventService } from '../../services/event.service';
 import * as moment from 'moment';
 import { ActivatedRoute } from '@angular/router';
 import { ToasterService } from 'angular2-toaster';
+import { DomSanitizer } from '@angular/platform-browser';
 
+@Pipe({ name: 'safeHtml'})
+export class SafeHtmlPipe implements PipeTransform  {
+  constructor(private sanitized: DomSanitizer) {}
+  transform(value) {
+    return this.sanitized.bypassSecurityTrustHtml(value);
+  }
+}
 @Component({
   selector: 'app-event-detail',
   templateUrl: './event-detail.component.html',
-  styleUrls: ['./event-detail.component.scss']
+  styleUrls: ['./event-detail.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class EventDetailComponent {
   model: any = {};
@@ -43,7 +52,6 @@ export class EventDetailComponent {
       this.can_unregister = this.canUnregister();
       this.getTrialWorkouts();
       this.is_full = this.full();
-      console.log('Full', this.is_full);
     });
   }
 

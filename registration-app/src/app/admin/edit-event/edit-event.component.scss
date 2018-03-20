@@ -23,3 +23,46 @@
     }
 }
 
+.anmeldungen {
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    .collection-item {
+        position: relative;
+        height: 55px;
+
+        .title {
+            font-size: 18px;
+            display: block !important;
+            margin-bottom: 0;
+        }
+
+        .phone {
+            font-size: 18px;
+            margin-left: 5px;
+        }
+
+        .icon-container {    
+            position: absolute;
+            right: 20px;
+            top: 16px;
+            
+            a {
+                margin-left: 5px;
+                cursor: pointer;
+
+                i {
+                    user-select: none;
+                    -moz-user-select: none;
+                    -khtml-user-select: none;
+                    -webkit-user-select: none;
+                    -o-user-select: none;
+                }
+            }
+        }
+    }
+}
+
+.aftereditor {
+    margin-top: 40px;
+}

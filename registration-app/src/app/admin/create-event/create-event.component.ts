@@ -55,7 +55,9 @@ export class CreateEventComponent {
     interval: 150
   };
 
-  constructor(private eventService: EventService, private location: Location, private toasterService: ToasterService) { }
+  constructor(private eventService: EventService, private location: Location, private toasterService: ToasterService) { 
+    moment.locale('de');
+  }
 
   create() {
     if (!this.repeat_date) {
@@ -110,16 +112,16 @@ export class CreateEventComponent {
   private getDates() {
     const dateArray = new Array();
     const repeatDays = this.getRepeatDays();
-    let date = moment.utc(this.event.date);
+    let date = moment(this.event.date);
 
-    while (!moment.utc(date).isAfter(moment.utc(this.repeat_date))) {
+    while (!moment(date).isAfter(moment(this.repeat_date))) {
       repeatDays.forEach(weekday => {
-        if (moment.utc(date).isoWeekday() <= weekday
-            && !moment.utc(date).isoWeekday(weekday).isAfter(moment.utc(this.repeat_date))) {
-          dateArray.push(moment.utc(date).isoWeekday(weekday));
+        if (moment(date).isoWeekday() <= weekday
+            && !moment(date).isoWeekday(weekday).isAfter(moment(this.repeat_date))) {
+          dateArray.push(moment(date).isoWeekday(weekday));
         }
       });
-      date = moment.utc(date).add(1, 'weeks').startOf('isoWeek');
+      date = moment(date).add(1, 'weeks').startOf('isoWeek');
     }
     return dateArray;
   }

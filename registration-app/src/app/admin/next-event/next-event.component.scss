@@ -30,6 +30,18 @@
         margin-top: -15px;
         .collection-item {
             height: 40px;
+            
+            img {
+                top: 7px;
+            }
+        }
+
+        .secondary-content i {
+            user-select: none;
+            -moz-user-select: none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            -o-user-select: none;
         }
     }
 }

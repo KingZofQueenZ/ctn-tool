@@ -1,11 +1,13 @@
 import { Component, Input, OnInit} from '@angular/core';
 import { Event } from '../../models/event';
-import { MzInputModule, MzTextareaModule, MzDatepickerModule, MzTimepickerModule, MzCheckboxModule } from 'ng2-materialize';
+import { MzInputModule, MzTextareaModule, MzDatepickerModule, MzTimepickerModule, MzCheckboxModule, MzTooltipModule } from 'ng2-materialize';
 import { EventService } from '../../services/event.service';
 import * as moment from 'moment';
 import { ActivatedRoute } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { Location } from '@angular/common';
 import { ToasterService } from 'angular2-toaster';
+import { CKEditorModule } from 'ng2-ckeditor';
 
 @Component({
   selector: 'app-edit-event',
@@ -20,6 +22,18 @@ export class EditEventComponent implements OnInit {
   time_abmeldefrist: string;
   time_from: string;
   time_to: string;
+  ckeConfig = {
+    toolbar: [
+			{ name: 'clipboard', items: [ 'Undo', 'Redo' ] },
+			{ name: 'styles', items: [ 'Styles', 'Format' ] },
+			{ name: 'basicstyles', items: [ 'Bold', 'Italic', 'Strike', '-', 'RemoveFormat' ] },
+			{ name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote' ] },
+			{ name: 'links', items: [ 'Link', 'Unlink' ] },
+			{ name: 'insert', items: [ 'Image', 'EmbedSemantic', 'Table' ] },
+			{ name: 'tools', items: [ 'Maximize' ] }
+    ],
+    removeDialogTabs: 'image:advanced;link:advanced',
+  };
 
   public optionsDate: Pickadate.DateOptions = {
     format: 'dddd, dd mmm. yyyy',
@@ -56,6 +70,7 @@ export class EditEventComponent implements OnInit {
         this.event = event;
         this.time_from = moment(this.event.date).format('HH:mm');
         this.event.date = moment(this.event.date).format('YYYY-MM-DD');
+        this.getTrialWorkouts();
 
         if (event.time_to) { this.time_to = moment(this.event.time_to).format('HH:mm'); }
         if (event.sign_in) { this.datum_anmeldefrist = moment(this.event.sign_in).format('YYYY-MM-DD'); }
@@ -86,6 +101,8 @@ export class EditEventComponent implements OnInit {
       event.sign_out = moment(this.datum_abmeldefrist + 'T' + this.time_abmeldefrist).toDate();
     }
 
+    console.log(event.description);
+
     this.eventService.update(event).subscribe(
       result => {
         this.toasterService.pop('success', 'Editieren erfolgreich', 'Der Termin wurde erfolgreich gespeichert.');
@@ -99,5 +116,24 @@ export class EditEventComponent implements OnInit {
 
   goBack(): void {
     this.location.back();
+  }
+
+  removeUser(participant: any) {
+    this.eventService.deleteParticipant(this.event._id, participant._id).subscribe(
+      result => {
+        this.event.participant_ids.splice(this.event.participant_ids.indexOf(participant._id), 1);
+        this.toasterService.pop('success', 'Abmeldung erfolgreich', 'Der User wurde erfolgreich von '
+                                  + this.event.name + ' entfernt');
+      },
+      error => {
+        this.toasterService.pop('error', 'Fehler', 'Der User konnte nicht entfernt werden!');
+      }
+    );
+  }
+
+  private getTrialWorkouts() {
+    this.event.trial_workouts.forEach(element => {
+      this.event.participant_ids.push({ _id: element._id, firstname: element.firstname, lastname: element.lastname, phone: element.phone, trial: true});
+    });
   }
 }

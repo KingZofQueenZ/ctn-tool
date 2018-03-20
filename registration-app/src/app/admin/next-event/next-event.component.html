@@ -8,14 +8,18 @@
     <div class="col s12 l6 registrations">
       <ul class="collection" >
         <li class="collection-item" *ngFor="let participant of event.participant_ids | slice:0:(event.participant_ids.length/2).toFixed()">
-          {{participant.firstname + ' ' + participant.lastname}}
+          <span>{{participant.firstname + ' ' + participant.lastname}}</span>
+          <span *ngIf="participant.trial" class="grey-text text-darken-1 light phone"><i>{{participant.phone}}</i></span>
+          <div *ngIf="participant.trial" class="secondary-content"><i class="material-icons" data-tooltip="Anmeldung zum Probetraining" mz-tooltip [tooltip]="'Anmeldung zum Probetraining'">fitness_center</i></div>
         </li>
       </ul>
     </div>
     <div class="col s12 l6 registrations" *ngIf="event.participant_ids.length > 1">
       <ul class="collection" >
         <li class="collection-item" *ngFor="let participant of event.participant_ids | slice:(event.participant_ids.length/2).toFixed():(event.participant_ids.length)">
-            {{participant.firstname + ' ' + participant.lastname}}
+            <span>{{participant.firstname + ' ' + participant.lastname}}</span>
+            <span *ngIf="participant.trial" class="grey-text text-darken-1 light phone"><i>{{participant.phone}}</i></span>
+            <div *ngIf="participant.trial" class="secondary-content"><i class="material-icons" data-tooltip="Anmeldung zum Probetraining" mz-tooltip [tooltip]="'Anmeldung zum Probetraining'">fitness_center</i></div>
         </li>
       </ul>
     </div>

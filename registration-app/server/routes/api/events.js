@@ -47,7 +47,7 @@ router.get('/', (request, response) => {
   const page = request.query.page || 1;
   const amount = Number(request.query.amount) || 20;
 
-  Event.find({"date": {"$gte": moment().format()}})
+  Event.find({"date": {"$gte": moment().subtract(1, 'hours').format()}})
     .populate('participant_ids', 'firstname lastname')
     .sort('date')
     .skip(amount * (page - 1))
@@ -186,13 +186,9 @@ router.delete('/:event_id/participants/:user_id', VerifyToken.verifyUser, (reque
       }
 
       var indexToDelete = document.participant_ids.indexOf(request.params.user_id);
-      if(indexToDelete !== -1) {
+      if(indexToDelete !== -1) 
         document.participant_ids.splice(indexToDelete, 1);
-      } else {
-        response.status(405).send('User not registered for this Event!');
-        return;
-      }
-
+      
       var trialWorkoutToDelete = document.trial_workouts.id(request.params.user_id);
       if(trialWorkoutToDelete)
         trialWorkoutToDelete.remove();

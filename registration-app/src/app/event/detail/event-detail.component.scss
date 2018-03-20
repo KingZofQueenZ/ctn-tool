@@ -31,18 +31,35 @@
         font-size: 18px;    
         display: block;
     }
+
+
+    .description {
+        ul {
+            padding-left: 40px !important;
+            list-style-type: initial !important;
+        }
+
+        li {
+            list-style-type: initial !important;
+        }
+    }
     
     .anmeldungen {
-        margin-top:20px;
+        margin-top: 20px;
         margin-bottom: 30px;
 
-        .collection .collection-item.avatar {
-            min-height: 55px;
-    
-            img {
-                top: 7px;
+        .collection {
+            margin-top: 20px;
+
+            .collection-item.avatar {
+                min-height: 55px;
+        
+                img {
+                    top: 7px;
+                }
             }
         }
+        
 
         .secondary-content i {
             user-select: none;
@@ -78,9 +95,9 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-  
+
     h1 {
-      margin-top: 0px;
-      padding-top: 125px;
+        margin-top: 0px;
+        padding-top: 125px;
     }
-  }
+}

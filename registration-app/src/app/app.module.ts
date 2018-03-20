@@ -35,6 +35,8 @@ import { NewsOverviewComponent } from './news/news-overview/news-overview.compon
 import { DeleteEventComponent } from './admin/delete-event/delete-event.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { InformationComponent } from './content/information/information.component';
+import { CKEditorModule } from 'ng2-ckeditor';
+import { SafeHtmlPipePipe } from './shared/safe-html-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,8 @@ import { InformationComponent } from './content/information/information.componen
     NewsOverviewComponent,
     DeleteEventComponent,
     ProfileComponent,
-    InformationComponent
+    InformationComponent,
+    SafeHtmlPipePipe
   ],
   imports: [
     BrowserModule,
@@ -67,7 +70,8 @@ import { InformationComponent } from './content/information/information.componen
     BrowserAnimationsModule,
     ToasterModule,
     InfiniteScrollModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CKEditorModule
   ],
   providers: [
     {

@@ -22,9 +22,9 @@
       <a *ngIf="is_registered && !can_unregister" class="btn center grey not-allowed" mz-tooltip [tooltip]="'Du kannst dich von diesem Event nicht mehr abmelden!'">Abmelden</a>
     </div>
 
-    <div class="col s12 details" *ngIf="event.description">
+    <div class="col s12 description" *ngIf="event.description">
       <h5 class="light">Details</h5>  
-      <div class="flow-text">{{event.description}}</div>
+      <div class="flow-text" [innerHTML]="event.description | safeHtml"></div>
     </div>
 
     <!-- Only show if user is logged in -->
