@@ -98,7 +98,7 @@ export class EventListItemComponent implements OnInit {
     this.lockIcon = true;
     this.eventService.deleteParticipant(this.event._id, this.user._id).subscribe(
       result => {
-        this.event.participant_ids.splice(this.event.participant_ids.indexOf(this.user._id), 1);
+        this.event.participant_ids.splice(this.event.participant_ids.findIndex(x => x._id === this.user._id), 1);
         this.updateUser();
         this.updateEvent();
         this.toasterService.pop('success', 'Abmeldung erfolgreich', 'Du wurdest erfolgreich für '

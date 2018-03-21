@@ -16,7 +16,6 @@ Event.exec = function(callback) {
   });
 };
 
-
 // Create events
 router.post('/', VerifyToken.verifyAdmin, (request, response) => {
   var body = request.body;
@@ -90,9 +89,9 @@ router.put('/:event_id', VerifyToken.verifyAdmin, (request, response) => {
         document.max_participants = body.max_participants || document.max_participants;
         document.date = body.date || document.date;
         document.time_from = body.time_from || document.time_from;
-        document.time_to = body.time_to || document.time_to;
-        document.sign_in = body.sign_in || document.sign_in;
-        document.sign_out = body.sign_out || document.sign_out;
+        document.time_to = body.time_to;
+        document.sign_in = body.sign_in;
+        document.sign_out = body.sign_out;
         document.allow_trials = body.allow_trials || document.allow_trials;
 
         return document.save((error, document) => {
@@ -205,4 +204,3 @@ router.delete('/:event_id/participants/:user_id', VerifyToken.verifyUser, (reque
 });
 
 module.exports = router;
-

@@ -207,3 +207,15 @@ blockquote {
 .footer-copyright {
     height: 70px;
 }
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top-width: 0px;
+    border-top-style: none;
+    border-top-color: currentcolor;
+    border-top: 1px solid #e0e0e0;
+    margin: 1em 0;
+    padding: 0;
+}

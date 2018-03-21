@@ -1,4 +1,4 @@
-import { Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Event } from '../../models/event';
 import { MzInputModule, MzTextareaModule, MzDatepickerModule, MzTimepickerModule, MzCheckboxModule, MzTooltipModule } from 'ng2-materialize';
 import { EventService } from '../../services/event.service';
@@ -24,15 +24,19 @@ export class EditEventComponent implements OnInit {
   time_to: string;
   ckeConfig = {
     toolbar: [
+      { name: 'document', items: [ 'Source' ] },
 			{ name: 'clipboard', items: [ 'Undo', 'Redo' ] },
-			{ name: 'styles', items: [ 'Styles', 'Format' ] },
-			{ name: 'basicstyles', items: [ 'Bold', 'Italic', 'Strike', '-', 'RemoveFormat' ] },
-			{ name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote' ] },
+			{ name: 'styles', items: [ 'Format', 'FontSize' ] },
+      { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
+			{ name: 'basicstyles', items: [ 'Bold', 'Italic', 'Strike', '-', 'CopyFormatting' ] },
+			{ name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'Blockquote' ] },
 			{ name: 'links', items: [ 'Link', 'Unlink' ] },
-			{ name: 'insert', items: [ 'Image', 'EmbedSemantic', 'Table' ] },
+			{ name: 'insert', items: [ 'Image', 'EmbedSemantic', 'Table', 'HorizontalRule', 'Smiley' ] },
 			{ name: 'tools', items: [ 'Maximize' ] }
     ],
     removeDialogTabs: 'image:advanced;link:advanced',
+    extraPlugins: 'divarea',
+    height: 350
   };
 
   public optionsDate: Pickadate.DateOptions = {
@@ -91,17 +95,21 @@ export class EditEventComponent implements OnInit {
 
     if (this.time_to) {
       event.time_to = moment(this.event.date + 'T' + this.time_to).toDate();
+    } else {
+      event.time_to = undefined;
     }
 
     if (this.datum_anmeldefrist && this.time_anmeldefrist) {
       event.sign_in = moment(this.datum_anmeldefrist + 'T' + this.time_anmeldefrist).toDate();
+    } else {
+      event.sign_in = undefined;
     }
 
     if (this.datum_abmeldefrist && this.time_abmeldefrist) {
       event.sign_out = moment(this.datum_abmeldefrist + 'T' + this.time_abmeldefrist).toDate();
+    } else {
+      event.sign_out = undefined;
     }
-
-    console.log(event.description);
 
     this.eventService.update(event).subscribe(
       result => {
@@ -121,9 +129,8 @@ export class EditEventComponent implements OnInit {
   removeUser(participant: any) {
     this.eventService.deleteParticipant(this.event._id, participant._id).subscribe(
       result => {
-        this.event.participant_ids.splice(this.event.participant_ids.indexOf(participant._id), 1);
-        this.toasterService.pop('success', 'Abmeldung erfolgreich', 'Der User wurde erfolgreich von '
-                                  + this.event.name + ' entfernt');
+        this.event.participant_ids.splice(this.event.participant_ids.findIndex(x => x._id === participant._id), 1);
+        this.toasterService.pop('success', 'Abmeldung erfolgreich', 'Der User wurde erfolgreich von ' + this.event.name + ' entfernt');
       },
       error => {
         this.toasterService.pop('error', 'Fehler', 'Der User konnte nicht entfernt werden!');

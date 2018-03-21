@@ -36,7 +36,8 @@ import { DeleteEventComponent } from './admin/delete-event/delete-event.componen
 import { ProfileComponent } from './user/profile/profile.component';
 import { InformationComponent } from './content/information/information.component';
 import { CKEditorModule } from 'ng2-ckeditor';
-import { SafeHtmlPipePipe } from './shared/safe-html-pipe.pipe';
+import { SafeHtmlPipe } from './shared/safe-html-pipe.pipe';
+import { ChangepasswordComponent } from './user/changepassword/changepassword.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { SafeHtmlPipePipe } from './shared/safe-html-pipe.pipe';
     DeleteEventComponent,
     ProfileComponent,
     InformationComponent,
-    SafeHtmlPipePipe
+    SafeHtmlPipe,
+    ChangepasswordComponent
   ],
   imports: [
     BrowserModule,

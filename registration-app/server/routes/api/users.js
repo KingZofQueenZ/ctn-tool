@@ -137,7 +137,39 @@ router.put('/reset', (request, response) => {
         response.status(200).send({reset: true});
       });
     });
+});
 
+router.put('/changepassword', (request, response) => {
+  console.log(request.body.email, request.body.password, request.body.newpassword)
+  User.findOne({email: request.body.email})
+    .exec((error, document) => {
+      if(error) {
+        response.status(500).send(error);
+        return;
+      }
+      
+      if(!document) {
+        response.status(404).send('User not found, email: ' +  request.body.email);
+        return;
+      }
+      
+      if(!bcrypt.compareSync(request.body.password, document.password)) {
+        response.status(500).send('Old password is wrong');
+        return;
+      }
+
+      const newPW = request.body.newpassword
+
+      document.password = newPW;
+      document.save((error, document) => {
+        if(error) {
+          response.status(500).send(error);
+          return;
+        }
+
+        response.status(200).send();
+      });
+    });
 });
 
 // Secured Routes --------------------

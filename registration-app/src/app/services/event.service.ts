@@ -61,8 +61,7 @@ export class EventService {
 
   // DELETE /events/{event-id}/participants/{participant-id}
   deleteParticipant(eventId: string, userId: string): Observable<Event> {
-    return this.http.delete<Event>('/api/events/' + eventId + '/participants/' + userId + '/',
-      {headers: headers, responseType: 'text' as 'json'});
+    return this.http.delete<Event>('/api/events/' + eventId + '/participants/' + userId + '/', {headers: headers, responseType: 'text' as 'json'});
   }
 
 }

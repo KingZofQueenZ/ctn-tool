@@ -48,4 +48,9 @@ export class UserService {
   reset(model: any): Observable<any> {
     return this.http.put('/api/users/reset', model, {headers: headers, responseType: 'text' as 'json'});
   }
+
+  // PUT /users/resetchangepassword
+  changepassword(model: any): Observable<any> {
+    return this.http.put('/api/users/changepassword', model, {headers: headers, responseType: 'text' as 'json'});
+  }
 }

@@ -32,6 +32,10 @@
         display: block;
     }
 
+    .title {
+        margin-top: 20px;
+    }
+
 
     .description {
         ul {
@@ -47,6 +51,19 @@
     .anmeldungen {
         margin-top: 20px;
         margin-bottom: 30px;
+
+        h5 {
+            display: inline;
+        }
+
+        .participantcount {
+           margin-left: 10px; 
+        }
+
+        .noregistrations {
+            display: inline-block;
+            margin-top: 20px;
+        }
 
         .collection {
             margin-top: 20px;

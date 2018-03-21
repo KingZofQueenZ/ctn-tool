@@ -5,6 +5,7 @@ import { EventService } from '../../services/event.service';
 import * as moment from 'moment';
 import { Location } from '@angular/common';
 import { ToasterService } from 'angular2-toaster';
+import { CKEditorModule } from 'ng2-ckeditor';
 
 @Component({
   selector: 'app-create-event',
@@ -26,6 +27,22 @@ export class CreateEventComponent {
   datum_abmeldefrist: string;
   time_abmeldefrist: string;
   time_from: string;
+  ckeConfig = {
+    toolbar: [
+      { name: 'document', items: [ 'Source' ] },
+			{ name: 'clipboard', items: [ 'Undo', 'Redo' ] },
+			{ name: 'styles', items: [ 'Format', 'FontSize' ] },
+      { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
+			{ name: 'basicstyles', items: [ 'Bold', 'Italic', 'Strike', '-', 'CopyFormatting' ] },
+			{ name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'Blockquote' ] },
+			{ name: 'links', items: [ 'Link', 'Unlink' ] },
+			{ name: 'insert', items: [ 'Image', 'EmbedSemantic', 'Table', 'HorizontalRule', 'Smiley' ] },
+			{ name: 'tools', items: [ 'Maximize' ] }
+    ],
+    removeDialogTabs: 'image:advanced;link:advanced',
+    extraPlugins: 'divarea',
+    height: 350
+  };
 
   public optionsDate: Pickadate.DateOptions = {
     format: 'dddd, dd mmm. yyyy',

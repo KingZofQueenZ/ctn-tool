@@ -6,15 +6,8 @@ import { EventService } from '../../services/event.service';
 import * as moment from 'moment';
 import { ActivatedRoute } from '@angular/router';
 import { ToasterService } from 'angular2-toaster';
-import { DomSanitizer } from '@angular/platform-browser';
+import { SafeHtmlPipe } from '../../shared/safe-html-pipe.pipe';
 
-@Pipe({ name: 'safeHtml'})
-export class SafeHtmlPipe implements PipeTransform  {
-  constructor(private sanitized: DomSanitizer) {}
-  transform(value) {
-    return this.sanitized.bypassSecurityTrustHtml(value);
-  }
-}
 @Component({
   selector: 'app-event-detail',
   templateUrl: './event-detail.component.html',
@@ -33,6 +26,7 @@ export class EventDetailComponent {
   date_string_anmeldung: string;
   date_string_abmeldung: string;
   trial_success: Boolean = false;
+  participant_string: string;
 
   constructor(private route: ActivatedRoute, private eventService: EventService, private toasterService: ToasterService) {
     moment.locale('de');
@@ -52,6 +46,7 @@ export class EventDetailComponent {
       this.can_unregister = this.canUnregister();
       this.getTrialWorkouts();
       this.is_full = this.full();
+      this.participant_string = this.participantCount();
     });
   }
 
@@ -114,6 +109,7 @@ export class EventDetailComponent {
   private updateUser() {
     this.is_registered = this.registered();
     this.is_full = this.full();
+    this.participant_string = this.participantCount();
   }
 
   private canRegister() {
@@ -157,5 +153,13 @@ export class EventDetailComponent {
 
   private full() {
     return (this.event.max_participants && this.event.participant_ids.length >= this.event.max_participants);
+  }
+
+  private participantCount() {
+    if (this.event.max_participants) {
+      return this.event.participant_ids.length + '/' + this.event.max_participants;
+    } else {
+      return this.event.participant_ids.length;
+    }
   }
 }

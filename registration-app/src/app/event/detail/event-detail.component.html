@@ -22,7 +22,7 @@
       <a *ngIf="is_registered && !can_unregister" class="btn center grey not-allowed" mz-tooltip [tooltip]="'Du kannst dich von diesem Event nicht mehr abmelden!'">Abmelden</a>
     </div>
 
-    <div class="col s12 description" *ngIf="event.description">
+    <div class="col s12 description title" *ngIf="event.description">
       <h5 class="light">Details</h5>  
       <div class="flow-text" [innerHTML]="event.description | safeHtml"></div>
     </div>
@@ -31,6 +31,7 @@
     <div *ngIf="user">
       <div class="col s12 anmeldungen flow-text">
         <h5 class="light">Anmeldungen</h5> 
+        <span class="participantcount grey-text text-darken-1 light">{{participant_string}} Anmeldungen</span>
         <ul class="collection" *ngIf="event.participant_ids.length" >
           <li class="collection-item avatar valign-wrapper" *ngFor="let participant of event.participant_ids">
             <img src="../../../assets/img/user.png" height="42" width="42" alt="" class="circle">
@@ -39,7 +40,7 @@
           </li>
         </ul>
         <div *ngIf="!event.participant_ids.length">
-          <span class="flow-text"><i>Es gibt noch keine Anmeldungen. Sei der Erste!</i></span>
+          <span class="noregistrations flow-text"><i>Es gibt noch keine Anmeldungen. Sei der Erste!</i></span>
         </div>
       </div>
     </div>

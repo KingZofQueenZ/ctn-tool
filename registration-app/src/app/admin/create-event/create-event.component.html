@@ -14,12 +14,17 @@
       <mz-input-container class="col s12 l2">
         <input mz-input [label]="'Teilnehmer'" id="max_participants" name="max_participants" type="number" [(ngModel)]="event.max_participants">
       </mz-input-container> 
-      <mz-textarea-container class="col s12">
-        <textarea mz-textarea [label]="'Beschreibung'" id="description" name="description" [(ngModel)]="event.description"></textarea>
-      </mz-textarea-container>
     </div>
 
     <div class="divider"></div>
+
+    <div class="row">
+      <div class="col s12 subtitle">Beschreibung</div>
+    </div>
+
+    <ckeditor class="ckeditor" [config]="ckeConfig" [(ngModel)]="event.description" debounce="500" name="description"></ckeditor>
+
+    <div class="divider aftereditor"></div>
 
     <div class="row">
       <div class="col s12 subtitle">Datum</div>
