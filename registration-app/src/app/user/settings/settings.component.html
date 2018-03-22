@@ -19,7 +19,7 @@
           <input mz-input [label]="'Telefon'" id="phone" name="phone" type="text" [(ngModel)]="user.phone" required>
         </mz-input-container>
 
-        <div class="col s12 center-on-mobile update-button">
+        <div class="col s12 center-on-mobile button update-button">
           <button class="btn" [class.disabled]="!settingsForm.form.valid" type="submit" name="action">Speichern</button>
           <a class="btn waves-effect waves-light red" (click)="goBack()">Abbrechen</a>
         </div>
