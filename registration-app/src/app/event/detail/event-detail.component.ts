@@ -79,14 +79,12 @@ export class EventDetailComponent {
                                   + this.event.name + ', am ' + this.date_string + ' angemeldet');
       },
       error => {
-        console.log(error);
         this.toasterService.pop('error', 'Fehler', 'Es ist ein Fehler aufgetreten.');
       }
     );
   }
 
   private deleteParticipant() {
-    console.log(this.event.participant_ids);
     this.eventService.deleteParticipant(this.event._id, this.user._id).subscribe(
       result => {
         this.event.participant_ids.splice(this.event.participant_ids.findIndex(x => x._id === this.user._id), 1);

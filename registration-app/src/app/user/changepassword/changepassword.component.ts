@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { matchOtherValidator } from '../../shared/password.validation';
 import { ToasterService } from 'angular2-toaster';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { User } from '../../models/user';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-changepassword',
   templateUrl: './changepassword.component.html',
   styleUrls: ['./changepassword.component.scss']
 })
-export class ChangepasswordComponent implements OnInit {
+export class ChangepasswordComponent {
   user: User;
   passwordold: string;
   passwordnew: string;
@@ -23,7 +24,8 @@ export class ChangepasswordComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private fb: FormBuilder,
-    private toasterService: ToasterService) {
+    private toasterService: ToasterService,
+    private location: Location) {
       this.passwordForm = fb.group({
         'oldPassword': ['', Validators.required],
         'password': ['', Validators.required],
@@ -31,9 +33,6 @@ export class ChangepasswordComponent implements OnInit {
       });
       this.user = JSON.parse(localStorage.getItem('currentUser'));
      }
-
-  ngOnInit() {
-  }
 
   changePassword() {
     this.userService.changepassword({ email: this.user.email, password: this.passwordold, newpassword: this.passwordnew })
@@ -48,4 +47,7 @@ export class ChangepasswordComponent implements OnInit {
       );
   }
 
+  goBack(): void {
+    this.location.back();
+  }
 }

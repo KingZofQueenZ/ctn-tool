@@ -1,8 +1,8 @@
 <nav class="white" role="navigation">
     <div class="nav-wrapper container">
         <div class="nav-desktop">
-            <a id="logo-container" href="index.html" class="brand-logo">
-                <img src="../assets/img/logo.jpg" height="100" width="100">
+            <a id="logo-container" routerLink="/home" class="brand-logo">
+                <img src="../assets/img/logos/logo.jpg" height="100" width="100">
             </a>
             <ul class="right light hide-on-med-and-down">
                 <li><a routerLink="/home" routerLinkActive="selected">Home</a></li>
@@ -10,7 +10,7 @@
                 <li><a routerLink="/information" routerLinkActive="selected">Information</a></li>
                 <li><a routerLink="/events" routerLinkActive="selected">Termine</a></li>
                 <li *ngIf="user?.admin"><a routerLink="/admin" routerLinkActive="selected">Admin</a></li>
-                <li *ngIf="user"><a id="login-toggle" routerLink="/profile" routerLinkActive="selected">{{user?.firstname + ' ' + user?.lastname}}<i class="material-icons right login">person</i></a></li>
+                <li *ngIf="user"><a id="login-toggle" routerLink="/profile" routerLinkActive="selected">{{user.firstname + ' ' + user.lastname}}<i class="material-icons right login">person</i></a></li>
                 <li *ngIf="!user"><a id="login-toggle" routerLink="/login" routerLinkActive="selected">Login<i class="material-icons right login">person</i></a></li>
             </ul>
         </div>
@@ -21,7 +21,7 @@
 <mz-sidenav #sidenav [id]="'sidenav'" [collapseButtonId]="'btn-sidenav-demo'" [edge]="'left'" [closeOnClick]="true">
     <mz-sidenav-header *ngIf="user">
       <div class="user-view">
-        <img class="circle avatar" src="../assets/img/user-img.jpg">
+        <img class="circle avatar" src="../assets/img/user.png">
         <div class="white-text name">{{user?.firstname + ' ' + user?.lastname}}</div>
         <div class="white-text email">{{user?.email}}</div>
       </div>
@@ -36,7 +36,7 @@
     </mz-sidenav-link>
 
     <mz-sidenav-link>
-        <a routerLink="/events">Informationen</a>
+        <a routerLink="/information">Informationen</a>
     </mz-sidenav-link>
 
     <mz-sidenav-link>
@@ -80,9 +80,9 @@
           <span class="data"><a href="#" class="grey-text text-lighten-2">Datenschutz</a></span>       
           <span class="impressum"><a href="#" class="grey-text text-lighten-2">Impressum</a></span>
           <div class="icons right hide-on-small-only">
-            <img src="assets/img/twitter.png" height="25" width="25">
-            <img src="assets/img/facebook.png" height="25" width="25">
-            <img src="assets/img/instagram.png" height="25" width="25">
+            <img src="assets/img/social/twitter.png" height="25" width="25">
+            <img src="assets/img/social/facebook.png" height="25" width="25">
+            <img src="assets/img/social/instagram.png" height="25" width="25">
           </div>          
       </div>
     </div>

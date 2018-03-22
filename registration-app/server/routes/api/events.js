@@ -53,6 +53,9 @@ router.get('/', (request, response) => {
     .limit(amount)
     .exec()
     .then((documents) => {
+      response.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+      response.header('Expires', '-1');
+      response.header('Pragma', 'no-cache');
       response.status(200).json(documents);
     })
     .catch((error) => {
@@ -67,6 +70,9 @@ router.get('/:event_id', (request, response) => {
     .exec()
     .then((document) => {
       if(document) {
+        response.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+        response.header('Expires', '-1');
+        response.header('Pragma', 'no-cache');
         response.status(200).json(document)
       } else {
         response.status(404).send('Event not found, id: ' +  request.params.event_id);

@@ -34,6 +34,11 @@ export class UserService {
     return this.http.get<User>('/api/users/' + _id);
   }
 
+  // GET /:user_id/events
+  getUserEvents(_id: string): Observable<any> {
+    return this.http.get<User>('/api/users/' + _id + '/events');
+  }
+
   // PUT /users/{user-id}
   update(user: User): Observable<any> {
     return this.http.put('/api/users/' + user._id, user, {headers: headers, responseType: 'text' as 'json'});

@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const router = express.Router();
 const config = require('../../config/index');
 const randomstring = require("randomstring");
+const moment = require('moment');
 
 const VerifyToken = require('../../authentication/verifytoken');
 const User = require('../../models/user');
@@ -37,6 +38,7 @@ router.post('/authenticate', (request, response) => {
         email: user.email,
         firstname: user.firstname,
         lastname: user.lastname,
+        phone: user.phone,
         token: jwt.sign({ sub: user._id, admin: user.admin }, config.auth.secret, { expiresIn: '14d'}),
         admin: user.admin
       };  
@@ -140,7 +142,6 @@ router.put('/reset', (request, response) => {
 });
 
 router.put('/changepassword', (request, response) => {
-  console.log(request.body.email, request.body.password, request.body.newpassword)
   User.findOne({email: request.body.email})
     .exec((error, document) => {
       if(error) {
@@ -186,6 +187,9 @@ router.get('/', VerifyToken.verifyAdmin, (request, response) => {
         return;
       }
 
+      response.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+      response.header('Expires', '-1');
+      response.header('Pragma', 'no-cache');
       response.status(200).json(documents);
     });
 });
@@ -205,6 +209,9 @@ router.get('/:user_id', VerifyToken.verifyUser, (request, response) => {
         return;
       }
 
+      response.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+      response.header('Expires', '-1');
+      response.header('Pragma', 'no-cache');
       response.status(200).json(document);
     });
 });
@@ -260,19 +267,24 @@ router.delete('/:user_id', VerifyToken.verifyAdmin, (request, response) => {
 
 // Get upcoming all events for a user
 router.get('/:user_id/events', VerifyToken.verifyUser, (request, response) => {
-  console.log(new Date(Date.now()).toISOString());
-  Event.find({participant_ids: request.params.user_id, date: {"$gte": new Date(Date.now()).toISOString()}})
-      .select({ "_id": 0, "password": 0, "__v": 0, "allow_trials:": 0 })
-      .sort('date')
-      .populate('participant_ids', 'firstname lastname -_id')
-      .exec((error, document) => {
-        if(error) {
-          response.status(500).send(error);
-          return;
-        }
-
-        response.status(200).json(document);
-      });
+  const page = request.query.page || 1;
+  const amount = Number(request.query.amount) || 20;
+  
+  Event.find({participant_ids: request.params.user_id, date: {"$gte": moment().subtract(1, 'hours').format()}})
+    .populate('participant_ids', 'firstname lastname')
+    .sort('date')
+    .skip(amount * (page - 1))
+    .limit(amount)
+    .exec()
+    .then((documents) => {
+      response.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+      response.header('Expires', '-1');
+      response.header('Pragma', 'no-cache');
+      response.status(200).json(documents);
+    })
+    .catch((error) => {
+      response.status(500).send(error);
+    });
 });
 
 module.exports = router;

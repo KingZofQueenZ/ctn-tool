@@ -19,6 +19,7 @@ import { DeleteEventComponent } from './admin/delete-event/delete-event.componen
 import { ProfileComponent } from './user/profile/profile.component';
 import { InformationComponent } from './content/information/information.component';
 import { ChangepasswordComponent } from './user/changepassword/changepassword.component';
+import { SettingsComponent } from './user/settings/settings.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -38,7 +39,8 @@ const routes: Routes = [
   { path: 'admin-event-delete/:id', component: DeleteEventComponent, canActivate: [AuthGuard] },
   { path: 'admin-user', component: AdminUserOverviewComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
-  { path: 'password', component: ChangepasswordComponent, canActivate: [AuthGuard] }
+  { path: 'password', component: ChangepasswordComponent, canActivate: [AuthGuard] },
+  { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] }
 
 ];
 

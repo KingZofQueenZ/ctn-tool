@@ -26,6 +26,7 @@ export class AppComponent {
 
     storageService.storageSub.subscribe((key: string) => {
       this.getUser();
+      console.log('new User');
     });
   }
 

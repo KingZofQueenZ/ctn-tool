@@ -38,6 +38,7 @@ import { InformationComponent } from './content/information/information.componen
 import { CKEditorModule } from 'ng2-ckeditor';
 import { SafeHtmlPipe } from './shared/safe-html-pipe.pipe';
 import { ChangepasswordComponent } from './user/changepassword/changepassword.component';
+import { SettingsComponent } from './user/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { ChangepasswordComponent } from './user/changepassword/changepassword.co
     ProfileComponent,
     InformationComponent,
     SafeHtmlPipe,
-    ChangepasswordComponent
+    ChangepasswordComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

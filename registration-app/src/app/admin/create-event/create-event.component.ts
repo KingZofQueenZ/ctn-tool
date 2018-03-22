@@ -115,6 +115,7 @@ export class CreateEventComponent {
 
       this.eventService.create(event).subscribe(
         result => {
+          // TODO
           console.log('Successfull!: ' + result);
         },
         error => {

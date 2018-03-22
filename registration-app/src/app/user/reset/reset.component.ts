@@ -25,7 +25,6 @@ export class ResetComponent {
         },
         error => {
           this.hasError = true;
-          console.log(error);
         });
   }
 }
