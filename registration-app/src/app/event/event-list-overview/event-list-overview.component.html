@@ -8,9 +8,7 @@
 </div>
 
 <!-- Event Cards -->
-<div class="container events" *ngIf="dateArray.length" style="height:100%" infiniteScroll
-[infiniteScrollDistance]="0"
-(scrolled)="onScroll()">
+<div class="container events" *ngIf="dateArray.length" style="height:100%">
   <div class="row">
     <div class="col s12">
       <h3 class="header teal-text center-on-mobile">Die nächsten Workouts und Termine</h3>
@@ -20,11 +18,19 @@
     </div>
   </div>
   <div class="divider"></div>
-  <div class="row event-cards">
+  <div class="row event-cards" *ngIf="!noEvents">
     <div *ngFor="let event of events" >
       <div class="col s12 {{getWidth(event)}}">
           <app-event-list-item [event]="event"></app-event-list-item>
       </div>
+    </div>
+    <div class="col s12 center load" *ngIf="!allEvents && !loading">
+      <a (click)="load()" class="flow-text center">Weitere Termine laden...</a>
+    </div>
+    <div class="col s12 center spinner" *ngIf="loading">
+      <mz-spinner
+        [size]="'small'">
+      </mz-spinner>
     </div>
   </div>
 </div>

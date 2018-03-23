@@ -20,15 +20,19 @@ import { ProfileComponent } from './user/profile/profile.component';
 import { InformationComponent } from './content/information/information.component';
 import { ChangepasswordComponent } from './user/changepassword/changepassword.component';
 import { SettingsComponent } from './user/settings/settings.component';
+import { ContactComponent } from './content/contact/contact.component';
+import { ImpressumComponent } from './content/impressum/impressum.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'information', component: InformationComponent },
+  { path: 'contact', component: ContactComponent },
   { path: 'reset', component: ResetComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'news', component: NewsOverviewComponent},
+  { path: 'impressum', component: ImpressumComponent},
   { path: 'events', component: EventListOverviewComponent},
   { path: 'details/:id', component: EventDetailComponent },
   { path: 'activate/:code', component: ActivateComponent },

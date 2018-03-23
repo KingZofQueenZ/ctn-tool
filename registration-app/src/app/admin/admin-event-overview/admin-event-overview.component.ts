@@ -15,6 +15,9 @@ export class AdminEventOverviewComponent implements OnInit {
   dateString: string;
   noEvents: Boolean = false;
   events: Event[] = [];
+  page = 1;
+  loading: Boolean = false;
+  allEvents: Boolean = false;
 
   constructor(private eventService: EventService, private toasterService: ToasterService) {
     moment.locale('de');
@@ -36,21 +39,36 @@ export class AdminEventOverviewComponent implements OnInit {
   }
 
   private getEvents() {
-    this.eventService.getAll().subscribe(events => {
-      events.forEach((element) => {
-        this.events.push(element);
-        this.noEvents = false;
-      });
+    this.loading = true;
+    setTimeout(() => {
+      this.eventService.getAll(this.page).subscribe(events => {
+        events.forEach((element) => {
+          this.events.push(element);
+          this.noEvents = false;
+        });
 
-      if (!this.events.length) {
-        this.noEvents = true;
-      }
-    });
+        if (!this.events.length) {
+          this.noEvents = true;
+        }
+
+        if (events.length < 40) {
+          this.allEvents = true;
+        }
+
+        this.loading = false;
+      });
+    }, 500);
   }
 
   private refresh() {
     this.noEvents = true;
+    this.page = 1;
     this.events = [];
+    this.getEvents();
+  }
+
+  public load() {
+    this.page++;
     this.getEvents();
   }
 }

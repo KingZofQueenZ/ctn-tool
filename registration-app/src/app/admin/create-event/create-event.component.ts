@@ -107,11 +107,14 @@ export class CreateEventComponent {
     const event: Event = Object.assign({}, this.event);
     const dates = this.getDates();
 
+    const anmeldeDifference = moment(this.event.date).diff(moment(this.datum_anmeldefrist), 'days');
+    const abmeldeDifference = moment(this.event.date).diff(moment(this.datum_abmeldefrist), 'days');
+
     dates.forEach(date => {
       event.date = moment(date.format('YYYY-MM-DD') + 'T' + this.time_from).toDate();
       if (this.event.time_to) { event.time_to = moment(date.format('YYYY-MM-DD') + 'T' + this.event.time_to).toDate(); }
-      if (this.datum_anmeldefrist && this.time_anmeldefrist) { event.sign_in = moment(this.datum_anmeldefrist + 'T' + this.time_anmeldefrist).toDate(); }
-      if (this.datum_abmeldefrist && this.time_abmeldefrist) { event.sign_out = moment(this.datum_abmeldefrist + 'T' + this.time_abmeldefrist).toDate(); }
+      if (this.datum_anmeldefrist && this.time_anmeldefrist) { event.sign_in = moment(date.format('YYYY-MM-DD') + 'T' + this.time_anmeldefrist).subtract(anmeldeDifference, 'days').toDate(); }
+      if (this.datum_abmeldefrist && this.time_abmeldefrist) { event.sign_out = moment(date.format('YYYY-MM-DD') + 'T' + this.time_abmeldefrist).subtract(abmeldeDifference, 'days').toDate(); }
 
       this.eventService.create(event).subscribe(
         result => {

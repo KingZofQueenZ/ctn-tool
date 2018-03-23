@@ -9,6 +9,7 @@
                 <li><a routerLink="/news" routerLinkActive="selected">News</a></li>
                 <li><a routerLink="/information" routerLinkActive="selected">Information</a></li>
                 <li><a routerLink="/events" routerLinkActive="selected">Termine</a></li>
+                <li><a routerLink="/contact" routerLinkActive="selected">Kontakt</a></li>
                 <li *ngIf="user?.admin"><a routerLink="/admin" routerLinkActive="selected">Admin</a></li>
                 <li *ngIf="user"><a id="login-toggle" routerLink="/profile" routerLinkActive="selected">{{user.firstname + ' ' + user.lastname}}<i class="material-icons right login">person</i></a></li>
                 <li *ngIf="!user"><a id="login-toggle" routerLink="/login" routerLinkActive="selected">Login<i class="material-icons right login">person</i></a></li>
@@ -41,6 +42,10 @@
 
     <mz-sidenav-link>
         <a routerLink="/events">Termine</a>
+    </mz-sidenav-link>
+
+    <mz-sidenav-link>
+        <a routerLink="/contact">Kontakt</a>
     </mz-sidenav-link>
 
     <mz-sidenav-divider></mz-sidenav-divider>
@@ -77,8 +82,7 @@
     <div class="footer-copyright grey darken-4">
       <div class="container">
           <span class="copyright">&copy;2018 crossthenature</span>    
-          <span class="data"><a href="#" class="grey-text text-lighten-2">Datenschutz</a></span>       
-          <span class="impressum"><a href="#" class="grey-text text-lighten-2">Impressum</a></span>
+          <span class="data"><a routerLink="/impressum" class="grey-text text-lighten-2">Datenschutz / Impressum</a></span>   
           <div class="icons right hide-on-small-only">
             <img src="assets/img/social/twitter.png" height="25" width="25">
             <img src="assets/img/social/facebook.png" height="25" width="25">

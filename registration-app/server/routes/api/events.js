@@ -44,7 +44,7 @@ router.post('/', VerifyToken.verifyAdmin, (request, response) => {
 // Get all events 
 router.get('/', (request, response) => {
   const page = request.query.page || 1;
-  const amount = Number(request.query.amount) || 20;
+  const amount = Number(request.query.amount) || 40;
 
   Event.find({"date": {"$gte": moment().subtract(1, 'hours').format()}})
     .populate('participant_ids', 'firstname lastname')

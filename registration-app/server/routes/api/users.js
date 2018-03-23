@@ -173,6 +173,28 @@ router.put('/changepassword', (request, response) => {
     });
 });
 
+// Contact Form ----------------------
+// -----------------------------------
+
+// Send Contact Form
+router.post('/contact', (request, response) => {
+  var body = request.body;
+
+  var locals = {
+    email: body.email,
+    name: body.name,
+    message: body.message,
+    emailTo: 'timothy.gediga@outlook.com',
+    subject: 'CTN - Kontaktformular ausgefüllt'
+  };
+
+  if(mailer.sendContactForm(locals)){
+    response.status(200).send('Mail sent');
+  } else {
+    response.status(500).send('Mail not sent');
+  }
+});
+
 // Secured Routes --------------------
 // -----------------------------------
 

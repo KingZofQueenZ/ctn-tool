@@ -21,6 +21,14 @@
         </li>
       </ul>
     </div>
+    <div class="col s12 center load" *ngIf="!allEvents && !noEvents && !loading">
+      <a (click)="load()" class="flow-text center">Weitere Termine laden...</a>
+    </div>
+    <div class="col s12 center spinner" *ngIf="events.length && loading">
+      <mz-spinner
+        [size]="'small'">
+      </mz-spinner>
+    </div>
   </div>
 </div>
 

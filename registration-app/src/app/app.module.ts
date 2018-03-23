@@ -21,7 +21,6 @@ import { StorageService } from './services/storage.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { CustomMaterializeModule } from './shared/materialize.module';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
 import { CreateEventComponent } from './admin/create-event/create-event.component';
 import { EditEventComponent } from './admin/edit-event/edit-event.component';
@@ -36,9 +35,12 @@ import { DeleteEventComponent } from './admin/delete-event/delete-event.componen
 import { ProfileComponent } from './user/profile/profile.component';
 import { InformationComponent } from './content/information/information.component';
 import { CKEditorModule } from 'ng2-ckeditor';
+import { ScrollEventModule } from 'ngx-scroll-event';
 import { SafeHtmlPipe } from './shared/safe-html-pipe.pipe';
 import { ChangepasswordComponent } from './user/changepassword/changepassword.component';
 import { SettingsComponent } from './user/settings/settings.component';
+import { ContactComponent } from './content/contact/contact.component';
+import { ImpressumComponent } from './content/impressum/impressum.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,9 @@ import { SettingsComponent } from './user/settings/settings.component';
     InformationComponent,
     SafeHtmlPipe,
     ChangepasswordComponent,
-    SettingsComponent
+    SettingsComponent,
+    ContactComponent,
+    ImpressumComponent
   ],
   imports: [
     BrowserModule,
@@ -73,9 +77,9 @@ import { SettingsComponent } from './user/settings/settings.component';
     CustomMaterializeModule,
     BrowserAnimationsModule,
     ToasterModule,
-    InfiniteScrollModule,
     ReactiveFormsModule,
-    CKEditorModule
+    CKEditorModule,
+    ScrollEventModule
   ],
   providers: [
     {

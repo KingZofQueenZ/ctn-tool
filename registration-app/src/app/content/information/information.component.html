@@ -1,86 +1,98 @@
 <div class="parallax-top hide-on-med-and-down">
     <div class="container">
-      <h1 class="header center teal-text">Informationen</h1>
-      <div class="row center">
-        <h5 class="header white-text col s12 light">&laquo;Today it hurts, tomorrow it works.&raquo;</h5>
-      </div>
-    </div>
-  </div>
-  
-  <div class="container welcome">
-    <div class="row">
-      <div class="col s12">
-        <h3 class="header teal-text center-on-mobile">Informationen</h3>
-      </div>
-      <div class="col s12 flow-text">
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur 
+        <h1 class="header center teal-text">Informationen</h1>
+        <div class="row center">
+            <h5 class="header white-text col s12 light">&laquo;Today it hurts, tomorrow it works.&raquo;</h5>
         </div>
     </div>
-  </div>
-    
-  <div class="parallax-probe center-on-mobile">
-    <div class="container">
-      <h4 class="header light white-text left center-on-mobile">Intressiert? Jetzt zum Probetraining anmelden!</h4>
-      <a [routerLink]="['/events']" [queryParams]="{probetraining:'true'}" class="btn">Zur Anmeldung</a>
-    </div>
-  </div>
+</div>
 
-  <div class="container team">
+<div class="container training">
     <div class="row">
-      <div class="col s12">
-        <h4 class="header teal-text center-on-mobile">Team</h4>
-      </div>
-      <div class="col s6 l3 member">
-        <div class="center">
-          <img src="../../../assets/img/team/Dani.png">
+        <div class="col s12">
+            <h3 class="header teal-text center-on-mobile">Trainings</h3>
         </div>
-        <div class="text flow-text">
-          <b>Dani</b>
-          <span>Gründer/Trainer</span>
-          <span>079 923 69 98</span>
-        </div>
-      </div>
-      <div class="col s6 l3 member">
-        <div class="center">
-          <img src="../../../assets/img/team/Cedi.png">
-        </div>
-        <div class="text flow-text">
-          <b>Cedi</b>
-          <span>Gründer/Trainer</span>
-          <span>079 923 69 98</span>
-        </div>
-      </div>
-      <div class="col s6 l3 member">
-        <div class="center">
-          <img src="../../../assets/img/team/Roman.png">
-        </div>
-        <div class="text flow-text">
-          <b>Roman</b>
-          <span>Trainer</span>
-          <span>079 923 69 98</span>
-        </div>
-      </div>
-      <div class="col s6 l3 member">
-        <div class="center">
-          <img src="../../../assets/img/team/Luca.png">
-        </div>
-        <div class="text flow-text">
-          <b>Luca</b>
-          <span>Trainer</span>
-          <span>079 923 69 98</span>
-        </div>
-      </div>
     </div>
-  </div>
-
-  <div class="container contact">
     <div class="row">
-      <div class="col s12">
-        <h4 class="header teal-text center-on-mobile">Kontaktiere uns</h4>
-      </div>
-
-      <div class="col s12 flow-text">
-        Bei Fragen und Anregungen kannst du dich gerne bei uns melden. Fülle dazu bitte das Kontaktformular aus oder rufe uns direkt unter <i>079 923 69 98</i> an!
-      </div>
+        <div class="col s12">
+            <h4 class="header teal-text center-on-mobile">WOD's</h4>
+            <p class="flow-text">WOD`s sind die wöchentlichen Trainings welche "for everybody" gestaltet sind. . Jeder kann auf seinem eigenen Leistungslevel, jedoch in der Gruppe, unsere Workouts absolvieren. Eine Stunde auspowern und den Kopf frei kriegen nach einem stressigen Arbeitstag. Gibt es etwas besseres?</p>
+            <h5 class="subtitle header">Trainingsfokus</h5>
+            <ul class="browser-default flow-text">
+                <li>Beweglichkeit</li>
+                <li>Technik</li>
+                <li>Ausdauer</li>
+                <li>Kraft</li>
+                <li>Schnellkraft</li>
+                <li>Koordination</li>
+            </ul>
+            <h5 class="subtitle header">Preise</h5>
+            <ul class="browser-default flow-text">
+                <li>Probetraining: gratis</li>
+                <li>Einzeltrainings: CHF 10.-</li>
+                <li>11er Abos: CHF 100.-</li>
+            </ul>
+        </div>
     </div>
+    <div class="divider"></div>
+    <div class="row">
+        <div class="col s12">
+            <h4 class="header teal-text center-on-mobile">Open Session</h4>
+            <p class="flow-text">Die Open Sessions werden für die etwas ambitionierteren Athleten angeboten. In diesen Session wird man so gut wie möglich auf die anstehenden Crossfit Opens vorbereitet. Gedacht ist, die Athleten welche sich das erste mal an einen Wettkampf trauen zu unterstützen. </p>
+            <h5 class="subtitle header">Trainingsfokus</h5>
+            <ul class="browser-default flow-text">
+                <li>Technik</li>
+                <li>Tipps & Tricks</li>
+                <li>Kraftaufbau</li>
+            </ul>
+            <h5 class="subtitle header">Preise</h5>
+            <p class="flow-text">Gleiche Preise wie WOD's</p>
+        </div>
+    </div>
+    <div class="divider"></div>
+    <div class="row">
+        <div class="col s12">
+            <h4 class="header teal-text center-on-mobile">Bootcamp</h4>
+            <p class="flow-text"> Das Bootcamp dient als sportliche Alternative im Bereich Teambuilding. Das wichtigste in einer Firma, Verein oder Gruppe ist es sich zu kennen, auf einander zu achten und zu helfen. Diese Aspekte können zu einer erfolgreicheren Performance verhelfen. Das Bootcamp hat militärische Hintergründe und zeigt den Teilnehmern in einer sportlichen Art und Weise auf, wie stark ein Team im Gegensatz zu einer Einzelleistung sein kann.  </p>
+            <h5 class="subtitle header">Trainingsfokus</h5>
+            <ul class="browser-default flow-text">
+                <li>Teambuilding</li>
+                <li>Eigenes Bedürfnis vs. Gruppenbedürfnis</li>
+                <li>Leistung im Team</li>
+            </ul>
+            <h5 class="subtitle header">Preise</h5>
+            <p class="flow-text">Die Preise für die Bootcamps werden optional auf die Bedürfnisse der Gruppe angepasst. Grundsätzlich kann mit 20 Fr. pro Person/h gerechnet werden.</p>
+        </div>
+    </div>
+</div>
+
+<div class="parallax-probe center-on-mobile">
+  <div class="container">
+    <h4 class="header light white-text left center-on-mobile">Intressiert? Jetzt zum Probetraining anmelden!</h4>
+    <a [routerLink]="['/events']" [queryParams]="{probetraining:'true'}" class="btn">Zur Anmeldung</a>
   </div>
+</div>
+
+<div class="container p2b">
+    <div class="row">
+        <div class="col s12">
+            <h3 class="header teal-text center-on-mobile">Place 2 Be</h3>
+        </div>
+        
+        <div class="col s12 l6 map center-on-mobile">
+            <h5 class="header teal-text center-on-mobile">Sommer WOD's</h5>
+            <p class="flow-text">FC Windisch</p>
+            <p class="flow-text">Mülligerstrasse</p>
+            <p class="flow-text">5210 Windisch</p>
+            <iframe width="100%" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJzVsvcdRqkEcR6xTB4k6tWAs&zoom=14&key=AIzaSyDxP6JRPDP67-V7yRx2l1SdV4xMJJG07oA" allowfullscreen></iframe>
+        </div>
+            
+        <div class="col s12 l6 map center-on-mobile">
+            <h5 class="header teal-text center-on-mobile">Winter WOD's</h5>
+            <p class="flow-text">Schulhaus</p>
+            <p class="flow-text">Schulstrasse 5</p>
+            <p class="flow-text">5412 Vogelsang</p>
+            <iframe width="100%" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJu0VDNhxrkEcRP10EuYgT9F8&zoom=14&key=AIzaSyDxP6JRPDP67-V7yRx2l1SdV4xMJJG07oA" allowfullscreen></iframe>  
+        </div>
+    </div>
+</div>

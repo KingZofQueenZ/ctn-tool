@@ -58,4 +58,9 @@ export class UserService {
   changepassword(model: any): Observable<any> {
     return this.http.put('/api/users/changepassword', model, {headers: headers, responseType: 'text' as 'json'});
   }
+
+  // POST /users
+  contact(model: any): Observable<any> {
+    return this.http.post<any>('/api/users/contact', model, {headers: headers, responseType: 'text' as 'json'});
+  }
 }

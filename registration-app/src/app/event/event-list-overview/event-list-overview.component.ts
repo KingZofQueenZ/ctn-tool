@@ -3,6 +3,7 @@ import { Event } from '../../models/event';
 import { EventService } from '../../services/event.service';
 import * as moment from 'moment';
 import { ActivatedRoute, Params} from '@angular/router';
+import { ScrollEvent } from 'ngx-scroll-event';
 
 @Component({
   selector: 'app-overview',
@@ -14,6 +15,8 @@ export class EventListOverviewComponent implements OnInit {
   dateArray: any[] = [];
   page = 1;
   noEvents: Boolean = false;
+  loading: Boolean = false;
+  allEvents: Boolean = false;
 
   constructor(private eventService: EventService, private route: ActivatedRoute) {
     this.getEvents();
@@ -36,16 +39,25 @@ export class EventListOverviewComponent implements OnInit {
   }
 
   getEvents(): void {
-    this.eventService.getAll(this.page).subscribe(events => {
-      events.forEach((element) => {
-        this.events.push(element);
-        this.setDateArray(element);
-      });
+    this.loading = true;
+    setTimeout(() => {
+      this.eventService.getAll(this.page).subscribe(events => {
+        events.forEach((element) => {
+          this.events.push(element);
+          this.setDateArray(element);
+        });
 
-      if (!this.events.length) {
-        this.noEvents = true;
-      }
-    });
+        if (!this.events.length) {
+          this.noEvents = true;
+        }
+
+        if (events.length < 40) {
+          this.allEvents = true;
+        }
+
+        this.loading = false;
+      });
+    }, 500);
   }
 
   getWidth(event: Event): string {
@@ -63,7 +75,7 @@ export class EventListOverviewComponent implements OnInit {
     }
   }
 
-  onScroll () {
+  public load() {
     this.page++;
     this.getEvents();
   }
