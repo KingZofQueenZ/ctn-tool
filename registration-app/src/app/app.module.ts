@@ -35,7 +35,6 @@ import { DeleteEventComponent } from './admin/delete-event/delete-event.componen
 import { ProfileComponent } from './user/profile/profile.component';
 import { InformationComponent } from './content/information/information.component';
 import { CKEditorModule } from 'ng2-ckeditor';
-import { ScrollEventModule } from 'ngx-scroll-event';
 import { SafeHtmlPipe } from './shared/safe-html-pipe.pipe';
 import { ChangepasswordComponent } from './user/changepassword/changepassword.component';
 import { SettingsComponent } from './user/settings/settings.component';
@@ -78,8 +77,7 @@ import { ImpressumComponent } from './content/impressum/impressum.component';
     BrowserAnimationsModule,
     ToasterModule,
     ReactiveFormsModule,
-    CKEditorModule,
-    ScrollEventModule
+    CKEditorModule
   ],
   providers: [
     {

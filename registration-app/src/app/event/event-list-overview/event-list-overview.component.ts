@@ -3,7 +3,6 @@ import { Event } from '../../models/event';
 import { EventService } from '../../services/event.service';
 import * as moment from 'moment';
 import { ActivatedRoute, Params} from '@angular/router';
-import { ScrollEvent } from 'ngx-scroll-event';
 
 @Component({
   selector: 'app-overview',
