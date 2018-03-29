@@ -1,16 +1,55 @@
 <div class="parallax hide-on-med-and-down">
-    <div class="container">
-      <h1 class="header center teal-text">News</h1>
-      <div class="row center">
-        <h5 class="header white-text col s12 light">&laquo;Wenn du alles gibst, kannst du dir nichts vorwerfen.&raquo;</h5>
-      </div>
+  <div class="container">
+    <h1 class="header center teal-text">News</h1>
+    <div class="row center">
+      <h5 class="header white-text col s12 light">&laquo;Wenn du alles gibst, kannst du dir nichts vorwerfen.&raquo;</h5>
+    </div>
+  </div>
+</div>
+  
+<!-- News Cards -->
+<div class="container news">
+  <div class="row">
+    <div class="col s12">
+      <h3 class="header teal-text center-on-mobile">News</h3>
     </div>
   </div>
 
-<div class="container">
-    <div class="row">
-      <div class="col s12 center">
-          <h4 class="header teal-text center-on-mobile">Coming soon...</h4>
+  <div class="news-container" *ngIf="!noNews">
+    <div *ngFor="let new of news">
+      <div class="divider"></div>
+      <div class="row news-cards">
+        <div class="col s12">
+          <h4 class="header teal-text">{{new.title}}</h4>
+          <div class="datetime grey-text text-darken-1 light truncate"><i>{{dateString(new)}}</i></div>
+          <div class="content flow-text" [innerHTML]="new.content | safeHtml"></div>
+        </div>
       </div>
+    </div> 
+  </div>
+
+  <div class="row" *ngIf="news.length">
+    <div class="col s12 center load" *ngIf="!allNews && !loading">
+      <a (click)="load()" class="flow-text center">Ältere News laden...</a>
     </div>
-  </div>  
+    <div class="col s12 center spinner" *ngIf="loading">
+      <mz-spinner [size]="'small'"></mz-spinner>
+    </div>
+  </div>
+
+  <div class="container no-news" *ngIf="noNews">
+      <div class="row">
+        <div class="col s12 center">
+          <span class="flow-text">Es gibt zurzeit leider keine News.</span>
+        </div>
+      </div>
+  </div>
+
+  <div class="container spinner" *ngIf="!news.length && !noNews">
+    <div class="row center">
+      <mz-spinner
+        [size]="'big'">
+      </mz-spinner>
+    </div>
+  </div>
+</div>

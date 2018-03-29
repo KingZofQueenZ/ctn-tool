@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="row all-news">
+    <div class="col s12 l8">
+        <h3 class="header teal-text center-on-mobile">Alle News</h3>
+    </div>
+    <div class="col s12 l4 center-on-mobile button">
+      <a mz-button [routerLink]="['/admin-news-create']">
+        Neue News
+      </a>
+    </div>
+    <div class="col s12 news">
+      <ul class="collection" *ngIf="news.length">
+        <li class="collection-item valign-wrapper" *ngFor="let new of news">
+          <span class="title teal-text">{{new.title}}</span>
+          <div class="icon-container">
+            <a class="teal-text secondary-content delete" (click)="setNewsToDelete(new);deleteNewsModal.open()"><i class="material-icons">delete</i></a>
+            <a class="teal-text secondary-content edit" [routerLink]="['/admin-news-edit', new._id]"><i class="material-icons">edit</i></a>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="col s12 center load" *ngIf="!allNews && !noNews && !loading">
+      <a (click)="load()" class="flow-text center">Weitere Termine laden...</a>
+    </div>
+    <div class="col s12 center spinner" *ngIf="news.length && loading">
+      <mz-spinner
+        [size]="'small'">
+      </mz-spinner>
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf="noNews">
+  <div class="row">
+    <div class="col s12 center-on-mobile">
+      <p class="flow-text">Es gibt zurzeit leider keine Termine!</p>
+    </div>
+  </div>
+</div>
+
+<div class="container spinner" *ngIf="!news.length && !noNews">
+  <div class="row center">
+    <mz-spinner
+      [size]="'big'">
+    </mz-spinner>
+  </div>
+</div>
+
+<mz-modal #deleteNewsModal class="deleteModal" [fixedFooter]="true">
+  <mz-modal-content>
+    <div class="container administration">
+      <div class="row">
+        <div class="col s12">
+          <span class="flow-text">Möchtest du die News <i>{{delNews?.title}}</i> wirklich löschen?</span>
+        </div>
+      </div>
+    </div>
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button mz-button [flat]="true" mz-modal-close>Abbrechen</button>
+    <button mz-button class="red white-text" [flat]="true" (click)="deleteNews()" mz-modal-close>Löschen</button>
+  </mz-modal-footer>
+</mz-modal>

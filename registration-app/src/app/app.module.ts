@@ -40,6 +40,10 @@ import { ChangepasswordComponent } from './user/changepassword/changepassword.co
 import { SettingsComponent } from './user/settings/settings.component';
 import { ContactComponent } from './content/contact/contact.component';
 import { ImpressumComponent } from './content/impressum/impressum.component';
+import { NewsService } from './services/news.service';
+import { AdminNewsOverviewComponent } from './admin/admin-news-overview/admin-news-overview.component';
+import { CreateNewsComponent } from './admin/news/create-news/create-news.component';
+import { EditNewsComponent } from './admin/news/edit-news/edit-news.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +70,10 @@ import { ImpressumComponent } from './content/impressum/impressum.component';
     ChangepasswordComponent,
     SettingsComponent,
     ContactComponent,
-    ImpressumComponent
+    ImpressumComponent,
+    AdminNewsOverviewComponent,
+    CreateNewsComponent,
+    EditNewsComponent
   ],
   imports: [
     BrowserModule,
@@ -90,7 +97,8 @@ import { ImpressumComponent } from './content/impressum/impressum.component';
     UserService,
     EventService,
     StorageService,
-    ToasterService
+    ToasterService,
+    NewsService
   ],
   bootstrap: [AppComponent]
 })

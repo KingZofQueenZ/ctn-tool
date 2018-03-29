@@ -36,10 +36,8 @@ export class AppComponent implements OnInit {
     if (this.user) {
       this.authSevice.refresh(this.user.email).subscribe(
         response => {
-          console.log('refreshed');
         },
         error => {
-          console.log('logging out');
           this.authSevice.logout();
         }
       );

@@ -22,6 +22,9 @@ import { ChangepasswordComponent } from './user/changepassword/changepassword.co
 import { SettingsComponent } from './user/settings/settings.component';
 import { ContactComponent } from './content/contact/contact.component';
 import { ImpressumComponent } from './content/impressum/impressum.component';
+import { AdminNewsOverviewComponent } from './admin/admin-news-overview/admin-news-overview.component';
+import { EditNewsComponent } from './admin/news/edit-news/edit-news.component';
+import { CreateNewsComponent } from './admin/news/create-news/create-news.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -42,6 +45,9 @@ const routes: Routes = [
   { path: 'admin-event-edit/:id', component: EditEventComponent, canActivate: [AuthGuard] },
   { path: 'admin-event-delete/:id', component: DeleteEventComponent, canActivate: [AuthGuard] },
   { path: 'admin-user', component: AdminUserOverviewComponent, canActivate: [AuthGuard] },
+  { path: 'admin-news', component: AdminNewsOverviewComponent, canActivate: [AuthGuard] },
+  { path: 'admin-news-create', component: CreateNewsComponent, canActivate: [AuthGuard] },
+  { path: 'admin-news-edit/:id', component: EditNewsComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'password', component: ChangepasswordComponent, canActivate: [AuthGuard] },
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] }

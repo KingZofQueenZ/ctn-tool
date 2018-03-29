@@ -1,0 +1,27 @@
+<div class="container edit-news">
+  <div class="row title">
+    <div class="col s12">
+        <h3 class="header detail-title teal-text center-on-mobile">News editieren</h3>
+    </div>
+  </div>
+
+  <form (ngSubmit)="editNewsForm.form.valid && edit()" #editNewsForm="ngForm" *ngIf="news">
+    <div class="row">
+      <mz-input-container class="col s12 l10">
+        <input mz-input [label]="'Titel'" id="title" name="title" type="text" [(ngModel)]="news.title" required>
+      </mz-input-container> 
+    </div>
+
+    <div class="divider"></div>
+
+    <ckeditor class="ckeditor" [config]="ckeConfig" [(ngModel)]="news.content" debounce="500" name="content"></ckeditor>
+
+    <div class="divider aftereditor"></div>
+
+    <div class="col s12 submit center-on-mobile">
+      <button class="btn waves-effect waves-light" [class.disabled]="!editNewsForm.form.valid" type="submit" name="action">News speichern</button>&nbsp;
+      <a class="btn waves-effect waves-light red" (click)="goBack()">Abbrechen</a>
+    </div>
+  </form>
+</div>
+ 
