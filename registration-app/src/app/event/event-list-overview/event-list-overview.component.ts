@@ -43,24 +43,22 @@ export class EventListOverviewComponent implements OnInit {
 
   getEvents(): void {
     this.loading = true;
-    setTimeout(() => {
-      this.eventService.getAll(this.page).subscribe(events => {
-        events.forEach((element) => {
-          this.events.push(element);
-          this.setDateArray(element);
-        });
-
-        if (!this.events.length) {
-          this.noEvents = true;
-        }
-
-        if (events.length < 40) {
-          this.allEvents = true;
-        }
-
-        this.loading = false;
+    this.eventService.getAll(this.page).subscribe(events => {
+      events.forEach((element) => {
+        this.events.push(element);
+        this.setDateArray(element);
       });
-    }, 500);
+
+      if (!this.events.length) {
+        this.noEvents = true;
+      }
+
+      if (events.length < 40) {
+        this.allEvents = true;
+      }
+
+      this.loading = false;
+    });
   }
 
   getWidth(event: Event): string {

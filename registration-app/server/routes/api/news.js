@@ -33,7 +33,7 @@ router.get('/', (request, response) => {
   const amount = Number(request.query.amount) || 10;
 
   News.find()
-    .sort('date')
+    .sort('-date')
     .skip(amount * (page - 1))
     .limit(amount)
     .exec()
