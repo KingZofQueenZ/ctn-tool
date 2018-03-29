@@ -8,17 +8,17 @@
 </div>
 
 <!-- Event Cards -->
-<div class="container events" *ngIf="dateArray.length" style="height:100%">
+<div class="container events" style="height:100%">
   <div class="row">
     <div class="col s12">
       <h3 class="header teal-text center-on-mobile">Die nächsten Workouts und Termine</h3>
     </div>
-    <div class="col s12 flow-text">
+    <div class="col s12 flow-text" *ngIf="probetraining">
       Für Probetrainings, klicke bitte auf den gewünschten Termin und melde dich über das Anmeldeformular an. Solltest du doch nicht teilnehmen können, melde dich bitte bei unseren Coaches wieder ab!
     </div>
   </div>
-  <div class="divider"></div>
-  <div class="row event-cards" *ngIf="!noEvents">
+  <div class="divider" *ngIf="probetraining"></div>
+  <div class="row event-cards" *ngIf="!noEvents && dateArray.length != 0">
     <div *ngFor="let event of events" >
       <div class="col s12 {{getWidth(event)}}">
           <app-event-list-item [event]="event"></app-event-list-item>

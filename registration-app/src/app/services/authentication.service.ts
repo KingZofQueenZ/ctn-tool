@@ -23,6 +23,16 @@ export class AuthenticationService {
         });
   }
 
+  refresh(email: String): Observable<any> {
+    return this.http.post<any>('/api/users/refresh', { email: email, })
+        .map((user) => {
+            if (user && user.token) {
+              this.storageService.setItem('currentUser', JSON.stringify(user));
+            }
+            return user;
+        });
+  }
+
   logout() {
     this.storageService.removeItem('currentUser');
   }

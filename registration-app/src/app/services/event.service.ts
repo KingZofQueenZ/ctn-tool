@@ -55,7 +55,7 @@ export class EventService {
 
   // POST /events/{event-id}/participants
   addTrialParticipant(eventId: string, firstname: string, lastname: string, phone: string): Observable<Event> {
-    return this.http.post<Event>('/api/events/' + eventId + '/participants/',
+    return this.http.post<Event>('/api/events/' + eventId + '/trialparticipants/',
       { firstname: firstname, lastname: lastname, phone: phone }, {headers: headers, responseType: 'text' as 'json'});
   }
 

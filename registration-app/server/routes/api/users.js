@@ -5,7 +5,6 @@ const router = express.Router();
 const config = require('../../config/index');
 const randomstring = require("randomstring");
 const moment = require('moment');
-
 const VerifyToken = require('../../authentication/verifytoken');
 const User = require('../../models/user');
 const Event = require('../../models/event');
@@ -33,6 +32,38 @@ router.post('/authenticate', (request, response) => {
     }
 
     if (user && user.activated && bcrypt.compareSync(body.password, user.password)) {
+      var authenticatedUser = {
+        _id: user._id,
+        email: user.email,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        phone: user.phone,
+        token: jwt.sign({ sub: user._id, admin: user.admin }, config.auth.secret, { expiresIn: '14d'}),
+        admin: user.admin
+      };  
+
+      response.status(200).send(authenticatedUser);
+    } else {
+        response.status(401).send('User authentication failed, email: ' +  body.email);
+    }
+  });
+});
+
+// Refresh Token
+router.post('/refresh', VerifyToken.verify, (request, response) => {
+  var body = request.body;
+  User.findOne({ email: body.email }, (error, user) => {
+    if(error) {
+      response.status(500).send(error);
+      return;
+    }
+
+    if(!user) {
+      response.status(404).send('User not found, email: ' +  body.email);
+      return;
+    }
+
+    if (user && user.activated) {
       var authenticatedUser = {
         _id: user._id,
         email: user.email,
@@ -184,7 +215,7 @@ router.post('/contact', (request, response) => {
     email: body.email,
     name: body.name,
     message: body.message,
-    emailTo: 'timothy.gediga@outlook.com',
+    emailTo: 'cedrauber@hotmail.com',
     subject: 'CTN - Kontaktformular ausgefüllt'
   };
 

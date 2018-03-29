@@ -21,8 +21,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.authenticationService.logout();
-
-    const activated = this.activatedRoute.snapshot.queryParams['activated'];
   }
 
   login() {

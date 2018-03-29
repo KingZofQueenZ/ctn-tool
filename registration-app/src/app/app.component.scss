@@ -22,7 +22,10 @@
     padding: 0;
   }
 }
-
+    
+nav ul a{
+  //display: inline-block;
+}
   
 .page-footer {
   position: absolute;
@@ -35,6 +38,15 @@
   }
   .data {
       margin-right:10px;
+  }
+  .phone {
+      margin-right:10px;
+  }
+  
+  @media only screen and (max-width: 992px) {
+    .phone {
+      float: right !important;
+    }
   }
   .icons img {
       margin-left:10px;

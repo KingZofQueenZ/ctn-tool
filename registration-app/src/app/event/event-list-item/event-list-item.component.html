@@ -6,9 +6,9 @@
     </a>
     <div class="registrations grey-text text-darken-1 light"><i class="tiny material-icons">group</i><i>{{participant_string}} Anmeldungen</i></div>
     <div class="register" *ngIf="user">
-      <i *ngIf="is_registered && !can_unregister" class="grey-text small material-icons no-unregister" mz-tooltip [tooltip]="'Du kannst dich von diesem Event nicht mehr abmelden!'">done</i>
-      <i *ngIf="is_registered && can_unregister" class="{{color}} small material-icons" (click)="handleRegistration()" [@opacityAnimation] (mouseenter)="mouseEnter()" (mouseleave)="mouseLeave()">{{icon}}</i>
-      <i *ngIf="!is_registered && !is_full && can_register" class="small material-icons" (click)="handleRegistration()" [@opacityAnimation]>person_add</i>
+      <i *ngIf="is_registered && !can_unregister" class="small grey-text material-icons no-unregister" mz-tooltip [tooltip]="'Du kannst dich von diesem Event nicht mehr abmelden!'">done</i>
+      <i *ngIf="is_registered && can_unregister" class="small {{color}} material-icons" (click)="handleRegistration()" [@opacityAnimation] (mouseenter)="mouseEnter()" (mouseleave)="mouseLeave()">{{icon}}</i>
+      <i *ngIf="!is_registered && !is_full && can_register" class="small teal-text material-icons" (click)="handleRegistration()" [@opacityAnimation]>person_add</i>
     </div> 
   </div>
 </div>

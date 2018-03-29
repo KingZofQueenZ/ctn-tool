@@ -72,6 +72,16 @@
             img.vw {
                 width: 50%;
             }
+
+            @media only screen and (min-width: 600px) and (max-width: 992px) {
+                img {
+                    width: 50%;
+                }
+        
+                img.vw {
+                    width: 25%;
+                }
+            }
         }
     }
 }

@@ -16,15 +16,19 @@ export class EventListOverviewComponent implements OnInit {
   noEvents: Boolean = false;
   loading: Boolean = false;
   allEvents: Boolean = false;
+  probetraining: Boolean = false;
 
   constructor(private eventService: EventService, private route: ActivatedRoute) {
     this.getEvents();
   }
 
   ngOnInit(): void {
-    /*this.route.queryParams.subscribe((params: Params) => {
+    this.route.queryParams.subscribe((params: Params) => {
       const probetraining = params['probetraining'];
-    });*/
+      if (probetraining) {
+        this.probetraining = true;
+      }
+    });
   }
 
   setDateArray(event: Event) {

@@ -133,8 +133,8 @@ router.delete('/:event_id', VerifyToken.verifyAdmin, (request, response) => {
 // Handle Event-Participants ----------------
 // ------------------------------------------
 
-// Add user or trial user to event
-router.post('/:event_id/participants', (request, response) => {
+// Add user to event
+router.post('/:event_id/participants', VerifyToken.verify, (request, response) => {
   Event.findById(request.params.event_id)
     .exec((error, document) => {
       if(error) {
@@ -156,7 +156,35 @@ router.post('/:event_id/participants', (request, response) => {
           response.status(405).send('User already registered for this Event!');
           return;
         }
-      } else if(request.body.firstname) {
+      } 
+
+      document.save((error, document) => {
+        if(error) {
+          response.status(500).send(error);
+          return;
+        }
+
+        response.status(200).json(document);
+      });
+    });
+});
+
+// Add trial user to event
+router.post('/:event_id/trialparticipants', (request, response) => {
+  Event.findById(request.params.event_id)
+    .exec((error, document) => {
+      if(error) {
+        response.status(500).send(error);
+        return;
+      }
+
+      if(!document) {
+        response.status(404).send('Event not found, id: ' +  request.body._id);
+        return;
+      }
+
+      // Add to participants of event
+      if(request.body.firstname) {
         // Add to trial workouts of event
         document.trial_workouts.push({
           firstname: request.body.firstname,

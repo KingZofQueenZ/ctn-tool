@@ -8,17 +8,17 @@
                 <li><a routerLink="/home" routerLinkActive="selected">Home</a></li>
                 <li><a routerLink="/news" routerLinkActive="selected">News</a></li>
                 <li><a routerLink="/information" routerLinkActive="selected">Information</a></li>
-                <li><a routerLink="/events" routerLinkActive="selected">Termine</a></li>
+                <li><a routerLink="/events" routerLinkActive="selected">Teilnehmen</a></li>
                 <li><a routerLink="/contact" routerLinkActive="selected">Kontakt</a></li>
                 <li *ngIf="user?.admin"><a routerLink="/admin" routerLinkActive="selected">Admin</a></li>
-                <li *ngIf="user"><a id="login-toggle" routerLink="/profile" routerLinkActive="selected">{{user.firstname + ' ' + user.lastname}}<i class="material-icons right login">person</i></a></li>
-                <li *ngIf="!user"><a id="login-toggle" routerLink="/login" routerLinkActive="selected">Login<i class="material-icons right login">person</i></a></li>
+                <li *ngIf="user"><a id="login-toggle" routerLink="/profile" routerLinkActive="selected">{{user.firstname + ' ' + user.lastname}}</a></li>
+                <li *ngIf="!user"><a id="login-toggle" routerLink="/login" routerLinkActive="selected">Login</a></li>
             </ul>
         </div>
         <a href="#" id="btn-sidenav-demo" class="button-collapse"><i class="large material-icons">menu</i></a>
     </div>
 </nav>
-
+<!-- <i class="material-icons right login">person</i> -->
 <mz-sidenav #sidenav [id]="'sidenav'" [collapseButtonId]="'btn-sidenav-demo'" [edge]="'left'" [closeOnClick]="true">
     <mz-sidenav-header *ngIf="user">
       <div class="user-view">
@@ -41,7 +41,7 @@
     </mz-sidenav-link>
 
     <mz-sidenav-link>
-        <a routerLink="/events">Termine</a>
+        <a routerLink="/events">Teilnehmen</a>
     </mz-sidenav-link>
 
     <mz-sidenav-link>
@@ -70,7 +70,7 @@
         </div>
         
         <mz-sidenav-link>
-            <a routerLink="/login">Logout</a>
+            <a routerLink="/login" (click)="sidenav.opened=false">Logout</a>
         </mz-sidenav-link>
     </div>
 </mz-sidenav>
@@ -81,12 +81,13 @@
 <footer class="page-footer teal">
     <div class="footer-copyright grey darken-4">
       <div class="container">
-          <span class="copyright">&copy;2018 crossthenature</span>    
-          <span class="data"><a routerLink="/impressum" class="grey-text text-lighten-2">Datenschutz / Impressum</a></span>   
-          <div class="icons right hide-on-small-only">
-            <img src="assets/img/social/twitter.png" height="25" width="25">
-            <img src="assets/img/social/facebook.png" height="25" width="25">
-            <img src="assets/img/social/instagram.png" height="25" width="25">
+          <span class="copyright hide-on-med-and-down">&copy;2018 crossthenature</span>
+          <span class="phone">Tel. 079 923 69 98</span>     
+          <span class="data"><a routerLink="/impressum" class="grey-text text-lighten-2">Datenschutz / Impressum</a></span>  
+          <div class="icons right hide-on-med-and-down">
+            <a href="https://twitter.com/realdonaldtrump" target="_blank"><img src="assets/img/social/twitter.png" height="25" width="25"></a>
+            <a href="https://www.facebook.com/crossthenature" target="_blank"><img src="assets/img/social/facebook.png" height="25" width="25"></a>
+            <a href="https://www.instagram.com/crossthenature/" target="_blank"><img src="assets/img/social/instagram.png" height="25" width="25"></a>
           </div>          
       </div>
     </div>
