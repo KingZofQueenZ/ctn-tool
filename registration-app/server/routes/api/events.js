@@ -90,9 +90,9 @@ router.put('/:event_id', VerifyToken.verifyAdmin, (request, response) => {
     .then((document) => {
       if(document) {
         var body = request.body;
-        document.name = body.name || document.name;
-        document.description = body.description || document.description;
-        document.max_participants = body.max_participants || document.max_participants;
+        document.name = body.name;
+        document.description = body.description;
+        document.max_participants = body.max_participants;
         document.date = body.date || document.date;
         document.time_from = body.time_from || document.time_from;
         document.time_to = body.time_to;
@@ -206,6 +206,49 @@ router.post('/:event_id/trialparticipants', (request, response) => {
 
 // Delete user or trial user from event
 router.delete('/:event_id/participants/:user_id', VerifyToken.verifyUser, (request, response) => {
+  Event.findById(request.params.event_id)
+    .exec((error, document) => {
+      if(error) {
+        response.status(500).send(error);
+        return;
+      }
+
+      if(!document) {
+        response.status(404).send('Event not found, id: ' +  request.params.user_id);
+        return;
+      }
+
+      if(document.sign_out && moment().isAfter(moment(document.sign_out))) {
+        response.status(500).send('Sign out date reached');
+        return;
+      }
+
+      if(document.date < moment().format()) {
+        response.status(500).send('Event already started');
+        return;
+      }
+
+      var indexToDelete = document.participant_ids.indexOf(request.params.user_id);
+      if(indexToDelete !== -1) 
+        document.participant_ids.splice(indexToDelete, 1);
+      
+      var trialWorkoutToDelete = document.trial_workouts.id(request.params.user_id);
+      if(trialWorkoutToDelete)
+        trialWorkoutToDelete.remove();
+
+      document.save((error, document) => {
+        if(error) {
+          response.status(500).send(error);
+          return;
+        }
+
+        response.status(200).json(document);
+      });
+    });
+});
+
+// Delete user or trial user from event (Admin - no time check)
+router.delete('/:event_id/participants-admin/:user_id', VerifyToken.verifyAdmin, (request, response) => {
   Event.findById(request.params.event_id)
     .exec((error, document) => {
       if(error) {

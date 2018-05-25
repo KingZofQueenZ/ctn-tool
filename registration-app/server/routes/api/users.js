@@ -104,7 +104,7 @@ router.post('/', (request, response) => {
       email: newUser.email,
       subject: 'Registrierung bestätigen',
       firstname: newUser.firstname,
-      url: 'http://ctn.musca.uberspace.de/activate/' + newUser.activation_code
+      url: 'http://www.crossthenature.ch/activate/' + newUser.activation_code
     };
     mailer.sendMail('registration', locals);
 

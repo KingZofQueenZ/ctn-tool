@@ -1,23 +1,27 @@
 .parallax-top {
-    background-image: url("../../../assets/img/background/pexels-photo-305239.png");
+    background-image: url("../../../assets/img/background/CrossTheNature.jpg");
     min-height: 400px; 
     background-attachment: fixed;
-    background-position: center;
+    background-position: top;
     background-repeat: no-repeat;
     background-size: cover;
     margin-bottom: 40px;
 
     h1 {
         margin-top: 0px;
-        padding-top: 125px;
+        padding-top: 160px;
+    } 
+
+    h5 {
+        margin-top: -25px;
     }
 }
 
 .parallax-probe {
-    background-image: url("../../../assets/img/background/sport-treadmill-tor-route-163444.png");
+    background-image: url("../../../assets/img/background/CrossTheNature.jpg");
     min-height: 160px; 
     background-attachment: fixed;
-    background-position: center;
+    background-position: top;
     background-repeat: no-repeat;
     background-size: cover;
 

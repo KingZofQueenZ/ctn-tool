@@ -6,7 +6,7 @@ module.exports = {
       local: 'mongodb://localhost/ctn',
     },
     mailer: {
-      connectionString: process.env.MAILCONNECTIONSTRING || 'smtp://ctn@musca.uberspace.de:fcbayern1900.!@smtp.musca.uberspace.de:587/?requireTLS=true', 
-      defaultFromAddress: 'ctn@musca.uberspace.de'
+      connectionString: process.env.MAILCONNECTIONSTRING, 
+      defaultFromAddress: 'info@crossthenature.ch'
     }
   };

@@ -24,16 +24,20 @@
 }
 
 .parallax {
-  background-image: url("../../../assets/img/crossfit-index2.jpg");
+  background-image: url("../../../assets/img/background/CrossTheNature.jpg");
   min-height: 400px; 
   background-attachment: fixed;
-  background-position: center;
+  background-position: top;
   background-repeat: no-repeat;
   background-size: cover;
 
   h1 {
-    margin-top: 0px;
-    padding-top: 125px;
+      margin-top: 0px;
+      padding-top: 160px;
+  } 
+
+  h5 {
+      margin-top: -25px;
   }
 }
 

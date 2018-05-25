@@ -37,12 +37,10 @@
     </div>
   </div>
 
-  <div class="container no-news" *ngIf="noNews">
-      <div class="row">
-        <div class="col s12 center">
-          <span class="flow-text">Es gibt zurzeit leider keine News.</span>
-        </div>
-      </div>
+  <div class="row no-news" *ngIf="noNews">
+    <div class="col s12">
+      <span class="flow-text">Es gibt zurzeit leider keine News.</span>
+    </div>
   </div>
 
   <div class="container spinner" *ngIf="!news.length && !noNews">

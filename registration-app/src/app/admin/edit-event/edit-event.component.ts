@@ -99,6 +99,10 @@ export class EditEventComponent implements OnInit {
       event.time_to = undefined;
     }
 
+    if (!event.max_participants) {
+      event.max_participants = undefined;
+    }
+
     if (this.datum_anmeldefrist && this.time_anmeldefrist) {
       event.sign_in = moment(this.datum_anmeldefrist + 'T' + this.time_anmeldefrist).toDate();
     } else {
@@ -127,7 +131,7 @@ export class EditEventComponent implements OnInit {
   }
 
   removeUser(participant: any) {
-    this.eventService.deleteParticipant(this.event._id, participant._id).subscribe(
+    this.eventService.deleteParticipantAdmin(this.event._id, participant._id).subscribe(
       result => {
         this.event.participant_ids.splice(this.event.participant_ids.findIndex(x => x._id === participant._id), 1);
         this.toasterService.pop('success', 'Abmeldung erfolgreich', 'Der User wurde erfolgreich von ' + this.event.name + ' entfernt');

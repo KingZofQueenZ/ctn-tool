@@ -50,8 +50,8 @@ const routes: Routes = [
   { path: 'admin-news-edit/:id', component: EditNewsComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'password', component: ChangepasswordComponent, canActivate: [AuthGuard] },
-  { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] }
-
+  { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
+  { path: '**', redirectTo: '/home' }
 ];
 
 @NgModule({
