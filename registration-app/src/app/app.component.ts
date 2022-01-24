@@ -1,10 +1,8 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { User } from './models/user';
 import { StorageService } from './services/storage.service';
-import { OnInit, AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
-import { MzSidenavModule, MzIconModule, MzIconMdiModule } from 'ng2-materialize';
+import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { ToasterConfig } from 'angular2-toaster/src/toaster-config';
-import { ChangeDetectionStrategy } from '@angular/compiler/src/core';
 import { AuthenticationService } from './services/authentication.service';
 
 @Component({
