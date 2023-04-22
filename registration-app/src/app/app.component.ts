@@ -1,7 +1,7 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { User } from './models/user';
 import { StorageService } from './services/storage.service';
-import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
+import { OnInit } from '@angular/core';
 import { ToasterConfig } from 'angular2-toaster/src/toaster-config';
 import { AuthenticationService } from './services/authentication.service';
 
