@@ -31,7 +31,6 @@ export class RegisterComponent {
         'phone': ['', Validators.required],
         'password': ['', Validators.required],
         'confirmPassword': ['', [matchOtherValidator('password'), Validators.required]],
-        'confirm': ['', [Validators.required, Validators.pattern('true')]],
       });
     }
 
