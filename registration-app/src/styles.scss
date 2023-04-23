@@ -251,11 +251,21 @@ hr {
   .teal-text {
     color: #009688 !important;
   }
+
+  .white-text {
+    color: #fff !important;
+  }
+
+  .light {
+    font-weight: 300;
+  }
+
   h4 {
     font-size: 2.28rem;
     line-height: 110%;
-    margin: 1.14rem 0 .912rem;
+    padding: 1rem 0 1rem;
   }
+
   h1, h2, h3, h4, h5, h6 {
     font-weight: 400;
   }

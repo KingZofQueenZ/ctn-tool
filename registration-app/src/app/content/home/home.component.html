@@ -23,14 +23,20 @@
   </div>
 </div>
 
-<div class="parallax-probe center-on-mobile">
-  <div class="container d-flex justify-content-between h-100">
-    <h4 class="header light white-text left center-on-mobile">Interessiert? Jetzt zum Probetraining anmelden!</h4>
-    <button mat-flat-button color="primary" [routerLink]="['/events']" [queryParams]="{probetraining:'true'}" class="btn">ZUR ANMELDUNG</button>
+<div class="parallax-probe">
+  <div class="container">
+    <div class="row d-flex justify-content-between align-items-center uwu">
+      <div class="col-12 col-lg-10 text-center text-lg-start">
+        <h4 class="header light white-text">Interessiert? Jetzt zum Probetraining anmelden!</h4>
+      </div>
+      <div class="col-12 col-lg-2 text-center text-lg-end mb-4 mb-lg-0">
+        <button mat-flat-button color="primary" [routerLink]="['/events']" [queryParams]="{probetraining:'true'}" class="btn">ZUR ANMELDUNG</button>
+      </div>
+    </div>
   </div>
 </div>
 
-<div class="container sponsor">
+<div class="container mt-2">
   <div class="row d-flex flex-column">
     <div class="col-12 d-flex justify-content-center justify-content-lg-start">
       <h4 class="header teal-text ">Sponsoren</h4>
