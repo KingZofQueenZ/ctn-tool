@@ -77,7 +77,18 @@ nav ul a {
   cursor: pointer;
 }
 
+mat-drawer {
+  width: 250px;
+}
 
+mat-list-item {
+  cursor: pointer;
+  font-weight: 400;
+
+  &:hover {
+      background-color: rgba(0,0,0,.05);
+  }
+}
 
 
 
