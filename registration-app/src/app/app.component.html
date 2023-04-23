@@ -78,16 +78,18 @@
 <router-outlet></router-outlet>
 <toaster-container [toasterconfig]="config"></toaster-container>
 
-<footer class="page-footer teal">
+<footer class="page-footer">
     <div class="footer-copyright grey darken-4">
-      <div class="container">
-          <span class="copyright hide-on-med-and-down">&copy;2018 crossthenature</span>
+      <div class="container d-flex justify-content-between">
+        <div class="d-flex justify-content-between justify-content-md-start w-100">
+          <span class="copyright d-none d-md-flex">&copy;2023 crossthenature</span>
           <span class="phone">Tel. 079 923 69 98</span>     
-          <span class="data"><a routerLink="/impressum" class="grey-text text-lighten-2">Datenschutz / Impressum</a></span>  
-          <div class="icons right hide-on-med-and-down">
-            <a href="https://www.facebook.com/crossthenature" target="_blank"><img src="assets/img/social/facebook.png" height="25" width="25"></a>
-            <a href="https://www.instagram.com/crossthenature/" target="_blank"><img src="assets/img/social/instagram.png" height="25" width="25"></a>
-          </div>          
+          <span class="data "><a routerLink="/impressum" class="grey-text text-lighten-2">Datenschutz / Impressum</a></span>  
+        </div>
+        <div class="icons d-none d-md-block">
+        <a href="https://www.facebook.com/crossthenature" target="_blank"><img src="assets/img/social/facebook.png" height="25" width="25"></a>
+        <a href="https://www.instagram.com/crossthenature/" target="_blank"><img src="assets/img/social/instagram.png" height="25" width="25"></a>
+        </div>     
       </div>
     </div>
 </footer>

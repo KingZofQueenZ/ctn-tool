@@ -64,28 +64,9 @@
     margin-top: 20px;
 
     .image {
-        height: 200px;
 
-        .center {
-            width: 100%;
-
-            img {
-                width: 100%;
-            }
-    
-            img.vw {
-                width: 50%;
-            }
-
-            @media only screen and (min-width: 600px) and (max-width: 992px) {
-                img {
-                    width: 50%;
-                }
-        
-                img.vw {
-                    width: 25%;
-                }
-            }
+        .vw {
+            height: 150px;
         }
     }
 }

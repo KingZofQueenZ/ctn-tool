@@ -22,16 +22,26 @@
     padding: 0;
   }
 }
-    
-nav ul a{
-  //display: inline-block;
-}
-  
+
 .page-footer {
+  padding-top: 20px;
+  color: #fff;
+  background-color: #009688;
+
   position: absolute;
   right: 0;
   bottom: 0;
   left: 0;
+
+  .footer-copyright {
+    overflow: hidden;
+    min-height: 50px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    color: rgba(255,255,255,.8);
+  }
 
   .copyright {
       margin-right:10px;
@@ -43,12 +53,14 @@ nav ul a{
       margin-right:10px;
   }
   
-  @media only screen and (max-width: 992px) {
-    .phone {
-      float: right !important;
+  .icons {
+    width: 80px;
+    img {
+      margin-left:10px;
     }
   }
-  .icons img {
-      margin-left:10px;
-  }
+}
+
+.light, .page-footer .footer-copyright {
+  font-weight: 300;
 }

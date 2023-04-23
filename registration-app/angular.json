@@ -21,7 +21,7 @@
               "src/favicon.ico"
             ],
             "styles": [
-              "src/assets/styles/materialize.scss",
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss",
               "node_modules/angular2-toaster/toaster.css",
               "node_modules/mdi/css/materialdesignicons.min.css"
