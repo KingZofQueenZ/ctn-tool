@@ -4,7 +4,7 @@
             <a id="logo-container" routerLink="/home" class="brand-logo">
                 <img src="../assets/img/logos/logo.jpg" height="100" width="100">
             </a>
-            <ul class="right light hide-on-med-and-down">
+            <!--<ul class="right light hide-on-med-and-down">
                 <li><a routerLink="/home" routerLinkActive="selected">Home</a></li>
                 <li><a routerLink="/news" routerLinkActive="selected">News</a></li>
                 <li><a routerLink="/information" routerLinkActive="selected">Information</a></li>
@@ -13,13 +13,13 @@
                 <li *ngIf="user?.admin"><a routerLink="/admin" routerLinkActive="selected">Admin</a></li>
                 <li *ngIf="user"><a id="login-toggle" routerLink="/profile" routerLinkActive="selected">{{user.firstname + ' ' + user.lastname}}</a></li>
                 <li *ngIf="!user"><a id="login-toggle" routerLink="/login" routerLinkActive="selected">Login</a></li>
-            </ul>
+            </ul>-->
         </div>
         <a href="#" id="btn-sidenav-demo" class="button-collapse"><i class="large material-icons">menu</i></a>
     </div>
 </nav>
 <!-- <i class="material-icons right login">person</i> -->
-<mz-sidenav #sidenav [id]="'sidenav'" [collapseButtonId]="'btn-sidenav-demo'" [edge]="'left'" [closeOnClick]="true">
+<!--<mz-sidenav #sidenav [id]="'sidenav'" [collapseButtonId]="'btn-sidenav-demo'" [edge]="'left'" [closeOnClick]="true">
     <mz-sidenav-header *ngIf="user">
       <div class="user-view">
         <img class="circle avatar" src="../assets/img/user.png">
@@ -73,7 +73,7 @@
             <a routerLink="/login" (click)="sidenav.opened=false">Logout</a>
         </mz-sidenav-link>
     </div>
-</mz-sidenav>
+</mz-sidenav>-->
 
 <router-outlet></router-outlet>
 <toaster-container [toasterconfig]="config"></toaster-container>

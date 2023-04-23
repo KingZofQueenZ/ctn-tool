@@ -5,7 +5,6 @@
     background-position: top;
     background-repeat: no-repeat;
     background-size: cover;
-    margin-bottom: 40px;
 
     h1 {
         margin-top: 0px;
@@ -27,8 +26,7 @@
 
 }
 
-
-.uwu {
+.probe-container {
     min-height: 160px;
 }
 
@@ -36,16 +34,7 @@
     margin-bottom: 40px;
     margin-top: 20px;
 
-    .link {
-        margin-top: 30px;
-    
-        a {
-            color: #000; 
-            text-decoration: underline;
-        }
-    }
 }
-
 
 .image {
     .vw {
