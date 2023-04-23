@@ -65,7 +65,7 @@ html {
     height: 100%;
 }
 
-body {
+mat-drawer-content {
     position: relative;
     padding-bottom: 6rem;
     min-height: 100%;
@@ -217,9 +217,12 @@ hr {
 
 // Bootstrap Overrides
 .mat-fab.mat-primary, .mat-flat-button.mat-primary, .mat-mini-fab.mat-primary, .mat-raised-button.mat-primary {
-    background-color: #2bbbad;
+    background-color: #009688;
   }
 
+  /*.mat-input-element {
+    caret-color: #009688 !important;
+  }*/
 
 
   /* -- Link -- */
