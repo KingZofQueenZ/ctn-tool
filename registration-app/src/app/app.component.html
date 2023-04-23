@@ -1,23 +1,38 @@
-<nav class="white" role="navigation">
-    <div class="nav-wrapper container">
-        <div class="nav-desktop">
-            <a id="logo-container" routerLink="/home" class="brand-logo">
-                <img src="../assets/img/logos/logo.jpg" height="100" width="100">
-            </a>
-            <!--<ul class="right light hide-on-med-and-down">
-                <li><a routerLink="/home" routerLinkActive="selected">Home</a></li>
-                <li><a routerLink="/news" routerLinkActive="selected">News</a></li>
-                <li><a routerLink="/information" routerLinkActive="selected">Information</a></li>
-                <li><a routerLink="/events" routerLinkActive="selected">Teilnehmen</a></li>
-                <li><a routerLink="/contact" routerLinkActive="selected">Kontakt</a></li>
-                <li *ngIf="user?.admin"><a routerLink="/admin" routerLinkActive="selected">Admin</a></li>
-                <li *ngIf="user"><a id="login-toggle" routerLink="/profile" routerLinkActive="selected">{{user.firstname + ' ' + user.lastname}}</a></li>
-                <li *ngIf="!user"><a id="login-toggle" routerLink="/login" routerLinkActive="selected">Login</a></li>
-            </ul>-->
-        </div>
-        <a href="#" id="btn-sidenav-demo" class="button-collapse"><i class="large material-icons">menu</i></a>
-    </div>
-</nav>
+
+<mat-drawer-container [hasBackdrop]="true">
+    <mat-drawer #drawer [mode]="over">I'm a drawer</mat-drawer>
+    
+    <mat-drawer-content>
+        <nav class="white" role="navigation">
+            <div class="nav-wrapper container d-none d-lg-block">
+                <div class="nav-desktop">
+                    <a routerLink="/home">
+                        <img src="../assets/img/logos/logo.jpg" height="100" width="100">
+                    </a>
+                    <ul class="right light ">
+                        <li><a routerLink="/home" routerLinkActive="selected">Home</a></li>
+                        <li><a routerLink="/news" routerLinkActive="selected">News</a></li>
+                        <li><a routerLink="/information" routerLinkActive="selected">Information</a></li>
+                        <li><a routerLink="/events" routerLinkActive="selected">Teilnehmen</a></li>
+                        <li><a routerLink="/contact" routerLinkActive="selected">Kontakt</a></li>
+                        <li *ngIf="user?.admin"><a routerLink="/admin" routerLinkActive="selected">Admin</a></li>
+                        <li *ngIf="user"><a id="login-toggle" routerLink="/profile" routerLinkActive="selected">{{user.firstname + ' ' + user.lastname}}</a></li>
+                        <li *ngIf="!user"><a id="login-toggle" routerLink="/login" routerLinkActive="selected">Login</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Mobile Header -->
+            <div class="container d-flex d-lg-none justify-content-between align-items-center">
+                <a (click)="drawer.toggle()" class="button-collapse"><i class="large material-icons">menu</i></a>
+                <a routerLink="/home">
+                    <img src="../assets/img/logos/logo.jpg" height="100" width="100">
+                </a>
+                <div style="width:30px">
+                    <!-- Empty Item to achieve a centered icon with flexbox -->
+                </div>
+            </div>
+        </nav>
+
 <!-- <i class="material-icons right login">person</i> -->
 <!--<mz-sidenav #sidenav [id]="'sidenav'" [collapseButtonId]="'btn-sidenav-demo'" [edge]="'left'" [closeOnClick]="true">
     <mz-sidenav-header *ngIf="user">
@@ -75,21 +90,23 @@
     </div>
 </mz-sidenav>-->
 
-<router-outlet></router-outlet>
-<toaster-container [toasterconfig]="config"></toaster-container>
+        <router-outlet></router-outlet>
+        <toaster-container [toasterconfig]="config"></toaster-container>
 
-<footer class="page-footer">
-    <div class="footer-copyright grey darken-4">
-      <div class="container d-flex justify-content-between">
-        <div class="d-flex justify-content-between justify-content-md-start w-100">
-          <span class="copyright d-none d-md-flex">&copy;2023 crossthenature</span>
-          <span class="phone">Tel. 079 923 69 98</span>     
-          <span class="data "><a routerLink="/impressum" class="grey-text text-lighten-2">Datenschutz / Impressum</a></span>  
-        </div>
-        <div class="icons d-none d-md-block">
-        <a href="https://www.facebook.com/crossthenature" target="_blank"><img src="assets/img/social/facebook.png" height="25" width="25"></a>
-        <a href="https://www.instagram.com/crossthenature/" target="_blank"><img src="assets/img/social/instagram.png" height="25" width="25"></a>
-        </div>     
-      </div>
-    </div>
-</footer>
+        <footer class="page-footer">
+            <div class="footer-copyright grey darken-4">
+            <div class="container d-flex justify-content-between">
+                <div class="d-flex justify-content-between justify-content-md-start w-100">
+                <span class="copyright d-none d-md-flex">&copy;2023 crossthenature</span>
+                <span class="phone">Tel. 079 923 69 98</span>     
+                <span class="data "><a routerLink="/impressum" class="grey-text text-lighten-2">Datenschutz / Impressum</a></span>  
+                </div>
+                <div class="icons d-none d-md-block">
+                <a href="https://www.facebook.com/crossthenature" target="_blank"><img src="assets/img/social/facebook.png" height="25" width="25"></a>
+                <a href="https://www.instagram.com/crossthenature/" target="_blank"><img src="assets/img/social/instagram.png" height="25" width="25"></a>
+                </div>     
+            </div>
+            </div>
+        </footer>
+    </mat-drawer-content>
+</mat-drawer-container>

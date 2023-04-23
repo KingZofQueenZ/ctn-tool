@@ -44,7 +44,7 @@ import { NewsService } from './services/news.service';
 import { AdminNewsOverviewComponent } from './admin/admin-news-overview/admin-news-overview.component';
 import { CreateNewsComponent } from './admin/news/create-news/create-news.component';
 import { EditNewsComponent } from './admin/news/edit-news/edit-news.component';
-import { MatButtonModule } from '@angular/material';
+import { MatButtonModule, MatSidenavModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -87,7 +87,8 @@ import { MatButtonModule } from '@angular/material';
     ToasterModule,
     ReactiveFormsModule,
     CKEditorModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSidenavModule,
   ],
   providers: [
     {
