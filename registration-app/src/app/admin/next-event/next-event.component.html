@@ -1,33 +1,43 @@
 <div class="row">
-  <div class="col s12 title ">
-    <h5 class="header teal-text center-on-mobile">{{event.name}}</h5>
-    <span class="grey-text text-darken-1 light center-on-mobile"><i>{{date_string}}</i></span>
+  <div class="col-12 title ">
+    <h5 class="header teal-text text-center text-lg-start">{{event.name}}</h5>
+    <span class="grey-text text-darken-1 light text-center text-lg-start"><i>{{date_string}}</i></span>
   </div>
   
-  <div *ngIf="event.participant_ids.length">
-    <div class="col s12 l6 registrations">
+  <div class="row" *ngIf="event.participant_ids.length">
+    <div class="col-12 col-lg-6 registrations">
       <ul class="collection" >
         <li class="collection-item" *ngFor="let participant of event.participant_ids | slice:0:(event.participant_ids.length/2).toFixed()">
-          <span>{{participant.firstname + ' ' + participant.lastname}}</span>
-          <span *ngIf="participant.trial" class="grey-text text-darken-1 light phone"><i>{{participant.phone}}</i></span>
-          <div *ngIf="participant.trial" class="secondary-content"><i class="material-icons" data-tooltip="Anmeldung zum Probetraining" mz-tooltip [tooltip]="'Anmeldung zum Probetraining'">fitness_center</i></div>
+          <div class="d-flex justify-content-between">
+            <div>
+              <span>{{participant.firstname + ' ' + participant.lastname}}</span>
+              <span *ngIf="participant.trial" class="grey-text text-darken-1 light phone"><i> {{participant.phone}}</i></span>
+            </div>
+            <div *ngIf="participant.trial" class="teal-text"><i class="material-icons" #tooltip="matTooltip" matTooltip="Anmeldung zum Probetraining">fitness_center</i></div>
+          </div>
         </li>
       </ul>
     </div>
-    <div class="col s12 l6 registrations" *ngIf="event.participant_ids.length > 1">
+    <div class="col-12 col-lg-6 registrations" *ngIf="event.participant_ids.length > 1">
       <ul class="collection" >
         <li class="collection-item" *ngFor="let participant of event.participant_ids | slice:(event.participant_ids.length/2).toFixed():(event.participant_ids.length)">
-            <span>{{participant.firstname + ' ' + participant.lastname}}</span>
-            <span *ngIf="participant.trial" class="grey-text text-darken-1 light phone"><i>{{participant.phone}}</i></span>
-            <div *ngIf="participant.trial" class="secondary-content"><i class="material-icons" data-tooltip="Anmeldung zum Probetraining" mz-tooltip [tooltip]="'Anmeldung zum Probetraining'">fitness_center</i></div>
+          <div class="d-flex justify-content-between">
+            <div>
+              <span>{{participant.firstname + ' ' + participant.lastname}}</span>
+              <span *ngIf="participant.trial" class="grey-text text-darken-1 light phone"><i> {{participant.phone}}</i></span>
+            </div>
+            <div *ngIf="participant.trial" class="teal-text"><i class="material-icons" #tooltip="matTooltip" matTooltip="Anmeldung zum Probetraining">fitness_center</i></div>
+          </div>
         </li>
       </ul>
     </div>
   </div>
 
   <div *ngIf="!event.participant_ids.length">
-    <div class="col s12 center-on-mobile">
+    <div class="col-12 text-center text-lg-start">
       <span class="flow-text">Es gibt keine Anmeldungen für diesen Event!</span>
     </div>
   </div>
 </div>
+
+

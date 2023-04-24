@@ -1,24 +1,22 @@
-<div class="container administration-overview">
+<div class="container">
   <div class="row">
-    <div class="col s12">
-        <h3 class="header teal-text center-on-mobile">Administration</h3>
+    <div class="col-12">
+        <h3 class="header teal-text text-center text-lg-start">Administration</h3>
     </div>
-    <div class="col s12">
-      <h5 class="header center-on-mobile">Nächste Termine</h5>
+    <div class="col-12">
+      <h5 class="header text-center text-lg-start">Nächste Termine</h5>
     </div>
   </div>
 
   <div class="row" *ngIf="noEvents">
-    <div class="col s12">
+    <div class="col-12">
       <p class="flow-text">Es gibt zurzeit leider keine Termine!</p>
     </div>
   </div>
   
   <div class="container spinner" *ngIf="!nextEvents.length && !noEvents">
-    <div class="row center">
-      <mz-spinner
-        [size]="'big'">
-      </mz-spinner>
+    <div class="row d-flex justify-content-center">
+      <mat-spinner></mat-spinner>
     </div>
   </div>
 
@@ -26,17 +24,17 @@
     <app-next-event [event]="event"></app-next-event>
   </div>
 
-  <div class="divider"></div>
+  <hr/>
 
   <div class="row">
-    <div class="col s12">
-      <h5 class="header center-on-mobile">Alle Bereiche</h5>
+    <div class="col-12">
+      <h5 class="header text-center text-lg-start">Alle Bereiche</h5>
     </div>
   </div>
 
   <div class="row other-areas">
 
-    <div class="col s12 l6">
+    <div class="col-12 col-lg-6">
       <div class="card-panel grey lighten-5">
         <div class="card-content black-text center">
           <a [routerLink]="['/admin-event']">
@@ -46,7 +44,7 @@
       </div>
     </div>
 
-    <div class="col s12 l6">
+    <div class="col-12 col-lg-6">
       <div class="card-panel grey lighten-5">
         <div class="card-content black-text center">
           <a [routerLink]="['/admin-user']">
@@ -56,7 +54,7 @@
       </div>
     </div>
 
-    <div class="col s12 l12">
+    <div class="col-12 col-lg-12">
       <div class="card-panel grey lighten-5">
         <div class="card-content black-text center">
           <a [routerLink]="['/admin-news']">

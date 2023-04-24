@@ -44,7 +44,7 @@ import { NewsService } from './services/news.service';
 import { AdminNewsOverviewComponent } from './admin/admin-news-overview/admin-news-overview.component';
 import { CreateNewsComponent } from './admin/news/create-news/create-news.component';
 import { EditNewsComponent } from './admin/news/edit-news/edit-news.component';
-import { MatButtonModule, MatInputModule, MatListModule, MatSidenavModule } from '@angular/material';
+import { MatButtonModule, MatInputModule, MatListModule, MatProgressSpinnerModule, MatSidenavModule, MatTooltipModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -90,7 +90,9 @@ import { MatButtonModule, MatInputModule, MatListModule, MatSidenavModule } from
     MatButtonModule,
     MatSidenavModule,
     MatListModule,
-    MatInputModule
+    MatInputModule,
+    MatProgressSpinnerModule,
+    MatTooltipModule
   ],
   providers: [
     {
