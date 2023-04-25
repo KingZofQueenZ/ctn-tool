@@ -44,7 +44,8 @@ import { NewsService } from './services/news.service';
 import { AdminNewsOverviewComponent } from './admin/admin-news-overview/admin-news-overview.component';
 import { CreateNewsComponent } from './admin/news/create-news/create-news.component';
 import { EditNewsComponent } from './admin/news/edit-news/edit-news.component';
-import { MatButtonModule, MatInputModule, MatListModule, MatProgressSpinnerModule, MatSidenavModule, MatTooltipModule } from '@angular/material';
+import { MatButtonModule, MatDialogModule, MatInputModule, MatListModule, MatProgressSpinnerModule, MatSidenavModule, MatTooltipModule } from '@angular/material';
+import { DeleteDialog } from './admin/admin-news-overview/delete-dialog/delete-dialog.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { MatButtonModule, MatInputModule, MatListModule, MatProgressSpinnerModul
     ImpressumComponent,
     AdminNewsOverviewComponent,
     CreateNewsComponent,
-    EditNewsComponent
+    EditNewsComponent,
+    DeleteDialog
   ],
   
   imports: [
@@ -92,8 +94,10 @@ import { MatButtonModule, MatInputModule, MatListModule, MatProgressSpinnerModul
     MatListModule,
     MatInputModule,
     MatProgressSpinnerModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDialogModule
   ],
+  entryComponents: [DeleteDialog],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
