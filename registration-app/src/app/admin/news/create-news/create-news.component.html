@@ -1,26 +1,23 @@
-<div class="container create-news">
-  <div class="row title">
-    <div class="col s12">
-        <h3 class="header detail-title teal-text center-on-mobile">Neue News anlegen</h3>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+        <h3 class="header detail-title teal-text text-center text-lg-start">Neue News anlegen</h3>
     </div>
   </div>
 
   <form (ngSubmit)="createNewsForm.form.valid && create()" #createNewsForm="ngForm">
-    <div class="row">
-      <mz-input-container class="col s12 l10">
-        <input mz-input [label]="'Titel'" id="title" name="title" type="text" [(ngModel)]="news.title" required>
-      </mz-input-container> 
+    <div class="row">      
+      <mat-form-field class="col-12">
+        <mat-label>Titel</mat-label>
+        <input matInput [(ngModel)]="news.title" required  id="title" name="title" type="text" >
+      </mat-form-field>
     </div>
-
-    <div class="divider"></div>
 
     <ckeditor class="ckeditor" [config]="ckeConfig" [(ngModel)]="news.content" debounce="500" name="content"></ckeditor>
 
-    <div class="divider aftereditor"></div>
-
-    <div class="col s12 submit center-on-mobile">
-      <button class="btn waves-effect waves-light" [class.disabled]="!createNewsForm.form.valid" type="submit" name="action">News anlegen</button>&nbsp;
-      <a class="btn waves-effect waves-light red" (click)="goBack()">Abbrechen</a>
+    <div class="col-12 submit text-center text-lg-start mt-3">
+      <button mat-flat-button color="primary" class="btn" [class.disabled]="!createNewsForm.form.valid" type="submit" name="action">News anlegen</button>
+      <button mat-flat-button color="error" class="btn" (click)="goBack()">Abbrechen</button>
     </div>
   </form>
 </div>
