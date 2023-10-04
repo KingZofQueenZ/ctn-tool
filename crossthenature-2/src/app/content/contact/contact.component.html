@@ -1,0 +1,150 @@
+<div class="parallax-top d-none d-lg-flex">
+  <div class="container">
+    <h1 class="header text-center teal-text">Kontakt</h1>
+    <div class="row text-center">
+      <h5 class="header white-text col-12 light">
+        &laquo;Today it hurts, tomorrow it works.&raquo;
+      </h5>
+    </div>
+  </div>
+</div>
+
+<div class="container team mb-4">
+  <div class="row">
+    <div class="col-12">
+      <h3 class="header teal-text center-on-mobile">Team</h3>
+    </div>
+    <div class="col-8 col-lg-4 member mb-4 text-center">
+      <div class="center">
+        <img src="../../../assets/img/team/Cedi.jpg" />
+      </div>
+      <div class="text-start flow-text d-flex flex-column trainer-name">
+        <b>Cedi</b>
+        <span>Gründer/Trainer</span>
+      </div>
+    </div>
+    <div class="col-8 col-lg-4 member mb-4 text-center">
+      <div class="center">
+        <img src="../../../assets/img/team/Roman.jpg" />
+      </div>
+      <div class="text-start flow-text d-flex flex-column trainer-name">
+        <b>Roman</b>
+        <span>Trainer</span>
+      </div>
+    </div>
+    <div class="col-8 col-lg-4 member mb-4 text-center">
+      <div class="center">
+        <img src="../../../assets/img/team/Luca.jpg" />
+      </div>
+      <div class="text-start flow-text d-flex flex-column trainer-name">
+        <b>Luca</b>
+        <span>Trainer</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="parallax-probe">
+  <div class="container">
+    <div
+      class="row d-flex justify-content-between align-items-center probe-container"
+    >
+      <div class="col-12 col-lg-10 text-center text-lg-start">
+        <h4 class="header light white-text">
+          Interessiert? Jetzt zum Probetraining anmelden!
+        </h4>
+      </div>
+      <div class="col-12 col-lg-2 text-center text-lg-end mb-4 mb-lg-0">
+        <button
+          mat-flat-button
+          color="primary"
+          [routerLink]="['/events']"
+          [queryParams]="{ probetraining: 'true' }"
+          class="btn"
+        >
+          ZUR ANMELDUNG
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container contact">
+  <div class="row">
+    <div class="col-12">
+      <h3 class="header teal-text text-center text-lg-start">
+        Kontaktiere uns
+      </h3>
+    </div>
+
+    <div class="col-12 flow-text text-center text-lg-start">
+      Bei Fragen und Anregungen kannst du dich gerne bei uns melden. Fülle dazu
+      bitte das Kontaktformular aus oder rufe uns direkt unter
+      <i>079 923 69 98</i> an!
+    </div>
+
+    <form
+      (ngSubmit)="contactForm.form.valid && send()"
+      #contactForm="ngForm"
+      class="col-12"
+      *ngIf="!success"
+    >
+      <div class="row">
+        <mat-form-field class="col-12">
+          <mat-label>Name</mat-label>
+          <input
+            matInput
+            [(ngModel)]="model.name"
+            required
+            id="name"
+            name="name"
+            type="text"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="col-12 mt-2">
+          <mat-label>E-Mail</mat-label>
+          <input
+            matInput
+            [(ngModel)]="model.email"
+            required
+            id="email"
+            name="email"
+            type="email"
+            email
+          />
+        </mat-form-field>
+
+        <mat-form-field class="col-12 mt-2">
+          <mat-label>Deine Nachricht</mat-label>
+          <textarea
+            matInput
+            id="message"
+            name="message"
+            [(ngModel)]="model.message"
+            required
+          ></textarea>
+        </mat-form-field>
+
+        <div class="col-12 text-center text-lg-start">
+          <button
+            mat-flat-button
+            color="primary"
+            [routerLink]="['/events']"
+            [queryParams]="{ probetraining: 'true' }"
+            class="btn"
+            [class.disabled]="!contactForm.form.valid"
+            type="submit"
+            name="action"
+          >
+            ABSENDEN
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <div class="col s12 flow-text success-message" *ngIf="success">
+      Vielen Dank für deine Nachricht!
+    </div>
+  </div>
+</div>

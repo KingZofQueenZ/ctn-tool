@@ -1,0 +1,31 @@
+.parallax-top {
+  background-image: url("../../../assets/img/background/CrossTheNature.jpg");
+  min-height: 400px;
+  background-attachment: fixed;
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+
+  h1 {
+    margin-top: 0px;
+    padding-top: 160px;
+  }
+
+  h5 {
+    margin-top: -25px;
+  }
+}
+
+.parallax-probe {
+  background-image: url("../../../assets/img/background/CrossTheNature.jpg");
+  min-height: 160px;
+  background-attachment: fixed;
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.probe-container {
+  min-height: 160px;
+}
