@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title></title>
+		<link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet"> 
+		<style type="text/css">
+			body {
+				Margin: 0;
+				padding: 0;
+				min-width: 100%;
+				font-family: 'Roboto', sans-serif;
+			}
+			
+			.wrapper {
+				width: 600px;
+				margin: auto;
+			}
+			
+			.image img{
+				margin: auto;
+			}
+			
+			.title {
+				margin-top: 40px;
+			}
+			
+			.text {
+				margin-top: 40px;
+				line-height: 26px;
+			}
+
+			.password {
+				font-size: 20px;
+			}
+			
+		</style>
+	</head>
+	<body style="Margin:0;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;min-width:100%;">
+		<div class="wrapper">
+			<div class="image">
+				<img src="https://ctn.musca.uberspace.de/assets/img/logos/logo.jpg" alt="" style="display:block; color:#000000; text-decoration:none; font-family:Helvetica,arial,sans-serif; font-size:16px; max-width:30%!important; width:30%; height:auto!important" border="0">
+			</div>
+			<div class="title">
+				<h3 style="text-align:center">Passwort vergessen? Kein Problem!</h3>
+			</div>
+			<div class="text" style="text-align: center">
+				<div>
+					Wir haben dir ein neues Passwort generiert: 
+				</div>
+				</br>
+				<div class="password">
+					<b><i><%= password %></i></b>
+				</div>
+				</br>
+				<div>
+					Bitte ändere dieses Temporäre Passwort in den Benutzereinstellungen wieder!
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
