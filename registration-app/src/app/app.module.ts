@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { AuthInterceptor } from './shared/auth.interceptor';
 import { AuthGuard } from './shared/auth.guard';
 
@@ -85,7 +85,7 @@ import { DeleteUserDialog } from './admin/admin-user-overview/delete-user-dialog
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule,
+    HttpClient,
     CustomMaterializeModule,
     BrowserAnimationsModule,
     ToasterModule,
