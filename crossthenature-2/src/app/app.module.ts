@@ -25,6 +25,7 @@ import { AuthenticationService } from './services/authentication.service';
 import { StorageService } from './services/storage.service';
 import { AuthInterceptor } from './shared/auth.interceptor';
 import { ActivateComponent } from './user/activate/activate.component';
+import { ProfileComponent } from './user/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { ActivateComponent } from './user/activate/activate.component';
     LoginComponent,
     RegisterComponent,
     ActivateComponent,
+    ProfileComponent,
   ],
   imports: [
     HttpClientModule,

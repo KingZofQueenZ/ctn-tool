@@ -7,6 +7,8 @@ import { ImpressumComponent } from './content/impressum/impressum.component';
 import { RegisterComponent } from './user/register/register.component';
 import { LoginComponent } from './user/login/login.component';
 import { ActivateComponent } from './user/activate/activate.component';
+import { ProfileComponent } from './user/profile/profile.component';
+import { AuthGuard } from './shared/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -17,6 +19,7 @@ const routes: Routes = [
   { path: 'impressum', component: ImpressumComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'activate/:code', component: ActivateComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

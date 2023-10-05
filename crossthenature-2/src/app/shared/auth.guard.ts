@@ -1,26 +1,41 @@
-import { Injectable } from '@angular/core';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Injectable, inject } from '@angular/core';
+import {
+  Router,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+  CanActivateFn,
+} from '@angular/router';
 
-@Injectable()
-export class AuthGuard implements CanActivate {
+@Injectable({
+  providedIn: 'root',
+})
+export class AuthGuardService {
+  constructor(private router: Router) {}
 
-    constructor(private router: Router) { }
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    const storageUser = localStorage.getItem('currentUser');
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        if (state.url.includes('admin')) {
-            const user = JSON.parse(localStorage.getItem('currentUser'));
+    if (storageUser) {
+      if (state.url.includes('admin')) {
+        const user = JSON.parse(storageUser);
 
-            if (user && user.admin) {
-                return true;
-            }
-            return false;
+        if (user && user.admin) {
+          return true;
         }
-
-        if (localStorage.getItem('currentUser')) {
-            return true;
-        }
-
-        this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
         return false;
+      }
+
+      return true;
     }
+
+    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+    return false;
+  }
 }
+
+export const AuthGuard: CanActivateFn = (
+  next: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot,
+): boolean => {
+  return inject(AuthGuardService).canActivate(next, state);
+};
