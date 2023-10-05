@@ -1,0 +1,26 @@
+.button {
+  .register {
+    margin-left: 15px;
+
+    a {
+      color: #000;
+      text-decoration: underline;
+    }
+  }
+
+  @media only screen and (max-width: 992px) {
+    span {
+      display: block !important;
+      margin-top: 30px;
+    }
+  }
+}
+
+.error {
+  margin-top: 30px;
+  color: #f44336;
+
+  a {
+    text-decoration: underline;
+  }
+}

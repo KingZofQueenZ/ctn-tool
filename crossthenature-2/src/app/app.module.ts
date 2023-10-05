@@ -15,6 +15,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { LoginComponent } from './user/login/login.component';
 import { RegisterComponent } from './user/register/register.component';
+import { UserService } from './services/user.service';
+import { HttpClientModule } from '@angular/common/http';
+import { AuthenticationService } from './services/authentication.service';
+import { StorageService } from './services/storage.service';
 
 @NgModule({
   declarations: [
@@ -27,6 +31,7 @@ import { RegisterComponent } from './user/register/register.component';
     RegisterComponent,
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -36,9 +41,9 @@ import { RegisterComponent } from './user/register/register.component';
     MatButtonModule,
     MatInputModule,
     MatFormFieldModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [UserService, AuthenticationService, StorageService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

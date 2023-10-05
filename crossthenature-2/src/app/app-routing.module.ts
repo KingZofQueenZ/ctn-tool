@@ -5,9 +5,11 @@ import { InformationComponent } from './content/information/information.componen
 import { ContactComponent } from './content/contact/contact.component';
 import { ImpressumComponent } from './content/impressum/impressum.component';
 import { RegisterComponent } from './user/register/register.component';
+import { LoginComponent } from './user/login/login.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent, pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'information', component: InformationComponent },
   { path: 'contact', component: ContactComponent },
