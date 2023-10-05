@@ -9,6 +9,7 @@ import { LoginComponent } from './user/login/login.component';
 import { ActivateComponent } from './user/activate/activate.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { AuthGuard } from './shared/auth.guard';
+import { ChangePasswordComponent } from './user/change-password/change-password.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -20,6 +21,11 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'activate/:code', component: ActivateComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  {
+    path: 'password',
+    component: ChangePasswordComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({

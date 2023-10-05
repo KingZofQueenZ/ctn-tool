@@ -191,34 +191,39 @@ router.put("/reset", (request, response) => {
 });
 
 router.put("/changepassword", (request, response) => {
-  User.findOne({ email: request.body.email }).exec((error, document) => {
-    if (error) {
-      response.status(500).send(error);
-      return;
-    }
-
-    if (!document) {
-      response.status(404).send("User not found, email: " + request.body.email);
-      return;
-    }
-
-    if (!bcrypt.compareSync(request.body.password, document.password)) {
-      response.status(500).send("Old password is wrong");
-      return;
-    }
-
-    const newPW = request.body.newpassword;
-
-    document.password = newPW;
-    document.save((error, document) => {
-      if (error) {
-        response.status(500).send(error);
+  User.findOne({ email: request.body.email })
+    .then((document) => {
+      if (!document) {
+        response
+          .status(404)
+          .send("User not found, email: " + request.body.email);
         return;
       }
 
-      response.status(200).send();
+      if (!bcrypt.compareSync(request.body.password, document.password)) {
+        response.status(500).send("Old password is wrong");
+        return;
+      }
+
+      const newPW = request.body.newpassword;
+
+      document.password = newPW;
+
+      document
+        .save()
+        .then(() => {
+          response.status(200).send();
+        })
+        .catch((err) => {
+          response.send(error);
+          return;
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+      response.status(500).send(err);
+      return;
     });
-  });
 });
 
 // Contact Form ----------------------

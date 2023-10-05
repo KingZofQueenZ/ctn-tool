@@ -15,7 +15,7 @@ export class ActivateComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private route: ActivatedRoute,
-    private _snackBar: MatSnackBar,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit() {
@@ -27,7 +27,7 @@ export class ActivateComponent implements OnInit {
 
     this.userService.activate(code).subscribe({
       next: () => {
-        this._snackBar.open(
+        this.snackBar.open(
           'Dein Benutzer wurde erfolgreich aktiviert! Du kannst dich nun einloggen.',
         );
 
