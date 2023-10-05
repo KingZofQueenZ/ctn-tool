@@ -158,36 +158,41 @@ router.put("/activate/:code", (request, response) => {
 });
 
 router.put("/reset", (request, response) => {
-  User.findOne({ email: request.body.email }).exec((error, document) => {
-    if (error) {
-      response.status(500).send(error);
-      return;
-    }
-
-    if (!document) {
-      response.status(404).send("User not found, email: " + request.body.email);
-      return;
-    }
-
-    const newPW = randomstring.generate(7);
-
-    document.password = newPW;
-    document.save((error, document) => {
-      if (error) {
-        response.status(500).send(error);
+  User.findOne({ email: request.body.email })
+    .then((document) => {
+      if (!document) {
+        response
+          .status(404)
+          .send("User not found, email: " + request.body.email);
         return;
       }
 
-      var locals = {
-        email: request.body.email,
-        subject: "Neues Passwort",
-        password: newPW,
-      };
-      //mailer.sendMail('password', locals);
+      const newPW = randomstring.generate(7);
+      console.log(newPW);
 
-      response.status(200).send({ reset: true });
+      document.password = newPW;
+
+      document
+        .save()
+        .then(() => {
+          var locals = {
+            email: request.body.email,
+            subject: "Neues Passwort",
+            password: newPW,
+          };
+          //mailer.sendMail('password', locals);
+
+          response.status(200).send({ reset: true });
+        })
+        .catch((err) => {
+          response.status(500).send(err);
+          return;
+        });
+    })
+    .catch((err) => {
+      response.status(500).send(err);
+      return;
     });
-  });
 });
 
 router.put("/changepassword", (request, response) => {

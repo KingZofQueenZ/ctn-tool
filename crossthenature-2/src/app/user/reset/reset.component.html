@@ -1,0 +1,68 @@
+<div class="container login">
+  <div class="row" *ngIf="!success">
+    <div class="col-12 col-lg-8 offset-lg-2">
+      <h3 class="header detail-title teal-text center-on-mobile">
+        Passwort zurücksetzen
+      </h3>
+    </div>
+
+    <div class="col-12 col-lg-8 offset-lg-2">
+      <span class="flow-text"
+        >Gib bitte deine E-Mail Adresse ein. Wir werden dir ein neues Passwort
+        zusenden!</span
+      >
+    </div>
+
+    <form
+      (ngSubmit)="resetForm.form.valid && reset()"
+      #resetForm="ngForm"
+      class="col-12 col-lg-8 offset-lg-2 form"
+    >
+      <mat-form-field class="col-12">
+        <mat-label>E-Mail</mat-label>
+        <input
+          matInput
+          [(ngModel)]="model.email"
+          required
+          id="email"
+          name="email"
+          type="email"
+          email
+        />
+      </mat-form-field>
+
+      <div class="col-12 text-center text-lg-start">
+        <button
+          mat-flat-button
+          color="primary"
+          class="btn"
+          [class.disabled]="!resetForm.form.valid"
+          type="submit"
+          name="action"
+        >
+          Bestätigen
+        </button>
+      </div>
+    </form>
+
+    <div class="col-12 col-lg-8 offset-lg-2">
+      <div class="col-12 error light" [hidden]="!hasError">
+        Das Passwort konnte nicht zurückgesetzt werden!
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="success">
+    <div class="col-12 col-lg-8 offset-lg-2">
+      <h3 class="header detail-title teal-text center-on-mobile">
+        Passwort zurückgesetzt
+      </h3>
+    </div>
+
+    <div class="col-12 col-lg-8 offset-lg-2">
+      <span class="flow-text"
+        >Das Passwort wurde erfolgreich zurückgesetzt. Wir haben dir ein neues
+        Passwort an die angegebene E-Mail Adresse gesendet.</span
+      >
+    </div>
+  </div>
+</div>
