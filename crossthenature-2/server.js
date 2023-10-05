@@ -14,8 +14,12 @@ const newsApi = require("./server/routes/api/news");
 
 const app = express();
 
-// Set headers for security
-app.use(helmet());
+// Set headers for security TODO: Fix CSP
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
 
 /* Mongoose setup */
 console.log("MongoDB", process.env.CONNECTIONSTRING);

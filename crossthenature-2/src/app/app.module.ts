@@ -11,8 +11,10 @@ import { ImpressumComponent } from './content/impressum/impressum.component';
 import { ContactComponent } from './content/contact/contact.component';
 import { InformationComponent } from './content/information/information.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { LoginComponent } from './user/login/login.component';
+import { RegisterComponent } from './user/register/register.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { MatInputModule } from '@angular/material/input';
     ImpressumComponent,
     ContactComponent,
     InformationComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,6 +36,7 @@ import { MatInputModule } from '@angular/material/input';
     MatButtonModule,
     MatInputModule,
     MatFormFieldModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

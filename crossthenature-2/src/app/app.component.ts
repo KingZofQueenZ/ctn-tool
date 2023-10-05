@@ -40,14 +40,6 @@ export class AppComponent {
 
   getUser() {
     this.user = new User(
-      'id',
-      'pw',
-      'name',
-      'lastname',
-      'phone',
-      'email',
-      'token',
-      true,
     ); //JSON.parse(localStorage.getItem('currentUser'));
   }
 }
