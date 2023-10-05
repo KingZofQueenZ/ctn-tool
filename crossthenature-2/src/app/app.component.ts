@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { User } from './models/user';
+import { StorageService } from './services/storage.service';
+import { AuthenticationService } from './services/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -16,30 +18,37 @@ export class AppComponent {
     timeout: 4000,
   });*/
 
-  constructor(/*private storageService: StorageService,
+  constructor(
+    private storageService: StorageService,
     private authSevice: AuthenticationService,
-    private cdRef: ChangeDetectorRef*/) {
+    private cdRef: ChangeDetectorRef,
+  ) {
     this.getUser();
-    //this.storageService.storageSub.subscribe((key: string) => {
-    //this.getUser();
-    //this.cdRef.detectChanges();
-    //});
+    this.storageService.storageSub.subscribe((key: string) => {
+      this.getUser();
+      this.cdRef.detectChanges();
+    });
   }
 
   ngOnInit(): void {
     if (this.user) {
-      /*this.authSevice.refresh(this.user.email).subscribe(
-        response => {
-        },
-        error => {
+      this.authSevice.refresh(this.user.email).subscribe({
+        next: () => {},
+        error: () => {
           this.authSevice.logout();
-        }
-      );*/
+        },
+      });
     }
   }
 
   getUser() {
-    this.user = new User(
-    ); //JSON.parse(localStorage.getItem('currentUser'));
+    let storageUser = localStorage.getItem('currentUser');
+
+    if (!storageUser) {
+      this.user = undefined;
+      return;
+    }
+
+    this.user = JSON.parse(storageUser);
   }
 }

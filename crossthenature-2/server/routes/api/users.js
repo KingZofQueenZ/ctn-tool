@@ -21,26 +21,6 @@ const mailer = require("../../config/mailer");
 router.post("/authenticate", (request, response) => {
   var body = request.body;
 
-  /*
-  User.create(newUser)
-  .then(() => {
-    var locals = {
-      email: newUser.email,
-      subject: "Registrierung bestätigen",
-      firstname: newUser.firstname,
-      url: "http://www.crossthenature.ch/activate/" + newUser.activation_code,
-    };
-    //mailer.sendMail('registration', locals);
-
-    response.status(200).send("User created successfully");
-  })
-  .catch((err) => {
-    response.status(500).send(err);
-    return;
-  });
-
-*/
-
   User.findOne({ email: body.email })
     .then((user) => {
       if (!user) {
@@ -75,7 +55,7 @@ router.post("/authenticate", (request, response) => {
       }
     })
     .catch((err) => {
-      response.status(500).send(error);
+      response.status(500).send(err);
       return;
     });
 });
@@ -83,39 +63,39 @@ router.post("/authenticate", (request, response) => {
 // Refresh Token
 router.post("/refresh", VerifyToken.verify, (request, response) => {
   var body = request.body;
-  User.findOne({ email: body.email }, (error, user) => {
-    if (error) {
-      response.status(500).send(error);
+  User.findOne({ email: body.email })
+    .then((user) => {
+      if (!user) {
+        response.status(404).send("User not found, email: " + body.email);
+        return;
+      }
+
+      if (user && user.activated) {
+        var authenticatedUser = {
+          _id: user._id,
+          email: user.email,
+          firstname: user.firstname,
+          lastname: user.lastname,
+          phone: user.phone,
+          token: jwt.sign(
+            { sub: user._id, admin: user.admin },
+            config.auth.secret,
+            { expiresIn: "14d" },
+          ),
+          admin: user.admin,
+        };
+
+        response.status(200).send(authenticatedUser);
+      } else {
+        response
+          .status(401)
+          .send("User authentication failed, email: " + body.email);
+      }
+    })
+    .catch((err) => {
+      response.status(500).send(err);
       return;
-    }
-
-    if (!user) {
-      response.status(404).send("User not found, email: " + body.email);
-      return;
-    }
-
-    if (user && user.activated) {
-      var authenticatedUser = {
-        _id: user._id,
-        email: user.email,
-        firstname: user.firstname,
-        lastname: user.lastname,
-        phone: user.phone,
-        token: jwt.sign(
-          { sub: user._id, admin: user.admin },
-          config.auth.secret,
-          { expiresIn: "14d" },
-        ),
-        admin: user.admin,
-      };
-
-      response.status(200).send(authenticatedUser);
-    } else {
-      response
-        .status(401)
-        .send("User authentication failed, email: " + body.email);
-    }
-  });
+    });
 });
 
 // Create user

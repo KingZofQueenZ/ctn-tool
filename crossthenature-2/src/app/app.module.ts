@@ -16,9 +16,10 @@ import { MatInputModule } from '@angular/material/input';
 import { LoginComponent } from './user/login/login.component';
 import { RegisterComponent } from './user/register/register.component';
 import { UserService } from './services/user.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthenticationService } from './services/authentication.service';
 import { StorageService } from './services/storage.service';
+import { AuthInterceptor } from './shared/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,16 @@ import { StorageService } from './services/storage.service';
     MatFormFieldModule,
     ReactiveFormsModule,
   ],
-  providers: [UserService, AuthenticationService, StorageService],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+    UserService,
+    AuthenticationService,
+    StorageService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
