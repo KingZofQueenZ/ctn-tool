@@ -11,6 +11,10 @@ import { ImpressumComponent } from './content/impressum/impressum.component';
 import { ContactComponent } from './content/contact/contact.component';
 import { InformationComponent } from './content/information/information.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {
+  MAT_SNACK_BAR_DEFAULT_OPTIONS,
+  MatSnackBarModule,
+} from '@angular/material/snack-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { LoginComponent } from './user/login/login.component';
@@ -20,6 +24,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthenticationService } from './services/authentication.service';
 import { StorageService } from './services/storage.service';
 import { AuthInterceptor } from './shared/auth.interceptor';
+import { ActivateComponent } from './user/activate/activate.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +35,7 @@ import { AuthInterceptor } from './shared/auth.interceptor';
     InformationComponent,
     LoginComponent,
     RegisterComponent,
+    ActivateComponent,
   ],
   imports: [
     HttpClientModule,
@@ -42,6 +48,7 @@ import { AuthInterceptor } from './shared/auth.interceptor';
     MatButtonModule,
     MatInputModule,
     MatFormFieldModule,
+    MatSnackBarModule,
     ReactiveFormsModule,
   ],
   providers: [
@@ -53,6 +60,11 @@ import { AuthInterceptor } from './shared/auth.interceptor';
     UserService,
     AuthenticationService,
     StorageService,
+    MatSnackBarModule,
+    {
+      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+      useValue: { duration: 5000, verticalPosition: 'top' },
+    },
   ],
   bootstrap: [AppComponent],
 })

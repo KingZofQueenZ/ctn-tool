@@ -1,13 +1,13 @@
 <div class="container login">
   <div class="">
-    <div class="row col-12 col-lg-6 offset-l3">
+    <div class="row col-12 col-lg-6 offset-lg-3">
       <h3 class="header detail-title teal-text center-on-mobile">Login</h3>
     </div>
 
     <form
       (ngSubmit)="loginForm.form.valid && login()"
       #loginForm="ngForm"
-      class="row col-12 col-lg-6 offset-l3"
+      class="row col-12 col-lg-6 offset-lg-3"
     >
       <mat-form-field class="col-12">
         <mat-label>E-Mail</mat-label>
@@ -54,7 +54,7 @@
       </div>
     </form>
 
-    <div class="col-12 col-lg-6 offset-l3" *ngIf="hasError">
+    <div class="col-12 col-lg-6 offset-lg-3" *ngIf="hasError">
       <div class="col s12 error light">
         Du konntest nicht eingeloggt werden! Passwort oder E-Mail falsch?
         Benutzer bereits aktiviert?

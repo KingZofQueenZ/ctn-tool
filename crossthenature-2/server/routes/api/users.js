@@ -130,13 +130,8 @@ router.post("/", (request, response) => {
 });
 
 router.put("/activate/:code", (request, response) => {
-  User.findOne({ activation_code: request.params.code }).exec(
-    (error, document) => {
-      if (error) {
-        response.status(500).send(error);
-        return;
-      }
-
+  User.findOne({ activation_code: request.params.code })
+    .then((document) => {
       if (!document || document.activated) {
         response
           .status(404)
@@ -146,15 +141,20 @@ router.put("/activate/:code", (request, response) => {
 
       document.activated = true;
       document.activation_code = "";
-      document.save((error, document) => {
-        if (error) {
+      document
+        .save()
+        .then(() => {
+          response.status(200).send({ activated: true });
+        })
+        .catch((err) => {
           response.send(error);
           return;
-        }
-        response.status(200).send({ activated: true });
-      });
-    },
-  );
+        });
+    })
+    .catch((err) => {
+      response.status(500).send(err);
+      return;
+    });
 });
 
 router.put("/reset", (request, response) => {

@@ -1,6 +1,6 @@
 <div class="container register">
   <div class="row" *ngIf="!success">
-    <div class="col-12 col-lg-8 offset-l2">
+    <div class="col-12 col-lg-8 offset-lg-2">
       <h3 class="header detail-title teal-text center-on-mobile">
         Registrieren
       </h3>
@@ -9,7 +9,7 @@
     <form
       (ngSubmit)="registerForm.valid && register()"
       [formGroup]="registerForm"
-      class="col-12 col-lg-8 offset-l2"
+      class="col-12 col-lg-8 offset-lg-2"
     >
       <mat-form-field class="col-12">
         <mat-label>Vorname</mat-label>
@@ -103,7 +103,7 @@
       </div>
     </form>
 
-    <div class="col-12 col-lg-8 offset-l2" *ngIf="hasError">
+    <div class="col-12 col-lg-8 offset-lg-2" *ngIf="hasError">
       <div class="col-12 error light">
         Ein Benutzer mit dieser E-Mail Adresse existiert bereits! Passwort
         <a [routerLink]="['/password']">vergessen?</a>
@@ -112,13 +112,13 @@
   </div>
 
   <div class="row success" *ngIf="success">
-    <div class="col-12 col-lg-8 offset-l2">
+    <div class="col-12 col-lg-8 offset-lg-2">
       <h4 class="header detail-title teal-text center-on-mobile">
         Registrierung erfolgreich
       </h4>
     </div>
 
-    <div class="col-12 col-lg-8 offset-l2 text">
+    <div class="col-12 col-lg-8 offset-lg-2 text">
       <span class="flow-text"
         >{{ user.firstname }}, vielen Dank für deine Registrierung! Wir haben
         dir eine Bestätigungsmail an <i>{{ user.email }}</i> gesendet. Bestätige
