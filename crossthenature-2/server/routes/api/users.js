@@ -10,7 +10,6 @@ const User = require("../../models/user");
 const Event = require("../../models/event");
 const mailer = require("../../config/mailer");
 const request = require("request");
-const config = require("../config/index");
 
 // Users ------------------------
 //   route: /api/users
