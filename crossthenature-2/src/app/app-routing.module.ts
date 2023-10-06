@@ -15,6 +15,7 @@ import { SettingsComponent } from './user/settings/settings.component';
 import { AdminOverviewComponent } from './admin/admin-overview/admin-overview.component';
 import { AdminNewsOverviewComponent } from './admin/admin-news-overview/admin-news-overview.component';
 import { CreateNewsComponent } from './admin/news/create-news/create-news.component';
+import { EditNewsComponent } from './admin/news/edit-news/edit-news.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -41,6 +42,11 @@ const routes: Routes = [
   {
     path: 'admin-news-create',
     component: CreateNewsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'admin-news-edit/:id',
+    component: EditNewsComponent,
     canActivate: [AuthGuard],
   },
   {

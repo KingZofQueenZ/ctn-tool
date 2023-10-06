@@ -86,14 +86,15 @@ router.put("/:news_id", VerifyToken.verifyAdmin, (request, response) => {
         document.content = body.content || document.content;
         document.date = body.date || document.date;
 
-        return document.save((error, document) => {
-          if (error) {
-            response.send(error);
+        document
+          .save()
+          .then((document) => {
+            response.status(200).json(document);
+          })
+          .catch((err) => {
+            response.status(500).send(err);
             return;
-          }
-
-          response.status(200).json(document);
-        });
+          });
       } else {
         response
           .status(404)

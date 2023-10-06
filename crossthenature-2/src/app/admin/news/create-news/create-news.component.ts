@@ -5,8 +5,7 @@ import { Location } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { Editor, EditorConfig } from '@ckeditor/ckeditor5-core';
-import { group } from '@angular/animations';
+import { EditorConfig } from '@ckeditor/ckeditor5-core';
 
 @Component({
   selector: 'app-create-news',

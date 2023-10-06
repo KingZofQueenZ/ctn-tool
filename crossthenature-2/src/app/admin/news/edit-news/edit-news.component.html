@@ -1,1 +1,60 @@
-<p>edit-news works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h3 class="header detail-title teal-text text-center text-lg-start">
+        News bearbeiten
+      </h3>
+    </div>
+  </div>
+
+  <form
+    (ngSubmit)="editNewsForm.form.valid && edit()"
+    #editNewsForm="ngForm"
+    *ngIf="news"
+  >
+    <div class="row">
+      <mat-form-field class="col-12">
+        <mat-label>Titel</mat-label>
+        <input
+          matInput
+          [(ngModel)]="news.title"
+          required
+          id="title"
+          name="title"
+          type="text"
+        />
+      </mat-form-field>
+    </div>
+
+    <ckeditor
+      class="ckeditor"
+      [editor]="editor"
+      [config]="ckeConfig"
+      [(ngModel)]="news.content"
+      name="content"
+      data=""
+    ></ckeditor>
+
+    <div class="col-12 submit text-center text-lg-start mt-3">
+      <button
+        mat-flat-button
+        color="primary"
+        class="btn"
+        [class.disabled]="!editNewsForm.form.valid"
+        type="submit"
+        name="action"
+      >
+        News speichern
+      </button>
+      <button
+        mat-flat-button
+        color="error"
+        type="button"
+        class="btn"
+        (click)="goBack()"
+      >
+        Abbrechen
+      </button>
+    </div>
+  </form>
+</div>
