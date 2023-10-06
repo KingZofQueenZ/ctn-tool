@@ -37,7 +37,6 @@ import { CreateNewsComponent } from './admin/news/create-news/create-news.compon
 import { EditNewsComponent } from './admin/news/edit-news/edit-news.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { MatDialogModule } from '@angular/material/dialog';
-import { DeleteDialog } from './admin/admin-news-overview/delete-dialog/delete-dialog.component';
 import { NewsOverviewComponent } from './news/news-overview/news-overview.component';
 import { SafeHtmlPipe } from './shared/safe-html-pipe.pipe';
 import {
@@ -47,6 +46,9 @@ import {
   RecaptchaSettings,
 } from 'ng-recaptcha';
 import { environment } from 'src/environments/environment';
+import { AdminUserOverviewComponent } from './admin/admin-user-overview/admin-user-overview.component';
+import { DeleteNewsDialog } from './admin/admin-news-overview/delete-dialog/delete-news-dialog.component';
+import { DeleteUserDialog } from './admin/admin-user-overview/delete-dialog/delete-user-dialog.component';
 
 @NgModule({
   declarations: [
@@ -65,10 +67,12 @@ import { environment } from 'src/environments/environment';
     AdminOverviewComponent,
     AdminNewsOverviewComponent,
     CreateNewsComponent,
-    DeleteDialog,
+    DeleteNewsDialog,
+    DeleteUserDialog,
     EditNewsComponent,
     NewsOverviewComponent,
     SafeHtmlPipe,
+    AdminUserOverviewComponent,
   ],
   imports: [
     HttpClientModule,

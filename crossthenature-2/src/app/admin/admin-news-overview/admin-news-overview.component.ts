@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { News } from 'src/app/models/news';
 import { NewsService } from 'src/app/services/news.service';
-import { DeleteDialog } from './delete-dialog/delete-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DeleteNewsDialog } from './delete-dialog/delete-news-dialog.component';
 
 @Component({
   selector: 'app-admin-news-overview',
@@ -64,7 +64,7 @@ export class AdminNewsOverviewComponent implements OnInit {
     dialogConfig.data = {
       title: news.title,
     };
-    const dialogRef = this.dialog.open(DeleteDialog, dialogConfig);
+    const dialogRef = this.dialog.open(DeleteNewsDialog, dialogConfig);
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {

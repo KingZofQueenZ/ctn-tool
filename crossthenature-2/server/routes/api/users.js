@@ -277,12 +277,7 @@ router.get("/", VerifyToken.verifyAdmin, (request, response) => {
   User.find({})
     .select({ password: 0, __v: 0 })
     .sort({ lastname: 1, firstname: 1 })
-    .exec((error, documents) => {
-      if (error) {
-        response.status(500).send(error);
-        return;
-      }
-
+    .then((documents) => {
       response.header(
         "Cache-Control",
         "private, no-cache, no-store, must-revalidate",
@@ -290,6 +285,10 @@ router.get("/", VerifyToken.verifyAdmin, (request, response) => {
       response.header("Expires", "-1");
       response.header("Pragma", "no-cache");
       response.status(200).json(documents);
+    })
+    .catch((err) => {
+      response.status(500).send(err);
+      return;
     });
 });
 
@@ -297,12 +296,7 @@ router.get("/", VerifyToken.verifyAdmin, (request, response) => {
 router.get("/:user_id", VerifyToken.verifyUser, (request, response) => {
   User.findById(request.params.user_id)
     .select({ _id: 0, password: 0, __v: 0 })
-    .exec((error, document) => {
-      if (error) {
-        response.status(500).send(error);
-        return;
-      }
-
+    .then((document) => {
       if (!document) {
         response
           .status(404)
@@ -317,6 +311,10 @@ router.get("/:user_id", VerifyToken.verifyUser, (request, response) => {
       response.header("Expires", "-1");
       response.header("Pragma", "no-cache");
       response.status(200).json(document);
+    })
+    .catch((err) => {
+      response.status(500).send(err);
+      return;
     });
 });
 
@@ -355,21 +353,14 @@ router.put("/:user_id", VerifyToken.verifyUser, (request, response) => {
 
 // Delete user
 router.delete("/:user_id", VerifyToken.verifyAdmin, (request, response) => {
-  User.remove({ _id: request.params.user_id }, (error, document) => {
-    if (error) {
+  User.deleteOne({ _id: request.params.user_id })
+    .then(() => {
+      response.status(200).send("User deleted sucessfully");
+    })
+    .catch((err) => {
       response.status(500).send(error);
       return;
-    }
-
-    if (!document.n) {
-      response
-        .status(404)
-        .send("User not found, _id: " + request.params.user_id);
-      return;
-    }
-
-    response.status(200).send("User deleted sucessfully");
-  });
+    });
 });
 
 // Get upcoming all events for a user
