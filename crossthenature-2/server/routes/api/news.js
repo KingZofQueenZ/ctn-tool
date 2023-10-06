@@ -108,7 +108,7 @@ router.put("/:news_id", VerifyToken.verifyAdmin, (request, response) => {
 
 // Delete news
 router.delete("/:news_id", VerifyToken.verifyAdmin, (request, response) => {
-  News.remove({ _id: request.params.news_id })
+  News.deleteOne({ _id: request.params.news_id })
     .then(() => {
       response.status(200).send();
     })

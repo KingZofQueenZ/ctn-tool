@@ -36,6 +36,8 @@ import { NewsService } from './services/news.service';
 import { CreateNewsComponent } from './admin/news/create-news/create-news.component';
 import { EditNewsComponent } from './admin/news/edit-news/edit-news.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DeleteDialog } from './admin/admin-news-overview/delete-dialog/delete-dialog.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +56,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     AdminOverviewComponent,
     AdminNewsOverviewComponent,
     CreateNewsComponent,
+    DeleteDialog,
     EditNewsComponent,
   ],
   imports: [
@@ -69,6 +72,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     MatFormFieldModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
+    MatDialogModule,
     ReactiveFormsModule,
     CKEditorModule,
   ],

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { News } from 'src/app/models/news';
 import { NewsService } from 'src/app/services/news.service';
+import { DeleteDialog } from './delete-dialog/delete-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-news-overview',
@@ -15,7 +18,9 @@ export class AdminNewsOverviewComponent implements OnInit {
   allNews: Boolean = false;
 
   constructor(
-    private newsService: NewsService, //public dialog: MatDialog,
+    private newsService: NewsService,
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit() {
@@ -54,7 +59,7 @@ export class AdminNewsOverviewComponent implements OnInit {
   }
 
   deleteNews(news: News) {
-    /*const dialogConfig = new MatDialogConfig();
+    const dialogConfig = new MatDialogConfig();
 
     dialogConfig.data = {
       title: news.title,
@@ -63,24 +68,16 @@ export class AdminNewsOverviewComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.newsService.delete(news._id).subscribe(
-          (result) => {
-            this.toasterService.pop(
-              'success',
-              'Löschen erfolgreich',
-              'Die News wurde erfolgreich gelöscht.',
-            );
+        this.newsService.delete(news._id).subscribe({
+          next: () => {
+            this.snackBar.open('Die News wurde erfolgreich gelöscht.');
             this.refresh();
           },
-          (error) => {
-            this.toasterService.pop(
-              'error',
-              'Löschen fehlerhaft',
-              'Die News konnte nicht gelöscht werden!',
-            );
+          error: (e) => {
+            this.snackBar.open('Die News konnte nicht gelöscht werden.');
           },
-        );
+        });
       }
-    });*/
+    });
   }
 }
