@@ -40,6 +40,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DeleteDialog } from './admin/admin-news-overview/delete-dialog/delete-dialog.component';
 import { NewsOverviewComponent } from './news/news-overview/news-overview.component';
 import { SafeHtmlPipe } from './shared/safe-html-pipe.pipe';
+import {
+  RECAPTCHA_SETTINGS,
+  RecaptchaFormsModule,
+  RecaptchaModule,
+  RecaptchaSettings,
+} from 'ng-recaptcha';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -79,12 +86,20 @@ import { SafeHtmlPipe } from './shared/safe-html-pipe.pipe';
     MatDialogModule,
     ReactiveFormsModule,
     CKEditorModule,
+    RecaptchaModule,
+    RecaptchaFormsModule,
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true,
+    },
+    {
+      provide: RECAPTCHA_SETTINGS,
+      useValue: {
+        siteKey: environment.recaptcha.siteKey,
+      } as RecaptchaSettings,
     },
     UserService,
     AuthenticationService,

@@ -26,6 +26,7 @@ export class RegisterComponent {
       email: ['', [Validators.required, Validators.email]],
       phone: ['', Validators.required],
       password: ['', Validators.required],
+      token: ['', Validators.required],
       confirmPassword: [
         '',
         [matchOtherValidator('password'), Validators.required],
