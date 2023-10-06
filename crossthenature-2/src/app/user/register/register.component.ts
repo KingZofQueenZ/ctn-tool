@@ -35,13 +35,16 @@ export class RegisterComponent {
   }
 
   register(): void {
-    this.userService.create(this.user).subscribe({
-      next: () => {
-        this.success = true;
-      },
-      error: (e) => {
-        this.hasError = true;
-      },
-    });
+    // Send Google Captcha Token to backend to verify
+    this.userService
+      .create(this.user, this.registerForm.controls['token'].value)
+      .subscribe({
+        next: () => {
+          this.success = true;
+        },
+        error: (e) => {
+          this.hasError = true;
+        },
+      });
   }
 }

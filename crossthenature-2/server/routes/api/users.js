@@ -9,6 +9,8 @@ const VerifyToken = require("../../authentication/verifytoken");
 const User = require("../../models/user");
 const Event = require("../../models/event");
 const mailer = require("../../config/mailer");
+const request = require("request");
+const config = require("../config/index");
 
 // Users ------------------------
 //   route: /api/users
@@ -99,8 +101,8 @@ router.post("/refresh", VerifyToken.verify, (request, response) => {
 });
 
 // Create user
-router.post("/", (request, response) => {
-  var body = request.body;
+router.post("/", (req, response) => {
+  var body = req.body;
   var newUser = new User({
     firstname: body.firstname,
     lastname: body.lastname,
@@ -111,22 +113,38 @@ router.post("/", (request, response) => {
     activation_code: randomstring.generate(7),
   });
 
-  User.create(newUser)
-    .then(() => {
-      var locals = {
-        email: newUser.email,
-        subject: "Registrierung bestätigen",
-        firstname: newUser.firstname,
-        url: "http://www.crossthenature.ch/activate/" + newUser.activation_code,
-      };
-      //mailer.sendMail('registration', locals);
+  const verificationURL =
+    "https://www.google.com/recaptcha/api/siteverify?secret=" +
+    config.captcha.secretKey +
+    "&response=" +
+    body.captchaToken;
 
-      response.status(200).send("User created successfully");
-    })
-    .catch((err) => {
-      response.status(500).send(err);
-      return;
-    });
+  // Verify Captcha with Google
+  request(verificationURL, function (error, res, body) {
+    body = JSON.parse(body);
+
+    if (body.success !== undefined && !body.success) {
+      return response.status(500).send("Failed captcha verification");
+    }
+
+    User.create(newUser)
+      .then(() => {
+        var locals = {
+          email: newUser.email,
+          subject: "Registrierung bestätigen",
+          firstname: newUser.firstname,
+          url:
+            "http://www.crossthenature.ch/activate/" + newUser.activation_code,
+        };
+        //mailer.sendMail('registration', locals);
+
+        response.status(200).send("User created successfully");
+      })
+      .catch((err) => {
+        response.status(500).send(err);
+        return;
+      });
+  });
 });
 
 router.put("/activate/:code", (request, response) => {

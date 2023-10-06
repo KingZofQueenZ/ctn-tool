@@ -12,8 +12,18 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   // POST /users
-  create(user: User): Observable<User> {
-    return this.http.post<User>('/api/users', user, {
+  create(user: User, captchaToken: string): Observable<User> {
+    const captcha = {
+      captchaToken: captchaToken,
+    };
+
+    // Combine user with captcha token to verify on backend
+    const tokenUser = {
+      ...user,
+      ...captcha,
+    };
+
+    return this.http.post<User>('/api/users', tokenUser, {
       headers: headers,
       responseType: 'text' as 'json',
     });
