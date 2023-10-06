@@ -11,6 +11,7 @@ import { ProfileComponent } from './user/profile/profile.component';
 import { AuthGuard } from './shared/auth.guard';
 import { ChangePasswordComponent } from './user/change-password/change-password.component';
 import { ResetComponent } from './user/reset/reset.component';
+import { SettingsComponent } from './user/settings/settings.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'reset', component: ResetComponent },
   { path: 'activate/:code', component: ActivateComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
   {
     path: 'password',
     component: ChangePasswordComponent,

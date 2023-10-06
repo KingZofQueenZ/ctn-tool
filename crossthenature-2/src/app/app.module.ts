@@ -28,6 +28,7 @@ import { ActivateComponent } from './user/activate/activate.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { ChangePasswordComponent } from './user/change-password/change-password.component';
 import { ResetComponent } from './user/reset/reset.component';
+import { SettingsComponent } from './user/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { ResetComponent } from './user/reset/reset.component';
     ProfileComponent,
     ChangePasswordComponent,
     ResetComponent,
+    SettingsComponent,
   ],
   imports: [
     HttpClientModule,

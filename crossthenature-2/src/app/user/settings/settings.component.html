@@ -1,49 +1,62 @@
-<div class="container password">
+<div class="container register">
   <div class="row">
     <div class="col-12 col-lg-8 offset-lg-2">
       <h3 class="header detail-title teal-text center-on-mobile">
-        Passwort ändern
+        Benutzerdaten
       </h3>
     </div>
 
     <form
-      (ngSubmit)="passwordForm.valid && changePassword()"
-      [formGroup]="passwordForm"
+      (ngSubmit)="settingsForm.form.valid && update()"
+      #settingsForm="ngForm"
       class="col-12 col-lg-8 offset-lg-2"
     >
       <mat-form-field class="col-12">
-        <mat-label>Altes Passwort</mat-label>
+        <mat-label>Vorname</mat-label>
         <input
           matInput
+          [(ngModel)]="user.firstname"
           required
-          formControlName="oldPassword"
-          id="oldPassword"
-          name="oldPassword"
-          type="password"
+          id="firstname"
+          name="firstname"
+          type="text"
         />
       </mat-form-field>
 
       <mat-form-field class="col-12">
-        <mat-label>Neues Passwort</mat-label>
+        <mat-label>Nachname</mat-label>
         <input
           matInput
+          [(ngModel)]="user.lastname"
           required
-          formControlName="password"
-          id="password"
-          name="password"
-          type="password"
+          id="lastname"
+          name="lastname"
+          type="text"
         />
       </mat-form-field>
 
       <mat-form-field class="col-12">
-        <mat-label>Passwort bestätigen</mat-label>
+        <mat-label>E-Mail</mat-label>
         <input
           matInput
+          [(ngModel)]="user.email"
           required
-          formControlName="confirmPassword"
-          id="confirmPassword"
-          name="confirmPassword"
-          type="password"
+          id="email"
+          name="email"
+          type="email"
+          email
+        />
+      </mat-form-field>
+
+      <mat-form-field class="col-12">
+        <mat-label>Telefon</mat-label>
+        <input
+          matInput
+          [(ngModel)]="user.phone"
+          required
+          id="phone"
+          name="phone"
+          type="text"
         />
       </mat-form-field>
 
@@ -52,11 +65,11 @@
           mat-flat-button
           color="primary"
           class="btn"
-          [class.disabled]="!passwordForm.valid"
+          [class.disabled]="!settingsForm.form.valid"
           type="submit"
           name="action"
         >
-          Passwort ändern
+          Speichern
         </button>
         <button
           mat-flat-button

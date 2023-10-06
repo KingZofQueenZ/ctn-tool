@@ -168,7 +168,6 @@ router.put("/reset", (request, response) => {
       }
 
       const newPW = randomstring.generate(7);
-      console.log(newPW);
 
       document.password = newPW;
 
@@ -307,32 +306,34 @@ router.get("/:user_id", VerifyToken.verifyUser, (request, response) => {
 // Update user
 router.put("/:user_id", VerifyToken.verifyUser, (request, response) => {
   var body = request.body;
-  User.findById(request.params.user_id).exec((error, document) => {
-    if (error) {
-      response.status(500).send(error);
-      return;
-    }
 
-    if (!document) {
-      response.status(404).send("User not found, _id: " + request.body._id);
-      return;
-    }
-
-    document.firstname = body.firstname || document.firstname;
-    document.lastname = body.lastname || document.lastname;
-    document.phone = body.phone || document.phone;
-    document.email = body.email || document.email;
-    document.password = body.password || document.password;
-
-    document.save((error, document) => {
-      if (error) {
-        response.send(error);
+  User.findById(request.params.user_id)
+    .then((document) => {
+      if (!document) {
+        response.status(404).send("User not found, _id: " + request.body._id);
         return;
       }
 
-      response.status(200).send("User updated sucessfully");
+      document.firstname = body.firstname || document.firstname;
+      document.lastname = body.lastname || document.lastname;
+      document.phone = body.phone || document.phone;
+      document.email = body.email || document.email;
+      document.password = body.password || document.password;
+
+      document
+        .save()
+        .then(() => {
+          response.status(200).send("User updated sucessfully");
+        })
+        .catch((err) => {
+          response.status(500).send(err);
+          return;
+        });
+    })
+    .catch((err) => {
+      response.status(500).send(err);
+      return;
     });
-  });
 });
 
 // Delete user
