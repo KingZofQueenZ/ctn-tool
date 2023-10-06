@@ -12,6 +12,7 @@ import { AuthGuard } from './shared/auth.guard';
 import { ChangePasswordComponent } from './user/change-password/change-password.component';
 import { ResetComponent } from './user/reset/reset.component';
 import { SettingsComponent } from './user/settings/settings.component';
+import { AdminOverviewComponent } from './admin/admin-overview/admin-overview.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -25,6 +26,11 @@ const routes: Routes = [
   { path: 'activate/:code', component: ActivateComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
+  {
+    path: 'admin',
+    component: AdminOverviewComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: 'password',
     component: ChangePasswordComponent,

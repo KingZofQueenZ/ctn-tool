@@ -11,6 +11,7 @@ import { ImpressumComponent } from './content/impressum/impressum.component';
 import { ContactComponent } from './content/contact/contact.component';
 import { InformationComponent } from './content/information/information.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {
   MAT_SNACK_BAR_DEFAULT_OPTIONS,
   MatSnackBarModule,
@@ -29,6 +30,7 @@ import { ProfileComponent } from './user/profile/profile.component';
 import { ChangePasswordComponent } from './user/change-password/change-password.component';
 import { ResetComponent } from './user/reset/reset.component';
 import { SettingsComponent } from './user/settings/settings.component';
+import { AdminOverviewComponent } from './admin/admin-overview/admin-overview.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,7 @@ import { SettingsComponent } from './user/settings/settings.component';
     ChangePasswordComponent,
     ResetComponent,
     SettingsComponent,
+    AdminOverviewComponent,
   ],
   imports: [
     HttpClientModule,
@@ -57,6 +60,7 @@ import { SettingsComponent } from './user/settings/settings.component';
     MatInputModule,
     MatFormFieldModule,
     MatSnackBarModule,
+    MatProgressSpinnerModule,
     ReactiveFormsModule,
   ],
   providers: [
