@@ -16,6 +16,7 @@ import { AdminOverviewComponent } from './admin/admin-overview/admin-overview.co
 import { AdminNewsOverviewComponent } from './admin/admin-news-overview/admin-news-overview.component';
 import { CreateNewsComponent } from './admin/news/create-news/create-news.component';
 import { EditNewsComponent } from './admin/news/edit-news/edit-news.component';
+import { NewsOverviewComponent } from './news/news-overview/news-overview.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'information', component: InformationComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'impressum', component: ImpressumComponent },
+  { path: 'news', component: NewsOverviewComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'reset', component: ResetComponent },
   { path: 'activate/:code', component: ActivateComponent },

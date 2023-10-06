@@ -1,0 +1,58 @@
+<div class="parallax-top d-none d-lg-flex">
+  <div class="container">
+    <h1 class="header text-center teal-text">News</h1>
+    <div class="row text-center">
+      <h5 class="header white-text col-12 light">
+        &laquo;Wenn du alles gibst, kannst du dir nichts vorwerfen.&raquo;
+      </h5>
+    </div>
+  </div>
+</div>
+
+<!-- News Cards -->
+<div class="container news">
+  <div class="row">
+    <div class="col-12">
+      <h3 class="header teal-text text-center text-lg-start">News</h3>
+    </div>
+  </div>
+
+  <div class="news-container" *ngIf="!noNews">
+    <div *ngFor="let new of news">
+      <hr />
+      <div class="row news-cards">
+        <div class="col s12">
+          <h4 class="header teal-text">{{ new.title }}</h4>
+          <div class="datetime grey-text text-darken-1 light truncate">
+            <i>{{ dateString(new) }}</i>
+          </div>
+          <div
+            class="content flow-text"
+            [innerHTML]="new.content | safeHtml"
+          ></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="news.length">
+    <div class="col-12 center load" *ngIf="!allNews && !loading">
+      <a (click)="load()" class="flow-text center">Ältere News laden...</a>
+    </div>
+    <div class="col-12 center spinner" *ngIf="loading">
+      <mat-spinner></mat-spinner>
+    </div>
+  </div>
+
+  <div class="row no-news" *ngIf="noNews">
+    <div class="col s12">
+      <span class="flow-text">Es gibt zurzeit leider keine News.</span>
+    </div>
+  </div>
+
+  <div class="container spinner" *ngIf="!news.length && !noNews">
+    <div class="row center">
+      <mat-spinner></mat-spinner>
+    </div>
+  </div>
+</div>

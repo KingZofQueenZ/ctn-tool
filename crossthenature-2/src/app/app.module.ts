@@ -38,6 +38,8 @@ import { EditNewsComponent } from './admin/news/edit-news/edit-news.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DeleteDialog } from './admin/admin-news-overview/delete-dialog/delete-dialog.component';
+import { NewsOverviewComponent } from './news/news-overview/news-overview.component';
+import { SafeHtmlPipe } from './shared/safe-html-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,8 @@ import { DeleteDialog } from './admin/admin-news-overview/delete-dialog/delete-d
     CreateNewsComponent,
     DeleteDialog,
     EditNewsComponent,
+    NewsOverviewComponent,
+    SafeHtmlPipe,
   ],
   imports: [
     HttpClientModule,
