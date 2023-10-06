@@ -31,6 +31,11 @@ import { ChangePasswordComponent } from './user/change-password/change-password.
 import { ResetComponent } from './user/reset/reset.component';
 import { SettingsComponent } from './user/settings/settings.component';
 import { AdminOverviewComponent } from './admin/admin-overview/admin-overview.component';
+import { AdminNewsOverviewComponent } from './admin/admin-news-overview/admin-news-overview.component';
+import { NewsService } from './services/news.service';
+import { CreateNewsComponent } from './admin/news/create-news/create-news.component';
+import { EditNewsComponent } from './admin/news/edit-news/edit-news.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   declarations: [
@@ -47,6 +52,9 @@ import { AdminOverviewComponent } from './admin/admin-overview/admin-overview.co
     ResetComponent,
     SettingsComponent,
     AdminOverviewComponent,
+    AdminNewsOverviewComponent,
+    CreateNewsComponent,
+    EditNewsComponent,
   ],
   imports: [
     HttpClientModule,
@@ -62,6 +70,7 @@ import { AdminOverviewComponent } from './admin/admin-overview/admin-overview.co
     MatSnackBarModule,
     MatProgressSpinnerModule,
     ReactiveFormsModule,
+    CKEditorModule,
   ],
   providers: [
     {
@@ -72,6 +81,7 @@ import { AdminOverviewComponent } from './admin/admin-overview/admin-overview.co
     UserService,
     AuthenticationService,
     StorageService,
+    NewsService,
     MatSnackBarModule,
     {
       provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,

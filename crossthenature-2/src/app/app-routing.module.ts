@@ -13,6 +13,8 @@ import { ChangePasswordComponent } from './user/change-password/change-password.
 import { ResetComponent } from './user/reset/reset.component';
 import { SettingsComponent } from './user/settings/settings.component';
 import { AdminOverviewComponent } from './admin/admin-overview/admin-overview.component';
+import { AdminNewsOverviewComponent } from './admin/admin-news-overview/admin-news-overview.component';
+import { CreateNewsComponent } from './admin/news/create-news/create-news.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -29,6 +31,16 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminOverviewComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'admin-news',
+    component: AdminNewsOverviewComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'admin-news-create',
+    component: CreateNewsComponent,
     canActivate: [AuthGuard],
   },
   {

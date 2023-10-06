@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="row all-news d-flex align-items-center">
+    <div class="col-12 col-lg-8">
+      <h3 class="header teal-text text-center text-lg-start">Alle News</h3>
+    </div>
+    <div class="col-12 col-lg-4 text-center text-lg-end">
+      <button
+        mat-flat-button
+        color="primary"
+        [routerLink]="['/admin-news-create']"
+        class="btn"
+      >
+        Neue News
+      </button>
+    </div>
+    <div class="col-12 news">
+      <ul class="collection" *ngIf="news.length">
+        <li
+          class="collection-item valign-wrapper d-flex align-items-center justify-content-between"
+          *ngFor="let new of news"
+        >
+          <span class="title teal-text">{{ new.title }}</span>
+          <div class="icon-container">
+            <a
+              class="teal-text secondary-content edit"
+              [routerLink]="['/admin-news-edit', new._id]"
+              ><i class="material-icons">edit</i></a
+            >
+            <a
+              class="teal-text secondary-content delete"
+              (click)="deleteNews(new)"
+              ><i class="material-icons">delete</i></a
+            >
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="col-12 center load" *ngIf="!allNews && !noNews && !loading">
+      <a (click)="load()" class="flow-text center">Weitere News laden...</a>
+    </div>
+    <div
+      class="row col-12 d-flex justify-content-center"
+      *ngIf="news.length && loading"
+    >
+      <mat-spinner></mat-spinner>
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf="noNews">
+  <div class="row">
+    <div class="col-12 text-center text-lg-start">
+      <p class="flow-text">Es gibt zurzeit leider keine News!</p>
+    </div>
+  </div>
+</div>
+
+<div class="container spinner" *ngIf="!news.length && !noNews">
+  <div class="row d-flex justify-content-center">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>

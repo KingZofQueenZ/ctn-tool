@@ -1,6 +1,6 @@
 export class News {
-  _id: string;
-  title: string;
-  content: string;
-  date: Date;
+  _id: string = '';
+  title: string = '';
+  content: string = '';
+  date: Date = new Date();
 }
