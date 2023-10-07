@@ -1,0 +1,60 @@
+<div class="parallax hide-on-med-and-down">
+  <div class="container">
+    <h1 class="header center teal-text">Trainings und Termine</h1>
+    <div class="row center">
+      <h5 class="header white-text col-12 light">
+        &laquo;If it doesn´t challenge you, it doesn´t change you.&raquo;
+      </h5>
+    </div>
+  </div>
+</div>
+
+<!-- Event Cards -->
+<div class="container events" style="height: 100%">
+  <div class="row">
+    <div class="col-12">
+      <h3 class="header teal-text center-on-mobile">
+        Die nächsten Workouts und Termine
+      </h3>
+    </div>
+    <div class="col-12 flow-text">
+      Temporär ausser Betrieb. Bitte melde dich via Whatsapp Gruppe für die
+      Training an oder melde dich via 079 923 69 98 bei uns.
+    </div>
+    <!--<div class="col-12 flow-text" *ngIf="probetraining">
+      Für Probetrainings, klicke bitte auf den gewünschten Termin und melde dich
+      über das Anmeldeformular an. Solltest du doch nicht teilnehmen können,
+      melde dich bitte bei unseren Coaches wieder ab!
+    </div>-->
+  </div>
+  <!--<div class="divider" *ngIf="probetraining"></div>-->
+  <!--<div class="row event-cards" *ngIf="!noEvents && dateArray.length != 0">
+    <div *ngFor="let event of events">
+      <div class="col s12 {{ getWidth(event) }}">
+        <app-event-list-item [event]="event"></app-event-list-item>
+      </div>
+    </div>
+    <div class="col s12 center load" *ngIf="!allEvents && !loading">
+      <a (click)="load()" class="flow-text center">Weitere Termine laden...</a>
+    </div>
+    <div class="col s12 center spinner" *ngIf="loading">
+      <mz-spinner [size]="'small'"> </mz-spinner>
+    </div>
+  </div>-->
+</div>
+
+<!--<div class="container no-events" *ngIf="noEvents">
+    <div class="row">
+      <div class="col s12 center">
+        <h4 class="teal-text">Es gibt zurzeit leider keine Termine! :(</h4>
+      </div>
+    </div>
+</div>-->
+
+<!--<div class="container spinner" *ngIf="!events.length && !noEvents">
+  <div class="row center">
+    <mz-spinner
+      [size]="'big'">
+    </mz-spinner>
+  </div>
+</div>-->

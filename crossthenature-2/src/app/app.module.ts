@@ -49,6 +49,9 @@ import { environment } from 'src/environments/environment';
 import { AdminUserOverviewComponent } from './admin/admin-user-overview/admin-user-overview.component';
 import { DeleteNewsDialog } from './admin/admin-news-overview/delete-dialog/delete-news-dialog.component';
 import { DeleteUserDialog } from './admin/admin-user-overview/delete-dialog/delete-user-dialog.component';
+import { EventListOverviewComponent } from './event/event-list-overview/event-list-overview.component';
+import { AdminEventOverviewComponent } from './admin/admin-event-overview/admin-event-overview.component';
+import { EventService } from './services/event.service';
 
 @NgModule({
   declarations: [
@@ -73,6 +76,8 @@ import { DeleteUserDialog } from './admin/admin-user-overview/delete-dialog/dele
     NewsOverviewComponent,
     SafeHtmlPipe,
     AdminUserOverviewComponent,
+    EventListOverviewComponent,
+    AdminEventOverviewComponent,
   ],
   imports: [
     HttpClientModule,
@@ -109,6 +114,7 @@ import { DeleteUserDialog } from './admin/admin-user-overview/delete-dialog/dele
     AuthenticationService,
     StorageService,
     NewsService,
+    EventService,
     MatSnackBarModule,
     {
       provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,

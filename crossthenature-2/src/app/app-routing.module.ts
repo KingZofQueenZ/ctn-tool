@@ -18,6 +18,8 @@ import { CreateNewsComponent } from './admin/news/create-news/create-news.compon
 import { EditNewsComponent } from './admin/news/edit-news/edit-news.component';
 import { NewsOverviewComponent } from './news/news-overview/news-overview.component';
 import { AdminUserOverviewComponent } from './admin/admin-user-overview/admin-user-overview.component';
+import { EventListOverviewComponent } from './event/event-list-overview/event-list-overview.component';
+import { AdminEventOverviewComponent } from './admin/admin-event-overview/admin-event-overview.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -32,6 +34,7 @@ const routes: Routes = [
   { path: 'activate/:code', component: ActivateComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
+  { path: 'events', component: EventListOverviewComponent },
   {
     path: 'admin-user',
     component: AdminUserOverviewComponent,
@@ -42,6 +45,14 @@ const routes: Routes = [
     component: AdminOverviewComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: 'admin-event',
+    component: AdminEventOverviewComponent,
+    canActivate: [AuthGuard],
+  },
+  //{ path: 'admin-event-create', component: CreateEventComponent, canActivate: [AuthGuard] },
+  //{ path: 'admin-event-edit/:id', component: EditEventComponent, canActivate: [AuthGuard] },
+  //{ path: 'admin-event-delete/:id', component: DeleteEventComponent, canActivate: [AuthGuard] },
   {
     path: 'admin-news',
     component: AdminNewsOverviewComponent,
