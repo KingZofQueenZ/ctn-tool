@@ -1,3 +1,5 @@
+import { User } from './user';
+
 export class Event {
   _id: string = '';
   name: string = '';
@@ -7,7 +9,7 @@ export class Event {
   time_to: Date = new Date();
   sign_in: Date = new Date();
   sign_out: Date = new Date();
-  participant_ids: any;
+  participant_ids: User[] = [];
   allow_trials: Boolean = false;
   trial_workouts: any;
 }

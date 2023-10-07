@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { EventService } from 'src/app/services/event.service';
+import { Event } from '../../models/event';
 
 @Component({
   selector: 'app-admin-overview',
@@ -7,20 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminOverviewComponent implements OnInit {
   nextEvents: Event[] = [];
-  noEvents: Boolean = false;
+  noEvents: boolean = false;
 
-  constructor(/*private eventService: EventService*/) {}
+  constructor(private eventService: EventService) {}
 
   ngOnInit() {
-    this.noEvents = true;
-    /*this.eventService.getAmount(2).subscribe((events) => {
+    this.eventService.getAmount(2).subscribe((events) => {
       events.forEach((element) => {
         this.nextEvents.push(element);
       });
 
-      if (!this.nextEvents.length) {
+      if (!events.length) {
         this.noEvents = true;
       }
-    });*/
+    });
   }
 }
