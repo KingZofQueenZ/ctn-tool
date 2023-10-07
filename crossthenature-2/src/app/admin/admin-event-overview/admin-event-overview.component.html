@@ -21,21 +21,21 @@
             ><i>{{ getDateString(event) }}</i></span
           >
           <div class="icon-container">
-            <a
-              class="secondary-content delete"
-              [routerLink]="['/admin-event-delete/', event._id]"
-              ><i class="material-icons">delete</i></a
-            >
+            <a class="secondary-content delete" (click)="deleteEvent(event)">
+              <i class="material-icons">delete</i>
+            </a>
             <a
               class="secondary-content edit"
               [routerLink]="['/admin-event-edit', event._id]"
-              ><i class="material-icons">edit</i></a
             >
+              <i class="material-icons">edit</i>
+            </a>
             <a
               class="secondary-content show"
               [routerLink]="['/details', event._id]"
-              ><i class="material-icons">remove_red_eye</i></a
             >
+              <i class="material-icons">remove_red_eye</i>
+            </a>
           </div>
         </li>
       </ul>

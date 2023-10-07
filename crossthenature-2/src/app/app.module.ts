@@ -52,6 +52,7 @@ import { DeleteUserDialog } from './admin/admin-user-overview/delete-dialog/dele
 import { EventListOverviewComponent } from './event/event-list-overview/event-list-overview.component';
 import { AdminEventOverviewComponent } from './admin/admin-event-overview/admin-event-overview.component';
 import { EventService } from './services/event.service';
+import { DeleteEventDialog } from './admin/admin-event-overview/delete-dialog/delete-event-dialog.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { EventService } from './services/event.service';
     CreateNewsComponent,
     DeleteNewsDialog,
     DeleteUserDialog,
+    DeleteEventDialog,
     EditNewsComponent,
     NewsOverviewComponent,
     SafeHtmlPipe,

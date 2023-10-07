@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { EventService } from 'src/app/services/event.service';
 import { Event } from 'src/app/models/event';
 import * as moment from 'moment';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { DeleteEventDialog } from './delete-dialog/delete-event-dialog.component';
 
 @Component({
   selector: 'app-admin-event-overview',
@@ -16,7 +19,11 @@ export class AdminEventOverviewComponent implements OnInit {
   loading: Boolean = false;
   allEvents: Boolean = false;
 
-  constructor(private eventService: EventService) {
+  constructor(
+    private eventService: EventService,
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar,
+  ) {
     moment.locale('de');
   }
 
@@ -67,5 +74,29 @@ export class AdminEventOverviewComponent implements OnInit {
   public load() {
     this.page++;
     this.getEvents();
+  }
+
+  deleteEvent(event: Event) {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.data = {
+      dateString: this.getDateString(event),
+      name: event.name,
+    };
+    const dialogRef = this.dialog.open(DeleteEventDialog, dialogConfig);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.eventService.delete(event._id).subscribe({
+          next: () => {
+            this.snackBar.open('Der Termin wurde erfolgreich gelöscht.');
+            this.refresh();
+          },
+          error: (e) => {
+            this.snackBar.open('Der Termin konnte nicht gelöscht werden.');
+          },
+        });
+      }
+    });
   }
 }
