@@ -17,44 +17,38 @@
         Die nächsten Workouts und Termine
       </h3>
     </div>
-    <div class="col-12 flow-text">
-      Temporär ausser Betrieb. Bitte melde dich via Whatsapp Gruppe für die
-      Trainings an oder melde dich via 079 923 69 98 bei uns.
-    </div>
-    <!--<div class="col-12 flow-text" *ngIf="probetraining">
+    <div class="col-12 flow-text" *ngIf="probetraining">
       Für Probetrainings, klicke bitte auf den gewünschten Termin und melde dich
       über das Anmeldeformular an. Solltest du doch nicht teilnehmen können,
       melde dich bitte bei unseren Coaches wieder ab!
-    </div>-->
+    </div>
   </div>
-  <!--<div class="divider" *ngIf="probetraining"></div>-->
-  <!--<div class="row event-cards" *ngIf="!noEvents && dateArray.length != 0">
+  <div class="divider" *ngIf="probetraining"></div>
+  <div class="row event-cards" *ngIf="!noEvents && dateArray.length != 0">
     <div *ngFor="let event of events">
-      <div class="col s12 {{ getWidth(event) }}">
+      <div class="col-12 {{ getWidth(event) }}">
         <app-event-list-item [event]="event"></app-event-list-item>
       </div>
     </div>
-    <div class="col s12 center load" *ngIf="!allEvents && !loading">
+    <div class="col-12 center load" *ngIf="!allEvents && !loading">
       <a (click)="load()" class="flow-text center">Weitere Termine laden...</a>
     </div>
-    <div class="col s12 center spinner" *ngIf="loading">
-      <mz-spinner [size]="'small'"> </mz-spinner>
+    <div class="col-12 center spinner" *ngIf="loading">
+      <mat-spinner></mat-spinner>
     </div>
-  </div>-->
+  </div>
 </div>
 
-<!--<div class="container no-events" *ngIf="noEvents">
-    <div class="row">
-      <div class="col s12 center">
-        <h4 class="teal-text">Es gibt zurzeit leider keine Termine! :(</h4>
-      </div>
+<div class="container no-events" *ngIf="noEvents">
+  <div class="row">
+    <div class="col-12 center">
+      <h4 class="teal-text">Es gibt zurzeit leider keine Termine! :(</h4>
     </div>
-</div>-->
-
-<!--<div class="container spinner" *ngIf="!events.length && !noEvents">
-  <div class="row center">
-    <mz-spinner
-      [size]="'big'">
-    </mz-spinner>
   </div>
-</div>-->
+</div>
+
+<div class="container spinner" *ngIf="!events.length && !noEvents">
+  <div class="row center">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>

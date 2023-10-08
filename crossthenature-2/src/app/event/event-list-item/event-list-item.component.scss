@@ -1,0 +1,50 @@
+// Event-Cards
+.header-text {
+  margin-bottom: 40px;
+}
+
+.card-panel {
+  position: relative;
+  height: 120px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  .card-content {
+    h4 {
+      font-size: 1.5rem;
+    }
+
+    a {
+      color: #000;
+    }
+
+    .registrations {
+      i {
+        vertical-align: middle;
+      }
+
+      .material-icons {
+        margin-right: 10px;
+      }
+    }
+
+    .register {
+      i {
+        font-size: 3rem;
+        cursor: pointer;
+        position: absolute;
+        right: 8px;
+        bottom: 4px;
+        user-select: none;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        -o-user-select: none;
+      }
+
+      .no-unregister {
+        cursor: not-allowed;
+      }
+    }
+  }
+}
