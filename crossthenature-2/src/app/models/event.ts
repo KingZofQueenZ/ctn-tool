@@ -4,7 +4,7 @@ export class Event {
   _id: string = '';
   name: string = '';
   description: string = '';
-  max_participants: Number = 0;
+  max_participants: number = 0;
   date: Date = new Date();
   time_to: Date = new Date();
   sign_in: Date = new Date();

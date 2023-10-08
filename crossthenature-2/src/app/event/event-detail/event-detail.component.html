@@ -1,0 +1,187 @@
+<div class="parallax hide-on-med-and-down">
+  <div class="container">
+    <h1 class="header center teal-text">Details</h1>
+    <div class="row center">
+      <h5 class="header white-text col-12 light">
+        &laquo;Nothing great comes without sacrifice.&raquo;
+      </h5>
+    </div>
+  </div>
+</div>
+
+<!-- Event Cards -->
+<div class="container details" *ngIf="event">
+  <div class="row">
+    <div class="col-12 col-lg-8">
+      <h3 class="header detail-title teal-text center-on-mobile">
+        {{ event.name }}
+      </h3>
+      <h5 class="header light detail-subtitle grey-text light center-on-mobile">
+        <i>{{ date_string }}</i>
+      </h5>
+      <span
+        *ngIf="date_string_anmeldung"
+        class="header light detail-deadline-subtitle grey-text light center-on-mobile"
+        ><i>Anmeldefrist: {{ date_string_anmeldung }}</i></span
+      >
+      <span
+        *ngIf="date_string_abmeldung"
+        class="header light detail-deadline-subtitle grey-text light center-on-mobile"
+        ><i>Abmeldefrist: {{ date_string_abmeldung }}</i></span
+      >
+    </div>
+    <div
+      class="col-12 col-lg-4 center-on-mobile button-anmeldung d-flex justify-content-end"
+      *ngIf="user"
+    >
+      <button
+        *ngIf="!is_registered && !is_full && can_register"
+        mat-flat-button
+        color="primary"
+        class="waves-effect waves-light btn center"
+        (click)="handleRegistration()"
+      >
+        Anmelden
+      </button>
+      <a
+        *ngIf="is_registered && can_unregister"
+        class="waves-effect waves-light btn center red"
+        (click)="handleRegistration()"
+        >Abmelden</a
+      >
+      <a
+        *ngIf="is_registered && !can_unregister"
+        class="btn center grey not-allowed"
+        >Abmelden</a
+      >
+    </div>
+
+    <div class="col-12 description title" *ngIf="event.description">
+      <h5 class="light">Details</h5>
+      <div class="flow-text" [innerHTML]="event.description | safeHtml"></div>
+    </div>
+
+    <!-- Only show if user is logged in -->
+    <div *ngIf="user">
+      <div class="col-12 anmeldungen flow-text">
+        <h5 class="light">Anmeldungen</h5>
+        <span class="participantcount grey-text text-darken-1 light">
+          {{ participant_string }} Anmeldungen
+        </span>
+        <ul class="collection" *ngIf="participants.length">
+          <li
+            class="collection-item avatar valign-wrapper d-flex"
+            *ngFor="let participant of participants"
+          >
+            <div>
+              <img
+                src="../../../assets/img/user.png"
+                height="42"
+                width="42"
+                alt=""
+                class="circle"
+              />
+            </div>
+            <div class="d-flex align-items-end mx-2">
+              <p>
+                {{ participant.user.firstname }} {{ participant.user.lastname }}
+              </p>
+            </div>
+            <div *ngIf="participant.trial" class="secondary-content">
+              <i class="material-icons">fitness_center</i>
+            </div>
+          </li>
+        </ul>
+        <div *ngIf="!participants.length">
+          <span class="noregistrations flow-text"
+            ><i>Es gibt noch keine Anmeldungen. Sei der Erste!</i></span
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- Only show if user is not logged in -->
+    <!--<div class="col-12 probetraining" *ngIf="!user">
+      <div class="title">
+        <h5 class="light">Anmeldung zum Probetraining</h5>
+      </div>
+
+      <div class="flow-text subtitle" *ngIf="!trial_success && !is_full">
+        Bitte fülle das Formular aus, um dich für ein Probetraining anzumelden.
+      </div>
+
+      <div class="flow-text" *ngIf="is_full">
+        Bei diesem Event haben wir leider keine freien Plätze mehr. Gerne darfst
+        du an einem anderen Tag kommen!
+      </div>
+
+      <form
+        class="form"
+        (ngSubmit)="trialForm.form.valid && handleTrialWorkout()"
+        #trialForm="ngForm"
+        *ngIf="!trial_success && !is_full"
+      >
+        <div class="row">
+          <div class="input-field col-12 col-lg-4">
+            <input
+              id="last_name"
+              type="text"
+              class="validate"
+              [(ngModel)]="model.firstname"
+              required
+              [class.invalid]="hasError"
+              name="firstname"
+            />
+            <label class="light" for="last_name">Vorname</label>
+          </div>
+          <div class="input-field col-12 col-lg-4">
+            <input
+              id="last_name"
+              type="text"
+              class="validate"
+              [(ngModel)]="model.lastname"
+              required
+              [class.invalid]="hasError"
+              name="lastname"
+            />
+            <label class="light" for="last_name">Nachname</label>
+          </div>
+          <div class="input-field col-12 col-lg-4">
+            <input
+              id="last_name"
+              type="text"
+              class="validate"
+              [(ngModel)]="model.phone"
+              required
+              [class.invalid]="hasError"
+              name="phone"
+            />
+            <label class="light" for="last_name">Telefonnummer</label>
+          </div>
+          <div class="col-12 center-on-mobile button">
+            <button
+              class="waves-effect waves-light btn"
+              [class.disabled]="!trialForm.form.valid"
+              type="submit"
+              name="action"
+            >
+              Zum Probetraining anmelden
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <div class="flow-text" *ngIf="trial_success">
+        Du wurdest erfolgreich für das Probetraining angemeldet. Wir erwarten
+        dich am {{ date_string }}. Solltest du doch nicht Teilnehmen können,
+        melde dich bitte bei unseren Coaches ab!
+      </div>
+    </div> -->
+  </div>
+</div>
+
+<div class="container spinner" *ngIf="!event">
+  <div class="row center">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>

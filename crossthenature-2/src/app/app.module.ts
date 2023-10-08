@@ -54,6 +54,7 @@ import { AdminEventOverviewComponent } from './admin/admin-event-overview/admin-
 import { EventService } from './services/event.service';
 import { DeleteEventDialog } from './admin/admin-event-overview/delete-dialog/delete-event-dialog.component';
 import { NextEventComponent } from './admin/next-event/next-event.component';
+import { EventDetailComponent } from './event/event-detail/event-detail.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { NextEventComponent } from './admin/next-event/next-event.component';
     EventListOverviewComponent,
     AdminEventOverviewComponent,
     NextEventComponent,
+    EventDetailComponent,
   ],
   imports: [
     HttpClientModule,

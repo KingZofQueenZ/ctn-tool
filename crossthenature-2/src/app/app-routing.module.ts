@@ -20,6 +20,7 @@ import { NewsOverviewComponent } from './news/news-overview/news-overview.compon
 import { AdminUserOverviewComponent } from './admin/admin-user-overview/admin-user-overview.component';
 import { EventListOverviewComponent } from './event/event-list-overview/event-list-overview.component';
 import { AdminEventOverviewComponent } from './admin/admin-event-overview/admin-event-overview.component';
+import { EventDetailComponent } from './event/event-detail/event-detail.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -35,6 +36,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
   { path: 'events', component: EventListOverviewComponent },
+  { path: 'details/:id', component: EventDetailComponent },
   {
     path: 'admin-user',
     component: AdminUserOverviewComponent,
