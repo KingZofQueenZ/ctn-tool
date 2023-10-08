@@ -56,13 +56,13 @@ export class EventDetailComponent {
 
     this.eventService.getById(id!).subscribe((event) => {
       this.event = event;
+      this.getParticipants();
       this.date_string = this.dateString();
       this.date_string_anmeldung = this.dateStringDeadline(this.event.sign_in);
       this.date_string_abmeldung = this.dateStringDeadline(this.event.sign_out);
       this.is_registered = this.registered();
       this.can_register = this.canRegister();
       this.can_unregister = this.canUnregister();
-      this.getParticipants();
       this.is_full = this.full();
       this.participant_string = this.participantCount();
     });
@@ -166,10 +166,10 @@ export class EventDetailComponent {
   }
 
   private updateUser() {
+    this.getParticipants();
     this.is_registered = this.registered();
     this.is_full = this.full();
     this.participant_string = this.participantCount();
-    this.getParticipants();
   }
 
   private canRegister() {
@@ -217,17 +217,15 @@ export class EventDetailComponent {
   private full() {
     return (
       this.event.max_participants != 0 &&
-      this.event.participant_ids.length >= this.event.max_participants
+      this.participants.length >= this.event.max_participants
     );
   }
 
   private participantCount() {
     if (this.event.max_participants) {
-      return (
-        this.event.participant_ids.length + '/' + this.event.max_participants
-      );
+      return this.participants.length + '/' + this.event.max_participants;
     } else {
-      return `${this.event.participant_ids.length}`;
+      return `${this.participants.length}`;
     }
   }
 }

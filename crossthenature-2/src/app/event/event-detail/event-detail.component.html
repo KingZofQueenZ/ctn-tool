@@ -43,17 +43,27 @@
       >
         Anmelden
       </button>
-      <a
+
+      <button
         *ngIf="is_registered && can_unregister"
-        class="waves-effect waves-light btn center red"
+        mat-flat-button
+        color="warn"
+        class="waves-effect waves-light btn center"
         (click)="handleRegistration()"
-        >Abmelden</a
       >
-      <a
+        Abmelden
+      </button>
+
+      <button
         *ngIf="is_registered && !can_unregister"
-        class="btn center grey not-allowed"
-        >Abmelden</a
+        mat-flat-button
+        disabled
+        color="warn"
+        class="waves-effect waves-light btn center"
+        (click)="handleRegistration()"
       >
+        Abmelden
+      </button>
     </div>
 
     <div class="col-12 description title" *ngIf="event.description">
@@ -101,7 +111,7 @@
     </div>
 
     <!-- Only show if user is not logged in -->
-    <!--<div class="col-12 probetraining" *ngIf="!user">
+    <div class="col-12 probetraining" *ngIf="!user">
       <div class="title">
         <h5 class="light">Anmeldung zum Probetraining</h5>
       </div>
@@ -119,56 +129,65 @@
         class="form"
         (ngSubmit)="trialForm.form.valid && handleTrialWorkout()"
         #trialForm="ngForm"
+        class="row col-12"
         *ngIf="!trial_success && !is_full"
       >
-        <div class="row">
-          <div class="input-field col-12 col-lg-4">
-            <input
-              id="last_name"
-              type="text"
-              class="validate"
-              [(ngModel)]="model.firstname"
-              required
-              [class.invalid]="hasError"
-              name="firstname"
-            />
-            <label class="light" for="last_name">Vorname</label>
-          </div>
-          <div class="input-field col-12 col-lg-4">
-            <input
-              id="last_name"
-              type="text"
-              class="validate"
-              [(ngModel)]="model.lastname"
-              required
-              [class.invalid]="hasError"
-              name="lastname"
-            />
-            <label class="light" for="last_name">Nachname</label>
-          </div>
-          <div class="input-field col-12 col-lg-4">
-            <input
-              id="last_name"
-              type="text"
-              class="validate"
-              [(ngModel)]="model.phone"
-              required
-              [class.invalid]="hasError"
-              name="phone"
-            />
-            <label class="light" for="last_name">Telefonnummer</label>
-          </div>
-          <div class="col-12 center-on-mobile button">
-            <button
-              class="waves-effect waves-light btn"
-              [class.disabled]="!trialForm.form.valid"
-              type="submit"
-              name="action"
-            >
-              Zum Probetraining anmelden
-            </button>
-          </div>
-        </div>
+        <mat-form-field class="col-12">
+          <mat-label>E-Mail</mat-label>
+          <input
+            matInput
+            [(ngModel)]="model.email"
+            required
+            id="email"
+            name="email"
+            type="email"
+            email
+          />
+        </mat-form-field>
+        <mat-form-field class="col-12">
+          <mat-label>Vorname</mat-label>
+          <input
+            matInput
+            [(ngModel)]="model.firstname"
+            required
+            id="firstname"
+            name="firstname"
+            type="text"
+          />
+        </mat-form-field>
+        <mat-form-field class="col-12">
+          <mat-label>Nachname</mat-label>
+          <input
+            matInput
+            [(ngModel)]="model.lastname"
+            required
+            id="lastname"
+            name="lastname"
+            type="text"
+          />
+        </mat-form-field>
+        <mat-form-field class="col-12">
+          <mat-label>Telefonnummer</mat-label>
+          <input
+            matInput
+            [(ngModel)]="model.phone"
+            required
+            id="phone"
+            name="phone"
+            type="text"
+          />
+        </mat-form-field>
+
+        <button
+          mat-flat-button
+          color="primary"
+          class="btn"
+          [class.disabled]="!trialForm.form.valid"
+          type="submit"
+          name="action"
+        >
+          Zum Probetraining anmelden
+        </button>
       </form>
 
       <div class="flow-text" *ngIf="trial_success">
@@ -176,7 +195,7 @@
         dich am {{ date_string }}. Solltest du doch nicht Teilnehmen können,
         melde dich bitte bei unseren Coaches ab!
       </div>
-    </div> -->
+    </div>
   </div>
 </div>
 
