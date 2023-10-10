@@ -3,6 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { EventService } from 'src/app/services/event.service';
 import * as moment from 'moment';
 import { Event } from '../../models/event';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-event-list-overview',
@@ -11,6 +12,7 @@ import { Event } from '../../models/event';
 })
 export class EventListOverviewComponent implements OnInit {
   events: Event[] = [];
+  user: User | undefined;
   dateArray: any[] = [];
   page = 1;
   noEvents: boolean = false;
@@ -22,6 +24,11 @@ export class EventListOverviewComponent implements OnInit {
     private eventService: EventService,
     private route: ActivatedRoute,
   ) {
+    const storageUser = localStorage.getItem('currentUser');
+    if (storageUser) {
+      this.user = JSON.parse(storageUser);
+    }
+
     this.getEvents();
   }
 
@@ -53,22 +60,24 @@ export class EventListOverviewComponent implements OnInit {
 
   getEvents(): void {
     this.loading = true;
-    this.eventService.getAll(this.page).subscribe((events) => {
-      events.forEach((element) => {
-        this.events.push(element);
-        this.setDateArray(element);
+
+    if (this.user) {
+      this.eventService.getAll(this.page).subscribe((events) => {
+        events.forEach((element) => {
+          this.events.push(element);
+          this.setDateArray(element);
+        });
+        this.setEventVariables();
       });
-
-      if (!this.events.length) {
-        this.noEvents = true;
-      }
-
-      if (events.length < 40) {
-        this.allEvents = true;
-      }
-
-      this.loading = false;
-    });
+    } else {
+      this.eventService.getAllPublic(this.page).subscribe((events) => {
+        events.forEach((element) => {
+          this.events.push(element);
+          this.setDateArray(element);
+        });
+        this.setEventVariables();
+      });
+    }
   }
 
   getWidth(event: Event): string {
@@ -91,5 +100,17 @@ export class EventListOverviewComponent implements OnInit {
   public load() {
     this.page++;
     this.getEvents();
+  }
+
+  private setEventVariables() {
+    if (!this.events.length) {
+      this.noEvents = true;
+    }
+
+    if (this.events.length < 40) {
+      this.allEvents = true;
+    }
+
+    this.loading = false;
   }
 }

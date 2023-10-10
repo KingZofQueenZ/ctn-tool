@@ -41,8 +41,8 @@ router.post("/", VerifyToken.verifyAdmin, (request, response) => {
     });
 });
 
-// Get all events
-router.get("/", (request, response) => {
+// Get all events for registered users
+router.get("/", VerifyToken.verify, (request, response) => {
   const page = request.query.page || 1;
   const amount = Number(request.query.amount) || 40;
 
@@ -66,10 +66,58 @@ router.get("/", (request, response) => {
     });
 });
 
-// Get event by id
-router.get("/:event_id", (request, response) => {
+// Get all events for public
+router.get("/public/", (request, response) => {
+  const page = request.query.page || 1;
+  const amount = Number(request.query.amount) || 40;
+
+  Event.find({ date: { $gte: moment().subtract(1, "hours").format() } })
+    .sort("date")
+    .skip(amount * (page - 1))
+    .limit(amount)
+    .exec()
+    .then((documents) => {
+      response.header(
+        "Cache-Control",
+        "private, no-cache, no-store, must-revalidate",
+      );
+      response.header("Expires", "-1");
+      response.header("Pragma", "no-cache");
+      response.status(200).json(documents);
+    })
+    .catch((error) => {
+      response.status(500).send(error);
+    });
+});
+
+// Get event by id for registered Users
+router.get("/:event_id", VerifyToken.verify, (request, response) => {
   Event.findById(request.params.event_id)
     .populate("participant_ids", "firstname lastname")
+    .exec()
+    .then((document) => {
+      if (document) {
+        response.header(
+          "Cache-Control",
+          "private, no-cache, no-store, must-revalidate",
+        );
+        response.header("Expires", "-1");
+        response.header("Pragma", "no-cache");
+        response.status(200).json(document);
+      } else {
+        response
+          .status(404)
+          .send("Event not found, id: " + request.params.event_id);
+      }
+    })
+    .catch((error) => {
+      response.status(500).send(error);
+    });
+});
+
+// Get event by id for public
+router.get("/:event_id/public", (request, response) => {
+  Event.findById(request.params.event_id)
     .exec()
     .then((document) => {
       if (document) {

@@ -39,11 +39,12 @@ export class EventDetailComponent {
     private snackBar: MatSnackBar,
   ) {
     moment.locale('de');
-    const storageUser = localStorage.getItem('currentUser');
 
+    const storageUser = localStorage.getItem('currentUser');
     if (storageUser) {
       this.user = JSON.parse(storageUser);
     }
+
     this.getEvent();
   }
 
@@ -54,18 +55,29 @@ export class EventDetailComponent {
       this.router.navigate(['/home']);
     }
 
-    this.eventService.getById(id!).subscribe((event) => {
-      this.event = event;
-      this.getParticipants();
-      this.date_string = this.dateString();
-      this.date_string_anmeldung = this.dateStringDeadline(this.event.sign_in);
-      this.date_string_abmeldung = this.dateStringDeadline(this.event.sign_out);
-      this.is_registered = this.registered();
-      this.can_register = this.canRegister();
-      this.can_unregister = this.canUnregister();
-      this.is_full = this.full();
-      this.participant_string = this.participantCount();
-    });
+    if (this.user) {
+      this.eventService.getById(id!).subscribe((event) => {
+        this.setEvent(event);
+      });
+    } else {
+      console.log('PUBLIC');
+      this.eventService.getByIdPublic(id!).subscribe((event) => {
+        this.setEvent(event);
+      });
+    }
+  }
+
+  private setEvent(event: Event) {
+    this.event = event;
+    this.getParticipants();
+    this.date_string = this.dateString();
+    this.date_string_anmeldung = this.dateStringDeadline(this.event.sign_in);
+    this.date_string_abmeldung = this.dateStringDeadline(this.event.sign_out);
+    this.is_registered = this.registered();
+    this.can_register = this.canRegister();
+    this.can_unregister = this.canUnregister();
+    this.is_full = this.full();
+    this.participant_string = this.participantCount();
   }
 
   handleRegistration(): void {

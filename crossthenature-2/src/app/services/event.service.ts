@@ -29,9 +29,19 @@ export class EventService {
     return this.http.get<Event[]>('/api/events?page=' + page);
   }
 
+  // GET /events/public
+  getAllPublic(page?: number): Observable<Event[]> {
+    return this.http.get<Event[]>('/api/events/public?page=' + page);
+  }
+
   // GET /events/{event-id}
   getById(_id: string): Observable<Event> {
     return this.http.get<Event>('/api/events/' + _id);
+  }
+
+  // GET /events/{event-id}/public
+  getByIdPublic(_id: string): Observable<Event> {
+    return this.http.get<Event>('/api/events/' + _id + '/public');
   }
 
   getAmount(amount?: number): Observable<Event[]> {
