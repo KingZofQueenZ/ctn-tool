@@ -60,7 +60,6 @@ export class EventDetailComponent {
         this.setEvent(event);
       });
     } else {
-      console.log('PUBLIC');
       this.eventService.getByIdPublic(id!).subscribe((event) => {
         this.setEvent(event);
       });
@@ -207,7 +206,7 @@ export class EventDetailComponent {
     return date + ' Uhr';
   }
 
-  private dateStringDeadline(date: Date) {
+  private dateStringDeadline(date: Date | undefined) {
     if (!date) {
       return '';
     }
@@ -228,7 +227,7 @@ export class EventDetailComponent {
 
   private full() {
     return (
-      this.event.max_participants != 0 &&
+      this.event.max_participants != undefined &&
       this.participants.length >= this.event.max_participants
     );
   }

@@ -21,6 +21,7 @@ import { AdminUserOverviewComponent } from './admin/admin-user-overview/admin-us
 import { EventListOverviewComponent } from './event/event-list-overview/event-list-overview.component';
 import { AdminEventOverviewComponent } from './admin/admin-event-overview/admin-event-overview.component';
 import { EventDetailComponent } from './event/event-detail/event-detail.component';
+import { EditEventComponent } from './admin/edit-event/edit-event.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -53,8 +54,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   //{ path: 'admin-event-create', component: CreateEventComponent, canActivate: [AuthGuard] },
-  //{ path: 'admin-event-edit/:id', component: EditEventComponent, canActivate: [AuthGuard] },
-  //{ path: 'admin-event-delete/:id', component: DeleteEventComponent, canActivate: [AuthGuard] },
+  {
+    path: 'admin-event-edit/:id',
+    component: EditEventComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: 'admin-news',
     component: AdminNewsOverviewComponent,

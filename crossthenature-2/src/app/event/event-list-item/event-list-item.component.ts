@@ -206,7 +206,7 @@ export class EventListItemComponent implements OnInit {
 
   private full() {
     return (
-      this.event.max_participants != 0 &&
+      this.event.max_participants != undefined &&
       this.participants.length >= this.event.max_participants
     );
   }
