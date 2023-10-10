@@ -135,7 +135,7 @@ router.post("/", (req, response) => {
           url:
             "http://www.crossthenature.ch/activate/" + newUser.activation_code,
         };
-        //mailer.sendMail('registration', locals);
+        mailer.sendMail("registration", locals);
 
         response.status(200).send("User created successfully");
       })
@@ -196,7 +196,7 @@ router.put("/reset", (request, response) => {
             subject: "Neues Passwort",
             password: newPW,
           };
-          //mailer.sendMail('password', locals);
+          mailer.sendMail("password", locals);
 
           response.status(200).send({ reset: true });
         })
