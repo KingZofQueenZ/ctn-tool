@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -57,6 +57,8 @@ import { NextEventComponent } from './admin/next-event/next-event.component';
 import { EventDetailComponent } from './event/event-detail/event-detail.component';
 import { EventListItemComponent } from './event/event-list-item/event-list-item.component';
 import { EditEventComponent } from './admin/edit-event/edit-event.component';
+import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
+import { MtxMomentDatetimeModule } from '@ng-matero/extensions-moment-adapter';
 
 @NgModule({
   declarations: [
@@ -107,6 +109,8 @@ import { EditEventComponent } from './admin/edit-event/edit-event.component';
     CKEditorModule,
     RecaptchaModule,
     RecaptchaFormsModule,
+    MtxDatetimepickerModule,
+    MtxMomentDatetimeModule,
   ],
   providers: [
     {
@@ -120,6 +124,7 @@ import { EditEventComponent } from './admin/edit-event/edit-event.component';
         siteKey: environment.recaptcha.siteKey,
       } as RecaptchaSettings,
     },
+
     UserService,
     AuthenticationService,
     StorageService,
@@ -130,6 +135,7 @@ import { EditEventComponent } from './admin/edit-event/edit-event.component';
       provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
       useValue: { duration: 5000, verticalPosition: 'top' },
     },
+    { provide: LOCALE_ID, useValue: 'de-DE' },
   ],
   bootstrap: [AppComponent],
 })

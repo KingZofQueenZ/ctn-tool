@@ -1,11 +1,23 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import { EventService } from 'src/app/services/event.service';
 import { Event } from '../../models/event';
 import { Location } from '@angular/common';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { EditorConfig } from '@ckeditor/ckeditor5-core';
+import {
+  MtxCalendarView,
+  MtxDatetimepickerMode,
+  MtxDatetimepickerType,
+} from '@ng-matero/extensions/datetimepicker';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { User } from 'src/app/models/user';
+
+class UserTrial {
+  user!: User;
+  trial: boolean = false;
+}
 
 @Component({
   selector: 'app-edit-event',
@@ -14,13 +26,17 @@ import { EditorConfig } from '@ckeditor/ckeditor5-core';
 })
 export class EditEventComponent implements OnInit {
   @Input() event!: Event;
-  datum_anmeldefrist: string = '';
-  time_anmeldefrist: string = '';
-  datum_abmeldefrist: string = '';
-  time_abmeldefrist: string = '';
-  time_from: string = '';
-  time_to: string = '';
+  time_from: Date | undefined;
+  time_to: Date | undefined;
   editor = ClassicEditor;
+
+  typeDatetime: MtxDatetimepickerType = 'datetime';
+  typeDate: MtxDatetimepickerType = 'date';
+  typeTime: MtxDatetimepickerType = 'time';
+  mode: MtxDatetimepickerMode = 'auto';
+  startView: MtxCalendarView = 'month';
+
+  participants: UserTrial[] = [];
 
   ckeConfig: EditorConfig = {
     toolbar: [
@@ -56,96 +72,25 @@ export class EditEventComponent implements OnInit {
     ],
   };
 
-  /*public optionsDate: Pickadate.DateOptions = {
-    format: 'dddd, dd mmm. yyyy',
-    formatSubmit: 'yyyy-mm-dd',
-    monthsFull: [
-      'Januar',
-      'Februar',
-      'März',
-      'April',
-      'Mai',
-      'Juni',
-      'Juli',
-      'August',
-      'September',
-      'Oktober',
-      'November',
-      'Dezember',
-    ],
-    monthsShort: [
-      'Jan',
-      'Feb',
-      'Mär',
-      'Apr',
-      'Mai',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sept',
-      'Okt',
-      'Nov',
-      'Dez',
-    ],
-    weekdaysFull: [
-      'Sonntag',
-      'Montag',
-      'Dienstag',
-      'Mittwoch',
-      'Donnerstag',
-      'Freitag',
-      'Samstag',
-    ],
-    weekdaysShort: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
-    today: 'Heute',
-    clear: 'Löschen',
-    close: 'Schliessen',
-    min: true,
-    closeOnSelect: true,
-    closeOnClear: true,
-    showMonthsShort: true,
-  };*/
-
-  /*public optionsTime: Pickadate.TimeOptions = {
-    format: 'HH:i',
-    default: 'now',
-    fromnow: 0,
-    twelvehour: false,
-    donetext: 'OK',
-    cleartext: 'Löschen',
-    canceltext: 'Abbrechen',
-    autoclose: true,
-    interval: 150,
-  };*/
-
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
-    // TODO
+
+    if (id === null) {
+      this.router.navigate(['/home']);
+    }
+
     this.eventService.getById(id!).subscribe((event: any) => {
       this.event = event;
-      this.time_from = moment(this.event.date).format('HH:mm');
-      //this.event.date = moment(this.event.date).format('YYYY-MM-DD');
-      this.getTrialWorkouts();
-
+      this.time_from = this.event.date;
       if (event.time_to) {
-        this.time_to = moment(this.event.time_to).format('HH:mm');
+        this.time_to = this.event.time_to;
       }
-      if (event.sign_in) {
-        this.datum_anmeldefrist = moment(this.event.sign_in).format(
-          'YYYY-MM-DD',
-        );
+
+      if (!event.description) {
+        this.event.description = '';
       }
-      if (event.sign_in) {
-        this.time_anmeldefrist = moment(this.event.sign_in).format('HH:mm');
-      }
-      if (event.sign_out) {
-        this.datum_abmeldefrist = moment(this.event.sign_out).format(
-          'YYYY-MM-DD',
-        );
-      }
-      if (event.sign_out) {
-        this.time_abmeldefrist = moment(this.event.sign_out).format('HH:mm');
-      }
+
+      this.getParticipants();
     });
   }
 
@@ -153,16 +98,35 @@ export class EditEventComponent implements OnInit {
     private route: ActivatedRoute,
     private eventService: EventService,
     private location: Location,
+    private router: Router,
+    private snackBar: MatSnackBar,
   ) {
     moment.locale('de');
   }
 
   edit() {
     const event: Event = Object.assign({}, this.event);
-    event.date = moment(this.event.date + 'T' + this.time_from).toDate();
+    const eventDate = new Date(event.date);
+    const timeFrom = new Date(this.time_from!);
+
+    event.date = new Date(
+      eventDate.getFullYear(),
+      eventDate.getMonth(),
+      eventDate.getDate(),
+      timeFrom.getHours(),
+      timeFrom.getMinutes(),
+    );
 
     if (this.time_to) {
-      event.time_to = moment(this.event.date + 'T' + this.time_to).toDate();
+      const timeTo = new Date(this.time_to!);
+
+      event.time_to = new Date(
+        eventDate.getFullYear(),
+        eventDate.getMonth(),
+        eventDate.getDate(),
+        timeTo.getHours(),
+        timeTo.getMinutes(),
+      );
     } else {
       event.time_to = undefined;
     }
@@ -171,39 +135,15 @@ export class EditEventComponent implements OnInit {
       event.max_participants = undefined;
     }
 
-    if (this.datum_anmeldefrist && this.time_anmeldefrist) {
-      event.sign_in = moment(
-        this.datum_anmeldefrist + 'T' + this.time_anmeldefrist,
-      ).toDate();
-    } else {
-      event.sign_in = undefined;
-    }
-
-    if (this.datum_abmeldefrist && this.time_abmeldefrist) {
-      event.sign_out = moment(
-        this.datum_abmeldefrist + 'T' + this.time_abmeldefrist,
-      ).toDate();
-    } else {
-      event.sign_out = undefined;
-    }
-
-    this.eventService.update(event).subscribe(
-      (result) => {
-        /*this.toasterService.pop(
-          'success',
-          'Editieren erfolgreich',
-          'Der Termin wurde erfolgreich gespeichert.',
-        );*/
+    this.eventService.update(event).subscribe({
+      next: () => {
+        this.snackBar.open('Der Termin wurde erfolgreich gespeichert.');
         this.goBack();
       },
-      (error) => {
-        /*this.toasterService.pop(
-          'error',
-          'Editieren nicht erfolgreich',
-          'Der Termin konnte nicht gespeichert werden.',
-        );*/
+      error: (e) => {
+        this.snackBar.open('Der Termin konnte nicht gespeichert werden.');
       },
-    );
+    });
   }
 
   goBack(): void {
@@ -213,39 +153,48 @@ export class EditEventComponent implements OnInit {
   removeUser(participant: any) {
     this.eventService
       .deleteParticipantAdmin(this.event._id, participant._id)
-      .subscribe(
-        (result) => {
+      .subscribe({
+        next: () => {
           this.event.participant_ids.splice(
             this.event.participant_ids.findIndex(
               (x) => x._id === participant._id,
             ),
             1,
           );
-          /*this.toasterService.pop(
-            'success',
-            'Abmeldung erfolgreich',
+
+          this.getParticipants();
+          this.snackBar.open(
             'Der User wurde erfolgreich von ' + this.event.name + ' entfernt',
-          );*/
+          );
         },
-        (error) => {
-          /*this.toasterService.pop(
-            'error',
-            'Fehler',
-            'Der User konnte nicht entfernt werden!',
-          );*/
+        error: (e) => {
+          this.snackBar.open('Der User konnte nicht entfernt werden.');
         },
-      );
+      });
   }
 
-  private getTrialWorkouts() {
-    this.event.trial_workouts.forEach((element: any) => {
-      /*this.event.participant_ids.push({
-        _id: element._id,
-        firstname: element.firstname,
-        lastname: element.lastname,
-        phone: element.phone,
+  // Private Methods
+  private getParticipants() {
+    this.participants = [];
+
+    this.event.participant_ids.forEach((participant) => {
+      this.participants.push({ user: participant, trial: false });
+    });
+
+    this.event.trial_workouts.forEach((trialParticipant: any) => {
+      this.participants.push({
+        user: {
+          firstname: trialParticipant.firstname,
+          lastname: trialParticipant.lastname,
+          phone: trialParticipant.phone,
+          _id: '',
+          admin: false,
+          email: '',
+          password: '',
+          token: '',
+        },
         trial: true,
-      });*/
+      });
     });
   }
 }

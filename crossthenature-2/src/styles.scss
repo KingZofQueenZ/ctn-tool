@@ -8,8 +8,8 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }*/
+@import "~@ng-matero/extensions/prebuilt-themes/indigo-pink.css";
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-
 // Variables
 $color-teal: #249287;
 $color-teal-light: #44ccbe;
@@ -354,4 +354,3 @@ ul:not(.browser-default) > li {
   margin: 0;
   border-bottom: 1px solid #e0e0e0;
 }
-

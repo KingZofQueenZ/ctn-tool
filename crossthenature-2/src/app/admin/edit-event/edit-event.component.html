@@ -13,8 +13,8 @@
     *ngIf="event"
   >
     <div class="row">
-      <div class="col-12 subtitle">Allgemeines</div>
-      <mat-form-field class="col-12 col-lg-10">
+      <div class="my-2 subtitle col-12">Allgemeines</div>
+      <mat-form-field class="col-12">
         <mat-label>Bezeichnung</mat-label>
         <input
           matInput
@@ -26,12 +26,11 @@
         />
       </mat-form-field>
 
-      <mat-form-field class="col-12 col-lg-10">
+      <mat-form-field class="col-3">
         <mat-label>Teilnehmer</mat-label>
         <input
           matInput
           [(ngModel)]="event.max_participants"
-          required
           id="max_participants"
           name="max_participants"
           type="number"
@@ -42,145 +41,187 @@
     <div class="divider"></div>
 
     <div class="row">
-      <div class="col-12 subtitle">Beschreibung</div>
-    </div>
+      <div class="my-2 col-12 subtitle">Beschreibung</div>
 
-    <ckeditor
-      class="ckeditor"
-      [editor]="editor"
-      [config]="ckeConfig"
-      [(ngModel)]="event.description"
-      name="content"
-      data=""
-    ></ckeditor>
+      <ckeditor
+        class="ckeditor col-12"
+        [editor]="editor"
+        [config]="ckeConfig"
+        [(ngModel)]="event.description"
+        name="content"
+        data=""
+      ></ckeditor>
+    </div>
 
     <div class="divider aftereditor"></div>
 
     <div class="row">
-      <div class="col-12 subtitle">Datum</div>
-      <!--<mz-datepicker-container class="col s12 l4">
+      <div class="my-2 col-12 subtitle">Datum</div>
+
+      <mat-form-field class="col-12 col-lg-3">
+        <mat-label>Datum</mat-label>
+        <mtx-datetimepicker
+          #datetimePicker
+          [type]="typeDate"
+          [multiYearSelector]="false"
+          [touchUi]="true"
+        ></mtx-datetimepicker>
         <input
-          mz-datepicker
-          [label]="'Datum'"
-          [options]="optionsDate"
+          [mtxDatetimepicker]="datetimePicker"
           [(ngModel)]="event.date"
-          id="datum"
-          name="datum"
-          type="text"
+          matInput
           required
         />
-      </mz-datepicker-container>
-      <mz-timepicker-container class="col s6 l4">
+        <mtx-datetimepicker-toggle
+          [for]="datetimePicker"
+          matSuffix
+        ></mtx-datetimepicker-toggle>
+      </mat-form-field>
+
+      <mat-form-field class="col-12 col-lg-3">
+        <mat-label>Zeit von</mat-label>
+        <mtx-datetimepicker
+          #datetimePickerTimeFrom
+          [type]="typeTime"
+          [twelvehour]="false"
+          [timeInterval]="15"
+          [touchUi]="true"
+          [timeInput]="true"
+        ></mtx-datetimepicker>
         <input
-          mz-timepicker
-          [label]="'Zeit von'"
-          [options]="optionsTime"
+          [mtxDatetimepicker]="datetimePickerTimeFrom"
           [(ngModel)]="time_from"
+          matInput
+          required
           id="timefrom"
           name="timefrom"
-          type="text"
-          required
         />
-      </mz-timepicker-container>
-      <mz-timepicker-container class="col s6 l4">
+        <mtx-datetimepicker-toggle
+          [for]="datetimePickerTimeFrom"
+          matSuffix
+        ></mtx-datetimepicker-toggle>
+      </mat-form-field>
+
+      <mat-form-field class="col-12 col-lg-3">
+        <mat-label>Zeit bis</mat-label>
+        <mtx-datetimepicker
+          #datetimePickerTimeTo
+          [type]="typeTime"
+          [twelvehour]="false"
+          [timeInterval]="15"
+          [touchUi]="true"
+          [timeInput]="true"
+        ></mtx-datetimepicker>
         <input
-          mz-timepicker
-          [label]="'Zeit bis'"
-          [options]="optionsTime"
+          [mtxDatetimepicker]="datetimePickerTimeTo"
           [(ngModel)]="time_to"
+          matInput
+          required
           id="timeto"
           name="timeto"
-          type="text"
         />
-      </mz-timepicker-container>-->
+        <mtx-datetimepicker-toggle
+          [for]="datetimePickerTimeTo"
+          matSuffix
+        ></mtx-datetimepicker-toggle>
+      </mat-form-field>
     </div>
 
     <div class="divider"></div>
 
     <div class="row">
-      <div class="col-12 subtitle">Anmeldefrist</div>
-      <!--<mz-datepicker-container class="col s12 l6">
+      <div class="my-2 col-12 subtitle">Anmeldefrist</div>
+
+      <mat-form-field class="col-12 col-lg-3">
+        <mat-label>Anmeldefrist</mat-label>
+        <mtx-datetimepicker
+          #datetimePickerSignIn
+          [type]="typeDatetime"
+          [multiYearSelector]="false"
+          [twelvehour]="false"
+          [timeInterval]="15"
+          [touchUi]="true"
+          [timeInput]="true"
+        ></mtx-datetimepicker>
         <input
-          mz-datepicker
-          [label]="'Datum'"
-          [options]="optionsDate"
-          [(ngModel)]="datum_anmeldefrist"
-          id="datumanmeldefrist"
-          name="datumanmeldefrist"
-          type="text"
+          [mtxDatetimepicker]="datetimePickerSignIn"
+          [(ngModel)]="event.sign_in"
+          matInput
+          id="anmeldefrist"
+          name="anmeldefrist"
         />
-      </mz-datepicker-container>
-      <mz-timepicker-container class="col s12 l6">
-        <input
-          mz-timepicker
-          [label]="'Zeit'"
-          [options]="optionsTime"
-          [(ngModel)]="time_anmeldefrist"
-          id="timeanmeldefrist"
-          name="timeanmeldefrist"
-          type="text"
-        />
-      </mz-timepicker-container>-->
+        <mtx-datetimepicker-toggle
+          [for]="datetimePickerSignIn"
+          matSuffix
+        ></mtx-datetimepicker-toggle>
+      </mat-form-field>
     </div>
 
     <div class="divider"></div>
 
     <div class="row">
-      <div class="col-12 subtitle">Abmeldefrist</div>
-      <!--<mz-datepicker-container class="col s12 l6">
+      <div class="my-2 col-12 subtitle">Abmeldefrist</div>
+
+      <mat-form-field class="col-12 col-lg-3">
+        <mat-label>Abmeldefrist</mat-label>
+        <mtx-datetimepicker
+          #datetimePickerSignOut
+          [type]="typeDatetime"
+          [multiYearSelector]="false"
+          [twelvehour]="false"
+          [timeInterval]="15"
+          [touchUi]="true"
+          [timeInput]="true"
+        ></mtx-datetimepicker>
         <input
-          mz-datepicker
-          [label]="'Datum'"
-          [options]="optionsDate"
-          [(ngModel)]="datum_abmeldefrist"
-          id="datumabmeldefrist"
-          name="datumabmeldefrist"
-          type="text"
+          [mtxDatetimepicker]="datetimePickerSignOut"
+          [(ngModel)]="event.sign_out"
+          matInput
+          id="abmeldefrist"
+          name="abmeldefrist"
         />
-      </mz-datepicker-container>
-      <mz-timepicker-container class="col s12 l6">
-        <input
-          mz-timepicker
-          [label]="'Zeit'"
-          [options]="optionsTime"
-          [(ngModel)]="time_abmeldefrist"
-          id="timeabmeldefrist"
-          name="timeabmeldefrist"
-          type="text"
-        />
-      </mz-timepicker-container>-->
+        <mtx-datetimepicker-toggle
+          [for]="datetimePickerSignOut"
+          matSuffix
+        ></mtx-datetimepicker-toggle>
+      </mat-form-field>
     </div>
 
     <div class="divider"></div>
 
     <div class="col-12 anmeldungen flow-text">
-      <h5 class="light">Anmeldungen</h5>
-      <ul class="collection" *ngIf="event.participant_ids.length">
+      <div class="my-2 col-12 subtitle">Anmeldungen</div>
+      <ul class="collection" *ngIf="participants.length">
         <li
-          class="collection-item valign-wrapper"
-          *ngFor="let participant of event.participant_ids"
+          class="collection-item valign-wrapper d-flex align-items-center"
+          *ngFor="let participant of participants"
         >
-          <span class="title"
-            >{{ participant.firstname }} {{ participant.lastname }}</span
-          >
-          <!--<span
+          <span class="title">
+            {{ participant.user.firstname }}
+            {{ participant.user.lastname }}
+          </span>
+          <span
             *ngIf="participant.trial"
             class="grey-text text-darken-1 light phone"
-            ><i>{{ participant.phone }}</i></span
-          >-->
-          <div class="icon-container">
-            <a class="secondary-content" (click)="removeUser(participant)"
-              ><i class="material-icons">delete</i></a
+          >
+            <i
+              ><small>{{ participant.user.phone }}</small></i
             >
-            <!--<i
-              *ngIf="participant.trial"
-              class="material-icons secondary-content"
-              >fitness_center</i
-            >-->
+          </span>
+          <i
+            *ngIf="participant.trial"
+            class="material-icons mx-3 secondary-content"
+          >
+            fitness_center
+          </i>
+          <div class="icon-container">
+            <a class="secondary-content" (click)="removeUser(participant)">
+              <i class="material-icons">delete</i>
+            </a>
           </div>
         </li>
       </ul>
-      <div *ngIf="!event.participant_ids.length">
+      <div *ngIf="!participants.length">
         <span class="flow-text"><i>Es gibt noch keine Anmeldungen.</i></span>
       </div>
     </div>
