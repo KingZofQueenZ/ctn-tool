@@ -1,5 +1,53 @@
-/* You can add global styles to this file, and also import other style files
+@use "./palette.scss" as palette;
+@use "@angular/material" as mat;
+@import "@angular/material/theming";
 
+$app-primary: mat.define-palette(palette.$primary);
+$app-accent: mat.define-palette(palette.$accent);
+$app-warn: mat.define-palette(palette.$warn);
+
+$app-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $app-primary,
+      accent: $app-accent,
+      warn: $app-warn,
+    ),
+  )
+);
+@include mat.all-component-themes($app-theme);
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~@ng-matero/extensions/prebuilt-themes/indigo-pink.css";
+
+// Parralax
+.parallax {
+  background-image: url("./assets/img/background/CrossTheNature.jpg");
+  background-attachment: fixed;
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  &.top {
+    min-height: 400px;
+  }
+
+  &.secondary {
+    height: 160px;
+  }
+
+  .parralax-title {
+    text-shadow: #000 1px 0 10px;
+    margin: 0px !important;
+  }
+
+  .parralax-subtitle {
+    font-weight: 200 !important;
+    text-shadow: #000 2px 2px 4px;
+  }
+}
+
+// OLD --------------------------------------------------------------------------------------------
 html,
 body {
   height: 100%;
@@ -7,21 +55,13 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-}*/
-@import "~@ng-matero/extensions/prebuilt-themes/indigo-pink.css";
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+}
+
 // Variables
 $color-teal: #249287;
 $color-teal-light: #44ccbe;
 
 $nav-height: 110px;
-
-// Typography override variables
-$small-screen: 600px !default;
-$large-screen: 1200px !default;
-$range: $large-screen - $small-screen !default;
-$intervals: 8 !default;
-$interval-size: $range / $intervals !default;
 
 .spinner {
   margin-top: 40px;
@@ -189,6 +229,10 @@ blockquote {
   height: 70px;
 }
 
+.light {
+  font-weight: 300 !important;
+}
+
 hr {
   display: block;
   height: 1px;
@@ -251,10 +295,6 @@ a:hover {
   color: #000000 !important;
 }
 
-.light {
-  font-weight: 300;
-}
-
 h1 {
   font-size: 4.2rem;
   line-height: 110%;
@@ -310,16 +350,16 @@ hr {
     0 2px 2px 0 rgba(0, 0, 0, 0.14),
     0 1px 5px 0 rgba(0, 0, 0, 0.12),
     0 3px 1px -2px rgba(0, 0, 0, 0.2);
+
+  a {
+    background-color: transparent;
+    -webkit-tap-highlight-color: transparent;
+    text-decoration: none;
+  }
 }
 
 .center {
   text-align: center;
-}
-
-a {
-  background-color: transparent;
-  -webkit-tap-highlight-color: transparent;
-  text-decoration: none;
 }
 
 /* Collection Next Events */

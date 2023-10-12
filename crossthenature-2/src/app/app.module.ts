@@ -61,6 +61,7 @@ import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
 import { MtxMomentDatetimeModule } from '@ng-matero/extensions-moment-adapter';
 import { CreateEventComponent } from './admin/create-event/create-event.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -108,6 +109,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatSnackBarModule,
     MatProgressSpinnerModule,
     MatDialogModule,
+    MatIconModule,
     MatCheckboxModule,
     ReactiveFormsModule,
     CKEditorModule,
