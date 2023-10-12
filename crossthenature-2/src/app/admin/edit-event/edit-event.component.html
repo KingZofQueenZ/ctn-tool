@@ -26,13 +26,14 @@
         />
       </mat-form-field>
 
-      <mat-form-field class="col-3">
+      <mat-form-field class="col-12 col-lg-3">
         <mat-label>Teilnehmer</mat-label>
         <input
           matInput
           [(ngModel)]="event.max_participants"
           id="max_participants"
           name="max_participants"
+          number
           type="number"
         />
       </mat-form-field>

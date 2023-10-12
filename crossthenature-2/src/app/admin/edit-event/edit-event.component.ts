@@ -150,19 +150,18 @@ export class EditEventComponent implements OnInit {
     this.location.back();
   }
 
-  removeUser(participant: any) {
+  removeUser(participant: UserTrial) {
     this.eventService
-      .deleteParticipantAdmin(this.event._id, participant._id)
+      .deleteParticipantAdmin(this.event._id, participant.user._id)
       .subscribe({
         next: () => {
-          this.event.participant_ids.splice(
-            this.event.participant_ids.findIndex(
-              (x) => x._id === participant._id,
+          this.participants.splice(
+            this.participants.findIndex(
+              (x) => x.user._id === participant.user._id,
             ),
             1,
           );
 
-          this.getParticipants();
           this.snackBar.open(
             'Der User wurde erfolgreich von ' + this.event.name + ' entfernt',
           );
@@ -187,7 +186,7 @@ export class EditEventComponent implements OnInit {
           firstname: trialParticipant.firstname,
           lastname: trialParticipant.lastname,
           phone: trialParticipant.phone,
-          _id: '',
+          _id: trialParticipant._id,
           admin: false,
           email: '',
           password: '',
