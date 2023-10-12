@@ -10,7 +10,7 @@ export class DeleteEventDialog {
   name: string;
 
   constructor(@Inject(MAT_DIALOG_DATA) data: any) {
-    this.dateString = data.deleteString;
+    this.dateString = data.dateString;
     this.name = data.name;
   }
 }

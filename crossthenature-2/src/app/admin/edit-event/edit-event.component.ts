@@ -7,7 +7,6 @@ import { Location } from '@angular/common';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { EditorConfig } from '@ckeditor/ckeditor5-core';
 import {
-  MtxCalendarView,
   MtxDatetimepickerMode,
   MtxDatetimepickerType,
 } from '@ng-matero/extensions/datetimepicker';
@@ -34,7 +33,6 @@ export class EditEventComponent implements OnInit {
   typeDate: MtxDatetimepickerType = 'date';
   typeTime: MtxDatetimepickerType = 'time';
   mode: MtxDatetimepickerMode = 'auto';
-  startView: MtxCalendarView = 'month';
 
   participants: UserTrial[] = [];
 

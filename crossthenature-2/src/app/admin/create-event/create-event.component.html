@@ -1,0 +1,244 @@
+<div class="container create-event">
+  <div class="row title">
+    <div class="col-12">
+      <h3 class="header detail-title teal-text center-on-mobile">
+        Neuer Termin anlegen
+      </h3>
+    </div>
+  </div>
+
+  <form
+    (ngSubmit)="createEventForm.form.valid && create()"
+    #createEventForm="ngForm"
+  >
+    <div class="row">
+      <div class="my-2 subtitle col-12">Allgemeines</div>
+      <mat-form-field class="col-12">
+        <mat-label>Bezeichnung</mat-label>
+        <input
+          matInput
+          [(ngModel)]="event.name"
+          required
+          id="name"
+          name="name"
+          type="text"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="col-12 col-lg-3">
+        <mat-label>Teilnehmer</mat-label>
+        <input
+          matInput
+          [(ngModel)]="event.max_participants"
+          id="max_participants"
+          name="max_participants"
+          number
+          type="number"
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="row">
+      <div class="my-2 col-12 subtitle">Beschreibung</div>
+
+      <ckeditor
+        class="ckeditor col-12"
+        [editor]="editor"
+        [config]="ckeConfig"
+        [(ngModel)]="event.description"
+        name="content"
+        data=""
+      ></ckeditor>
+    </div>
+
+    <div class="divider aftereditor"></div>
+
+    <div class="row">
+      <div class="my-2 col-12 subtitle">Datum</div>
+      <mat-form-field class="col-12 col-lg-3">
+        <mat-label>Datum</mat-label>
+        <mtx-datetimepicker
+          #datetimePicker
+          [type]="typeDate"
+          [multiYearSelector]="false"
+          [touchUi]="true"
+        ></mtx-datetimepicker>
+        <input
+          [mtxDatetimepicker]="datetimePicker"
+          [(ngModel)]="event.date"
+          matInput
+          required
+        />
+        <mtx-datetimepicker-toggle
+          [for]="datetimePicker"
+          matSuffix
+        ></mtx-datetimepicker-toggle>
+      </mat-form-field>
+
+      <mat-form-field class="col-12 col-lg-3">
+        <mat-label>Zeit von</mat-label>
+        <mtx-datetimepicker
+          #datetimePickerTimeFrom
+          [type]="typeTime"
+          [twelvehour]="false"
+          [timeInterval]="15"
+          [touchUi]="true"
+          [timeInput]="true"
+        ></mtx-datetimepicker>
+        <input
+          [mtxDatetimepicker]="datetimePickerTimeFrom"
+          [(ngModel)]="time_from"
+          matInput
+          required
+          id="timefrom"
+          name="timefrom"
+        />
+        <mtx-datetimepicker-toggle
+          [for]="datetimePickerTimeFrom"
+          matSuffix
+        ></mtx-datetimepicker-toggle>
+      </mat-form-field>
+
+      <mat-form-field class="col-12 col-lg-3">
+        <mat-label>Zeit bis</mat-label>
+        <mtx-datetimepicker
+          #datetimePickerTimeTo
+          [type]="typeTime"
+          [twelvehour]="false"
+          [timeInterval]="15"
+          [touchUi]="true"
+          [timeInput]="true"
+        ></mtx-datetimepicker>
+        <input
+          [mtxDatetimepicker]="datetimePickerTimeTo"
+          [(ngModel)]="time_to"
+          matInput
+          required
+          id="timeto"
+          name="timeto"
+        />
+        <mtx-datetimepicker-toggle
+          [for]="datetimePickerTimeTo"
+          matSuffix
+        ></mtx-datetimepicker-toggle>
+      </mat-form-field>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="row">
+      <div class="my-2 col-12 subtitle">Anmeldefrist</div>
+      <mat-form-field class="col-12 col-lg-3">
+        <mat-label>Anmeldefrist</mat-label>
+        <mtx-datetimepicker
+          #datetimePickerSignIn
+          [type]="typeDatetime"
+          [multiYearSelector]="false"
+          [twelvehour]="false"
+          [timeInterval]="15"
+          [touchUi]="true"
+          [timeInput]="true"
+        ></mtx-datetimepicker>
+        <input
+          [mtxDatetimepicker]="datetimePickerSignIn"
+          [(ngModel)]="event.sign_in"
+          matInput
+          id="anmeldefrist"
+          name="anmeldefrist"
+        />
+        <mtx-datetimepicker-toggle
+          [for]="datetimePickerSignIn"
+          matSuffix
+        ></mtx-datetimepicker-toggle>
+      </mat-form-field>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="row">
+      <div class="my-2 col-12 subtitle">Abmeldefrist</div>
+      <mat-form-field class="col-12 col-lg-3">
+        <mat-label>Abmeldefrist</mat-label>
+        <mtx-datetimepicker
+          #datetimePickerSignOut
+          [type]="typeDatetime"
+          [multiYearSelector]="false"
+          [twelvehour]="false"
+          [timeInterval]="15"
+          [touchUi]="true"
+          [timeInput]="true"
+        ></mtx-datetimepicker>
+        <input
+          [mtxDatetimepicker]="datetimePickerSignOut"
+          [(ngModel)]="event.sign_out"
+          matInput
+          id="abmeldefrist"
+          name="abmeldefrist"
+        />
+        <mtx-datetimepicker-toggle
+          [for]="datetimePickerSignOut"
+          matSuffix
+        ></mtx-datetimepicker-toggle>
+      </mat-form-field>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="row repeat">
+      <div class="col-12 my-2 subtitle">Termin wiederholung</div>
+
+      <mat-checkbox class="col-3 col-lg-1" [(ngModel)]="mo"> Mo </mat-checkbox>
+      <mat-checkbox class="col-3 col-lg-1" [(ngModel)]="di"> Di </mat-checkbox>
+      <mat-checkbox class="col-3 col-lg-1" [(ngModel)]="mi"> Mi </mat-checkbox>
+      <mat-checkbox class="col-3 col-lg-1" [(ngModel)]="do"> Do </mat-checkbox>
+      <mat-checkbox class="col-3 col-lg-1" [(ngModel)]="fr"> Fr </mat-checkbox>
+      <mat-checkbox class="col-3 col-lg-1" [(ngModel)]="sa"> Sa </mat-checkbox>
+      <mat-checkbox class="col-3 col-lg-1" [(ngModel)]="so"> So </mat-checkbox>
+
+      <mat-form-field class="col-12 col-lg-4 offset-lg-1">
+        <mat-label>Wiederholen bis</mat-label>
+        <mtx-datetimepicker
+          #datetimePickerRepeat
+          [type]="typeDate"
+          [multiYearSelector]="false"
+          [touchUi]="true"
+        ></mtx-datetimepicker>
+        <input
+          [mtxDatetimepicker]="datetimePickerRepeat"
+          [(ngModel)]="repeat_date"
+          matInput
+        />
+        <mtx-datetimepicker-toggle
+          [for]="datetimePickerRepeat"
+          matSuffix
+        ></mtx-datetimepicker-toggle>
+      </mat-form-field>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="col-12 submit center-on-mobile">
+      <button
+        mat-flat-button
+        color="primary"
+        class="btn"
+        [class.disabled]="!createEventForm.form.valid"
+        type="submit"
+        name="action"
+      >
+        Termin anlegen
+      </button>
+      <button
+        mat-flat-button
+        color="error"
+        type="button"
+        class="btn"
+        (click)="goBack()"
+      >
+        Abbrechen
+      </button>
+    </div>
+  </form>
+</div>

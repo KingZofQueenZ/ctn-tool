@@ -46,6 +46,12 @@ export class AdminEventOverviewComponent implements OnInit {
     this.loading = true;
     setTimeout(() => {
       this.eventService.getAll(this.page).subscribe((events) => {
+        if (events.length === 0) {
+          this.noEvents = true;
+          this.page = 1;
+        }
+
+        this.events = [];
         events.forEach((element) => {
           this.events.push(element);
           this.noEvents = false;
@@ -62,13 +68,6 @@ export class AdminEventOverviewComponent implements OnInit {
         this.loading = false;
       });
     }, 500);
-  }
-
-  private refresh() {
-    this.noEvents = true;
-    this.page = 1;
-    this.events = [];
-    this.getEvents();
   }
 
   public load() {
@@ -90,7 +89,7 @@ export class AdminEventOverviewComponent implements OnInit {
         this.eventService.delete(event._id).subscribe({
           next: () => {
             this.snackBar.open('Der Termin wurde erfolgreich gelöscht.');
-            this.refresh();
+            this.getEvents();
           },
           error: (e) => {
             this.snackBar.open('Der Termin konnte nicht gelöscht werden.');

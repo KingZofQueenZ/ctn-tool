@@ -59,6 +59,8 @@ import { EventListItemComponent } from './event/event-list-item/event-list-item.
 import { EditEventComponent } from './admin/edit-event/edit-event.component';
 import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
 import { MtxMomentDatetimeModule } from '@ng-matero/extensions-moment-adapter';
+import { CreateEventComponent } from './admin/create-event/create-event.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -90,6 +92,7 @@ import { MtxMomentDatetimeModule } from '@ng-matero/extensions-moment-adapter';
     EventDetailComponent,
     EventListItemComponent,
     EditEventComponent,
+    CreateEventComponent,
   ],
   imports: [
     HttpClientModule,
@@ -105,6 +108,7 @@ import { MtxMomentDatetimeModule } from '@ng-matero/extensions-moment-adapter';
     MatSnackBarModule,
     MatProgressSpinnerModule,
     MatDialogModule,
+    MatCheckboxModule,
     ReactiveFormsModule,
     CKEditorModule,
     RecaptchaModule,
