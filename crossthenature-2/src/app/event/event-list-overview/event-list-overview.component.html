@@ -35,7 +35,7 @@
     <div class="col-12 center load" *ngIf="!allEvents && !loading">
       <a (click)="load()" class="flow-text center">Weitere Termine laden...</a>
     </div>
-    <div class="col-12 center spinner" *ngIf="loading">
+    <div class="col-12 d-flex justify-content-center my-4" *ngIf="loading">
       <mat-spinner></mat-spinner>
     </div>
   </div>
@@ -49,8 +49,8 @@
   </div>
 </div>
 
-<div class="container spinner" *ngIf="!events.length && !noEvents">
-  <div class="row center">
+<div class="container" *ngIf="!events.length && !noEvents">
+  <div class="w-100 d-flex justify-content-center">
     <mat-spinner></mat-spinner>
   </div>
 </div>

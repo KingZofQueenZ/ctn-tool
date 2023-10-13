@@ -1,11 +1,11 @@
-<div class="parallax hide-on-med-and-down">
-  <div class="container">
-    <h1 class="header center teal-text">Details</h1>
-    <div class="row center">
-      <h5 class="header white-text col-12 light">
-        &laquo;Nothing great comes without sacrifice.&raquo;
-      </h5>
-    </div>
+<div class="parallax top d-none d-lg-flex">
+  <div
+    class="container d-flex flex-column align-items-center justify-content-center"
+  >
+    <h1 class="teal-text mat-headline-3 parralax-title">Details</h1>
+    <h1 class="white-text parralax-subtitle mt-3">
+      &laquo;Nothing great comes without sacrifice.&raquo;
+    </h1>
   </div>
 </div>
 
@@ -13,12 +13,12 @@
 <div class="container details" *ngIf="event">
   <div class="row">
     <div class="col-12 col-lg-8">
-      <h3 class="header detail-title teal-text center-on-mobile">
+      <h1 class="header detail-title teal-text center-on-mobile">
         {{ event.name }}
-      </h3>
-      <h5 class="header light detail-subtitle grey-text light center-on-mobile">
+      </h1>
+      <h3 class="header light detail-subtitle grey-text light center-on-mobile">
         <i>{{ date_string }}</i>
-      </h5>
+      </h3>
       <span
         *ngIf="date_string_anmeldung"
         class="header light detail-deadline-subtitle grey-text light center-on-mobile"
@@ -67,14 +67,14 @@
     </div>
 
     <div class="col-12 description title" *ngIf="event.description">
-      <h5 class="light">Details</h5>
+      <h2 class="light">Details</h2>
       <div class="flow-text" [innerHTML]="event.description | safeHtml"></div>
     </div>
 
     <!-- Only show if user is logged in -->
     <div *ngIf="user">
       <div class="col-12 anmeldungen flow-text">
-        <h5 class="light">Anmeldungen</h5>
+        <h2 class="light">Anmeldungen</h2>
         <span class="participantcount grey-text text-darken-1 light">
           {{ participant_string }} Anmeldungen
         </span>
@@ -113,7 +113,7 @@
     <!-- Only show if user is not logged in -->
     <div class="col-12 probetraining" *ngIf="!user">
       <div class="title">
-        <h5 class="light">Anmeldung zum Probetraining</h5>
+        <h2 class="light">Anmeldung zum Probetraining</h2>
       </div>
 
       <div class="flow-text subtitle" *ngIf="!trial_success && !is_full">
@@ -199,8 +199,8 @@
   </div>
 </div>
 
-<div class="container spinner" *ngIf="!event">
-  <div class="row center">
+<div class="container" *ngIf="!event">
+  <div class="w-100 d-flex justify-content-center">
     <mat-spinner></mat-spinner>
   </div>
 </div>

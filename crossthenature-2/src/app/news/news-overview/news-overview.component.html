@@ -39,7 +39,7 @@
     <div class="col-12 center load" *ngIf="!allNews && !loading">
       <a (click)="load()" class="flow-text center">Ältere News laden...</a>
     </div>
-    <div class="col-12 center spinner" *ngIf="loading">
+    <div class="col-12 d-flex justify-content-center my-4" *ngIf="loading">
       <mat-spinner></mat-spinner>
     </div>
   </div>
@@ -50,8 +50,8 @@
     </div>
   </div>
 
-  <div class="container spinner" *ngIf="!news.length && !noNews">
-    <div class="row center">
+  <div class="container" *ngIf="!news.length && !noNews">
+    <div class="w-100 d-flex justify-content-center">
       <mat-spinner></mat-spinner>
     </div>
   </div>
