@@ -1,9 +1,9 @@
 <div class="container">
   <div class="row profile">
     <div class="col-12">
-      <h3 class="header detail-title teal-text center-on-mobile">
+      <h1 class="header detail-title teal-text center-on-mobile">
         Benutzerprofil
-      </h3>
+      </h1>
     </div>
     <div class="col-12 center-on-mobile">
       <h4 class="light">{{ user.firstname }} {{ user.lastname }}</h4>
@@ -43,16 +43,16 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <h4 class="teal-text header center-on-mobile">
+      <h1 class="teal-text header center-on-mobile">
         Meine nächsten Trainings
-      </h4>
+      </h1>
     </div>
   </div>
 
   <div class="row event-cards">
     <div *ngFor="let event of events">
       <div class="col-12">
-        <!--<app-event-list-item [event]="event"></app-event-list-item>-->
+        <app-event-list-item [event]="event"></app-event-list-item>
       </div>
     </div>
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
+import { Event } from '../../models/event';
 
 @Component({
   selector: 'app-profile',
@@ -25,9 +26,9 @@ export class ProfileComponent implements OnInit {
   }
 
   getEvents(): void {
-    /*this.userService.getUserEvents(this.user._id).subscribe(
-      (events) => {
-        events.forEach((element) => {
+    this.userService.getUserEvents(this.user._id).subscribe({
+      next: (events: Event[]) => {
+        events.forEach((element: Event) => {
           this.events.push(element);
         });
 
@@ -35,9 +36,7 @@ export class ProfileComponent implements OnInit {
           this.noEvents = true;
         }
       },
-      (error) => {
-        // TODO
-      },
-    );*/
+      error: (e) => {},
+    });
   }
 }
