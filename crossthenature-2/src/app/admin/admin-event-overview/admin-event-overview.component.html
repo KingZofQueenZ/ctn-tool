@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="row all-events">
+    <div class="col-12 col-lg-8">
+      <h3 class="header teal-text center-on-mobile">Alle Termine</h3>
+    </div>
+    <div class="col-12 col-lg-4 center-on-mobile button">
+      <button
+        mat-flat-button
+        color="primary"
+        [routerLink]="['/admin-event-create']"
+        class="btn"
+      >
+        Neuer Termin
+      </button>
+    </div>
+    <div class="col-12 events">
+      <ul class="collection" *ngIf="events.length">
+        <li class="collection-item" *ngFor="let event of events">
+          <span class="title teal-text">{{ event.name }}</span>
+          <span class="date grey-text text-darken-1 light"
+            ><i>{{ getDateString(event) }}</i></span
+          >
+          <div class="icon-container">
+            <mat-icon
+              (click)="deleteEvent(event)"
+              fontIcon="delete"
+              color="primary"
+            ></mat-icon>
+
+            <a
+              class="secondary-content edit"
+              [routerLink]="['/admin-event-edit', event._id]"
+            >
+              <i class="material-icons">edit</i>
+            </a>
+            <a
+              class="secondary-content show"
+              [routerLink]="['/details', event._id]"
+            >
+              <i class="material-icons">remove_red_eye</i>
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="col-12 center load" *ngIf="!allEvents && !noEvents && !loading">
+      <a (click)="load()" class="flow-text center">Weitere Termine laden...</a>
+    </div>
+    <div class="col-12 center spinner" *ngIf="events.length && loading">
+      <mat-spinner></mat-spinner>
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf="noEvents">
+  <div class="row">
+    <div class="col-12 center-on-mobile">
+      <p class="flow-text">Es gibt zurzeit leider keine Termine!</p>
+    </div>
+  </div>
+</div>
+
+<div class="container spinner" *ngIf="!events.length && !noEvents">
+  <div class="row center">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>

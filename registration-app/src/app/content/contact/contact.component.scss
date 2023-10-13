@@ -5,7 +5,6 @@
     background-position: top;
     background-repeat: no-repeat;
     background-size: cover;
-    margin-bottom: 40px;
 
     h1 {
         margin-top: 0px;
@@ -15,7 +14,6 @@
     h5 {
         margin-top: -25px;
     }
-
 }
 
 .parallax-probe {
@@ -25,27 +23,10 @@
     background-position: top;
     background-repeat: no-repeat;
     background-size: cover;
-    margin-top: 50px;
+}
 
-    a {
-        margin-top: 25px;
-        margin-bottom: 25px;
-    }
-
-    h4 {
-        padding-top: 25px;
-    }
-
-    @media only screen and (min-width: 992px) {
-        h4 {
-            padding-top: 45px;
-        }
-
-        a {
-            float: right !important;
-            margin-top: 65px;
-        }
-    }
+.probe-container {
+    min-height: 160px;
 }
 
 .team {
@@ -82,6 +63,10 @@
             }
         }
     }
+}
+
+.trainer-name {
+    margin-left: 80px;
 }
 
 .contact {

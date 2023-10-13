@@ -1,0 +1,66 @@
+.all-events {
+  @media only screen and (min-width: 992px) {
+    .button {
+      a {
+        float: right !important;
+        margin-top: 30px;
+      }
+    }
+  }
+
+  .load {
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    a {
+      color: #000;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+
+  .spinner {
+    margin-top: 20px;
+    margin-bottom: 4px;
+  }
+
+  .events {
+    margin-top: 20px;
+
+    .collection-item {
+      position: relative;
+
+      .title {
+        font-size: 18px;
+      }
+
+      .icon-container {
+        position: absolute;
+        right: 20px;
+        top: 21px;
+
+        a {
+          margin-left: 5px;
+          cursor: pointer;
+
+          i {
+            user-select: none;
+            -moz-user-select: none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            -o-user-select: none;
+          }
+        }
+      }
+
+      .title {
+        display: block !important;
+      }
+
+      .date {
+        display: block !important;
+        margin-top: 2px;
+      }
+    }
+  }
+}

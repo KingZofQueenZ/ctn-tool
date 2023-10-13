@@ -1,0 +1,73 @@
+<div class="row">
+  <div class="col-12 title">
+    <h5 class="header teal-text text-center text-lg-start">{{ event.name }}</h5>
+    <span class="grey-text text-darken-1 light text-center text-lg-start"
+      ><i>{{ date_string }}</i></span
+    >
+  </div>
+
+  <div class="row" *ngIf="participants.length">
+    <div class="col-12 col-lg-6 registrations">
+      <ul class="collection">
+        <li
+          class="collection-item"
+          *ngFor="
+            let participant of participants
+              | slice: 0 : +(participants.length / 2).toFixed()
+          "
+        >
+          <div class="d-flex justify-content-between">
+            <div>
+              <span>{{
+                participant.user.firstname + " " + participant.user.lastname
+              }}</span>
+              <span
+                *ngIf="participant.trial"
+                class="grey-text text-darken-1 light phone"
+                ><i> {{ participant.user.phone }}</i></span
+              >
+            </div>
+            <div *ngIf="participant.trial" class="teal-text">
+              <i class="material-icons">fitness_center</i>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="col-12 col-lg-6 registrations" *ngIf="participants.length > 1">
+      <ul class="collection">
+        <li
+          class="collection-item"
+          *ngFor="
+            let participant of participants
+              | slice
+                : +(participants.length / 2).toFixed()
+                : participants.length
+          "
+        >
+          <div class="d-flex justify-content-between">
+            <div>
+              <span>{{
+                participant.user.firstname + " " + participant.user.lastname
+              }}</span>
+              <span
+                *ngIf="participant.trial"
+                class="grey-text text-darken-1 light phone"
+                ><i> {{ participant.user.phone }}</i></span
+              >
+            </div>
+            <div *ngIf="participant.trial" class="teal-text">
+              <i class="material-icons">fitness_center</i>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div *ngIf="!participants.length">
+    <div class="col-12 text-center text-lg-start">
+      <span class="flow-text">Es gibt keine Anmeldungen für diesen Event!</span>
+    </div>
+  </div>
+</div>

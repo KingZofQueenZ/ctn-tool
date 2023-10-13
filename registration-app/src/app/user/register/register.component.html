@@ -30,15 +30,6 @@
           <label class="light" for="confirmPassword">Passwort bestätigen</label>
         </div>
 
-        <div class="col s12 checkbox-container">
-          <mz-checkbox-container class="checkbox">
-              <input mz-checkbox
-                id="confirm"
-                type="checkbox"
-                formControlName="confirm">
-          </mz-checkbox-container>
-          <span class="confirm">Ich akzeptiere die <a (click)="agbModal.open()">AGB</a></span>
-        </div>
         <div class="col s12 center-on-mobile register-button">
           <button class="btn" [disabled]="!registerForm.valid" type="submit" name="action">Registrieren</button>
         </div>
@@ -59,15 +50,3 @@
       </div>
   </div>
 </div>  
-
-<mz-modal #agbModal [fixedFooter]="true">
-  <mz-modal-header>
-    Datenschutzbestimmungen
-  </mz-modal-header>
-  <mz-modal-content>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  </mz-modal-content>
-  <mz-modal-footer>
-    <button mz-button [flat]="true" mz-modal-close>Schliessen</button>
-  </mz-modal-footer>
-</mz-modal>

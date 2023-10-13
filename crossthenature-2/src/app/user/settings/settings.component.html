@@ -1,0 +1,86 @@
+<div class="container register">
+  <div class="row">
+    <div class="col-12 col-lg-8 offset-lg-2">
+      <h3 class="header detail-title teal-text center-on-mobile">
+        Benutzerdaten
+      </h3>
+    </div>
+
+    <form
+      (ngSubmit)="settingsForm.form.valid && update()"
+      #settingsForm="ngForm"
+      class="col-12 col-lg-8 offset-lg-2"
+    >
+      <mat-form-field class="col-12">
+        <mat-label>Vorname</mat-label>
+        <input
+          matInput
+          [(ngModel)]="user.firstname"
+          required
+          id="firstname"
+          name="firstname"
+          type="text"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="col-12">
+        <mat-label>Nachname</mat-label>
+        <input
+          matInput
+          [(ngModel)]="user.lastname"
+          required
+          id="lastname"
+          name="lastname"
+          type="text"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="col-12">
+        <mat-label>E-Mail</mat-label>
+        <input
+          matInput
+          [(ngModel)]="user.email"
+          required
+          id="email"
+          name="email"
+          type="email"
+          email
+        />
+      </mat-form-field>
+
+      <mat-form-field class="col-12">
+        <mat-label>Telefon</mat-label>
+        <input
+          matInput
+          [(ngModel)]="user.phone"
+          required
+          id="phone"
+          name="phone"
+          type="text"
+        />
+      </mat-form-field>
+
+      <div class="col-12 text-center text-lg-start">
+        <button
+          mat-flat-button
+          color="primary"
+          class="btn"
+          [class.disabled]="!settingsForm.form.valid"
+          type="submit"
+          name="action"
+        >
+          Speichern
+        </button>
+        <button
+          mat-flat-button
+          color="secondary"
+          class="btn"
+          type="button"
+          (click)="goBack()"
+        >
+          Abbrechen
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

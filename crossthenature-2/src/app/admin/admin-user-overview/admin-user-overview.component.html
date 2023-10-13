@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row all-users">
+    <div class="col-12 col-lg-8">
+      <h4 class="header teal-text center-on-mobile">Alle User</h4>
+    </div>
+    <div class="col-12 users">
+      <ul class="collection" *ngIf="users.length">
+        <li class="collection-item" *ngFor="let user of users">
+          <span class="title teal-text">{{
+            user.lastname + ", " + user.firstname
+          }}</span>
+          <span class="information grey-text text-darken-1 light">
+            <i>{{ user.email + ", " + user.phone }}</i>
+          </span>
+          <div class="icon-container">
+            <a class="secondary-content delete" (click)="deleteUser(user)">
+              <i class="material-icons">delete</i>
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf="noUsers">
+  <div class="row">
+    <div class="col-12 text-center text-lg-start">
+      <p class="flow-text">Es gibt zurzeit leider keine User!</p>
+    </div>
+  </div>
+</div>
+
+<div class="container spinner" *ngIf="!users.length && !noUsers">
+  <div class="row d-flex justify-content-center">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>

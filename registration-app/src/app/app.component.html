@@ -1,94 +1,91 @@
-<nav class="white" role="navigation">
-    <div class="nav-wrapper container">
-        <div class="nav-desktop">
-            <a id="logo-container" routerLink="/home" class="brand-logo">
-                <img src="../assets/img/logos/logo.jpg" height="100" width="100">
-            </a>
-            <ul class="right light hide-on-med-and-down">
-                <li><a routerLink="/home" routerLinkActive="selected">Home</a></li>
-                <li><a routerLink="/news" routerLinkActive="selected">News</a></li>
-                <li><a routerLink="/information" routerLinkActive="selected">Information</a></li>
-                <li><a routerLink="/events" routerLinkActive="selected">Teilnehmen</a></li>
-                <li><a routerLink="/contact" routerLinkActive="selected">Kontakt</a></li>
-                <li *ngIf="user?.admin"><a routerLink="/admin" routerLinkActive="selected">Admin</a></li>
-                <li *ngIf="user"><a id="login-toggle" routerLink="/profile" routerLinkActive="selected">{{user.firstname + ' ' + user.lastname}}</a></li>
-                <li *ngIf="!user"><a id="login-toggle" routerLink="/login" routerLinkActive="selected">Login</a></li>
-            </ul>
-        </div>
-        <a href="#" id="btn-sidenav-demo" class="button-collapse"><i class="large material-icons">menu</i></a>
-    </div>
-</nav>
+
+<mat-drawer-container [hasBackdrop]="true">
+    <mat-drawer #drawer [mode]="over">
+        <mat-list role="list">
+            <mat-list-item (click)="drawer.close()" routerLink="/home">Home</mat-list-item>
+            <mat-list-item (click)="drawer.close()" routerLink="/news">News</mat-list-item>
+            <mat-list-item (click)="drawer.close()" routerLink="/information">Informationen</mat-list-item>
+            <mat-list-item (click)="drawer.close()" routerLink="/events">Teilnehmen</mat-list-item>
+            <mat-list-item (click)="drawer.close()" routerLink="/contact">Kontakt</mat-list-item>
+            <hr/>
+          
+            <div *ngIf="!user">
+                <mat-list-item (click)="drawer.close()" routerLink="/login">Login</mat-list-item>
+                <mat-list-item (click)="drawer.close()" routerLink="/register">Registrieren</mat-list-item>
+            </div>
+
+            <div *ngIf="user">    
+                <mat-list-item (click)="drawer.close()" routerLink="/profile">Mein Profil</mat-list-item>
+
+                <div *ngIf="user.admin">
+                    <mat-list-item (click)="drawer.close()" routerLink="/admin">Administration</mat-list-item>
+                </div>
+
+                <mat-list-item (click)="drawer.close()" routerLink="/login">Logout</mat-list-item>
+            </div>
+        </mat-list>
+    </mat-drawer>
+    
+    <mat-drawer-content>
+        <nav class="white" role="navigation">
+            <div class="nav-wrapper container d-none d-lg-block">
+                <div class="nav-desktop">
+                    <a routerLink="/home">
+                        <img src="../assets/img/logos/logo.jpg" height="100" width="100">
+                    </a>
+                    <ul class="right light ">
+                        <li><a routerLink="/home" routerLinkActive="selected">Home</a></li>
+                        <li><a routerLink="/news" routerLinkActive="selected">News</a></li>
+                        <li><a routerLink="/information" routerLinkActive="selected">Information</a></li>
+                        <li><a routerLink="/events" routerLinkActive="selected">Teilnehmen</a></li>
+                        <li><a routerLink="/contact" routerLinkActive="selected">Kontakt</a></li>
+                        <li *ngIf="user?.admin"><a routerLink="/admin" routerLinkActive="selected">Admin</a></li>
+                        <li *ngIf="user"><a id="login-toggle" routerLink="/profile" routerLinkActive="selected">{{user.firstname + ' ' + user.lastname}}</a></li>
+                        <li *ngIf="!user"><a id="login-toggle" routerLink="/login" routerLinkActive="selected">Login</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Mobile Header -->
+            <div class="container d-flex d-lg-none justify-content-between align-items-center">
+                <a (click)="drawer.toggle()" class="button-collapse"><i class="large material-icons">menu</i></a>
+                <a routerLink="/home">
+                    <img src="../assets/img/logos/logo.jpg" height="100" width="100">
+                </a>
+                <div style="width:30px">
+                    <!-- Empty Item to achieve a centered icon with flexbox -->
+                </div>
+            </div>
+        </nav>
+
 <!-- <i class="material-icons right login">person</i> -->
-<mz-sidenav #sidenav [id]="'sidenav'" [collapseButtonId]="'btn-sidenav-demo'" [edge]="'left'" [closeOnClick]="true">
+<!--<mz-sidenav #sidenav [id]="'sidenav'" [collapseButtonId]="'btn-sidenav-demo'" [edge]="'left'" [closeOnClick]="true">
     <mz-sidenav-header *ngIf="user">
       <div class="user-view">
         <img class="circle avatar" src="../assets/img/user.png">
         <div class="white-text name">{{user?.firstname + ' ' + user?.lastname}}</div>
         <div class="white-text email">{{user?.email}}</div>
       </div>
-    </mz-sidenav-header>
+    </mz-sidenav-header>    
+</mz-sidenav>-->
 
-    <mz-sidenav-link>
-        <a routerLink="/home">Home</a>
-    </mz-sidenav-link>
+        <router-outlet></router-outlet>
+        <toaster-container [toasterconfig]="config"></toaster-container>
 
-    <mz-sidenav-link>
-        <a routerLink="/news">News</a>
-    </mz-sidenav-link>
+        <footer class="page-footer">
+            <div class="footer-copyright grey darken-4">
+                <div class="container d-flex justify-content-between">
+                    <div class="d-flex justify-content-between justify-content-md-start w-100">
+                    <span class="copyright d-none d-md-flex">&copy;2023 crossthenature</span>
+                    <span class="phone">Tel. 079 923 69 98</span>     
+                    <span class="data "><a routerLink="/impressum" class="grey-text text-lighten-2">Datenschutz / Impressum</a></span>  
+                    </div>
+                    <div class="icons d-none d-md-block">
+                    <a href="https://www.facebook.com/crossthenature" target="_blank"><img src="assets/img/social/facebook.png" height="25" width="25"></a>
+                    <a href="https://www.instagram.com/crossthenature/" target="_blank"><img src="assets/img/social/instagram.png" height="25" width="25"></a>
+                    </div>     
+                </div>
+            </div>
+        </footer>
+    </mat-drawer-content>
+</mat-drawer-container>
 
-    <mz-sidenav-link>
-        <a routerLink="/information">Informationen</a>
-    </mz-sidenav-link>
-
-    <mz-sidenav-link>
-        <a routerLink="/events">Teilnehmen</a>
-    </mz-sidenav-link>
-
-    <mz-sidenav-link>
-        <a routerLink="/contact">Kontakt</a>
-    </mz-sidenav-link>
-
-    <mz-sidenav-divider></mz-sidenav-divider>
-    
-    <div *ngIf="!user">
-        <mz-sidenav-link>
-            <a routerLink="/login">Login</a>
-        </mz-sidenav-link>
-        <mz-sidenav-link>
-            <a routerLink="/register">Registrieren</a>
-        </mz-sidenav-link>
-    </div>
-    <div *ngIf="user">    
-        <mz-sidenav-link>
-            <a routerLink="/profile">Mein Profil</a>
-        </mz-sidenav-link>
-
-        <div *ngIf="user.admin">
-            <mz-sidenav-link>
-                <a routerLink="/admin">Administration</a>
-            </mz-sidenav-link>
-        </div>
-        
-        <mz-sidenav-link>
-            <a routerLink="/login" (click)="sidenav.opened=false">Logout</a>
-        </mz-sidenav-link>
-    </div>
-</mz-sidenav>
-
-<router-outlet></router-outlet>
-<toaster-container [toasterconfig]="config"></toaster-container>
-
-<footer class="page-footer teal">
-    <div class="footer-copyright grey darken-4">
-      <div class="container">
-          <span class="copyright hide-on-med-and-down">&copy;2018 crossthenature</span>
-          <span class="phone">Tel. 079 923 69 98</span>     
-          <span class="data"><a routerLink="/impressum" class="grey-text text-lighten-2">Datenschutz / Impressum</a></span>  
-          <div class="icons right hide-on-med-and-down">
-            <a href="https://twitter.com/realdonaldtrump" target="_blank"><img src="assets/img/social/twitter.png" height="25" width="25"></a>
-            <a href="https://www.facebook.com/crossthenature" target="_blank"><img src="assets/img/social/facebook.png" height="25" width="25"></a>
-            <a href="https://www.instagram.com/crossthenature/" target="_blank"><img src="assets/img/social/instagram.png" height="25" width="25"></a>
-          </div>          
-      </div>
-    </div>
-</footer>

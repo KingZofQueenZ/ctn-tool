@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { AuthInterceptor } from './shared/auth.interceptor';
 import { AuthGuard } from './shared/auth.guard';
 
@@ -44,6 +44,9 @@ import { NewsService } from './services/news.service';
 import { AdminNewsOverviewComponent } from './admin/admin-news-overview/admin-news-overview.component';
 import { CreateNewsComponent } from './admin/news/create-news/create-news.component';
 import { EditNewsComponent } from './admin/news/edit-news/edit-news.component';
+import { MatButtonModule, MatDialogModule, MatInputModule, MatListModule, MatProgressSpinnerModule, MatSidenavModule, MatTooltipModule } from '@angular/material';
+import { DeleteDialog } from './admin/admin-news-overview/delete-dialog/delete-dialog.component';
+import { DeleteUserDialog } from './admin/admin-user-overview/delete-user-dialog/delete-user-dialog.component';
 
 @NgModule({
   declarations: [
@@ -73,19 +76,30 @@ import { EditNewsComponent } from './admin/news/edit-news/edit-news.component';
     ImpressumComponent,
     AdminNewsOverviewComponent,
     CreateNewsComponent,
-    EditNewsComponent
+    EditNewsComponent,
+    DeleteDialog,
+    DeleteUserDialog
   ],
+  
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule,
+    HttpClient,
     CustomMaterializeModule,
     BrowserAnimationsModule,
     ToasterModule,
     ReactiveFormsModule,
-    CKEditorModule
+    CKEditorModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatListModule,
+    MatInputModule,
+    MatProgressSpinnerModule,
+    MatTooltipModule,
+    MatDialogModule
   ],
+  entryComponents: [DeleteDialog, DeleteUserDialog],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

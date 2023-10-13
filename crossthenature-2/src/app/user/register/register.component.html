@@ -1,0 +1,137 @@
+<div class="container register">
+  <div class="row" *ngIf="!success">
+    <div class="col-12 col-lg-8 offset-lg-2">
+      <h3 class="header detail-title teal-text center-on-mobile">
+        Registrieren
+      </h3>
+    </div>
+
+    <form
+      (ngSubmit)="registerForm.valid && register()"
+      [formGroup]="registerForm"
+      class="col-12 col-lg-8 offset-lg-2"
+    >
+      <mat-form-field class="col-12">
+        <mat-label>Vorname</mat-label>
+        <input
+          matInput
+          [(ngModel)]="user.firstname"
+          required
+          formControlName="firstname"
+          id="firstname"
+          name="firstname"
+          type="text"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="col-12">
+        <mat-label>Nachname</mat-label>
+        <input
+          matInput
+          [(ngModel)]="user.lastname"
+          required
+          formControlName="lastname"
+          id="lastname"
+          name="lastname"
+          type="text"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="col-12">
+        <mat-label>E-Mail</mat-label>
+        <input
+          matInput
+          [(ngModel)]="user.email"
+          required
+          formControlName="email"
+          id="email"
+          name="email"
+          type="email"
+          email
+        />
+      </mat-form-field>
+
+      <mat-form-field class="col-12">
+        <mat-label>Telefon</mat-label>
+        <input
+          matInput
+          [(ngModel)]="user.phone"
+          required
+          formControlName="phone"
+          id="phone"
+          name="phone"
+          type="text"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="col-12">
+        <mat-label>Passwort</mat-label>
+        <input
+          matInput
+          [(ngModel)]="user.password"
+          required
+          formControlName="password"
+          id="password"
+          name="password"
+          type="password"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="col-12">
+        <mat-label>Passwort bestätigen</mat-label>
+        <input
+          matInput
+          required
+          formControlName="confirmPassword"
+          id="confirmPassword"
+          name="confirmPassword"
+          type="password"
+        />
+      </mat-form-field>
+
+      <re-captcha
+        id="recaptcha"
+        name="recaptcha"
+        formControlName="token"
+        required
+      ></re-captcha>
+
+      <div class="col-12 text-center text-lg-start">
+        <button
+          mat-flat-button
+          color="primary"
+          class="btn"
+          [class.disabled]="!registerForm.valid"
+          type="submit"
+          name="action"
+        >
+          Registrieren
+        </button>
+      </div>
+    </form>
+
+    <div class="col-12 col-lg-8 offset-lg-2" *ngIf="hasError">
+      <div class="col-12 error light">
+        Ein Benutzer mit dieser E-Mail Adresse existiert bereits! Passwort
+        <a [routerLink]="['/password']">vergessen?</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row success" *ngIf="success">
+    <div class="col-12 col-lg-8 offset-lg-2">
+      <h4 class="header detail-title teal-text center-on-mobile">
+        Registrierung erfolgreich
+      </h4>
+    </div>
+
+    <div class="col-12 col-lg-8 offset-lg-2 text">
+      <span class="flow-text"
+        >{{ user.firstname }}, vielen Dank für deine Registrierung! Wir haben
+        dir eine Bestätigungsmail an <i>{{ user.email }}</i> gesendet. Bestätige
+        bitte kurz deine E-Mail Adresse indem du auf den Link im Mail klickst.
+        Anschliessend kannst du dich einloggen.</span
+      >
+    </div>
+  </div>
+</div>

@@ -1,0 +1,103 @@
+// Details
+.details {
+  margin-top: 20px;
+
+  @media only screen and (min-width: 992px) {
+    .button-anmeldung {
+      a {
+        float: right !important;
+      }
+    }
+  }
+
+  .button-anmeldung {
+    margin-top: 30px;
+
+    a.not-allowed {
+      cursor: not-allowed !important;
+    }
+  }
+
+  .detail-title {
+    margin-bottom: 0;
+  }
+
+  .detail-subtitle {
+    line-height: 32px;
+  }
+
+  .detail-deadline-subtitle {
+    font-size: 16px;
+    display: block;
+  }
+
+  .title {
+    margin-top: 20px;
+  }
+
+  .description {
+    ul {
+      padding-left: 40px !important;
+      list-style-type: initial !important;
+
+      li {
+        list-style-type: initial !important;
+      }
+    }
+  }
+
+  .anmeldungen {
+    margin-top: 20px;
+    margin-bottom: 30px;
+
+    h5 {
+      display: inline;
+    }
+
+    .participantcount {
+      margin-left: 10px;
+    }
+
+    .noregistrations {
+      display: inline-block;
+      margin-top: 20px;
+    }
+
+    .collection {
+      margin-top: 20px;
+
+      .collection-item.avatar {
+        min-height: 55px;
+
+        img {
+          top: 7px;
+        }
+      }
+    }
+
+    .secondary-content i {
+      user-select: none;
+      -moz-user-select: none;
+      -khtml-user-select: none;
+      -webkit-user-select: none;
+      -o-user-select: none;
+    }
+  }
+
+  .probetraining {
+    margin-bottom: 30px;
+    margin-top: 20px;
+
+    a {
+      margin-top: 20px;
+    }
+
+    .subtitle {
+      margin-bottom: 10px;
+    }
+
+    .button {
+      margin-top: 15px;
+    }
+  }
+}

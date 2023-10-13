@@ -3,6 +3,8 @@ import { News } from '../../models/news';
 import { NewsService } from '../../services/news.service';
 import { ToasterService } from 'angular2-toaster';
 import * as moment from 'moment';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { DeleteDialog } from './delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-admin-news-overview',
@@ -11,13 +13,12 @@ import * as moment from 'moment';
 })
 export class AdminNewsOverviewComponent implements OnInit {
   news: News[] = [];
-  delNews: News
   page = 1;
   noNews: Boolean = false;
   loading: Boolean = false;
   allNews: Boolean = false;
 
-  constructor(private newsService: NewsService, private toasterService: ToasterService) { }
+  constructor(private newsService: NewsService, private toasterService: ToasterService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.getNews();
@@ -54,19 +55,30 @@ export class AdminNewsOverviewComponent implements OnInit {
     this.getNews();
   }
 
-  setNewsToDelete(news: News) {
-    this.delNews = news;
-  }
 
-  deleteNews() {
-    this.newsService.delete(this.delNews._id).subscribe(
-      result => {
-        this.toasterService.pop('success', 'Löschen erfolgreich', 'Die News wurde erfolgreich gelöscht.');
-        this.refresh();
-      },
-      error => {
-        this.toasterService.pop('error', 'Löschen fehlerhaft', 'Die News konnte nicht gelöscht werden!');
+  deleteNews(news: News) {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.data = {
+        title: news.title,
+    };
+    const dialogRef = this.dialog.open(DeleteDialog, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        this.newsService.delete(news._id).subscribe(
+          result => {
+            this.toasterService.pop('success', 'Löschen erfolgreich', 'Die News wurde erfolgreich gelöscht.');
+            this.refresh();
+          },
+          error => {
+            this.toasterService.pop('error', 'Löschen fehlerhaft', 'Die News konnte nicht gelöscht werden!');
+          }
+        );
       }
-    );
+    });
+    
+
+    
   }
 }

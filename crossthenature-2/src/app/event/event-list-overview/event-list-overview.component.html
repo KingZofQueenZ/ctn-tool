@@ -1,0 +1,56 @@
+<div class="parallax top d-none d-lg-flex">
+  <div
+    class="container d-flex flex-column align-items-center justify-content-center"
+  >
+    <h1 class="teal-text mat-headline-3 parralax-title">
+      Trainings und Termine
+    </h1>
+    <h1 class="white-text parralax-subtitle mt-3">
+      &laquo;If it doesn´t challenge you, it doesn´t change you.&raquo;
+    </h1>
+  </div>
+</div>
+
+<!-- Event Cards -->
+<div class="container events" style="height: 100%">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="header teal-text center-on-mobile">
+        Die nächsten Workouts und Termine
+      </h1>
+    </div>
+    <div class="col-12 flow-text" *ngIf="probetraining">
+      Für Probetrainings, klicke bitte auf den gewünschten Termin und melde dich
+      über das Anmeldeformular an. Solltest du doch nicht teilnehmen können,
+      melde dich bitte bei unseren Coaches wieder ab!
+    </div>
+  </div>
+  <div class="divider" *ngIf="probetraining"></div>
+  <div class="row event-cards" *ngIf="!noEvents && dateArray.length != 0">
+    <div *ngFor="let event of events">
+      <div class="col-12 {{ getWidth(event) }}">
+        <app-event-list-item [event]="event"></app-event-list-item>
+      </div>
+    </div>
+    <div class="col-12 center load" *ngIf="!allEvents && !loading">
+      <a (click)="load()" class="flow-text center">Weitere Termine laden...</a>
+    </div>
+    <div class="col-12 d-flex justify-content-center my-4" *ngIf="loading">
+      <mat-spinner></mat-spinner>
+    </div>
+  </div>
+</div>
+
+<div class="container no-events" *ngIf="noEvents">
+  <div class="row">
+    <div class="col-12 center">
+      <h4 class="teal-text">Es gibt zurzeit leider keine Termine! :(</h4>
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf="!events.length && !noEvents">
+  <div class="w-100 d-flex justify-content-center">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>

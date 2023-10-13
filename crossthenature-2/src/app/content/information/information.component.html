@@ -1,0 +1,129 @@
+<div class="parallax top d-none d-lg-flex">
+  <div
+    class="container d-flex flex-column align-items-center justify-content-center"
+  >
+    <h1 class="teal-text mat-headline-3 parralax-title">Informationen</h1>
+    <h1 class="white-text parralax-subtitle mt-3">
+      &laquo;Today it hurts, tomorrow it works.&raquo;
+    </h1>
+  </div>
+</div>
+
+<div class="container my-4">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="header teal-text text-center text-md-start">Trainings</h1>
+    </div>
+    <div class="col-12">
+      <h2 class="header teal-text text-center text-md-start">WOD's</h2>
+      <p class="flow-text">
+        WOD`s sind die wöchentlichen Trainings welche "for everybody" gestaltet
+        sind. Jeder kann auf seinem eigenen Leistungslevel, jedoch in der
+        Gruppe, unsere Workouts absolvieren. Eine Stunde auspowern und den Kopf
+        frei kriegen nach einem stressigen Arbeitstag. Gibt es etwas besseres?
+      </p>
+      <h3 class="header mt-4">Trainingsfokus</h3>
+      <ul class="flow-text">
+        <li>Beweglichkeit</li>
+        <li>Technik</li>
+        <li>Ausdauer</li>
+        <li>Kraft</li>
+        <li>Schnellkraft</li>
+        <li>Koordination</li>
+      </ul>
+      <h3 class="header mt-4">Preise</h3>
+      <ul class="flow-text">
+        <li>Probetraining: gratis</li>
+        <li>Einzeltrainings: CHF 10.-</li>
+        <li>11er Abos: CHF 100.-</li>
+      </ul>
+    </div>
+  </div>
+  <hr />
+  <div class="row my-4">
+    <div class="col-12">
+      <h2 class="header teal-text text-center text-md-start">Open Session</h2>
+      <p class="flow-text">
+        Die Open Sessions werden für die etwas ambitionierteren Athleten
+        angeboten. In diesen Session wird man so gut wie möglich auf die
+        anstehenden Crossfit Opens vorbereitet. Gedacht ist, die Athleten welche
+        sich das erste mal an einen Wettkampf trauen zu unterstützen.
+      </p>
+      <h3 class="header mt-4">Trainingsfokus</h3>
+      <ul class="flow-text">
+        <li>Technik</li>
+        <li>Tipps & Tricks</li>
+        <li>Kraftaufbau</li>
+      </ul>
+      <h3 class="header mt-4">Preise</h3>
+      <p class="flow-text">Gleiche Preise wie WOD's</p>
+    </div>
+  </div>
+</div>
+
+<div class="parallax secondary">
+  <div class="container h-100">
+    <div class="row d-flex justify-content-between align-items-center h-100">
+      <div class="col-12 col-lg-9 text-center text-lg-start">
+        <h2 class="header white-text parralax-subtitle">
+          Interessiert? Jetzt zum Probetraining anmelden!
+        </h2>
+      </div>
+      <div
+        class="col-12 col-lg-3 justify-self-end text-center text-lg-end mb-4 mb-lg-0"
+      >
+        <button
+          mat-flat-button
+          color="primary"
+          [routerLink]="['/events']"
+          [queryParams]="{ probetraining: 'true' }"
+          class="btn"
+        >
+          ZUR ANMELDUNG
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container my-4">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="header teal-text text-center text-lg-start">Place 2 Be</h1>
+    </div>
+
+    <div class="col-12 col-lg-6 text-center text-lg-start mb-4">
+      <h3 class="header teal-text text-center text-lg-start">Sommer WOD's</h3>
+      <div class="d-flex flex-column mb-4">
+        <span>FC Windisch (Bushaltestelle Dägerli)</span>
+        <span>Mülligerstrasse</span>
+        <span>5210 Windisch</span>
+      </div>
+      <iframe
+        width="100%"
+        height="450"
+        frameborder="0"
+        style="border: 0"
+        src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJzVsvcdRqkEcR6xTB4k6tWAs&zoom=14&key=AIzaSyDxP6JRPDP67-V7yRx2l1SdV4xMJJG07oA"
+        allowfullscreen
+      ></iframe>
+    </div>
+
+    <div class="col-12 col-lg-6 text-center text-lg-start mb-4">
+      <h3 class="header teal-text text-center text-lg-start">Winter WOD's</h3>
+      <div class="d-flex flex-column mb-4">
+        <span>Schulhaus</span>
+        <span>Schulstrasse 5</span>
+        <span>5412 Vogelsang</span>
+      </div>
+      <iframe
+        width="100%"
+        height="450"
+        frameborder="0"
+        style="border: 0"
+        src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJu0VDNhxrkEcRP10EuYgT9F8&zoom=14&key=AIzaSyDxP6JRPDP67-V7yRx2l1SdV4xMJJG07oA"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,206 @@
+<div class="parallax top d-none d-lg-flex">
+  <div
+    class="container d-flex flex-column align-items-center justify-content-center"
+  >
+    <h1 class="teal-text mat-headline-3 parralax-title">Details</h1>
+    <h1 class="white-text parralax-subtitle mt-3">
+      &laquo;Nothing great comes without sacrifice.&raquo;
+    </h1>
+  </div>
+</div>
+
+<!-- Event Cards -->
+<div class="container details" *ngIf="event">
+  <div class="row">
+    <div class="col-12 col-lg-8">
+      <h1 class="header detail-title teal-text center-on-mobile">
+        {{ event.name }}
+      </h1>
+      <h3 class="header light detail-subtitle grey-text light center-on-mobile">
+        <i>{{ date_string }}</i>
+      </h3>
+      <span
+        *ngIf="date_string_anmeldung"
+        class="header light detail-deadline-subtitle grey-text light center-on-mobile"
+        ><i>Anmeldefrist: {{ date_string_anmeldung }}</i></span
+      >
+      <span
+        *ngIf="date_string_abmeldung"
+        class="header light detail-deadline-subtitle grey-text light center-on-mobile"
+        ><i>Abmeldefrist: {{ date_string_abmeldung }}</i></span
+      >
+    </div>
+    <div
+      class="col-12 col-lg-4 center-on-mobile button-anmeldung d-flex justify-content-end"
+      *ngIf="user"
+    >
+      <button
+        *ngIf="!is_registered && !is_full && can_register"
+        mat-flat-button
+        color="primary"
+        class="waves-effect waves-light btn center"
+        (click)="handleRegistration()"
+      >
+        Anmelden
+      </button>
+
+      <button
+        *ngIf="is_registered && can_unregister"
+        mat-flat-button
+        color="warn"
+        class="waves-effect waves-light btn center"
+        (click)="handleRegistration()"
+      >
+        Abmelden
+      </button>
+
+      <button
+        *ngIf="is_registered && !can_unregister"
+        mat-flat-button
+        disabled
+        color="warn"
+        class="waves-effect waves-light btn center"
+        (click)="handleRegistration()"
+      >
+        Abmelden
+      </button>
+    </div>
+
+    <div class="col-12 description title" *ngIf="event.description">
+      <h2 class="light">Details</h2>
+      <div class="flow-text" [innerHTML]="event.description | safeHtml"></div>
+    </div>
+
+    <!-- Only show if user is logged in -->
+    <div *ngIf="user">
+      <div class="col-12 anmeldungen flow-text">
+        <h2 class="light">Anmeldungen</h2>
+        <span class="participantcount grey-text text-darken-1 light">
+          {{ participant_string }} Anmeldungen
+        </span>
+        <ul class="collection" *ngIf="participants.length">
+          <li
+            class="collection-item avatar valign-wrapper d-flex"
+            *ngFor="let participant of participants"
+          >
+            <div>
+              <img
+                src="../../../assets/img/user.png"
+                height="42"
+                width="42"
+                alt=""
+                class="circle"
+              />
+            </div>
+            <div class="d-flex align-items-end mx-2">
+              <p>
+                {{ participant.user.firstname }} {{ participant.user.lastname }}
+              </p>
+            </div>
+            <div *ngIf="participant.trial" class="secondary-content">
+              <i class="material-icons">fitness_center</i>
+            </div>
+          </li>
+        </ul>
+        <div *ngIf="!participants.length">
+          <span class="noregistrations flow-text"
+            ><i>Es gibt noch keine Anmeldungen. Sei der Erste!</i></span
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- Only show if user is not logged in -->
+    <div class="col-12 probetraining" *ngIf="!user">
+      <div class="title">
+        <h2 class="light">Anmeldung zum Probetraining</h2>
+      </div>
+
+      <div class="flow-text subtitle" *ngIf="!trial_success && !is_full">
+        Bitte fülle das Formular aus, um dich für ein Probetraining anzumelden.
+      </div>
+
+      <div class="flow-text" *ngIf="is_full">
+        Bei diesem Event haben wir leider keine freien Plätze mehr. Gerne darfst
+        du an einem anderen Tag kommen!
+      </div>
+
+      <form
+        class="form"
+        (ngSubmit)="trialForm.form.valid && handleTrialWorkout()"
+        #trialForm="ngForm"
+        class="row col-12"
+        *ngIf="!trial_success && !is_full"
+      >
+        <mat-form-field class="col-12">
+          <mat-label>E-Mail</mat-label>
+          <input
+            matInput
+            [(ngModel)]="model.email"
+            required
+            id="email"
+            name="email"
+            type="email"
+            email
+          />
+        </mat-form-field>
+        <mat-form-field class="col-12">
+          <mat-label>Vorname</mat-label>
+          <input
+            matInput
+            [(ngModel)]="model.firstname"
+            required
+            id="firstname"
+            name="firstname"
+            type="text"
+          />
+        </mat-form-field>
+        <mat-form-field class="col-12">
+          <mat-label>Nachname</mat-label>
+          <input
+            matInput
+            [(ngModel)]="model.lastname"
+            required
+            id="lastname"
+            name="lastname"
+            type="text"
+          />
+        </mat-form-field>
+        <mat-form-field class="col-12">
+          <mat-label>Telefonnummer</mat-label>
+          <input
+            matInput
+            [(ngModel)]="model.phone"
+            required
+            id="phone"
+            name="phone"
+            type="text"
+          />
+        </mat-form-field>
+
+        <button
+          mat-flat-button
+          color="primary"
+          class="btn"
+          [class.disabled]="!trialForm.form.valid"
+          type="submit"
+          name="action"
+        >
+          Zum Probetraining anmelden
+        </button>
+      </form>
+
+      <div class="flow-text" *ngIf="trial_success">
+        Du wurdest erfolgreich für das Probetraining angemeldet. Wir erwarten
+        dich am {{ date_string }}. Solltest du doch nicht Teilnehmen können,
+        melde dich bitte bei unseren Coaches ab!
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf="!event">
+  <div class="w-100 d-flex justify-content-center">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>

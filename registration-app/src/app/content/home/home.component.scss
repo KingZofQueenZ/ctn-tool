@@ -5,7 +5,6 @@
     background-position: top;
     background-repeat: no-repeat;
     background-size: cover;
-    margin-bottom: 40px;
 
     h1 {
         margin-top: 0px;
@@ -24,69 +23,20 @@
     background-position: top;
     background-repeat: no-repeat;
     background-size: cover;
+}
 
-    a {
-        margin-top: 25px;
-        margin-bottom: 25px;
-    }
-
-    h4 {
-        padding-top: 25px;
-    }
-
-    @media only screen and (min-width: 992px) {
-        h4 {
-            padding-top: 45px;
-        }
-
-        a {
-            float: right !important;
-            margin-top: 65px;
-        }
-    }
+.probe-container {
+    min-height: 160px;
 }
 
 .welcome {
     margin-bottom: 40px;
     margin-top: 20px;
 
-    .link {
-        margin-top: 30px;
-    
-        a {
-            color: #000; 
-            text-decoration: underline;
-        }
-    }
 }
 
-.sponsor {
-    margin-top: 20px;
-
-    .image {
-        height: 200px;
-
-        .center {
-            width: 100%;
-
-            img {
-                width: 100%;
-            }
-    
-            img.vw {
-                width: 50%;
-            }
-
-            @media only screen and (min-width: 600px) and (max-width: 992px) {
-                img {
-                    width: 50%;
-                }
-        
-                img.vw {
-                    width: 25%;
-                }
-            }
-        }
+.image {
+    .vw {
+        height: 150px;
     }
 }
-
