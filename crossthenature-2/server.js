@@ -18,13 +18,15 @@ const app = express();
 app.use(
   helmet({
     contentSecurityPolicy: false,
-  })
+  }),
 );
 
 /* Mongoose setup */
 console.log("MongoDB", process.env.CONNECTIONSTRING);
 console.log("Secret", process.env.SECRET);
 console.log("Mail", process.env.MAILCONNECTIONSTRING);
+
+mongoose.set("strictQuery", false);
 mongoose.connect(process.env.CONNECTIONSTRING || config.database.local);
 
 var db = mongoose.connection;

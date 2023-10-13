@@ -39,12 +39,17 @@ $app-theme: mat.define-light-theme(
   .parralax-title {
     text-shadow: #000 1px 0 10px;
     margin: 0px !important;
+    color: #14bdad;
   }
 
   .parralax-subtitle {
     font-weight: 200 !important;
     text-shadow: #000 2px 2px 4px;
   }
+}
+
+a {
+  color: #000;
 }
 
 // OLD --------------------------------------------------------------------------------------------
@@ -280,7 +285,7 @@ a:hover {
 
 /* -- Title -- */
 .teal-text {
-  color: #009688 !important;
+  color: #009688;
 }
 
 .white-text {
