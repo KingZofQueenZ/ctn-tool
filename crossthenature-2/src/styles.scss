@@ -82,8 +82,11 @@ $app-theme: mat.define-light-theme(
 // Allgemein
 a {
   color: #000;
-  text-decoration: underline !important;
   cursor: pointer;
+}
+
+.underline-link {
+  text-decoration: underline !important;
 }
 
 .light {
@@ -184,7 +187,7 @@ nav {
         font-size: 20px;
         position: relative;
         color: #444;
-        text-decoration: none !important;
+        text-decoration: none;
         padding: 0 5px;
       }
 

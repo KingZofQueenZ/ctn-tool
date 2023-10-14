@@ -14,7 +14,7 @@
       </button>
     </div>
 
-    <div class="col-12 news list-style-none">
+    <div class="col-12 mt-2 list-style-none">
       <ul class="collection" *ngIf="news.length">
         <li
           class="collection-item d-flex align-items-center justify-content-between"
@@ -43,7 +43,7 @@
       class="col-12 d-flex justify-content-center my-2"
       *ngIf="!allNews && !noNews && !loading"
     >
-      <a (click)="load()">Weitere News laden...</a>
+      <a class="underline-link" (click)="load()">Weitere News laden...</a>
     </div>
 
     <div
