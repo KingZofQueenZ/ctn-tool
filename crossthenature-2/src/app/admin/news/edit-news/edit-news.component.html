@@ -26,14 +26,16 @@
       </mat-form-field>
     </div>
 
-    <ckeditor
-      class="ckeditor"
-      [editor]="editor"
-      [config]="ckeConfig"
-      [(ngModel)]="news.content"
-      name="content"
-      data=""
-    ></ckeditor>
+    <div>
+      <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"></ngx-editor-menu>
+      <ngx-editor
+        class="col-12"
+        [editor]="editor"
+        [(ngModel)]="news.content"
+        name="content"
+        id="content"
+      ></ngx-editor>
+    </div>
 
     <div class="col-12 submit text-center text-lg-start mt-3">
       <button

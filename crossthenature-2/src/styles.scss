@@ -48,8 +48,62 @@ $app-theme: mat.define-light-theme(
   }
 }
 
+/* List Style None */
+
+.list-style-none {
+  ul:not(.browser-default) {
+    padding-left: 0;
+    list-style-type: none;
+  }
+
+  ul:not(.browser-default) > li {
+    list-style-type: none;
+  }
+}
+
+// Collection
+.collection {
+  margin: 0.5rem 0 1rem;
+  margin-top: 0.5rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.collection .collection-item {
+  background-color: #fff;
+  line-height: 1.5rem;
+  padding: 10px 20px;
+  margin: 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+// Allgemein
 a {
   color: #000;
+  text-decoration: underline !important;
+  cursor: pointer;
+}
+
+.light {
+  font-weight: 300 !important;
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top-width: 0px;
+  border-top-style: none;
+  border-top-color: currentcolor;
+  border-top: 1px solid #e0e0e0;
+  margin: 1em 0;
+  padding: 0;
+}
+
+.mat-icon {
+  cursor: pointer;
 }
 
 // OLD --------------------------------------------------------------------------------------------
@@ -130,7 +184,7 @@ nav {
         font-size: 20px;
         position: relative;
         color: #444;
-        text-decoration: none;
+        text-decoration: none !important;
         padding: 0 5px;
       }
 
@@ -232,22 +286,6 @@ blockquote {
 
 .footer-copyright {
   height: 70px;
-}
-
-.light {
-  font-weight: 300 !important;
-}
-
-hr {
-  display: block;
-  height: 1px;
-  border: 0;
-  border-top-width: 0px;
-  border-top-style: none;
-  border-top-color: currentcolor;
-  border-top: 1px solid #e0e0e0;
-  margin: 1em 0;
-  padding: 0;
 }
 
 // Bootstrap Overrides
@@ -373,37 +411,4 @@ hr {
 
 .center {
   text-align: center;
-}
-
-/* Collection Next Events */
-
-ul:not(.browser-default) {
-  padding-left: 0;
-  list-style-type: none;
-}
-
-ul:not(.browser-default) > li {
-  list-style-type: none;
-}
-
-.collection {
-  margin: 0.5rem 0 1rem;
-  margin-top: 0.5rem;
-  border: 1px solid #e0e0e0;
-  border-radius: 2px;
-  overflow: hidden;
-  position: relative;
-}
-
-.registrations[_ngcontent-c17]
-  .collection[_ngcontent-c17]
-  .collection-item[_ngcontent-c17] {
-  height: 40px;
-}
-.collection .collection-item {
-  background-color: #fff;
-  line-height: 1.5rem;
-  padding: 10px 20px;
-  margin: 0;
-  border-bottom: 1px solid #e0e0e0;
 }

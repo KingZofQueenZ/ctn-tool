@@ -1,61 +1,34 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { Location } from '@angular/common';
 import { News } from 'src/app/models/news';
 import { ActivatedRoute } from '@angular/router';
 import { NewsService } from 'src/app/services/news.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { EditorConfig } from '@ckeditor/ckeditor5-core';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { Editor, Toolbar } from 'ngx-editor';
+import { editorToolbar } from '../../../shared/settings';
 
 @Component({
   selector: 'app-edit-news',
   templateUrl: './edit-news.component.html',
   styleUrls: ['./edit-news.component.scss'],
 })
-export class EditNewsComponent {
+export class EditNewsComponent implements OnDestroy {
   @Input() news!: News;
-  editor = ClassicEditor;
+  editor: Editor;
+  toolbar: Toolbar = editorToolbar;
 
-  ckeConfig: EditorConfig = {
-    toolbar: [
-      'undo',
-      'redo',
-      '|',
-      'heading',
-      '|',
-      'fontfamily',
-      'fontsize',
-      'fontColor',
-      'fontBackgroundColor',
-      '|',
-      'bold',
-      'italic',
-      'strikethrough',
-      'subscript',
-      'superscript',
-      'code',
-      '-', // break point
-      '|',
-      'alignment',
-      'link',
-      'uploadImage',
-      'blockQuote',
-      'codeBlock',
-      '|',
-      'bulletedList',
-      'numberedList',
-      'todoList',
-      'outdent',
-      'indent',
-    ],
-  };
+  ngOnDestroy(): void {
+    this.editor.destroy();
+  }
 
   constructor(
     private route: ActivatedRoute,
     private newsService: NewsService,
     private location: Location,
     private snackBar: MatSnackBar,
-  ) {}
+  ) {
+    this.editor = new Editor();
+  }
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
@@ -70,6 +43,7 @@ export class EditNewsComponent {
   }
 
   edit() {
+    console.log(this.news);
     this.newsService.update(this.news).subscribe({
       next: () => {
         this.snackBar.open('Die News wurde erfolgreich gespeichert.');

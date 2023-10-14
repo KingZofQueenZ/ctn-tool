@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import * as moment from 'moment';
 import { EventService } from 'src/app/services/event.service';
 import { Event } from '../../models/event';
@@ -7,16 +7,16 @@ import {
   MtxDatetimepickerMode,
   MtxDatetimepickerType,
 } from '@ng-matero/extensions/datetimepicker';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { EditorConfig } from '@ckeditor/ckeditor5-core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Editor, Toolbar } from 'ngx-editor';
+import { editorToolbar } from '../../shared/settings';
 
 @Component({
   selector: 'app-create-event',
   templateUrl: './create-event.component.html',
   styleUrls: ['./create-event.component.scss'],
 })
-export class CreateEventComponent {
+export class CreateEventComponent implements OnDestroy {
   event: Event = new Event();
   mo: boolean = false;
   di: boolean = false;
@@ -28,46 +28,18 @@ export class CreateEventComponent {
   repeat_date: Date | undefined;
   time_from: Date | undefined;
   time_to: Date | undefined;
-  editor = ClassicEditor;
 
   typeDatetime: MtxDatetimepickerType = 'datetime';
   typeDate: MtxDatetimepickerType = 'date';
   typeTime: MtxDatetimepickerType = 'time';
   mode: MtxDatetimepickerMode = 'auto';
 
-  ckeConfig: EditorConfig = {
-    toolbar: [
-      'undo',
-      'redo',
-      '|',
-      'heading',
-      '|',
-      'fontfamily',
-      'fontsize',
-      'fontColor',
-      'fontBackgroundColor',
-      '|',
-      'bold',
-      'italic',
-      'strikethrough',
-      'subscript',
-      'superscript',
-      'code',
-      '-', // break point
-      '|',
-      'alignment',
-      'link',
-      'uploadImage',
-      'blockQuote',
-      'codeBlock',
-      '|',
-      'bulletedList',
-      'numberedList',
-      'todoList',
-      'outdent',
-      'indent',
-    ],
-  };
+  editor: Editor;
+  toolbar: Toolbar = editorToolbar;
+
+  ngOnDestroy(): void {
+    this.editor.destroy();
+  }
 
   constructor(
     private eventService: EventService,
@@ -75,6 +47,7 @@ export class CreateEventComponent {
     private snackBar: MatSnackBar,
   ) {
     moment.locale('de');
+    this.editor = new Editor();
   }
 
   create() {

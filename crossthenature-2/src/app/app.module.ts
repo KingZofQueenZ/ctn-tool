@@ -35,7 +35,6 @@ import { AdminNewsOverviewComponent } from './admin/admin-news-overview/admin-ne
 import { NewsService } from './services/news.service';
 import { CreateNewsComponent } from './admin/news/create-news/create-news.component';
 import { EditNewsComponent } from './admin/news/edit-news/edit-news.component';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NewsOverviewComponent } from './news/news-overview/news-overview.component';
 import { SafeHtmlPipe } from './shared/safe-html-pipe.pipe';
@@ -62,6 +61,7 @@ import { MtxMomentDatetimeModule } from '@ng-matero/extensions-moment-adapter';
 import { CreateEventComponent } from './admin/create-event/create-event.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
+import { NgxEditorModule } from 'ngx-editor';
 
 @NgModule({
   declarations: [
@@ -112,11 +112,11 @@ import { MatIconModule } from '@angular/material/icon';
     MatIconModule,
     MatCheckboxModule,
     ReactiveFormsModule,
-    CKEditorModule,
     RecaptchaModule,
     RecaptchaFormsModule,
     MtxDatetimepickerModule,
     MtxMomentDatetimeModule,
+    NgxEditorModule,
   ],
   providers: [
     {

@@ -1,17 +1,17 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import { EventService } from 'src/app/services/event.service';
 import { Event } from '../../models/event';
 import { Location } from '@angular/common';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { EditorConfig } from '@ckeditor/ckeditor5-core';
 import {
   MtxDatetimepickerMode,
   MtxDatetimepickerType,
 } from '@ng-matero/extensions/datetimepicker';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from 'src/app/models/user';
+import { Editor, Toolbar } from 'ngx-editor';
+import { editorToolbar } from '../../shared/settings';
 
 class UserTrial {
   user!: User;
@@ -23,52 +23,24 @@ class UserTrial {
   templateUrl: './edit-event.component.html',
   styleUrls: ['./edit-event.component.scss'],
 })
-export class EditEventComponent implements OnInit {
+export class EditEventComponent implements OnInit, OnDestroy {
   @Input() event!: Event;
   time_from: Date | undefined;
   time_to: Date | undefined;
-  editor = ClassicEditor;
 
   typeDatetime: MtxDatetimepickerType = 'datetime';
   typeDate: MtxDatetimepickerType = 'date';
   typeTime: MtxDatetimepickerType = 'time';
   mode: MtxDatetimepickerMode = 'auto';
 
+  editor: Editor;
+  toolbar: Toolbar = editorToolbar;
+
   participants: UserTrial[] = [];
 
-  ckeConfig: EditorConfig = {
-    toolbar: [
-      'undo',
-      'redo',
-      '|',
-      'heading',
-      '|',
-      'fontfamily',
-      'fontsize',
-      'fontColor',
-      'fontBackgroundColor',
-      '|',
-      'bold',
-      'italic',
-      'strikethrough',
-      'subscript',
-      'superscript',
-      'code',
-      '-', // break point
-      '|',
-      'alignment',
-      'link',
-      'uploadImage',
-      'blockQuote',
-      'codeBlock',
-      '|',
-      'bulletedList',
-      'numberedList',
-      'todoList',
-      'outdent',
-      'indent',
-    ],
-  };
+  ngOnDestroy(): void {
+    this.editor.destroy();
+  }
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
@@ -100,6 +72,7 @@ export class EditEventComponent implements OnInit {
     private snackBar: MatSnackBar,
   ) {
     moment.locale('de');
+    this.editor = new Editor();
   }
 
   edit() {
