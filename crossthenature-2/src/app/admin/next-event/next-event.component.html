@@ -1,14 +1,16 @@
 <div class="row">
-  <div class="col-12 title">
-    <h5 class="header teal-text text-center text-lg-start">{{ event.name }}</h5>
-    <span class="grey-text text-darken-1 light text-center text-lg-start"
+  <div class="col-12 d-flex flex-column flex-lg-row align-items-center mb-3">
+    <h2 class="teal-text text-center light text-lg-start mb-0">
+      {{ event.name }}
+    </h2>
+    <span class="grey-text text-darken-1 light text-center text-lg-start ms-2"
       ><i>{{ date_string }}</i></span
     >
   </div>
 
-  <div class="row" *ngIf="participants.length">
-    <div class="col-12 col-lg-6 registrations list-style-none">
-      <ul class="collection">
+  <div *ngIf="participants.length" class="w-100 d-flex flex-column flex-lg-row">
+    <div class="list-style-none w-100">
+      <ul class="collection my-0">
         <li
           class="collection-item"
           *ngFor="
@@ -23,27 +25,26 @@
               }}</span>
               <span
                 *ngIf="participant.trial"
-                class="grey-text text-darken-1 light phone"
-                ><i> {{ participant.user.phone }}</i></span
+                class="grey-text text-darken-1 light"
               >
+                <i> {{ participant.user.phone }}</i>
+              </span>
             </div>
-            <div *ngIf="participant.trial" class="teal-text">
-              <i
-                class="material-icons"
-                matTooltip="Anmeldung zum Probetraining"
-                matTooltipPosition="above"
-                >fitness_center</i
-              >
-            </div>
+
+            <mat-icon
+              *ngIf="participant.trial"
+              fontIcon="fitness_center"
+              color="primary"
+              matTooltip="Anmeldung zum Probetraining"
+              matTooltipPosition="above"
+            ></mat-icon>
           </div>
         </li>
       </ul>
     </div>
-    <div
-      class="col-12 col-lg-6 registrations list-style-none"
-      *ngIf="participants.length > 1"
-    >
-      <ul class="collection">
+    <div class="d-none d-lg-block mx-1">&nbsp;</div>
+    <div class="list-style-none w-100" *ngIf="participants.length">
+      <ul class="collection my-0">
         <li
           class="collection-item"
           *ngFor="
@@ -60,22 +61,29 @@
               }}</span>
               <span
                 *ngIf="participant.trial"
-                class="grey-text text-darken-1 light phone"
-                ><i> {{ participant.user.phone }}</i></span
+                class="grey-text text-darken-1 light"
               >
+                <i> {{ participant.user.phone }}</i>
+              </span>
             </div>
-            <div *ngIf="participant.trial" class="teal-text">
-              <i class="material-icons">fitness_center</i>
-            </div>
+
+            <mat-icon
+              *ngIf="participant.trial"
+              fontIcon="fitness_center"
+              color="primary"
+              matTooltip="Anmeldung zum Probetraining"
+              matTooltipPosition="above"
+            ></mat-icon>
           </div>
         </li>
       </ul>
     </div>
   </div>
 
-  <div *ngIf="!participants.length">
-    <div class="col-12 text-center text-lg-start">
-      <span class="flow-text">Es gibt keine Anmeldungen für diesen Event!</span>
-    </div>
+  <div
+    class="col-12 text-center text-lg-start mt-2"
+    *ngIf="!participants.length"
+  >
+    <span>Es gibt keine Anmeldungen für diesen Event!</span>
   </div>
 </div>

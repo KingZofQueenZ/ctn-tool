@@ -1,47 +1,7 @@
-.title {
-  margin-bottom: 30px;
-
-  @media only screen and (max-width: 992px) {
-    span {
-      display: block !important;
-    }
-
-    h5 {
-      display: block !important;
-    }
-  }
-  span {
-    display: inline;
-    font-size: 18px;
-  }
-
-  h5 {
-    display: inline;
-    margin-right: 10px;
-
-    i {
-      margin-top: 2px;
-    }
-  }
+.mat-icon {
+  cursor: default;
 }
 
-.registrations {
-  .collection {
-    margin-top: -18px;
-    .collection-item {
-      height: 40px;
-
-      img {
-        top: 7px;
-      }
-    }
-
-    .secondary-content i {
-      user-select: none;
-      -moz-user-select: none;
-      -khtml-user-select: none;
-      -webkit-user-select: none;
-      -o-user-select: none;
-    }
-  }
+.list-style-none {
+  margin-top: -2px;
 }
