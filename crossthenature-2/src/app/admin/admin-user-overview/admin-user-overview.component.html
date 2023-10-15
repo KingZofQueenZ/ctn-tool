@@ -1,21 +1,31 @@
-<div class="container">
-  <div class="row all-users">
-    <div class="col-12 col-lg-8">
-      <h4 class="header teal-text center-on-mobile">Alle User</h4>
+<div class="container my-4">
+  <div class="row">
+    <div class="col-12">
+      <div class="d-flex justify-content-center justify-content-lg-start">
+        <h1 class="teal-text">Alle User</h1>
+      </div>
     </div>
-    <div class="col-12 users list-style-none">
+
+    <div class="col-12 mt-2 list-style-none">
       <ul class="collection" *ngIf="users.length">
-        <li class="collection-item" *ngFor="let user of users">
-          <span class="title teal-text">{{
-            user.lastname + ", " + user.firstname
-          }}</span>
-          <span class="information grey-text text-darken-1 light">
-            <i>{{ user.email + ", " + user.phone }}</i>
-          </span>
-          <div class="icon-container">
-            <a class="secondary-content delete" (click)="deleteUser(user)">
-              <i class="material-icons">delete</i>
-            </a>
+        <li
+          class="collection-item d-flex align-items-center justify-content-between"
+          *ngFor="let user of users"
+        >
+          <div class="d-flex flex-column align-items-start">
+            <h3 class="light teal-text mb-0">
+              {{ user.lastname + ", " + user.firstname }}
+            </h3>
+            <span class="grey-text text-darken-1 light">
+              <i>{{ user.email + ", " + user.phone }}</i>
+            </span>
+          </div>
+          <div>
+            <mat-icon
+              (click)="deleteUser(user)"
+              fontIcon="delete"
+              color="primary"
+            ></mat-icon>
           </div>
         </li>
       </ul>
@@ -26,13 +36,13 @@
 <div class="container" *ngIf="noUsers">
   <div class="row">
     <div class="col-12 text-center text-lg-start">
-      <p class="flow-text">Es gibt zurzeit leider keine User!</p>
+      <p>Es gibt zurzeit leider keine User!</p>
     </div>
   </div>
 </div>
 
-<div class="container spinner" *ngIf="!users.length && !noUsers">
-  <div class="row d-flex justify-content-center">
+<div class="container my-4" *ngIf="!users.length && !noUsers">
+  <div class="w-100 d-flex justify-content-center">
     <mat-spinner></mat-spinner>
   </div>
 </div>

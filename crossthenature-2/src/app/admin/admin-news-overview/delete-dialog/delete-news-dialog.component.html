@@ -4,7 +4,14 @@
     Möchtest du die News <i>{{ title }}</i> wirklich löschen?
   </p>
 </mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button mat-dialog-close>Abbrechen</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Löschen</button>
+<mat-dialog-actions align="end">
+  <button mat-flat-button color="warn" mat-dialog-close>Abbrechen</button>
+  <button
+    mat-flat-button
+    color="primary"
+    [mat-dialog-close]="true"
+    cdkFocusInitial
+  >
+    Löschen
+  </button>
 </mat-dialog-actions>

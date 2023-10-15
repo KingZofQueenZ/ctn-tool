@@ -47,7 +47,6 @@ export class AdminNewsOverviewComponent implements OnInit {
   }
 
   private refresh() {
-    this.noNews = true;
     this.page = 1;
     this.news = [];
     this.getNews();
