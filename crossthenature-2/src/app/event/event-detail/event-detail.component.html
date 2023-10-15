@@ -50,7 +50,9 @@
       </div>
     </div>
 
-    <div class="col-12 col-lg-8">
+    <div
+      class="col-12 col-lg-8 mt-4 d-flex flex-column align-items-center align-items-lg-start"
+    >
       <h3 class="light grey-text light">
         <i>{{ date_string }}</i>
       </h3>
@@ -62,25 +64,25 @@
       </h3>
     </div>
 
-    <div class="col-12" *ngIf="event.description">
-      <h2 class="light">Details</h2>
+    <div class="col-12 my-2" *ngIf="event.description">
+      <h2 class="light text-center text-lg-start">Details</h2>
       <div [innerHTML]="event.description | safeHtml"></div>
     </div>
 
     <!-- Only show if user is logged in -->
-    <div *ngIf="user">
-      <div class="col-12 anmeldungen list-style-none my-2">
-        <h2 class="light">Anmeldungen</h2>
-        <h3 class="grey-text text-darken-1 light">
-          {{ participant_string }} Anmeldungen
-        </h3>
+    <div class="col-12 anmeldungen list-style-none my-2" *ngIf="user">
+      <h2 class="light text-center text-lg-start">Anmeldungen</h2>
+      <h3 class="grey-text text-darken-1 lighttext-center text-lg-start">
+        {{ participant_string }} Anmeldungen
+      </h3>
 
-        <ul class="collection" *ngIf="participants.length">
-          <li
-            class="collection-item d-flex"
-            *ngFor="let participant of participants"
-          >
-            <div>
+      <ul class="collection" *ngIf="participants.length">
+        <li
+          class="collection-item d-flex"
+          *ngFor="let participant of participants"
+        >
+          <div class="d-flex w-100 align-items-center justify-content-between">
+            <div class="d-flex justify-content-start align-items-center">
               <img
                 src="../../../assets/img/user.png"
                 height="42"
@@ -88,23 +90,26 @@
                 alt=""
                 class="circle"
               />
-            </div>
-            <div class="d-flex align-items-end mx-2">
-              <p>
-                {{ participant.user.firstname }} {{ participant.user.lastname }}
-              </p>
-            </div>
-            <div *ngIf="participant.trial">
-              <i class="material-icons">fitness_center</i>
-            </div>
-          </li>
-        </ul>
 
-        <div *ngIf="!participants.length">
-          <span class="noregistrations">
-            <i>Es gibt noch keine Anmeldungen. Sei der Erste!</i>
-          </span>
-        </div>
+              <div class="ms-3">
+                {{ participant.user.firstname }}
+                {{ participant.user.lastname }}
+              </div>
+            </div>
+
+            <mat-icon
+              *ngIf="participant.trial"
+              fontIcon="fitness_center"
+              color="primary"
+            ></mat-icon>
+          </div>
+        </li>
+      </ul>
+
+      <div *ngIf="!participants.length">
+        <span class="noregistrations">
+          <i>Es gibt noch keine Anmeldungen. Sei der Erste!</i>
+        </span>
       </div>
     </div>
 
