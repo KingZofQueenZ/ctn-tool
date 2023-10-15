@@ -4,10 +4,6 @@ import * as moment from 'moment';
 import { EventService } from 'src/app/services/event.service';
 import { Event } from '../../models/event';
 import { Location } from '@angular/common';
-import {
-  MtxDatetimepickerMode,
-  MtxDatetimepickerType,
-} from '@ng-matero/extensions/datetimepicker';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from 'src/app/models/user';
 import { Editor, Toolbar } from 'ngx-editor';
@@ -27,11 +23,6 @@ export class EditEventComponent implements OnInit, OnDestroy {
   @Input() event!: Event;
   time_from: Date | undefined;
   time_to: Date | undefined;
-
-  typeDatetime: MtxDatetimepickerType = 'datetime';
-  typeDate: MtxDatetimepickerType = 'date';
-  typeTime: MtxDatetimepickerType = 'time';
-  mode: MtxDatetimepickerMode = 'auto';
 
   editor: Editor;
   toolbar: Toolbar = editorToolbar;

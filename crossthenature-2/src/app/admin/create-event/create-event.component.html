@@ -63,7 +63,7 @@
         <mat-label>Datum</mat-label>
         <mtx-datetimepicker
           #datetimePicker
-          [type]="typeDate"
+          type="date"
           [multiYearSelector]="false"
           [touchUi]="true"
         ></mtx-datetimepicker>
@@ -83,7 +83,7 @@
         <mat-label>Zeit von</mat-label>
         <mtx-datetimepicker
           #datetimePickerTimeFrom
-          [type]="typeTime"
+          type="time"
           [twelvehour]="false"
           [timeInterval]="15"
           [touchUi]="true"
@@ -107,7 +107,7 @@
         <mat-label>Zeit bis</mat-label>
         <mtx-datetimepicker
           #datetimePickerTimeTo
-          [type]="typeTime"
+          type="time"
           [twelvehour]="false"
           [timeInterval]="15"
           [touchUi]="true"
@@ -136,7 +136,7 @@
         <mat-label>Anmeldefrist</mat-label>
         <mtx-datetimepicker
           #datetimePickerSignIn
-          [type]="typeDatetime"
+          type="datetime"
           [multiYearSelector]="false"
           [twelvehour]="false"
           [timeInterval]="15"
@@ -165,7 +165,7 @@
         <mat-label>Abmeldefrist</mat-label>
         <mtx-datetimepicker
           #datetimePickerSignOut
-          [type]="typeDatetime"
+          type="datetime"
           [multiYearSelector]="false"
           [twelvehour]="false"
           [timeInterval]="15"
@@ -203,7 +203,7 @@
         <mat-label>Wiederholen bis</mat-label>
         <mtx-datetimepicker
           #datetimePickerRepeat
-          [type]="typeDate"
+          type="date"
           [multiYearSelector]="false"
           [touchUi]="true"
         ></mtx-datetimepicker>

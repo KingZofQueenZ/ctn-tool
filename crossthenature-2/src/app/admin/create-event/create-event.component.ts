@@ -3,10 +3,6 @@ import * as moment from 'moment';
 import { EventService } from 'src/app/services/event.service';
 import { Event } from '../../models/event';
 import { Location } from '@angular/common';
-import {
-  MtxDatetimepickerMode,
-  MtxDatetimepickerType,
-} from '@ng-matero/extensions/datetimepicker';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Editor, Toolbar } from 'ngx-editor';
 import { editorToolbar } from '../../shared/settings';
@@ -28,11 +24,6 @@ export class CreateEventComponent implements OnDestroy {
   repeat_date: Date | undefined;
   time_from: Date | undefined;
   time_to: Date | undefined;
-
-  typeDatetime: MtxDatetimepickerType = 'datetime';
-  typeDate: MtxDatetimepickerType = 'date';
-  typeTime: MtxDatetimepickerType = 'time';
-  mode: MtxDatetimepickerMode = 'auto';
 
   editor: Editor;
   toolbar: Toolbar = editorToolbar;

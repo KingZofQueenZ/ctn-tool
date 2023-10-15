@@ -62,6 +62,7 @@ import { CreateEventComponent } from './admin/create-event/create-event.componen
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { NgxEditorModule } from 'ngx-editor';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -116,6 +117,7 @@ import { NgxEditorModule } from 'ngx-editor';
     RecaptchaFormsModule,
     MtxDatetimepickerModule,
     MtxMomentDatetimeModule,
+    MatTooltipModule,
     NgxEditorModule,
   ],
   providers: [

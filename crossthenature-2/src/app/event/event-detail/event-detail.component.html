@@ -37,16 +37,20 @@
           Abmelden
         </button>
 
-        <button
+        <div
           *ngIf="is_registered && !can_unregister"
-          mat-flat-button
-          disabled
-          color="warn"
-          class="waves-effect waves-light btn center"
-          (click)="handleRegistration()"
+          matTooltip="Du kannst dich von diesem Event nicht mehr abmelden!"
+          matTooltipPosition="above"
         >
-          Abmelden
-        </button>
+          <button
+            mat-flat-button
+            disabled
+            color="warn"
+            class="waves-effect waves-light btn center"
+          >
+            Abmelden
+          </button>
+        </div>
       </div>
     </div>
 
@@ -101,6 +105,8 @@
               *ngIf="participant.trial"
               fontIcon="fitness_center"
               color="primary"
+              matTooltip="Anmeldung zum Probetraining"
+              matTooltipPosition="above"
             ></mat-icon>
           </div>
         </li>
