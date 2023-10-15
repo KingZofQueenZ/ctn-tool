@@ -1,9 +1,9 @@
-<div class="container register">
+<div class="container my-4">
   <div class="row" *ngIf="!success">
     <div class="col-12 col-lg-8 offset-lg-2">
-      <h3 class="header detail-title teal-text center-on-mobile">
-        Registrieren
-      </h3>
+      <div class="d-flex justify-content-center justify-content-lg-start">
+        <h1 class="teal-text">Registrieren</h1>
+      </div>
     </div>
 
     <form
@@ -89,14 +89,16 @@
         />
       </mat-form-field>
 
-      <re-captcha
-        id="recaptcha"
-        name="recaptcha"
-        formControlName="token"
-        required
-      ></re-captcha>
+      <div class="d-flex justify-content-center justify-content-lg-start">
+        <re-captcha
+          id="recaptcha"
+          name="recaptcha"
+          formControlName="token"
+          required
+        ></re-captcha>
+      </div>
 
-      <div class="col-12 text-center text-lg-start">
+      <div class="col-12 text-center text-lg-start mt-4">
         <button
           mat-flat-button
           color="primary"
@@ -110,23 +112,24 @@
       </div>
     </form>
 
-    <div class="col-12 col-lg-8 offset-lg-2" *ngIf="hasError">
-      <div class="col-12 error light">
+    <div
+      class="col-12 col-lg-8 offset-lg-2 text-center text-lg-start mt-3"
+      *ngIf="hasError"
+    >
+      <div class="col-12 red-text">
         Ein Benutzer mit dieser E-Mail Adresse existiert bereits! Passwort
-        <a [routerLink]="['/password']">vergessen?</a>
+        <a class="red-text" [routerLink]="['/password']">vergessen?</a>
       </div>
     </div>
   </div>
 
-  <div class="row success" *ngIf="success">
+  <div class="row text-center text-lg-start my-4" *ngIf="success">
     <div class="col-12 col-lg-8 offset-lg-2">
-      <h4 class="header detail-title teal-text center-on-mobile">
-        Registrierung erfolgreich
-      </h4>
+      <h1 class="teal-text">Registrierung erfolgreich</h1>
     </div>
 
-    <div class="col-12 col-lg-8 offset-lg-2 text">
-      <span class="flow-text"
+    <div class="col-12 col-lg-8 offset-lg-2">
+      <span
         >{{ user.firstname }}, vielen Dank für deine Registrierung! Wir haben
         dir eine Bestätigungsmail an <i>{{ user.email }}</i> gesendet. Bestätige
         bitte kurz deine E-Mail Adresse indem du auf den Link im Mail klickst.

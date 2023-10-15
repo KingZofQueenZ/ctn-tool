@@ -1,22 +1,20 @@
-<div class="container login">
+<div class="container my-4">
   <div class="row" *ngIf="!success">
     <div class="col-12 col-lg-8 offset-lg-2">
-      <h3 class="header detail-title teal-text center-on-mobile">
-        Passwort zurücksetzen
-      </h3>
+      <div class="d-flex justify-content-center justify-content-lg-start">
+        <h1 class="teal-text">Passwort zurücksetzen</h1>
+      </div>
     </div>
 
     <div class="col-12 col-lg-8 offset-lg-2">
-      <span class="flow-text"
-        >Gib bitte deine E-Mail Adresse ein. Wir werden dir ein neues Passwort
-        zusenden!</span
-      >
+      Gib bitte deine E-Mail Adresse ein. Wir werden dir ein neues Passwort
+      zusenden!
     </div>
 
     <form
       (ngSubmit)="resetForm.form.valid && reset()"
       #resetForm="ngForm"
-      class="col-12 col-lg-8 offset-lg-2 form"
+      class="col-12 col-lg-8 offset-lg-2 mt-4 form"
     >
       <mat-form-field class="col-12">
         <mat-label>E-Mail</mat-label>
@@ -45,24 +43,24 @@
       </div>
     </form>
 
-    <div class="col-12 col-lg-8 offset-lg-2">
-      <div class="col-12 error light" [hidden]="!hasError">
+    <div
+      class="col-12 col-lg-8 offset-lg-2 text-center text-lg-start mt-3"
+      *ngIf="hasError"
+    >
+      <div class="col-12 red-text">
         Das Passwort konnte nicht zurückgesetzt werden!
       </div>
     </div>
   </div>
-  <div class="row" *ngIf="success">
+
+  <div class="row text-center text-lg-start my-4" *ngIf="success">
     <div class="col-12 col-lg-8 offset-lg-2">
-      <h3 class="header detail-title teal-text center-on-mobile">
-        Passwort zurückgesetzt
-      </h3>
+      <h1 class="teal-text">Passwort zurückgesetzt</h1>
     </div>
 
     <div class="col-12 col-lg-8 offset-lg-2">
-      <span class="flow-text"
-        >Das Passwort wurde erfolgreich zurückgesetzt. Wir haben dir ein neues
-        Passwort an die angegebene E-Mail Adresse gesendet.</span
-      >
+      Das Passwort wurde erfolgreich zurückgesetzt. Wir haben dir ein neues
+      Passwort an die angegebene E-Mail Adresse gesendet.
     </div>
   </div>
 </div>

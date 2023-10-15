@@ -7,7 +7,7 @@
   </div>
 
   <div class="row" *ngIf="participants.length">
-    <div class="col-12 col-lg-6 registrations">
+    <div class="col-12 col-lg-6 registrations list-style-none">
       <ul class="collection">
         <li
           class="collection-item"
@@ -39,7 +39,10 @@
         </li>
       </ul>
     </div>
-    <div class="col-12 col-lg-6 registrations" *ngIf="participants.length > 1">
+    <div
+      class="col-12 col-lg-6 registrations list-style-none"
+      *ngIf="participants.length > 1"
+    >
       <ul class="collection">
         <li
           class="collection-item"
