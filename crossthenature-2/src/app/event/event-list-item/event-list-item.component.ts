@@ -38,7 +38,7 @@ export class EventListItemComponent implements OnInit {
   date_string: string = '';
   user: User | undefined;
   lockIcon: boolean = false;
-  icon: String = 'done';
+  icon: String = 'how_to_reg';
   color: String = 'green-text';
   participants: UserTrial[] = [];
 
@@ -105,7 +105,7 @@ export class EventListItemComponent implements OnInit {
         this.event.participant_ids.push(this.user!);
         this.updateUser();
         this.updateEvent();
-        this.icon = 'done';
+        this.icon = 'how_to_reg';
         this.color = 'green-text';
 
         this.snackBar.open(
@@ -212,13 +212,13 @@ export class EventListItemComponent implements OnInit {
   }
 
   mouseEnter() {
-    this.icon = 'close';
+    this.icon = 'person_remove  ';
     this.color = 'red-text';
   }
 
   mouseLeave() {
     if (!this.lockIcon) {
-      this.icon = 'done';
+      this.icon = 'how_to_reg';
       this.color = 'green-text';
     }
   }

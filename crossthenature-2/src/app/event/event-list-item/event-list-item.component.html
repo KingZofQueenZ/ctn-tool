@@ -13,11 +13,10 @@
     <div class="register" *ngIf="user">
       <i
         *ngIf="is_registered && !can_unregister"
-        class="small grey-text material-icons no-unregister"
-        mz-tooltip
+        class="small green-text material-icons no-unregister"
         matTooltip="Du kannst dich von diesem Event nicht mehr abmelden!"
         matTooltipPosition="above"
-        >done</i
+        >how_to_reg</i
       >
       <i
         *ngIf="is_registered && can_unregister"
@@ -30,7 +29,7 @@
       >
       <i
         *ngIf="!is_registered && !is_full && can_register"
-        class="small teal-text material-icons"
+        class="small grey-text material-icons"
         (click)="handleRegistration()"
         [@opacityAnimation]
         >person_add</i

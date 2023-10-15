@@ -35,7 +35,7 @@
         <app-event-list-item [event]="event"></app-event-list-item>
       </div>
     </div>
-    <div class="col-12 center load" *ngIf="!allEvents && !loading">
+    <div class="col-12 center mt-2" *ngIf="!allEvents && !loading">
       <a (click)="load()" class="flow-text center">Weitere Termine laden...</a>
     </div>
     <div class="col-12 d-flex justify-content-center my-4" *ngIf="loading">
