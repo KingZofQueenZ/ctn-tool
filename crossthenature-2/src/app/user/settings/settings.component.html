@@ -1,9 +1,9 @@
-<div class="container register">
+<div class="container my-4">
   <div class="row">
     <div class="col-12 col-lg-8 offset-lg-2">
-      <h3 class="header detail-title teal-text center-on-mobile">
-        Benutzerdaten
-      </h3>
+      <div class="d-flex justify-content-center justify-content-lg-start">
+        <h1 class="teal-text">Benutzerdaten</h1>
+      </div>
     </div>
 
     <form
@@ -64,7 +64,7 @@
         <button
           mat-flat-button
           color="primary"
-          class="btn"
+          class="btn me-2"
           [class.disabled]="!settingsForm.form.valid"
           type="submit"
           name="action"
@@ -73,7 +73,7 @@
         </button>
         <button
           mat-flat-button
-          color="secondary"
+          color="accent"
           class="btn"
           type="button"
           (click)="goBack()"
