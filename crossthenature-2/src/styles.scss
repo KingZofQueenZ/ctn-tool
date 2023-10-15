@@ -140,14 +140,6 @@ $nav-height: 110px;
   z-index: 1;
 }
 
-#toast-container.toast-bottom-full-width {
-  .toast {
-    margin-top: 10px !important;
-    width: 100% !important;
-    border-radius: 0;
-  }
-}
-
 .createModal .modal {
   width: 90% !important;
   max-height: 90% !important;
@@ -239,45 +231,6 @@ nav {
 
     i {
       font-size: 30px;
-    }
-  }
-}
-
-// Administration
-.administration {
-  .header {
-    margin-top: 20px;
-  }
-
-  .event-title {
-    margin-top: 20px;
-    margin-bottom: 20px;
-
-    h5 {
-      display: inline;
-
-      i {
-        margin-top: 2px;
-      }
-    }
-    span {
-      margin-left: 10px;
-      display: inline;
-    }
-  }
-  .event-participants-container {
-    margin-bottom: 20px;
-    padding: 0;
-
-    .event-participants {
-      .collection {
-        margin-top: -1px;
-        margin-bottom: 0px;
-      }
-
-      span {
-        font-size: 12px;
-      }
     }
   }
 }
