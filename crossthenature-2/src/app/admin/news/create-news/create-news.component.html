@@ -1,60 +1,61 @@
-<div class="container">
+<div class="container my-4">
   <div class="row">
     <div class="col-12">
-      <h3 class="header detail-title teal-text text-center text-lg-start">
-        Neue News anlegen
-      </h3>
+      <div class="d-flex justify-content-center justify-content-lg-start">
+        <h1 class="teal-text">Neue News anlegen</h1>
+      </div>
     </div>
+
+    <form
+      (ngSubmit)="createNewsForm.form.valid && create()"
+      #createNewsForm="ngForm"
+    >
+      <div class="row">
+        <mat-form-field class="col-12">
+          <mat-label>Titel</mat-label>
+          <input
+            matInput
+            [(ngModel)]="news.title"
+            required
+            id="title"
+            name="title"
+            type="text"
+          />
+        </mat-form-field>
+      </div>
+
+      <div>
+        <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
+        </ngx-editor-menu>
+        <ngx-editor
+          class="col-12"
+          [editor]="editor"
+          [(ngModel)]="news.content"
+          name="content"
+        ></ngx-editor>
+      </div>
+
+      <div class="col-12 submit text-center text-lg-start mt-3">
+        <button
+          mat-flat-button
+          color="primary"
+          class="btn me-2"
+          [class.disabled]="!createNewsForm.form.valid"
+          type="submit"
+          name="action"
+        >
+          News anlegen
+        </button>
+        <button
+          mat-flat-button
+          color="accent"
+          type="button"
+          class="btn"
+          (click)="goBack()"
+        >
+          Abbrechen
+        </button>
+      </div>
+    </form>
   </div>
-
-  <form
-    (ngSubmit)="createNewsForm.form.valid && create()"
-    #createNewsForm="ngForm"
-  >
-    <div class="row">
-      <mat-form-field class="col-12">
-        <mat-label>Titel</mat-label>
-        <input
-          matInput
-          [(ngModel)]="news.title"
-          required
-          id="title"
-          name="title"
-          type="text"
-        />
-      </mat-form-field>
-    </div>
-
-    <div>
-      <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
-      <ngx-editor
-        class="col-12"
-        [editor]="editor"
-        [(ngModel)]="news.content"
-        name="content"
-      ></ngx-editor>
-    </div>
-
-    <div class="col-12 submit text-center text-lg-start mt-3">
-      <button
-        mat-flat-button
-        color="primary"
-        class="btn"
-        [class.disabled]="!createNewsForm.form.valid"
-        type="submit"
-        name="action"
-      >
-        News anlegen
-      </button>
-      <button
-        mat-flat-button
-        color="error"
-        type="button"
-        class="btn"
-        (click)="goBack()"
-      >
-        Abbrechen
-      </button>
-    </div>
-  </form>
 </div>
