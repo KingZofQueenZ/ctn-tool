@@ -69,11 +69,15 @@ export class AdminNewsOverviewComponent implements OnInit {
       if (result) {
         this.newsService.delete(news._id).subscribe({
           next: () => {
-            this.snackBar.open('Die News wurde erfolgreich gelöscht.');
+            this.snackBar.open('Die News wurde erfolgreich gelöscht.', '', {
+              panelClass: ['green-snackbar'],
+            });
             this.refresh();
           },
           error: (e) => {
-            this.snackBar.open('Die News konnte nicht gelöscht werden.');
+            this.snackBar.open('Die News konnte nicht gelöscht werden.', '', {
+              panelClass: ['red-snackbar'],
+            });
           },
         });
       }

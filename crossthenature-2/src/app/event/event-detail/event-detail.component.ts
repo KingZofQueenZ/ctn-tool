@@ -100,7 +100,9 @@ export class EventDetailComponent {
           this.trial_success = true;
         },
         error: (e) => {
-          this.snackBar.open('Es ist ein Fehler aufgetreten.');
+          this.snackBar.open('Es ist ein Fehler aufgetreten.', '', {
+            panelClass: ['red-snackbar'],
+          });
         },
       });
   }
@@ -142,10 +144,16 @@ export class EventDetailComponent {
             ', am ' +
             this.date_string +
             ' angemeldet',
+          '',
+          {
+            panelClass: ['green-snackbar'],
+          },
         );
       },
       error: (e) => {
-        this.snackBar.open('Es ist ein Fehler aufgetreten.');
+        this.snackBar.open('Es ist ein Fehler aufgetreten.', '', {
+          panelClass: ['red-snackbar'],
+        });
       },
     });
   }
@@ -168,10 +176,16 @@ export class EventDetailComponent {
               ', am ' +
               this.date_string +
               ' abgemeldet',
+            '',
+            {
+              panelClass: ['green-snackbar'],
+            },
           );
         },
         error: (e) => {
-          this.snackBar.open('Es ist ein Fehler aufgetreten.');
+          this.snackBar.open('Es ist ein Fehler aufgetreten.', '', {
+            panelClass: ['red-snackbar'],
+          });
         },
       });
   }

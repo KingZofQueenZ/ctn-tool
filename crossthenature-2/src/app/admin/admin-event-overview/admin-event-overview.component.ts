@@ -88,11 +88,15 @@ export class AdminEventOverviewComponent implements OnInit {
       if (result) {
         this.eventService.delete(event._id).subscribe({
           next: () => {
-            this.snackBar.open('Der Termin wurde erfolgreich gelöscht.');
+            this.snackBar.open('Der Termin wurde erfolgreich gelöscht.', '', {
+              panelClass: ['green-snackbar'],
+            });
             this.getEvents();
           },
           error: (e) => {
-            this.snackBar.open('Der Termin konnte nicht gelöscht werden.');
+            this.snackBar.open('Der Termin konnte nicht gelöscht werden.', '', {
+              panelClass: ['red-snackbar'],
+            });
           },
         });
       }

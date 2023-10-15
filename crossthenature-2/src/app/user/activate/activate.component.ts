@@ -29,6 +29,10 @@ export class ActivateComponent implements OnInit {
       next: () => {
         this.snackBar.open(
           'Dein Benutzer wurde erfolgreich aktiviert! Du kannst dich nun einloggen.',
+          '',
+          {
+            panelClass: ['green-snackbar'],
+          },
         );
 
         this.router.navigate(['/login'], { queryParams: { activated: true } });

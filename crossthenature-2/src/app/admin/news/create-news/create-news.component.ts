@@ -31,11 +31,17 @@ export class CreateNewsComponent implements OnDestroy {
   create() {
     this.newsService.create(this.news).subscribe({
       next: () => {
-        this.snackBar.open('Die News wurde erfolgreich erstellt.');
+        this.snackBar.open('Die News wurde erfolgreich erstellt.', '', {
+          panelClass: ['green-snackbar'],
+        });
         this.goBack();
       },
       error: (e) => {
-        this.snackBar.open('Die News konnte nicht erstellt werden.');
+        this.snackBar.open('Die News konnte nicht erstellt werden.'),
+          '',
+          {
+            panelClass: ['red-snackbar'],
+          };
       },
     });
   }

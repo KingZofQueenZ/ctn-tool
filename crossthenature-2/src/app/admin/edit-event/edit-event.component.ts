@@ -99,11 +99,15 @@ export class EditEventComponent implements OnInit, OnDestroy {
 
     this.eventService.update(event).subscribe({
       next: () => {
-        this.snackBar.open('Der Termin wurde erfolgreich gespeichert.');
+        this.snackBar.open('Der Termin wurde erfolgreich gespeichert.', '', {
+          panelClass: ['green-snackbar'],
+        });
         this.goBack();
       },
       error: (e) => {
-        this.snackBar.open('Der Termin konnte nicht gespeichert werden.');
+        this.snackBar.open('Der Termin konnte nicht gespeichert werden.', '', {
+          panelClass: ['red-snackbar'],
+        });
       },
     });
   }
@@ -126,10 +130,16 @@ export class EditEventComponent implements OnInit, OnDestroy {
 
           this.snackBar.open(
             'Der User wurde erfolgreich von ' + this.event.name + ' entfernt',
+            '',
+            {
+              panelClass: ['green-snackbar'],
+            },
           );
         },
         error: (e) => {
-          this.snackBar.open('Der User konnte nicht entfernt werden.');
+          this.snackBar.open('Der User konnte nicht entfernt werden.', '', {
+            panelClass: ['red-snackbar'],
+          });
         },
       });
   }

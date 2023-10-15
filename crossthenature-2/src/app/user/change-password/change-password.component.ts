@@ -43,11 +43,15 @@ export class ChangePasswordComponent {
       })
       .subscribe({
         next: () => {
-          this.snackBar.open('Das Passwort wurde erfolgreich geändert.');
+          this.snackBar.open('Das Passwort wurde erfolgreich geändert.', '', {
+            panelClass: ['green-snackbar'],
+          });
           this.router.navigate(['/profile']);
         },
         error: (e) => {
-          this.snackBar.open('Das Passwort konnte nicht geändert werden.');
+          this.snackBar.open('Das Passwort konnte nicht geändert werden.', '', {
+            panelClass: ['red-snackbar'],
+          });
         },
       });
   }

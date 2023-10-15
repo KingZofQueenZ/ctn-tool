@@ -79,6 +79,20 @@ $app-theme: mat.define-light-theme(
   border-bottom: 1px solid #e0e0e0;
 }
 
+// Snackbar
+.mat-mdc-snack-bar-container {
+  &.green-snackbar {
+    --mdc-snackbar-container-color: #618264;
+    --mat-mdc-snack-bar-button-color: #fff;
+    --mdc-snackbar-supporting-text-color: #fff;
+  }
+  &.red-snackbar {
+    --mdc-snackbar-container-color: #f44336;
+    --mat-mdc-snack-bar-button-color: #fff;
+    --mdc-snackbar-supporting-text-color: #fff;
+  }
+}
+
 // Allgemein
 a {
   color: #000;

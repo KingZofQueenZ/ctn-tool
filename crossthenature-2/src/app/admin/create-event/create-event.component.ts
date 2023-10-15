@@ -78,11 +78,15 @@ export class CreateEventComponent implements OnDestroy {
 
     this.eventService.create(event).subscribe({
       next: () => {
-        this.snackBar.open('Der Termin wurde erfolgreich erstellt.');
+        this.snackBar.open('Der Termin wurde erfolgreich erstellt.', '', {
+          panelClass: ['green-snackbar'],
+        });
         this.goBack();
       },
       error: (e) => {
-        this.snackBar.open('Der Termin konnte nicht erstellt werden.');
+        this.snackBar.open('Der Termin konnte nicht erstellt werden.', '', {
+          panelClass: ['red-snackbar'],
+        });
       },
     });
   }
@@ -158,6 +162,10 @@ export class CreateEventComponent implements OnDestroy {
         error: (e) => {
           this.snackBar.open(
             'Mindestens ein Termin konnte nicht erstellt werden.',
+            '',
+            {
+              panelClass: ['red-snackbar'],
+            },
           );
         },
       });

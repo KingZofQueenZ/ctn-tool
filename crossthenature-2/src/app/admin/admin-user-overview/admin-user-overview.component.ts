@@ -37,11 +37,15 @@ export class AdminUserOverviewComponent implements OnInit {
       if (result) {
         this.userService.delete(user._id).subscribe({
           next: () => {
-            this.snackBar.open('Der User wurde erfolgreich gelöscht.');
+            this.snackBar.open('Der User wurde erfolgreich gelöscht.', '', {
+              panelClass: ['green-snackbar'],
+            });
             this.refresh();
           },
           error: (e) => {
-            this.snackBar.open('Der User konnte nicht gelöscht werden!');
+            this.snackBar.open('Der User konnte nicht gelöscht werden!', '', {
+              panelClass: ['red-snackbar'],
+            });
           },
         });
       }

@@ -46,11 +46,15 @@ export class EditNewsComponent implements OnDestroy {
     console.log(this.news);
     this.newsService.update(this.news).subscribe({
       next: () => {
-        this.snackBar.open('Die News wurde erfolgreich gespeichert.');
+        this.snackBar.open('Die News wurde erfolgreich gespeichert.', '', {
+          panelClass: ['green-snackbar'],
+        });
         this.goBack();
       },
       error: (e) => {
-        this.snackBar.open('Die News konnte nicht gespeichert werden.');
+        this.snackBar.open('Die News konnte nicht gespeichert werden.', '', {
+          panelClass: ['red-snackbar'],
+        });
       },
     });
   }

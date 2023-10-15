@@ -114,10 +114,16 @@ export class EventListItemComponent implements OnInit {
             ', am ' +
             this.date_string +
             ' angemeldet',
+          '',
+          {
+            panelClass: ['green-snackbar'],
+          },
         );
       },
       error: (e) => {
-        this.snackBar.open('Du konntest nicht angemeldet werden!');
+        this.snackBar.open('Du konntest nicht angemeldet werden!', '', {
+          panelClass: ['red-snackbar'],
+        });
       },
     });
   }
@@ -143,11 +149,17 @@ export class EventListItemComponent implements OnInit {
               ', am ' +
               this.date_string +
               ' abgemeldet',
+            '',
+            {
+              panelClass: ['green-snackbar'],
+            },
           );
           this.lockIcon = false;
         },
         error: (e) => {
-          this.snackBar.open('Du konntest nicht abgemeldet werden!');
+          this.snackBar.open('Du konntest nicht abgemeldet werden!', '', {
+            panelClass: ['red-snackbar'],
+          });
         },
       });
   }

@@ -25,11 +25,23 @@ export class SettingsComponent {
   update() {
     this.userService.update(this.user!).subscribe({
       next: () => {
-        this.snackBar.open('Die Benutzerdaten wurden erfolgreich geändert.');
+        this.snackBar.open(
+          'Die Benutzerdaten wurden erfolgreich geändert.',
+          '',
+          {
+            panelClass: ['green-snackbar'],
+          },
+        );
         this.router.navigate(['/profile']);
       },
       error: (e) => {
-        this.snackBar.open('Die Benutzerdaten konnten nicht geändert werden.');
+        this.snackBar.open(
+          'Die Benutzerdaten konnten nicht geändert werden.',
+          '',
+          {
+            panelClass: ['red-snackbar'],
+          },
+        );
       },
     });
   }
