@@ -1,5 +1,7 @@
 @use "./palette.scss" as palette;
+@use "@ng-matero/extensions" as mtx;
 @use "@angular/material" as mat;
+
 @import "@angular/material/theming";
 
 $app-primary: mat.define-palette(palette.$primary);
@@ -15,7 +17,9 @@ $app-theme: mat.define-light-theme(
     ),
   )
 );
+
 @include mat.all-component-themes($app-theme);
+@include mtx.all-component-themes($app-theme);
 
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "~@ng-matero/extensions/prebuilt-themes/indigo-pink.css";
