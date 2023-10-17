@@ -43,8 +43,8 @@
       </ul>
     </div>
     <div class="d-none d-lg-block mx-1">&nbsp;</div>
-    <div class="list-style-none w-100" *ngIf="participants.length">
-      <ul class="collection my-0">
+    <div class="list-style-none w-100">
+      <ul class="collection my-0" *ngIf="participants.length > 1">
         <li
           class="collection-item"
           *ngFor="
