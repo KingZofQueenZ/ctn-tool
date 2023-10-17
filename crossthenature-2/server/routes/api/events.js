@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 const VerifyToken = require("../../authentication/verifytoken");
 const Event = require("../../models/event");
-const moment = require("moment");
+const subHours = require("date-fns/subHours");
+const isAfter = require("date-fns/isAfter");
 
 // Events ------------------------
 //   route: /api/events
@@ -46,7 +47,7 @@ router.get("/", VerifyToken.verify, (request, response) => {
   const page = request.query.page || 1;
   const amount = Number(request.query.amount) || 40;
 
-  Event.find({ date: { $gte: moment().subtract(1, "hours").format() } })
+  Event.find({ date: { $gte: subHours(new Date(), 1) } })
     .populate("participant_ids", "firstname lastname")
     .sort("date")
     .skip(amount * (page - 1))
@@ -71,7 +72,7 @@ router.get("/public/", (request, response) => {
   const page = request.query.page || 1;
   const amount = Number(request.query.amount) || 40;
 
-  Event.find({ date: { $gte: moment().subtract(1, "hours").format() } })
+  Event.find({ date: { $gte: subHours(new Date(), 1) } })
     .sort("date")
     .skip(amount * (page - 1))
     .limit(amount)
@@ -282,12 +283,12 @@ router.delete(
           return;
         }
 
-        if (document.sign_out && moment().isAfter(moment(document.sign_out))) {
+        if (document.sign_out && isAfter(new Date(), document.sign_out)) {
           response.status(500).send("Sign out date reached");
           return;
         }
 
-        if (document.date < moment().format()) {
+        if (document.date < new Date()) {
           response.status(500).send("Event already started");
           return;
         }

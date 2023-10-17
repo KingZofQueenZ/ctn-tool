@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const VerifyToken = require("../../authentication/verifytoken");
 const News = require("../../models/news");
-const moment = require("moment");
 
 // Events ------------------------
 //   route: /api/news
@@ -14,7 +13,7 @@ router.post("/", (request, response) => {
   var news = new News({
     title: body.title,
     content: body.content,
-    date: moment().format(),
+    date: new Date(),
   });
 
   News.create(news)

@@ -5,8 +5,8 @@ const smtpConfig = config.mailer.connectionString;
 const path = require('path');
 
 const email = new Email({
-    views: { 
-        root: (path.join(__dirname, '../../templates')),
+    views: {
+        root: (path.join(__dirname, '../templates')),
         options: {
             extension: 'ejs'
         }

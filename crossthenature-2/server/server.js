@@ -5,12 +5,12 @@ const http = require("http");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const helmet = require("helmet");
-const config = require("./server/config/index");
+const config = require("./config/index");
 
 // Get our API routes
-const usersApi = require("./server/routes/api/users");
-const eventsApi = require("./server/routes/api/events");
-const newsApi = require("./server/routes/api/news");
+const usersApi = require("./routes/api/users");
+const eventsApi = require("./routes/api/events");
+const newsApi = require("./routes/api/news");
 
 const app = express();
 
@@ -46,7 +46,7 @@ app.use("/api/news", newsApi);
 
 // Catch all other routes and return the index file
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "dist/index.html"));
+  res.sendFile(path.join(__dirname, "/dist/index.html"));
 });
 
 /**

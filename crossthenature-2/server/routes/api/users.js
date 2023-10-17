@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const router = express.Router();
 const config = require("../../config/index");
 const randomstring = require("randomstring");
-const moment = require("moment");
+const subHours = require("date-fns/subHours");
 const VerifyToken = require("../../authentication/verifytoken");
 const User = require("../../models/user");
 const Event = require("../../models/event");
@@ -370,7 +370,7 @@ router.get("/:user_id/events", VerifyToken.verifyUser, (request, response) => {
 
   Event.find({
     participant_ids: request.params.user_id,
-    date: { $gte: moment().subtract(1, "hours").format() },
+    date: { $gte: subHours(new Date(), 1) },
   })
     .populate("participant_ids", "firstname lastname")
     .sort("date")
