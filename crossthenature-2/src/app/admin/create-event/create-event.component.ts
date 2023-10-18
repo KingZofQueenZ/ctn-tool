@@ -1,11 +1,16 @@
 import { Component, OnDestroy } from '@angular/core';
-import * as moment from 'moment';
 import { EventService } from 'src/app/services/event.service';
 import { Event } from '../../models/event';
 import { Location } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Editor, Toolbar } from 'ngx-editor';
 import { editorToolbar } from '../../shared/settings';
+import {
+  differenceInDays,
+  subDays,
+  isWithinInterval,
+  eachWeekOfInterval,
+} from 'date-fns';
 
 @Component({
   selector: 'app-create-event',
@@ -37,7 +42,6 @@ export class CreateEventComponent implements OnDestroy {
     private location: Location,
     private snackBar: MatSnackBar,
   ) {
-    moment.locale('de');
     this.editor = new Editor();
   }
 
@@ -95,14 +99,19 @@ export class CreateEventComponent implements OnDestroy {
     const event: Event = Object.assign({}, this.event);
     const dates = this.getDates();
 
-    const anmeldeDifference = moment(this.event.date).diff(
-      moment(this.event.sign_in),
-      'days',
-    );
-    const abmeldeDifference = moment(this.event.date).diff(
-      moment(this.event.sign_out),
-      'days',
-    );
+    const anmeldeDifference = 0;
+    const abmeldeDifference = 0;
+
+    if (this.event.sign_in) {
+      differenceInDays(new Date(this.event.date), new Date(this.event.sign_in));
+    }
+
+    if (this.event.sign_out) {
+      differenceInDays(
+        new Date(this.event.date),
+        new Date(this.event.sign_out),
+      );
+    }
 
     dates.forEach((date) => {
       const eventDate = new Date(date);
@@ -139,9 +148,8 @@ export class CreateEventComponent implements OnDestroy {
           signIn.getHours(),
           signIn.getMinutes(),
         );
-        event.sign_in = moment(event.sign_in)
-          .subtract(anmeldeDifference, 'days')
-          .toDate();
+
+        event.sign_in = subDays(new Date(event.sign_in), anmeldeDifference);
       }
       if (this.event.sign_out) {
         const signOut = new Date(this.event.sign_out);
@@ -152,9 +160,7 @@ export class CreateEventComponent implements OnDestroy {
           signOut.getHours(),
           signOut.getMinutes(),
         );
-        event.sign_out = moment(event.sign_out)
-          .subtract(abmeldeDifference, 'days')
-          .toDate();
+        event.sign_in = subDays(new Date(event.sign_out), abmeldeDifference);
       }
 
       this.eventService.create(event).subscribe({
@@ -177,19 +183,28 @@ export class CreateEventComponent implements OnDestroy {
   private getDates() {
     const dateArray = new Array();
     const repeatDays = this.getRepeatDays();
-    let date = moment(this.event.date);
 
-    while (!moment(date).isAfter(moment(this.repeat_date))) {
-      repeatDays.forEach((weekday) => {
+    repeatDays.forEach((weekday) => {
+      var weekdayDates = eachWeekOfInterval(
+        {
+          start: new Date(this.event.date),
+          end: new Date(this.repeat_date!),
+        },
+        { weekStartsOn: weekday },
+      );
+
+      weekdayDates.forEach((date) => {
         if (
-          moment(date).isoWeekday() <= weekday &&
-          !moment(date).isoWeekday(weekday).isAfter(moment(this.repeat_date))
+          isWithinInterval(date, {
+            start: new Date(this.event.date),
+            end: new Date(this.repeat_date!),
+          })
         ) {
-          dateArray.push(moment(date).isoWeekday(weekday));
+          dateArray.push(date);
         }
       });
-      date = moment(date).add(1, 'weeks').startOf('isoWeek');
-    }
+    });
+
     return dateArray;
   }
 

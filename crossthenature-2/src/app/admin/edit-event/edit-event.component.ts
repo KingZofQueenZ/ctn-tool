@@ -1,6 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import * as moment from 'moment';
 import { EventService } from 'src/app/services/event.service';
 import { Event } from '../../models/event';
 import { Location } from '@angular/common';
@@ -62,7 +61,6 @@ export class EditEventComponent implements OnInit, OnDestroy {
     private router: Router,
     private snackBar: MatSnackBar,
   ) {
-    moment.locale('de');
     this.editor = new Editor();
   }
 

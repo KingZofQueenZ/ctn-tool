@@ -1,7 +1,9 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { User } from './models/user';
 import { StorageService } from './services/storage.service';
+import { setDefaultOptions } from 'date-fns';
 import { AuthenticationService } from './services/authentication.service';
+import { de } from 'date-fns/locale';
 
 @Component({
   selector: 'app-root',
@@ -11,18 +13,12 @@ import { AuthenticationService } from './services/authentication.service';
 export class AppComponent {
   user: User | undefined;
 
-  /*public config: ToasterConfig = new ToasterConfig({
-    animation: 'fade',
-    limit: 3,
-    positionClass: 'toast-bottom-full-width',
-    timeout: 4000,
-  });*/
-
   constructor(
     private storageService: StorageService,
     private authSevice: AuthenticationService,
     private cdRef: ChangeDetectorRef,
   ) {
+    setDefaultOptions({ locale: de });
     this.getUser();
     this.storageService.storageSub.subscribe((key: string) => {
       this.getUser();

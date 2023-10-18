@@ -57,12 +57,15 @@ import { EventDetailComponent } from './event/event-detail/event-detail.componen
 import { EventListItemComponent } from './event/event-list-item/event-list-item.component';
 import { EditEventComponent } from './admin/edit-event/edit-event.component';
 import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
-import { MtxMomentDatetimeModule } from '@ng-matero/extensions-moment-adapter';
+import { MtxDateFnsDatetimeModule } from '@ng-matero/extensions-date-fns-adapter';
 import { CreateEventComponent } from './admin/create-event/create-event.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { NgxEditorModule } from 'ngx-editor';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+
+import { de } from 'date-fns/locale';
 
 @NgModule({
   declarations: [
@@ -116,7 +119,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     RecaptchaModule,
     RecaptchaFormsModule,
     MtxDatetimepickerModule,
-    MtxMomentDatetimeModule,
+    MtxDateFnsDatetimeModule,
     MatTooltipModule,
     NgxEditorModule,
   ],
@@ -143,7 +146,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
       provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
       useValue: { duration: 5000, verticalPosition: 'top' },
     },
-    { provide: LOCALE_ID, useValue: 'de-DE' },
+    { provide: MAT_DATE_LOCALE, useValue: de },
   ],
   bootstrap: [AppComponent],
 })

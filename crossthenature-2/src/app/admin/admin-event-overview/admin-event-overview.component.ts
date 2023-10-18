@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from 'src/app/services/event.service';
 import { Event } from 'src/app/models/event';
-import * as moment from 'moment';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DeleteEventDialog } from './delete-dialog/delete-event-dialog.component';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'app-admin-event-overview',
@@ -23,20 +23,17 @@ export class AdminEventOverviewComponent implements OnInit {
     private eventService: EventService,
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
-  ) {
-    moment.locale('de');
-  }
+  ) {}
 
   ngOnInit() {
     this.getEvents();
   }
 
   public getDateString(event: Event): string {
-    const date = moment(event.date).format('dd. D MMM YYYY / HH:mm');
+    const date = format(new Date(event.date), 'eeeeee. d MMM yyyy / HH:mm');
 
     if (event.time_to) {
-      const time_to = moment(event.time_to).format('HH:mm');
-      return date + '-' + time_to;
+      return date + '-' + format(new Date(event.time_to), 'HH:mm');
     }
 
     return date + ' Uhr';

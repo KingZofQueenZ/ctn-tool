@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { News } from 'src/app/models/news';
 import { NewsService } from 'src/app/services/news.service';
-import * as moment from 'moment';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'app-news-overview',
@@ -15,9 +15,7 @@ export class NewsOverviewComponent implements OnInit {
   loading: Boolean = false;
   allNews: Boolean = false;
 
-  constructor(private newsService: NewsService) {
-    moment.locale('de');
-  }
+  constructor(private newsService: NewsService) {}
 
   ngOnInit() {
     this.getNews();
@@ -48,6 +46,6 @@ export class NewsOverviewComponent implements OnInit {
   }
 
   public dateString(news: News) {
-    return moment(news.date).format('dd. D MMM YYYY / HH:mm') + ' Uhr';
+    return format(new Date(news.date), 'eeeeee. d MMM yyyy / HH:mm') + ' Uhr';
   }
 }

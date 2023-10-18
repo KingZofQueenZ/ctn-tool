@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { EventService } from 'src/app/services/event.service';
-import * as moment from 'moment';
 import { Event } from '../../models/event';
 import { User } from 'src/app/models/user';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'app-event-list-overview',
@@ -43,16 +43,16 @@ export class EventListOverviewComponent implements OnInit {
 
   setDateArray(event: Event) {
     const date = this.dateArray.find(
-      (x) => x.date === moment(event.date).format('YYYY-MM-DD'),
+      (x) => x.date === format(new Date(event.date), 'yyyy-MM-dd'),
     );
 
     if (date) {
       this.dateArray.find(
-        (x) => x.date === moment(event.date).format('YYYY-MM-DD'),
+        (x) => x.date === format(new Date(event.date), 'yyyy-MM-dd'),
       ).count = ++date.count;
     } else {
       this.dateArray.push({
-        date: moment(event.date).format('YYYY-MM-DD'),
+        date: format(new Date(event.date), 'yyyy-MM-dd'),
         count: 1,
       });
     }
@@ -82,18 +82,18 @@ export class EventListOverviewComponent implements OnInit {
 
   getWidth(event: Event): string {
     const amount = this.dateArray.find(
-      (x) => x.date === moment(event.date).format('YYYY-MM-DD'),
+      (x) => x.date === format(new Date(event.date), 'yyyy-MM-dd'),
     ).count;
 
     switch (amount) {
       case 1:
-        return 'l12';
+        return 'lg-12';
       case 2:
-        return 'l6';
+        return 'lg-6';
       case 3:
-        return 'l4';
+        return 'lg-4';
       default:
-        return 'l12';
+        return 'lg-12';
     }
   }
 

@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { Event } from '../../models/event';
 import { User } from '../../models/user';
 import { EventService } from '../../services/event.service';
-import * as moment from 'moment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { format, isAfter } from 'date-fns';
 
 class UserTrial {
   user!: User;
@@ -38,8 +38,6 @@ export class EventDetailComponent {
     private router: Router,
     private snackBar: MatSnackBar,
   ) {
-    moment.locale('de');
-
     const storageUser = localStorage.getItem('currentUser');
     if (storageUser) {
       this.user = JSON.parse(storageUser);
@@ -199,23 +197,26 @@ export class EventDetailComponent {
 
   private canRegister() {
     if (this.event.sign_in) {
-      return moment(this.event.sign_in).isAfter(moment());
+      return isAfter(new Date(this.event.sign_in), new Date());
     }
     return true;
   }
 
   private canUnregister() {
     if (this.event.sign_out) {
-      return moment(this.event.sign_out).isAfter(moment());
+      return isAfter(new Date(this.event.sign_out), new Date());
     }
     return true;
   }
 
   private dateString() {
-    const date = moment(this.event.date).format('dd. D MMM YYYY / HH:mm');
+    const date = format(
+      new Date(this.event.date),
+      'eeeeee. d MMM yyyy / HH:mm',
+    );
 
     if (this.event.time_to) {
-      return date + '-' + moment(this.event.time_to).format('HH:mm');
+      return date + '-' + format(new Date(this.event.time_to), 'HH:mm');
     }
     return date + ' Uhr';
   }
@@ -225,7 +226,7 @@ export class EventDetailComponent {
       return '';
     }
 
-    return moment(date).format('dd. D MMM YYYY / HH:mm') + ' Uhr';
+    return format(new Date(date), 'eeeeee. d MMM yyyy / HH:mm') + ' Uhr';
   }
 
   private registered() {

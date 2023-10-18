@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Event } from '../../models/event';
-import * as moment from 'moment';
 import { User } from 'src/app/models/user';
+import { format } from 'date-fns';
 
 class UserTrial {
   user!: User;
@@ -18,21 +18,19 @@ export class NextEventComponent implements OnInit {
   participants: UserTrial[] = [];
   date_string: string = '';
 
-  constructor() {
-    moment.locale('de');
-  }
-
   ngOnInit() {
     this.date_string = this.getDateString();
     this.getParticipants();
   }
 
   private getDateString() {
-    const date = moment(this.event.date).format('dd. D MMM YYYY / HH:mm');
+    const date = format(
+      new Date(this.event.date),
+      'eeeeee. d MMM yyyy / HH:mm',
+    );
 
     if (this.event.time_to) {
-      const time_to = moment(this.event.time_to).format('HH:mm');
-      return date + '-' + time_to;
+      return date + '-' + format(new Date(this.event.time_to), 'HH:mm');
     }
 
     return date + 'Uhr';

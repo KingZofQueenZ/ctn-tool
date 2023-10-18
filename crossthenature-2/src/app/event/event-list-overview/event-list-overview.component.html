@@ -32,10 +32,8 @@
   <hr *ngIf="probetraining" />
 
   <div class="row event-cards" *ngIf="!noEvents && dateArray.length != 0">
-    <div *ngFor="let event of events">
-      <div class="col-12 {{ getWidth(event) }}">
-        <app-event-list-item [event]="event"></app-event-list-item>
-      </div>
+    <div class="col-12 col-{{ getWidth(event) }}" *ngFor="let event of events">
+      <app-event-list-item [event]="event"></app-event-list-item>
     </div>
     <div class="col-12 center mt-2" *ngIf="!allEvents && !loading">
       <a (click)="load()" class="flow-text center">Weitere Termine laden...</a>

@@ -1,10 +1,10 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
 import { EventService } from 'src/app/services/event.service';
-import * as moment from 'moment';
 import { User } from 'src/app/models/user';
 import { Event } from '../../models/event';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { format, isAfter } from 'date-fns';
 
 class UserTrial {
   user!: User;
@@ -46,7 +46,6 @@ export class EventListItemComponent implements OnInit {
     private eventService: EventService,
     private snackBar: MatSnackBar,
   ) {
-    moment.locale('de');
     const storageUser = localStorage.getItem('currentUser');
 
     if (storageUser) {
@@ -176,23 +175,26 @@ export class EventListItemComponent implements OnInit {
 
   private canRegister() {
     if (this.event.sign_in) {
-      return moment(this.event.sign_in).isAfter(moment());
+      return isAfter(new Date(this.event.sign_in), new Date());
     }
     return true;
   }
 
   private canUnregister() {
     if (this.event.sign_out) {
-      return moment(this.event.sign_out).isAfter(moment());
+      return isAfter(new Date(this.event.sign_out), new Date());
     }
     return true;
   }
 
   private dateString() {
-    const date = moment(this.event.date).format('dd. D MMM YYYY / HH:mm');
+    const date = format(
+      new Date(this.event.date),
+      'eeeeee. d MMM yyyy / HH:mm',
+    );
 
     if (this.event.time_to) {
-      return date + '-' + moment(this.event.time_to).format('HH:mm');
+      return date + '-' + format(new Date(this.event.time_to), 'HH:mm');
     }
     return date + ' Uhr';
   }
