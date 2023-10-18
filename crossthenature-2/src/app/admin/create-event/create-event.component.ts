@@ -5,7 +5,7 @@ import { Location } from '@angular/common';
 import { Editor, Toolbar } from 'ngx-editor';
 import { editorToolbar } from '../../shared/settings';
 import { differenceInCalendarDays, subDays, eachDayOfInterval, getDay, set } from 'date-fns';
-import { SnackbarService } from 'src/app/services/snackbar.service';
+import { HelperService } from 'src/app/services/helper.service';
 
 @Component({
   selector: 'app-create-event',
@@ -19,20 +19,14 @@ export class CreateEventComponent implements OnDestroy {
   time_to: Date | undefined;
   weekdays: any[] = [];
   selectedWeekdays: any[] = [];
-
   touchUI = false;
-
   editor: Editor;
   toolbar: Toolbar = editorToolbar;
-
-  ngOnDestroy(): void {
-    this.editor.destroy();
-  }
 
   constructor(
     private eventService: EventService,
     protected location: Location,
-    private snackbar: SnackbarService,
+    private helper: HelperService,
   ) {
     this.editor = new Editor();
     this.isTouchUI(window.innerWidth);
@@ -45,6 +39,10 @@ export class CreateEventComponent implements OnDestroy {
       { name: 'Sa', value: 6 },
       { name: 'So', value: 0 },
     ];
+  }
+
+  ngOnDestroy(): void {
+    this.editor.destroy();
   }
 
   // Add checked day to selected weekdays / remove
@@ -72,10 +70,10 @@ export class CreateEventComponent implements OnDestroy {
 
     this.eventService.create(event).subscribe({
       next: () => {
-        this.snackbar.successSnackbar('Der Termin wurde erfolgreich erstellt.');
+        this.helper.successSnackbar('Der Termin wurde erfolgreich erstellt.');
         this.location.back();
       },
-      error: () => this.snackbar.errorSnackbar('Der Termin konnte nicht erstellt werden.'),
+      error: () => this.helper.errorSnackbar('Der Termin konnte nicht erstellt werden.'),
     });
   }
 
@@ -110,7 +108,7 @@ export class CreateEventComponent implements OnDestroy {
 
       this.eventService.create(event).subscribe({
         next: () => {},
-        error: () => this.snackbar.errorSnackbar('Mindestens ein Termin konnte nicht erstellt werden.'),
+        error: () => this.helper.errorSnackbar('Mindestens ein Termin konnte nicht erstellt werden.'),
       });
     });
 

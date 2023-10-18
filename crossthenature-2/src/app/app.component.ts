@@ -28,7 +28,7 @@ export class AppComponent {
 
   ngOnInit(): void {
     if (this.user) {
-      this.authSevice.refresh(this.user.email).subscribe({
+      this.authSevice.refresh(this.user.email!).subscribe({
         next: () => {},
         error: () => {
           this.authSevice.logout();

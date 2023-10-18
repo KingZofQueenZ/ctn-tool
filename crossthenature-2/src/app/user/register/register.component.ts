@@ -10,7 +10,12 @@ import { matchOtherValidator } from 'src/app/shared/password.validation';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
-  user: User = new User();
+  user: User = {
+    _id: '',
+    firstname: '',
+    lastname: '',
+    phone: '',
+  };
   passwordconfirm: string | undefined;
   hasError = false;
   success = false;
@@ -27,24 +32,19 @@ export class RegisterComponent {
       phone: ['', Validators.required],
       password: ['', Validators.required],
       token: ['', Validators.required],
-      confirmPassword: [
-        '',
-        [matchOtherValidator('password'), Validators.required],
-      ],
+      confirmPassword: ['', [matchOtherValidator('password'), Validators.required]],
     });
   }
 
   register(): void {
     // Send Google Captcha Token to backend to verify
-    this.userService
-      .create(this.user, this.registerForm.controls['token'].value)
-      .subscribe({
-        next: () => {
-          this.success = true;
-        },
-        error: (e) => {
-          this.hasError = true;
-        },
-      });
+    this.userService.create(this.user, this.registerForm.controls['token'].value).subscribe({
+      next: () => {
+        this.success = true;
+      },
+      error: (e) => {
+        this.hasError = true;
+      },
+    });
   }
 }

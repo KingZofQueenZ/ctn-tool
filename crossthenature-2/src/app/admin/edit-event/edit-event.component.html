@@ -120,15 +120,15 @@
       <div class="col-12 list-style-none">
         <h3 class="my-2 col-12 light">Anmeldungen</h3>
 
-        <ul class="collection" *ngIf="participants.length">
-          <li class="collection-item d-flex" *ngFor="let participant of participants">
+        <ul class="collection" *ngIf="event.participant_ids.length">
+          <li class="collection-item d-flex" *ngFor="let participant of event.participant_ids">
             <div class="d-flex w-100 align-items-center justify-content-between">
               <div class="d-flex justify-content-start align-items-center">
                 <span>
-                  {{ participant.user.firstname + " " + participant.user.lastname }}
+                  {{ participant.firstname + " " + participant.lastname }}
                 </span>
                 <span *ngIf="participant.trial" class="grey-text text-darken-1 light ms-3">
-                  <i>{{ participant.user.phone }}</i>
+                  <i>{{ participant.phone }}</i>
                 </span>
               </div>
 
@@ -139,7 +139,7 @@
                   color="primary"
                   matTooltip="Anmeldung zum Probetraining"
                   matTooltipPosition="above"
-                  class="me-3"
+                  class="me-3 trial"
                 ></mat-icon>
 
                 <mat-icon (click)="removeUser(participant)" fontIcon="delete" color="warn"></mat-icon>
@@ -148,7 +148,7 @@
           </li>
         </ul>
 
-        <div *ngIf="!participants.length">
+        <div *ngIf="!event.participant_ids.length">
           <span><i>Es gibt noch keine Anmeldungen.</i></span>
         </div>
       </div>

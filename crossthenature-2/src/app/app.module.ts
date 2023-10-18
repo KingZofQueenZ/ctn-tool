@@ -1,4 +1,4 @@
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,10 +12,7 @@ import { ContactComponent } from './content/contact/contact.component';
 import { InformationComponent } from './content/information/information.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import {
-  MAT_SNACK_BAR_DEFAULT_OPTIONS,
-  MatSnackBarModule,
-} from '@angular/material/snack-bar';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { LoginComponent } from './user/login/login.component';
@@ -38,12 +35,7 @@ import { EditNewsComponent } from './admin/news/edit-news/edit-news.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NewsOverviewComponent } from './news/news-overview/news-overview.component';
 import { SafeHtmlPipe } from './shared/safe-html-pipe.pipe';
-import {
-  RECAPTCHA_SETTINGS,
-  RecaptchaFormsModule,
-  RecaptchaModule,
-  RecaptchaSettings,
-} from 'ng-recaptcha';
+import { RECAPTCHA_SETTINGS, RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
 import { environment } from 'src/environments/environment';
 import { AdminUserOverviewComponent } from './admin/admin-user-overview/admin-user-overview.component';
 import { DeleteNewsDialog } from './admin/admin-news-overview/delete-dialog/delete-news-dialog.component';
@@ -64,7 +56,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { NgxEditorModule } from 'ngx-editor';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
-
 import { de } from 'date-fns/locale';
 
 @NgModule({

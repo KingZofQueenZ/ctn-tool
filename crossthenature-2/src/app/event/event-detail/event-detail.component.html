@@ -1,20 +1,14 @@
 <div class="parallax top d-none d-lg-flex">
-  <div
-    class="container d-flex flex-column align-items-center justify-content-center"
-  >
+  <div class="container d-flex flex-column align-items-center justify-content-center">
     <h1 class="teal-text mat-headline-3 parralax-title">Details</h1>
-    <h1 class="white-text parralax-subtitle mt-3">
-      &laquo;Nothing great comes without sacrifice.&raquo;
-    </h1>
+    <h1 class="white-text parralax-subtitle mt-3">&laquo;Nothing great comes without sacrifice.&raquo;</h1>
   </div>
 </div>
 
 <!-- Event Cards -->
 <div class="container my-4 details" *ngIf="event">
   <div class="row">
-    <div
-      class="d-flex justify-content-between flex-column flex-lg-row align-items-center"
-    >
+    <div class="d-flex justify-content-between flex-column flex-lg-row align-items-center">
       <h1 class="header teal-text">{{ event.name }}</h1>
       <div *ngIf="user">
         <button
@@ -27,36 +21,17 @@
           Anmelden
         </button>
 
-        <button
-          *ngIf="is_registered && can_unregister"
-          mat-flat-button
-          color="warn"
-          class="waves-effect waves-light btn center"
-          (click)="handleRegistration()"
-        >
+        <button *ngIf="is_registered && can_unregister" mat-flat-button color="warn" class="waves-effect waves-light btn center" (click)="handleRegistration()">
           Abmelden
         </button>
 
-        <div
-          *ngIf="is_registered && !can_unregister"
-          matTooltip="Du kannst dich von diesem Event nicht mehr abmelden!"
-          matTooltipPosition="above"
-        >
-          <button
-            mat-flat-button
-            disabled
-            color="warn"
-            class="waves-effect waves-light btn center"
-          >
-            Abmelden
-          </button>
+        <div *ngIf="is_registered && !can_unregister" matTooltip="Du kannst dich von diesem Event nicht mehr abmelden!" matTooltipPosition="above">
+          <button mat-flat-button disabled color="warn" class="waves-effect waves-light btn center">Abmelden</button>
         </div>
       </div>
     </div>
 
-    <div
-      class="col-12 col-lg-8 mt-4 d-flex flex-column align-items-center align-items-lg-start"
-    >
+    <div class="col-12 col-lg-8 mt-4 d-flex flex-column align-items-center align-items-lg-start">
       <h3 class="light grey-text light">
         <i>{{ date_string }}</i>
       </h3>
@@ -76,24 +51,13 @@
     <!-- Only show if user is logged in -->
     <div class="col-12 anmeldungen list-style-none my-2" *ngIf="user">
       <h2 class="light text-center text-lg-start">Anmeldungen</h2>
-      <h3 class="grey-text text-darken-1 light text-center text-lg-start">
-        {{ participant_string }} Anmeldungen
-      </h3>
+      <h3 class="grey-text text-darken-1 light text-center text-lg-start">{{ participant_string }} Anmeldungen</h3>
 
       <ul class="collection" *ngIf="participants.length">
-        <li
-          class="collection-item d-flex"
-          *ngFor="let participant of participants"
-        >
+        <li class="collection-item d-flex" *ngFor="let participant of participants">
           <div class="d-flex w-100 align-items-center justify-content-between">
             <div class="d-flex justify-content-start align-items-center">
-              <img
-                src="../../../assets/img/user.png"
-                height="42"
-                width="42"
-                alt=""
-                class="circle"
-              />
+              <img src="../../../assets/img/user.png" height="42" width="42" alt="" class="circle" />
 
               <div class="ms-3">
                 {{ participant.user.firstname }}
@@ -122,18 +86,11 @@
     <!-- Only show if user is not logged in  -->
     <div class="col-12 my-4" *ngIf="!user">
       <hr class="mb-4" />
-      <h2 class="light text-center text-lg-start">
-        Anmeldung zum Probetraining
-      </h2>
+      <h2 class="light text-center text-lg-start">Anmeldung zum Probetraining</h2>
 
-      <div *ngIf="!trial_success && !is_full">
-        Bitte fülle das Formular aus, um dich für ein Probetraining anzumelden.
-      </div>
+      <div *ngIf="!trial_success && !is_full">Bitte fülle das Formular aus, um dich für ein Probetraining anzumelden.</div>
 
-      <div *ngIf="is_full">
-        Bei diesem Event haben wir leider keine freien Plätze mehr. Gerne darfst
-        du an einem anderen Tag kommen!
-      </div>
+      <div *ngIf="is_full">Bei diesem Event haben wir leider keine freien Plätze mehr. Gerne darfst du an einem anderen Tag kommen!</div>
 
       <form
         class="form"
@@ -143,69 +100,28 @@
         *ngIf="!trial_success && !is_full"
       >
         <mat-form-field class="col-12">
-          <mat-label>E-Mail</mat-label>
-          <input
-            matInput
-            [(ngModel)]="model.email"
-            required
-            id="email"
-            name="email"
-            type="email"
-            email
-          />
-        </mat-form-field>
-        <mat-form-field class="col-12">
           <mat-label>Vorname</mat-label>
-          <input
-            matInput
-            [(ngModel)]="model.firstname"
-            required
-            id="firstname"
-            name="firstname"
-            type="text"
-          />
+          <input matInput [(ngModel)]="model.firstname" required id="firstname" name="firstname" type="text" />
         </mat-form-field>
         <mat-form-field class="col-12">
           <mat-label>Nachname</mat-label>
-          <input
-            matInput
-            [(ngModel)]="model.lastname"
-            required
-            id="lastname"
-            name="lastname"
-            type="text"
-          />
+          <input matInput [(ngModel)]="model.lastname" required id="lastname" name="lastname" type="text" />
         </mat-form-field>
         <mat-form-field class="col-12">
           <mat-label>Telefonnummer</mat-label>
-          <input
-            matInput
-            [(ngModel)]="model.phone"
-            required
-            id="phone"
-            name="phone"
-            type="text"
-          />
+          <input matInput [(ngModel)]="model.phone" required id="phone" name="phone" type="text" />
         </mat-form-field>
 
         <div class="col-12 text-center text-lg-start">
-          <button
-            mat-flat-button
-            color="primary"
-            class="btn mt-2"
-            [class.disabled]="!trialForm.form.valid"
-            type="submit"
-            name="action"
-          >
+          <button mat-flat-button color="primary" class="btn mt-2" [class.disabled]="!trialForm.form.valid" type="submit" name="action">
             Zum Probetraining anmelden
           </button>
         </div>
       </form>
 
       <div class="col-12 mt-3 text-center text-lg-start" *ngIf="trial_success">
-        Du wurdest erfolgreich für das Probetraining angemeldet. Wir erwarten
-        dich am {{ date_string }}. Solltest du doch nicht Teilnehmen können,
-        melde dich bitte bei unseren Coaches ab!
+        Du wurdest erfolgreich für das Probetraining angemeldet. Wir erwarten dich am {{ date_string }}. Solltest du doch nicht Teilnehmen können, melde dich
+        bitte bei unseren Coaches ab!
       </div>
     </div>
   </div>
