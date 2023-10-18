@@ -1,12 +1,13 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from 'src/app/services/event.service';
 import { Event } from '../../models/event';
 import { Location } from '@angular/common';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from 'src/app/models/user';
 import { Editor, Toolbar } from 'ngx-editor';
 import { editorToolbar } from '../../shared/settings';
+import { SnackbarService } from 'src/app/services/snackbar.service';
+import { set } from 'date-fns';
 
 class UserTrial {
   user!: User;
@@ -22,6 +23,8 @@ export class EditEventComponent implements OnInit, OnDestroy {
   @Input() event!: Event;
   time_from: Date | undefined;
   time_to: Date | undefined;
+
+  touchUI = false;
 
   editor: Editor;
   toolbar: Toolbar = editorToolbar;
@@ -57,89 +60,40 @@ export class EditEventComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private eventService: EventService,
-    private location: Location,
+    protected location: Location,
     private router: Router,
-    private snackBar: MatSnackBar,
+    private snackbar: SnackbarService,
   ) {
     this.editor = new Editor();
   }
 
   edit() {
     const event: Event = Object.assign({}, this.event);
-    const eventDate = new Date(event.date);
-    const timeFrom = new Date(this.time_from!);
 
-    event.date = new Date(
-      eventDate.getFullYear(),
-      eventDate.getMonth(),
-      eventDate.getDate(),
-      timeFrom.getHours(),
-      timeFrom.getMinutes(),
-    );
-
-    if (this.time_to) {
-      const timeTo = new Date(this.time_to!);
-
-      event.time_to = new Date(
-        eventDate.getFullYear(),
-        eventDate.getMonth(),
-        eventDate.getDate(),
-        timeTo.getHours(),
-        timeTo.getMinutes(),
-      );
-    } else {
-      event.time_to = undefined;
-    }
-
-    if (!event.max_participants) {
-      event.max_participants = undefined;
-    }
+    event.date = set(new Date(event.date), { hours: new Date(this.time_from!).getHours(), minutes: new Date(this.time_from!).getMinutes() });
+    event.time_to = set(new Date(event.date), { hours: new Date(this.time_to!).getHours(), minutes: new Date(this.time_to!).getMinutes() });
 
     this.eventService.update(event).subscribe({
       next: () => {
-        this.snackBar.open('Der Termin wurde erfolgreich gespeichert.', '', {
-          panelClass: ['green-snackbar'],
-        });
-        this.goBack();
+        this.snackbar.successSnackbar('Der Termin wurde erfolgreich gespeichert.');
+        this.location.back();
       },
-      error: (e) => {
-        this.snackBar.open('Der Termin konnte nicht gespeichert werden.', '', {
-          panelClass: ['red-snackbar'],
-        });
-      },
+      error: () => this.snackbar.errorSnackbar('Der Termin konnte nicht gespeichert werden.'),
     });
   }
 
-  goBack(): void {
-    this.location.back();
-  }
-
   removeUser(participant: UserTrial) {
-    this.eventService
-      .deleteParticipantAdmin(this.event._id, participant.user._id)
-      .subscribe({
-        next: () => {
-          this.participants.splice(
-            this.participants.findIndex(
-              (x) => x.user._id === participant.user._id,
-            ),
-            1,
-          );
+    this.eventService.deleteParticipantAdmin(this.event._id, participant.user._id).subscribe({
+      next: () => {
+        this.participants.splice(
+          this.participants.findIndex((x) => x.user._id === participant.user._id),
+          1,
+        );
 
-          this.snackBar.open(
-            'Der User wurde erfolgreich von ' + this.event.name + ' entfernt',
-            '',
-            {
-              panelClass: ['green-snackbar'],
-            },
-          );
-        },
-        error: (e) => {
-          this.snackBar.open('Der User konnte nicht entfernt werden.', '', {
-            panelClass: ['red-snackbar'],
-          });
-        },
-      });
+        this.snackbar.successSnackbar('Der User wurde erfolgreich von ' + this.event.name + ' entfernt');
+      },
+      error: () => this.snackbar.errorSnackbar('Der User konnte nicht entfernt werden.'),
+    });
   }
 
   // Private Methods
@@ -165,5 +119,15 @@ export class EditEventComponent implements OnInit, OnDestroy {
         trial: true,
       });
     });
+  }
+
+  // Display Datepicker as TouchUI if a certain screen width is reached
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.isTouchUI(window.innerWidth);
+  }
+
+  private isTouchUI(windowWidth: number) {
+    this.touchUI = windowWidth < 992;
   }
 }

@@ -6,36 +6,18 @@
       </div>
     </div>
 
-    <form
-      (ngSubmit)="editEventForm.form.valid && edit()"
-      #editEventForm="ngForm"
-      *ngIf="event"
-    >
+    <form (ngSubmit)="editEventForm.form.valid && edit()" #editEventForm="ngForm" *ngIf="event">
       <div class="row">
         <h3 class="my-2 col-12 light">Allgemeines</h3>
 
         <mat-form-field class="col-12">
           <mat-label>Bezeichnung</mat-label>
-          <input
-            matInput
-            [(ngModel)]="event.name"
-            required
-            id="name"
-            name="name"
-            type="text"
-          />
+          <input matInput [(ngModel)]="event.name" required id="name" name="name" type="text" />
         </mat-form-field>
 
         <mat-form-field class="col-12 col-lg-3">
           <mat-label>Teilnehmer</mat-label>
-          <input
-            matInput
-            [(ngModel)]="event.max_participants"
-            id="max_participants"
-            name="max_participants"
-            number
-            type="number"
-          />
+          <input matInput [(ngModel)]="event.max_participants" id="max_participants" name="max_participants" number type="number" />
         </mat-form-field>
       </div>
 
@@ -45,14 +27,8 @@
         <h3 class="my-2 col-12 light">Beschreibung</h3>
 
         <div>
-          <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
-          </ngx-editor-menu>
-          <ngx-editor
-            class="col-12"
-            [editor]="editor"
-            [(ngModel)]="event.description"
-            name="content"
-          ></ngx-editor>
+          <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
+          <ngx-editor class="col-12" [editor]="editor" [(ngModel)]="event.description" name="content"></ngx-editor>
         </div>
       </div>
 
@@ -63,22 +39,9 @@
 
         <mat-form-field class="col-12 col-lg-3">
           <mat-label>Datum</mat-label>
-          <mtx-datetimepicker
-            #datetimePicker
-            type="date"
-            [multiYearSelector]="false"
-            [touchUi]="true"
-          ></mtx-datetimepicker>
-          <input
-            [mtxDatetimepicker]="datetimePicker"
-            [(ngModel)]="event.date"
-            matInput
-            required
-          />
-          <mtx-datetimepicker-toggle
-            [for]="datetimePicker"
-            matSuffix
-          ></mtx-datetimepicker-toggle>
+          <mtx-datetimepicker #datetimePicker type="date" [multiYearSelector]="false" [touchUi]="true"></mtx-datetimepicker>
+          <input [mtxDatetimepicker]="datetimePicker" [(ngModel)]="event.date" matInput required />
+          <mtx-datetimepicker-toggle [for]="datetimePicker" matSuffix></mtx-datetimepicker-toggle>
         </mat-form-field>
 
         <mat-form-field class="col-12 col-lg-3">
@@ -88,21 +51,11 @@
             type="time"
             [twelvehour]="false"
             [timeInterval]="15"
-            [touchUi]="true"
+            [touchUi]="touchUI"
             [timeInput]="true"
           ></mtx-datetimepicker>
-          <input
-            [mtxDatetimepicker]="datetimePickerTimeFrom"
-            [(ngModel)]="time_from"
-            matInput
-            required
-            id="timefrom"
-            name="timefrom"
-          />
-          <mtx-datetimepicker-toggle
-            [for]="datetimePickerTimeFrom"
-            matSuffix
-          ></mtx-datetimepicker-toggle>
+          <input [mtxDatetimepicker]="datetimePickerTimeFrom" [(ngModel)]="time_from" matInput required id="timefrom" name="timefrom" />
+          <mtx-datetimepicker-toggle [for]="datetimePickerTimeFrom" matSuffix></mtx-datetimepicker-toggle>
         </mat-form-field>
 
         <mat-form-field class="col-12 col-lg-3">
@@ -112,21 +65,11 @@
             type="time"
             [twelvehour]="false"
             [timeInterval]="15"
-            [touchUi]="true"
+            [touchUi]="touchUI"
             [timeInput]="true"
           ></mtx-datetimepicker>
-          <input
-            [mtxDatetimepicker]="datetimePickerTimeTo"
-            [(ngModel)]="time_to"
-            matInput
-            required
-            id="timeto"
-            name="timeto"
-          />
-          <mtx-datetimepicker-toggle
-            [for]="datetimePickerTimeTo"
-            matSuffix
-          ></mtx-datetimepicker-toggle>
+          <input [mtxDatetimepicker]="datetimePickerTimeTo" [(ngModel)]="time_to" matInput required id="timeto" name="timeto" />
+          <mtx-datetimepicker-toggle [for]="datetimePickerTimeTo" matSuffix></mtx-datetimepicker-toggle>
         </mat-form-field>
       </div>
 
@@ -143,20 +86,11 @@
             [multiYearSelector]="false"
             [twelvehour]="false"
             [timeInterval]="15"
-            [touchUi]="true"
+            [touchUi]="touchUI"
             [timeInput]="true"
           ></mtx-datetimepicker>
-          <input
-            [mtxDatetimepicker]="datetimePickerSignIn"
-            [(ngModel)]="event.sign_in"
-            matInput
-            id="anmeldefrist"
-            name="anmeldefrist"
-          />
-          <mtx-datetimepicker-toggle
-            [for]="datetimePickerSignIn"
-            matSuffix
-          ></mtx-datetimepicker-toggle>
+          <input [mtxDatetimepicker]="datetimePickerSignIn" [(ngModel)]="event.sign_in" matInput id="anmeldefrist" name="anmeldefrist" />
+          <mtx-datetimepicker-toggle [for]="datetimePickerSignIn" matSuffix></mtx-datetimepicker-toggle>
         </mat-form-field>
       </div>
 
@@ -173,20 +107,11 @@
             [multiYearSelector]="false"
             [twelvehour]="false"
             [timeInterval]="15"
-            [touchUi]="true"
+            [touchUi]="touchUI"
             [timeInput]="true"
           ></mtx-datetimepicker>
-          <input
-            [mtxDatetimepicker]="datetimePickerSignOut"
-            [(ngModel)]="event.sign_out"
-            matInput
-            id="abmeldefrist"
-            name="abmeldefrist"
-          />
-          <mtx-datetimepicker-toggle
-            [for]="datetimePickerSignOut"
-            matSuffix
-          ></mtx-datetimepicker-toggle>
+          <input [mtxDatetimepicker]="datetimePickerSignOut" [(ngModel)]="event.sign_out" matInput id="abmeldefrist" name="abmeldefrist" />
+          <mtx-datetimepicker-toggle [for]="datetimePickerSignOut" matSuffix></mtx-datetimepicker-toggle>
         </mat-form-field>
       </div>
 
@@ -196,23 +121,13 @@
         <h3 class="my-2 col-12 light">Anmeldungen</h3>
 
         <ul class="collection" *ngIf="participants.length">
-          <li
-            class="collection-item d-flex"
-            *ngFor="let participant of participants"
-          >
-            <div
-              class="d-flex w-100 align-items-center justify-content-between"
-            >
+          <li class="collection-item d-flex" *ngFor="let participant of participants">
+            <div class="d-flex w-100 align-items-center justify-content-between">
               <div class="d-flex justify-content-start align-items-center">
                 <span>
-                  {{
-                    participant.user.firstname + " " + participant.user.lastname
-                  }}
+                  {{ participant.user.firstname + " " + participant.user.lastname }}
                 </span>
-                <span
-                  *ngIf="participant.trial"
-                  class="grey-text text-darken-1 light ms-3"
-                >
+                <span *ngIf="participant.trial" class="grey-text text-darken-1 light ms-3">
                   <i>{{ participant.user.phone }}</i>
                 </span>
               </div>
@@ -227,11 +142,7 @@
                   class="me-3"
                 ></mat-icon>
 
-                <mat-icon
-                  (click)="removeUser(participant)"
-                  fontIcon="delete"
-                  color="warn"
-                ></mat-icon>
+                <mat-icon (click)="removeUser(participant)" fontIcon="delete" color="warn"></mat-icon>
               </div>
             </div>
           </li>
@@ -245,25 +156,10 @@
       <div class="divider"></div>
 
       <div class="col-12 submit text-center text-lg-start mt-4">
-        <button
-          mat-flat-button
-          color="primary"
-          class="btn me-2"
-          [class.disabled]="!editEventForm.form.valid"
-          type="submit"
-          name="action"
-        >
+        <button mat-flat-button color="primary" class="btn me-2" [class.disabled]="!editEventForm.form.valid" type="submit" name="action">
           Termin speichern
         </button>
-        <button
-          mat-flat-button
-          color="accent"
-          type="button"
-          class="btn"
-          (click)="goBack()"
-        >
-          Abbrechen
-        </button>
+        <button mat-flat-button color="accent" type="button" class="btn" (click)="location.back()">Abbrechen</button>
       </div>
     </form>
   </div>
