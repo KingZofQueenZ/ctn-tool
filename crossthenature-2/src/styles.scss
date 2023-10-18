@@ -24,6 +24,12 @@ $app-theme: mat.define-light-theme(
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "~@ng-matero/extensions/prebuilt-themes/indigo-pink.css";
 
+// Variables
+$color-teal: #249287;
+$color-teal-light: #44ccbe;
+
+$nav-height: 110px;
+
 // Parralax
 .parallax {
   background-image: url("./assets/img/background/CrossTheNature.jpg");
@@ -95,93 +101,6 @@ $app-theme: mat.define-light-theme(
     --mat-mdc-snack-bar-button-color: #fff;
     --mdc-snackbar-supporting-text-color: #fff;
   }
-}
-
-// Allgemein
-a {
-  color: #000;
-  cursor: pointer;
-}
-
-.underline-link {
-  text-decoration: underline !important;
-}
-
-.light {
-  font-weight: 300 !important;
-}
-
-hr {
-  display: block;
-  height: 1px;
-  border: 0;
-  border-top-width: 0px;
-  border-top-style: none;
-  border-top-color: currentcolor;
-  border-top: 1px solid #e0e0e0;
-  margin: 1em 0;
-  padding: 0;
-}
-
-.mat-icon {
-  cursor: pointer;
-}
-
-.NgxEditor {
-  min-height: 150px;
-}
-
-// OLD --------------------------------------------------------------------------------------------
-html,
-body {
-  height: 100%;
-}
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
-// Variables
-$color-teal: #249287;
-$color-teal-light: #44ccbe;
-
-$nav-height: 110px;
-
-.spinner {
-  margin-top: 40px;
-}
-
-.simple-notification-wrapper {
-  width: 400px !important;
-}
-
-.parralax {
-  width: 100%;
-  position: absolute;
-  top: 20%;
-  z-index: 1;
-}
-
-.createModal .modal {
-  width: 90% !important;
-  max-height: 90% !important;
-}
-
-.deleteModal .modal {
-  width: 40%px !important;
-  max-height: 20% !important;
-  top: 30% !important;
-}
-
-html {
-  height: 100%;
-}
-
-mat-drawer-content {
-  position: relative;
-  padding-bottom: 6rem;
-  min-height: 100vh;
-  font-weight: 300;
 }
 
 // Navigation
@@ -257,111 +176,7 @@ nav {
   }
 }
 
-// Allgemein
-blockquote {
-  border-left: 5px solid $color-teal;
-}
-
-.footer-copyright {
-  height: 70px;
-}
-
-// Bootstrap Overrides
-.mat-fab.mat-primary,
-.mat-flat-button.mat-primary,
-.mat-mini-fab.mat-primary,
-.mat-raised-button.mat-primary {
-  background-color: #009688;
-}
-
-/*.mat-input-element {
-    caret-color: #009688 !important;
-  }*/
-
-/* -- Link -- */
-.grey.darken-4 {
-  background-color: #212121 !important;
-}
-
-.grey {
-  background-color: #9e9e9e !important;
-}
-
-.grey.lighten-5 {
-  background-color: #f2f2f2 !important;
-}
-
-.grey-text.text-lighten-2 {
-  color: #e0e0e0 !important;
-}
-a:active,
-a:hover {
-  outline: 0;
-}
-
-/* -- Title -- */
-.teal-text {
-  color: #009688;
-}
-
-.white-text {
-  color: #fff !important;
-}
-
-.grey-text {
-  color: #9e9e9e !important;
-}
-
-.black-text {
-  color: #000000 !important;
-}
-
-.red-text {
-  color: #dc0000 !important;
-}
-
-.green-text {
-  color: #04900f !important;
-}
-
-h1 {
-  font-size: 4.2rem;
-  line-height: 110%;
-  margin: 2.1rem 0 1.68rem;
-  margin-top: 2.1rem;
-}
-
-h3 {
-  font-size: 2.92rem;
-  line-height: 110%;
-  margin: 1.46rem 0 1.168rem;
-}
-
-h4 {
-  font-size: 2.28rem;
-  line-height: 110%;
-  padding: 1rem 0 1rem;
-}
-
-h5 {
-  font-size: 1.64rem;
-  line-height: 110%;
-  margin: 0.82rem 0 0.656rem;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 400;
-}
-
-hr {
-  border-top: 1px solid #2e2e2e;
-}
-
+// Card Panel
 .card-panel {
   -webkit-transition: -webkit-box-shadow 0.25s;
   transition:
@@ -387,6 +202,112 @@ hr {
   }
 }
 
-.center {
-  text-align: center;
+// Allgemein
+a {
+  color: #000;
+  cursor: pointer;
+}
+
+.underline-link {
+  text-decoration: underline !important;
+}
+
+.light {
+  font-weight: 300 !important;
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top-width: 0px;
+  border-top-style: none;
+  border-top-color: currentcolor;
+  border-top: 1px solid #e0e0e0;
+  margin: 1em 0;
+  padding: 0;
+}
+
+.mat-icon {
+  cursor: pointer;
+}
+
+.NgxEditor {
+  min-height: 150px;
+}
+
+.footer-copyright {
+  height: 70px;
+}
+
+hr {
+  border-top: 1px solid #2e2e2e;
+}
+
+/* -- Colors -- */
+.grey.darken-4 {
+  background-color: #212121 !important;
+}
+
+.grey {
+  background-color: #9e9e9e !important;
+}
+
+.grey.lighten-5 {
+  background-color: #f2f2f2 !important;
+}
+
+.grey-text.text-lighten-2 {
+  color: #e0e0e0 !important;
+}
+
+.teal-text {
+  color: #009688;
+}
+
+.white-text {
+  color: #fff !important;
+}
+
+.grey-text {
+  color: #9e9e9e !important;
+}
+
+.black-text {
+  color: #000000 !important;
+}
+
+.red-text {
+  color: #dc0000 !important;
+}
+
+.green-text {
+  color: #04900f !important;
+}
+
+// OLD --------------------------------------------------------------------------------------------
+
+mat-drawer-content {
+  position: relative;
+  padding-bottom: 6rem;
+  min-height: 100vh;
+  font-weight: 300;
+}
+
+// Allgemein
+
+h1 {
+  margin: 2.1rem 0 1.68rem;
+}
+
+h3 {
+  margin: 1.46rem 0 1.168rem;
+}
+
+h4 {
+  padding: 1rem 0 1rem;
+}
+
+h5 {
+  margin: 0.82rem 0 0.656rem;
 }
