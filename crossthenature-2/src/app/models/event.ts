@@ -1,15 +1,15 @@
 import { User } from './user';
 
-export class Event {
-  _id: string = '';
-  name: string = '';
-  description: string = '';
-  max_participants: number | undefined;
-  date: Date = new Date();
-  time_to: Date = new Date();
-  sign_in: Date | undefined;
-  sign_out: Date | undefined;
-  participant_ids: User[] = [];
-  allow_trials: Boolean = false;
+export interface Event {
+  _id: string;
+  name: string;
+  description?: string;
+  max_participants?: number;
+  date: Date;
+  time_to: Date;
+  sign_in?: Date;
+  sign_out?: Date;
+  participant_ids: User[];
+  allow_trials: Boolean;
   trial_workouts: any;
 }

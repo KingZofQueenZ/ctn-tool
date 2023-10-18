@@ -3,8 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { EventService } from 'src/app/services/event.service';
 import { User } from 'src/app/models/user';
 import { Event } from '../../models/event';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { format, isAfter } from 'date-fns';
+import { isAfter } from 'date-fns';
 import { HelperService } from 'src/app/services/helper.service';
 import { EventDateFormatPipe } from 'src/app/shared/event-date-format-pipe.pipe';
 

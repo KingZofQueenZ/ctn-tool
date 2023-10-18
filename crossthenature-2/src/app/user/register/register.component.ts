@@ -10,12 +10,7 @@ import { matchOtherValidator } from 'src/app/shared/password.validation';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
-  user: User = {
-    _id: '',
-    firstname: '',
-    lastname: '',
-    phone: '',
-  };
+  user: User = {} as User;
   passwordconfirm: string | undefined;
   hasError = false;
   success = false;
@@ -39,12 +34,8 @@ export class RegisterComponent {
   register(): void {
     // Send Google Captcha Token to backend to verify
     this.userService.create(this.user, this.registerForm.controls['token'].value).subscribe({
-      next: () => {
-        this.success = true;
-      },
-      error: (e) => {
-        this.hasError = true;
-      },
+      next: () => (this.success = true),
+      error: () => (this.hasError = true),
     });
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HelperService } from 'src/app/services/helper.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class ActivateComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private route: ActivatedRoute,
-    private snackBar: MatSnackBar,
+    private helper: HelperService,
   ) {}
 
   ngOnInit() {
@@ -27,19 +27,10 @@ export class ActivateComponent implements OnInit {
 
     this.userService.activate(code).subscribe({
       next: () => {
-        this.snackBar.open(
-          'Dein Benutzer wurde erfolgreich aktiviert! Du kannst dich nun einloggen.',
-          '',
-          {
-            panelClass: ['green-snackbar'],
-          },
-        );
-
+        this.helper.successSnackbar('Dein Benutzer wurde erfolgreich aktiviert! Du kannst dich nun einloggen.');
         this.router.navigate(['/login'], { queryParams: { activated: true } });
       },
-      error: () => {
-        this.error = true;
-      },
+      error: () => (this.error = true),
     });
   }
 }

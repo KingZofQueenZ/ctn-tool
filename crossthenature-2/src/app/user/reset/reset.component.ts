@@ -15,12 +15,8 @@ export class ResetComponent {
 
   reset() {
     this.userService.reset(this.model).subscribe({
-      next: () => {
-        this.success = true;
-      },
-      error: (e) => {
-        this.hasError = true;
-      },
+      next: () => (this.success = true),
+      error: () => (this.hasError = true),
     });
   }
 }

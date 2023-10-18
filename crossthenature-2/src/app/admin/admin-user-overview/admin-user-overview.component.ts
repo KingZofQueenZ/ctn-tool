@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 import { DeleteUserDialog } from './delete-dialog/delete-user-dialog.component';
+import { HelperService } from 'src/app/services/helper.service';
 
 @Component({
   selector: 'app-admin-user-overview',
@@ -15,9 +15,9 @@ export class AdminUserOverviewComponent implements OnInit {
   users: User[] = [];
 
   constructor(
-    private snackBar: MatSnackBar,
     public dialog: MatDialog,
     private userService: UserService,
+    private helper: HelperService,
   ) {}
 
   ngOnInit() {
@@ -37,16 +37,10 @@ export class AdminUserOverviewComponent implements OnInit {
       if (result) {
         this.userService.delete(user._id).subscribe({
           next: () => {
-            this.snackBar.open('Der User wurde erfolgreich gelöscht.', '', {
-              panelClass: ['green-snackbar'],
-            });
+            this.helper.successSnackbar('Der User wurde erfolgreich gelöscht.');
             this.refresh();
           },
-          error: (e) => {
-            this.snackBar.open('Der User konnte nicht gelöscht werden!', '', {
-              panelClass: ['red-snackbar'],
-            });
-          },
+          error: () => this.helper.successSnackbar('Der User konnte nicht gelöscht werden!'),
         });
       }
     });

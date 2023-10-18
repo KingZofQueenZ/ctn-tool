@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { News } from 'src/app/models/news';
 import { NewsService } from 'src/app/services/news.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { DeleteNewsDialog } from './delete-dialog/delete-news-dialog.component';
+import { HelperService } from 'src/app/services/helper.service';
 
 @Component({
   selector: 'app-admin-news-overview',
@@ -20,7 +20,7 @@ export class AdminNewsOverviewComponent implements OnInit {
   constructor(
     private newsService: NewsService,
     public dialog: MatDialog,
-    private snackBar: MatSnackBar,
+    private helper: HelperService,
   ) {}
 
   ngOnInit() {
@@ -69,16 +69,10 @@ export class AdminNewsOverviewComponent implements OnInit {
       if (result) {
         this.newsService.delete(news._id).subscribe({
           next: () => {
-            this.snackBar.open('Die News wurde erfolgreich gelöscht.', '', {
-              panelClass: ['green-snackbar'],
-            });
+            this.helper.successSnackbar('Die News wurde erfolgreich gelöscht.');
             this.refresh();
           },
-          error: (e) => {
-            this.snackBar.open('Die News konnte nicht gelöscht werden.', '', {
-              panelClass: ['red-snackbar'],
-            });
-          },
+          error: () => this.helper.errorSnackbar('Die News konnte nicht gelöscht werden.'),
         });
       }
     });

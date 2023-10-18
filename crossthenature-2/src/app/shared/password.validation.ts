@@ -1,13 +1,10 @@
-import {FormControl} from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
-
-export function matchOtherValidator (otherControlName: string) {
-
+export function matchOtherValidator(otherControlName: string) {
   let thisControl: FormControl;
   let otherControl: FormControl;
 
-  return function matchOtherValidate (control: FormControl) {
-
+  return function matchOtherValidate(control: FormControl) {
     if (!control.parent) {
       return null;
     }
@@ -30,11 +27,10 @@ export function matchOtherValidator (otherControlName: string) {
 
     if (otherControl.value !== thisControl.value) {
       return {
-        matchOther: true
+        matchOther: true,
       };
     }
 
     return null;
-
   };
 }

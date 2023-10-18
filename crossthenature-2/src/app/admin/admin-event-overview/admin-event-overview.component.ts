@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { EventService } from 'src/app/services/event.service';
 import { Event } from 'src/app/models/event';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { DeleteEventDialog } from './delete-dialog/delete-event-dialog.component';
-import { format } from 'date-fns';
+import { HelperService } from 'src/app/services/helper.service';
+import { EventDateFormatPipe } from 'src/app/shared/event-date-format-pipe.pipe';
 
 @Component({
   selector: 'app-admin-event-overview',
@@ -22,21 +22,12 @@ export class AdminEventOverviewComponent implements OnInit {
   constructor(
     private eventService: EventService,
     public dialog: MatDialog,
-    private snackBar: MatSnackBar,
+    private helper: HelperService,
+    private eventDateFormat: EventDateFormatPipe,
   ) {}
 
   ngOnInit() {
     this.getEvents();
-  }
-
-  public getDateString(event: Event): string {
-    const date = format(new Date(event.date), 'eeeeee. d MMM yyyy / HH:mm');
-
-    if (event.time_to) {
-      return date + '-' + format(new Date(event.time_to), 'HH:mm');
-    }
-
-    return date + ' Uhr';
   }
 
   private getEvents() {
@@ -76,7 +67,7 @@ export class AdminEventOverviewComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.data = {
-      dateString: this.getDateString(event),
+      dateString: this.eventDateFormat.transform(event),
       name: event.name,
     };
     const dialogRef = this.dialog.open(DeleteEventDialog, dialogConfig);
@@ -85,16 +76,10 @@ export class AdminEventOverviewComponent implements OnInit {
       if (result) {
         this.eventService.delete(event._id).subscribe({
           next: () => {
-            this.snackBar.open('Der Termin wurde erfolgreich gelöscht.', '', {
-              panelClass: ['green-snackbar'],
-            });
+            this.helper.successSnackbar('Der Termin wurde erfolgreich gelöscht.');
             this.getEvents();
           },
-          error: (e) => {
-            this.snackBar.open('Der Termin konnte nicht gelöscht werden.', '', {
-              panelClass: ['red-snackbar'],
-            });
-          },
+          error: () => this.helper.errorSnackbar('Der Termin konnte nicht gelöscht werden.'),
         });
       }
     });

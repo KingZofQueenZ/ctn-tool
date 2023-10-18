@@ -12,7 +12,7 @@ import { HelperService } from 'src/app/services/helper.service';
   styleUrls: ['./create-news.component.scss'],
 })
 export class CreateNewsComponent implements OnDestroy {
-  news: News = new News();
+  news!: News;
   editor: Editor;
   toolbar: Toolbar = editorToolbar;
 

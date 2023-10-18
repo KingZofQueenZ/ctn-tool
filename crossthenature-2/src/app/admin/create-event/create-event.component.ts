@@ -13,7 +13,7 @@ import { HelperService } from 'src/app/services/helper.service';
   styleUrls: ['./create-event.component.scss'],
 })
 export class CreateEventComponent implements OnDestroy {
-  event: Event = new Event();
+  event: Event = {} as Event;
   repeat_date: Date | undefined;
   time_from: Date | undefined;
   time_to: Date | undefined;
@@ -28,6 +28,7 @@ export class CreateEventComponent implements OnDestroy {
     protected location: Location,
     private helper: HelperService,
   ) {
+    this.event.description = '';
     this.editor = new Editor();
     this.isTouchUI(window.innerWidth);
     this.weekdays = [
