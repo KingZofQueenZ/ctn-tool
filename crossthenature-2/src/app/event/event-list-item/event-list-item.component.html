@@ -1,14 +1,13 @@
 <div class="card-panel grey lighten-5">
   <div class="card-content black-text">
     <div class="datetime grey-text text-darken-1 light truncate">
-      <i>{{ date_string }}</i>
+      <i>{{ event | eventDateFormat }}</i>
     </div>
     <a [routerLink]="['/details', event._id]">
       <h4 class="my-0 title truncate">{{ event.name }}</h4>
     </a>
     <div class="registrations grey-text text-darken-1 light">
-      <i class="tiny material-icons">group</i
-      ><i>{{ participant_string }} Anmeldungen</i>
+      <i class="tiny material-icons">group</i><i>{{ participant_string }} Anmeldungen</i>
     </div>
     <div class="register" *ngIf="user">
       <i
@@ -27,11 +26,7 @@
         (mouseleave)="mouseLeave()"
         >{{ icon }}</i
       >
-      <i
-        *ngIf="!is_registered && !is_full && can_register"
-        class="small grey-text material-icons"
-        (click)="handleRegistration()"
-        [@opacityAnimation]
+      <i *ngIf="!is_registered && !is_full && can_register" class="small grey-text material-icons" (click)="handleRegistration()" [@opacityAnimation]
         >group_add</i
       >
     </div>

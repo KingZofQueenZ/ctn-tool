@@ -57,6 +57,8 @@ import { NgxEditorModule } from 'ngx-editor';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { de } from 'date-fns/locale';
+import { EventDateFormatPipe } from './shared/event-date-format-pipe.pipe';
+import { DeadlineFormatPipe } from './shared/deadline-format-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -81,6 +83,8 @@ import { de } from 'date-fns/locale';
     EditNewsComponent,
     NewsOverviewComponent,
     SafeHtmlPipe,
+    EventDateFormatPipe,
+    DeadlineFormatPipe,
     AdminUserOverviewComponent,
     EventListOverviewComponent,
     AdminEventOverviewComponent,
@@ -126,18 +130,18 @@ import { de } from 'date-fns/locale';
         siteKey: environment.recaptcha.siteKey,
       } as RecaptchaSettings,
     },
-
+    {
+      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+      useValue: { duration: 5000, verticalPosition: 'top' },
+    },
+    { provide: MAT_DATE_LOCALE, useValue: de },
     UserService,
     AuthenticationService,
     StorageService,
     NewsService,
     EventService,
     MatSnackBarModule,
-    {
-      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
-      useValue: { duration: 5000, verticalPosition: 'top' },
-    },
-    { provide: MAT_DATE_LOCALE, useValue: de },
+    EventDateFormatPipe,
   ],
   bootstrap: [AppComponent],
 })

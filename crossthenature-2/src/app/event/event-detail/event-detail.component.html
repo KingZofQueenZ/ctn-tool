@@ -33,13 +33,13 @@
 
     <div class="col-12 col-lg-8 mt-4 d-flex flex-column align-items-center align-items-lg-start">
       <h3 class="light grey-text light">
-        <i>{{ date_string }}</i>
+        <i>{{ event | eventDateFormat }}</i>
       </h3>
-      <h3 *ngIf="date_string_anmeldung" class="light grey-text light">
-        <i>Anmeldefrist: {{ date_string_anmeldung }}</i>
+      <h3 *ngIf="event.sign_in" class="light grey-text light">
+        <i>Anmeldefrist: {{ event.sign_in | deadlineFormat }}</i>
       </h3>
-      <h3 *ngIf="date_string_abmeldung" class="light grey-text light">
-        <i>Abmeldefrist: {{ date_string_abmeldung }}</i>
+      <h3 *ngIf="event.sign_out" class="light grey-text light">
+        <i>Abmeldefrist: {{ event.sign_out | deadlineFormat }}</i>
       </h3>
     </div>
 
@@ -53,15 +53,15 @@
       <h2 class="light text-center text-lg-start">Anmeldungen</h2>
       <h3 class="grey-text text-darken-1 light text-center text-lg-start">{{ participant_string }} Anmeldungen</h3>
 
-      <ul class="collection" *ngIf="participants.length">
-        <li class="collection-item d-flex" *ngFor="let participant of participants">
+      <ul class="collection" *ngIf="event.participant_ids.length">
+        <li class="collection-item d-flex" *ngFor="let participant of event.participant_ids">
           <div class="d-flex w-100 align-items-center justify-content-between">
             <div class="d-flex justify-content-start align-items-center">
               <img src="../../../assets/img/user.png" height="42" width="42" alt="" class="circle" />
 
               <div class="ms-3">
-                {{ participant.user.firstname }}
-                {{ participant.user.lastname }}
+                {{ participant.firstname }}
+                {{ participant.lastname }}
               </div>
             </div>
 
@@ -76,7 +76,7 @@
         </li>
       </ul>
 
-      <div *ngIf="!participants.length">
+      <div *ngIf="!event.participant_ids.length">
         <span class="noregistrations">
           <i>Es gibt noch keine Anmeldungen. Sei der Erste!</i>
         </span>
@@ -120,8 +120,8 @@
       </form>
 
       <div class="col-12 mt-3 text-center text-lg-start" *ngIf="trial_success">
-        Du wurdest erfolgreich für das Probetraining angemeldet. Wir erwarten dich am {{ date_string }}. Solltest du doch nicht Teilnehmen können, melde dich
-        bitte bei unseren Coaches ab!
+        Du wurdest erfolgreich für das Probetraining angemeldet. Wir erwarten dich am {{ event | eventDateFormat }}. Solltest du doch nicht Teilnehmen können,
+        melde dich bitte bei unseren Coaches ab!
       </div>
     </div>
   </div>

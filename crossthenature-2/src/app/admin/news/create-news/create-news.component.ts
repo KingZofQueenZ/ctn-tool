@@ -2,9 +2,9 @@ import { Component, OnDestroy } from '@angular/core';
 import { News } from 'src/app/models/news';
 import { NewsService } from 'src/app/services/news.service';
 import { Location } from '@angular/common';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Editor, Toolbar } from 'ngx-editor';
 import { editorToolbar } from '../../../shared/settings';
+import { HelperService } from 'src/app/services/helper.service';
 
 @Component({
   selector: 'app-create-news',
@@ -16,37 +16,25 @@ export class CreateNewsComponent implements OnDestroy {
   editor: Editor;
   toolbar: Toolbar = editorToolbar;
 
-  ngOnDestroy(): void {
-    this.editor.destroy();
-  }
-
   constructor(
     private newsService: NewsService,
-    private location: Location,
-    private snackBar: MatSnackBar,
+    protected location: Location,
+    private helper: HelperService,
   ) {
     this.editor = new Editor();
+  }
+
+  ngOnDestroy(): void {
+    this.editor.destroy();
   }
 
   create() {
     this.newsService.create(this.news).subscribe({
       next: () => {
-        this.snackBar.open('Die News wurde erfolgreich erstellt.', '', {
-          panelClass: ['green-snackbar'],
-        });
-        this.goBack();
+        this.helper.errorSnackbar('Die News wurde erfolgreich erstellt.');
+        this.location.back();
       },
-      error: (e) => {
-        this.snackBar.open('Die News konnte nicht erstellt werden.'),
-          '',
-          {
-            panelClass: ['red-snackbar'],
-          };
-      },
+      error: () => this.helper.errorSnackbar('Die News konnte nicht erstellt werden.'),
     });
-  }
-
-  goBack(): void {
-    this.location.back();
   }
 }

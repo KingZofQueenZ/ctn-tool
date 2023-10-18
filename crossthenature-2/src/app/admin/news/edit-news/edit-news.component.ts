@@ -3,9 +3,9 @@ import { Location } from '@angular/common';
 import { News } from 'src/app/models/news';
 import { ActivatedRoute } from '@angular/router';
 import { NewsService } from 'src/app/services/news.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Editor, Toolbar } from 'ngx-editor';
 import { editorToolbar } from '../../../shared/settings';
+import { HelperService } from 'src/app/services/helper.service';
 
 @Component({
   selector: 'app-edit-news',
@@ -17,15 +17,11 @@ export class EditNewsComponent implements OnDestroy {
   editor: Editor;
   toolbar: Toolbar = editorToolbar;
 
-  ngOnDestroy(): void {
-    this.editor.destroy();
-  }
-
   constructor(
     private route: ActivatedRoute,
     private newsService: NewsService,
-    private location: Location,
-    private snackBar: MatSnackBar,
+    protected location: Location,
+    private helper: HelperService,
   ) {
     this.editor = new Editor();
   }
@@ -33,33 +29,22 @@ export class EditNewsComponent implements OnDestroy {
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     this.newsService.getById(id!).subscribe({
-      next: (news) => {
-        this.news = news;
-      },
-      error: (e) => {
-        this.goBack();
-      },
+      next: (news) => (this.news = news),
+      error: () => this.location.back(),
     });
+  }
+
+  ngOnDestroy(): void {
+    this.editor.destroy();
   }
 
   edit() {
-    console.log(this.news);
     this.newsService.update(this.news).subscribe({
       next: () => {
-        this.snackBar.open('Die News wurde erfolgreich gespeichert.', '', {
-          panelClass: ['green-snackbar'],
-        });
-        this.goBack();
+        this.helper.successSnackbar('Die News wurde erfolgreich gespeichert.');
+        this.location.back();
       },
-      error: (e) => {
-        this.snackBar.open('Die News konnte nicht gespeichert werden.', '', {
-          panelClass: ['red-snackbar'],
-        });
-      },
+      error: () => this.helper.successSnackbar('Die News konnte nicht gespeichert werden.'),
     });
-  }
-
-  goBack(): void {
-    this.location.back();
   }
 }
