@@ -14,17 +14,8 @@ const email = new Email({
 });
 
 exports.sendMail = function (template, locals) {
-  const transporter = nodemailer.createTransport({
-    name: "www.yourdomain.com",
-    host: "smtp.example.com",
-    port: 587,
-    secure: false, // upgrade later with STARTTLS
-    auth: {
-      user: "username",
-      pass: "password",
-    },
-  });
-
+  const transporter = nodemailer.createTransport(smtpConfig);
+  
   email
     .render(template, locals)
     .then((result) => {
